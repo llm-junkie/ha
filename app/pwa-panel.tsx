@@ -2,6 +2,7 @@ import { Check, Download, RefreshCw, Share, WifiOff } from 'lucide-react';
 import { useEffect, useRef, useState, type Ref } from 'react';
 import { Button } from '@/components/ui/button';
 import { installApp, prepareOffline, updateApp, type PwaState } from './pwa';
+import { APP_VERSION } from './version';
 import './pwa.css';
 
 export function pwaLabel(state: PwaState) {
@@ -84,6 +85,7 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
       )}
       <div className="pwa-update-section">
         <h3 ref={updateTitleRef} tabIndex={-1}>{state.updateAvailable ? 'A new version is ready' : 'App updates'}</h3>
+        <p className="pwa-version">Current version <strong>{APP_VERSION}</strong></p>
         <p className="pwa-hint">
           {state.support === 'development' ? 'Updates are available in the published atlas.'
             : 'Check for the latest version. Updating reloads open atlas windows; saved views stay on this device.'}

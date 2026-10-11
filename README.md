@@ -33,6 +33,12 @@ Use the permanent **Update** button in the footer or **App & credits** panel to 
 
 PWA registration runs in production builds on HTTPS or localhost. Development stays uncached so edits appear immediately. The manifest, icons, worker scope, and offline navigation use the configured base path, including `/ha/` on GitHub Pages. No extra dependencies or deployment secrets are needed.
 
+## App version
+
+The initial app release is **v0.1.0**. **App & credits → App updates** shows the version currently open, including when the app is installed or offline. The display and built files read the version from `package.json`.
+
+For the next release, run `npm version patch --no-git-tag-version` for fixes, or `npm version minor --no-git-tag-version` for new features. This updates `package.json` and `package-lock.json` together. Validate and deploy the release as usual; installed apps show the new version after an update. Each build still has a content-based cache identifier, so builds with the same release number can update correctly.
+
 ## Run locally
 
 Use Node.js 24 LTS (specified in `.nvmrc`); Node.js 22.18 or newer is supported. No API keys or accounts are needed.

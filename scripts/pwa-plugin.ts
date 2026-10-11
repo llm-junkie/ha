@@ -2,6 +2,7 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import type { Plugin, ResolvedConfig } from 'vite';
+import { APP_VERSION } from '../app/version.ts';
 
 const digest = (data: string | Uint8Array) => createHash('sha256').update(data).digest('hex');
 
@@ -29,6 +30,9 @@ export function atlasPwa(): Plugin {
     name: 'human-atlas-pwa',
     enforce: 'post',
     configResolved(value) { config = value; },
+    transformIndexHtml() {
+      return [{ tag: 'meta', attrs: { name: 'application-version', content: APP_VERSION }, injectTo: 'head' }];
+    },
     configureServer(server) {
       server.middlewares.use((request, response, next) => {
         if (request.url?.split('?')[0] !== `${config.base}manifest.webmanifest`) return next();
@@ -70,7 +74,7 @@ export function atlasPwa(): Plugin {
         shell.push({ url: `${base}${file}`, hashes: [digest(await readFile(resolve(output, file)))] });
       const source = await readFile(resolve(config.root, '../app/service-worker.js'), 'utf8');
       const appVersion = digest(JSON.stringify(shell) + modelVersion + source).slice(0, 16);
-      const settings = { base, appVersion, modelVersion, shell, catalogue: catalogueEntry, chunks };
+      const settings = { base, releaseVersion: APP_VERSION, appVersion, modelVersion, shell, catalogue: catalogueEntry, chunks };
       await writeFile(resolve(output, 'sw.js'), `const CONFIG = ${JSON.stringify(settings)};\n${source}`);
     },
   };

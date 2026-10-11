@@ -28,6 +28,8 @@
 .pwa-install-help svg { display: inline-block; vertical-align: text-bottom; }
 .pwa-update-section { border-top: 1px solid #dce4e8; padding-top: 12px; }
 .pwa-update-section h3 { font-size: 13px; margin: 0 0 7px; font-weight: 600; }
+.pwa-panel .pwa-version { margin-bottom: 8px; font-size: 12px; color: #394957; }
+.pwa-version strong { font-variant-numeric: tabular-nums; }
 .pwa-update-section button { margin-top: 12px; }
 .pwa-panel .pwa-update-notice { margin-top: 10px; color: #37736a; font-size: 12px; }
 .pwa-footer-actions { display: flex; align-items: center; gap: 12px; }
