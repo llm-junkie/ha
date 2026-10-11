@@ -111,3 +111,29 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
  .structure-row .structure-name{min-height:44px}.structure-expand{min-height:44px}.structure-filter{font-size:16px;min-height:40px}
  .rotation-options label{min-height:44px}.rotation-settings [data-slot=slider]{padding-block:12px}.search-history-heading button{min-height:36px}
 }
+/* Model choice stays beside the atlas identity on desktop and mobile. */
+.model-select {
+  margin-top: 10px;
+  max-width: 100%;
+  border: 1px solid rgb(64 82 75 / 18%);
+  border-radius: 10px;
+  background: rgb(255 255 255 / 80%);
+  color: #34463e;
+  padding: 6px 28px 6px 10px;
+  font: inherit;
+  font-size: 12px;
+  pointer-events: auto;
+}
+.model-select:focus-visible { outline: 2px solid #688a76; outline-offset: 3px; }
+@media (max-width: 767px) {
+  .model-select { min-height: 44px; font-size: 16px; }
+}
+@media (max-width: 767px) and (orientation: portrait) {
+  .view-controls, .search-panel {
+    top: max(164px, calc(env(safe-area-inset-top) + 146px));
+  }
+  .layers-panel.mobile-open {
+    top: max(220px, calc(env(safe-area-inset-top) + 202px));
+    max-height: none;
+  }
+}

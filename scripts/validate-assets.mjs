@@ -3,7 +3,9 @@ import {readFile} from 'node:fs/promises';
 import {assetUrl} from '../app/asset-url.ts';
 import {decodeModelResponse} from '../app/model-download.ts';
 
-const atlas=JSON.parse(await readFile(new URL('../public/models/atlas.json',import.meta.url)));
+const atlases=await Promise.all(['atlas.json','atlas-female.json'].map(file=>readFile(new URL(`../public/models/${file}`,import.meta.url)).then(JSON.parse)));
+const atlas=atlases[0];
+for (const atlas of atlases) {
 for(const base of ['/', '/ha/', '/renamed-fork/']) {
   const catalogue=new URL(assetUrl('/models/atlas.json',base),'https://example.github.io');
   assert.equal(catalogue.pathname,`${base}models/atlas.json`);
@@ -12,6 +14,7 @@ for(const base of ['/', '/ha/', '/renamed-fork/']) {
     assert.equal(url.pathname,`${base}models/${path.split('/').pop()}`);
     assert.equal(assetUrl(path,base),assetUrl(path.slice(1),base));
   }
+}
 }
 
 const chunk=atlas.chunks[0];

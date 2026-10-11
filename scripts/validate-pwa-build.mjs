@@ -28,10 +28,12 @@ for (const [name, size] of [['icon-192.png', 192], ['icon-512.png', 512], ['icon
   assert.equal(png.readUInt32BE(20), size);
 }
 assert.ok(manifest.icons.some((icon) => icon.purpose === 'maskable' && icon.sizes === '512x512'));
-const catalogue = JSON.parse(await read('models/atlas.json'));
+const catalogues = await Promise.all(['atlas.json', 'atlas-female.json'].map(file => read(`models/${file}`).then(JSON.parse)));
+const catalogue = { chunks: catalogues.flatMap(atlas => atlas.chunks) };
+assert.equal(config.catalogues.length, 2);
 assert.equal(config.chunks.length, catalogue.chunks.length);
 assert.equal(config.catalogue.url, `${base}models/atlas.json`);
-for (const entry of [config.catalogue, ...config.shell, ...config.chunks.flatMap(({ raw, gzip }) => gzip ? [raw, gzip] : [raw])]) {
+for (const entry of [...config.catalogues, ...config.shell, ...config.chunks.flatMap(({ raw, gzip }) => gzip ? [raw, gzip] : [raw])]) {
   assert.ok(entry.url.startsWith(base));
   const body = await read(entry.url.slice(base.length));
   const hash = createHash('sha256').update(body).digest('hex');

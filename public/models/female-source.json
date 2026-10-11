@@ -1,0 +1,314 @@
+{
+  "repository": "https://github.com/PrejudiceNeutrino/human-atlas-enhanced",
+  "revision": "9e0d710fcc1d467dc758d61d6f417231cb1472fe",
+  "imported": "2026-10-11",
+  "manifest": "public/models/atlas-female-reconstructed.json",
+  "license": "CC-BY-4.0",
+  "geometryChanged": true,
+  "files": [
+    {
+      "path": "atlas-female.json",
+      "bytes": 1613714,
+      "sha256": "14b05dae3f3685fadf42de89bdd4e8ac63ab7dd054cfef5f697d45976df7c4a2"
+    },
+    {
+      "path": "female-fit-report.json",
+      "bytes": 273385,
+      "sha256": "3bd226a86e96ead166ca87ab45bcab4ff80188e5b179c35d47104d0e55d743e5"
+    },
+    {
+      "path": "female-base-0.bin.gz",
+      "bytes": 2279399,
+      "sha256": "6f8c4840f554fa9bd1b90f866077be877985a72d6fef39a9926b0dd196974eb4"
+    },
+    {
+      "path": "female-base-1.bin.gz",
+      "bytes": 2325209,
+      "sha256": "937fea4230ab38265005ae4a258271b35d7dedc54e340567c9f773b183301424"
+    },
+    {
+      "path": "female-base-2.bin.gz",
+      "bytes": 2388965,
+      "sha256": "61c90df32afdb1bcff5da60262278beebfe5283729d6d49d48005e0b4ed49799"
+    },
+    {
+      "path": "female-base-3.bin.gz",
+      "bytes": 2152130,
+      "sha256": "47667d765348ea054947b216ae4c7b18669103f1f61bc02b238d9723d8dd90ad"
+    },
+    {
+      "path": "female-base-4.bin.gz",
+      "bytes": 2170207,
+      "sha256": "964c63442a589089de35d12e67d1b39afa93f6c1fe1b4c931a4f20af16f6c894"
+    },
+    {
+      "path": "female-base-5.bin.gz",
+      "bytes": 2233971,
+      "sha256": "8b6d8848a23f6fff5b60e76d902dece22b37aa8bb75f59e0eb4eeedc7ae632b8"
+    },
+    {
+      "path": "female-base-6.bin.gz",
+      "bytes": 2392219,
+      "sha256": "242b580fc48aa54a302ec11c56cabf46f5190907caa7f21def0014d17ce0ec30"
+    },
+    {
+      "path": "female-base-7.bin.gz",
+      "bytes": 2391078,
+      "sha256": "12a2c1a764b449ad7d7ad2d7ab3cac0a5286c93fcfaaae45b7870d1f43c1f94d"
+    },
+    {
+      "path": "female-base-8.bin.gz",
+      "bytes": 2372384,
+      "sha256": "b09da50abe143ccb582dec3be0b22d9b9d3dd87d1c890a2a71583a49928e1783"
+    },
+    {
+      "path": "female-base-9.bin.gz",
+      "bytes": 2296708,
+      "sha256": "ea0a89fe9b0d9dfd1e0fc8a21674e864d2b0938ecc40423cf03965c65c1a6a67"
+    },
+    {
+      "path": "female-base-10.bin.gz",
+      "bytes": 2298571,
+      "sha256": "e1e8d3897e1a164c810a14f49bf901d4f39ee9f1f52bb775904e2ee606c512e3"
+    },
+    {
+      "path": "female-base-11.bin.gz",
+      "bytes": 2302440,
+      "sha256": "24979f2f2a46266b2e06de588b5164d4a5a066182eb2a13c03c58b16663cdaeb"
+    },
+    {
+      "path": "female-base-12.bin.gz",
+      "bytes": 2608638,
+      "sha256": "90a09e2d11cff48bfe1b766fe7e90a8682e2c3e3b10098d607207c89e6ceaaad"
+    },
+    {
+      "path": "female-base-13.bin.gz",
+      "bytes": 2387855,
+      "sha256": "3f9ac79f7e260a495b3ef425255b007e5f014790cb6d231d32853858a0d6d516"
+    },
+    {
+      "path": "female-base-14.bin.gz",
+      "bytes": 2352106,
+      "sha256": "36e5e66cd2e565d06b19e7dec264da9a1cb21c66b4d8a186109405be1bd9d6c1"
+    },
+    {
+      "path": "female-base-15.bin.gz",
+      "bytes": 177424,
+      "sha256": "1f29d60df0b4b8d56ae1a9f5cf1f875b607f184dc855c8de84d52bfdf6e98277"
+    },
+    {
+      "path": "female-joint-additions-8d95b6b434cd4e04.bin.gz",
+      "bytes": 9333,
+      "sha256": "4d4de687fbe5c0ba8a843088e32550380e6695bc4f307cee88afc7cd674888c6"
+    },
+    {
+      "path": "female-base-0.bin",
+      "bytes": 4019496,
+      "sha256": "5dfc3c73c8f61befe07ae60687ed410669631e298275d0150c04a0e9433b3483"
+    },
+    {
+      "path": "female-base-1.bin",
+      "bytes": 4470564,
+      "sha256": "00f0351b3c5fa57b27f538042a03ea4cd60cbd192e3b9a475d92c5155ad0d0f1"
+    },
+    {
+      "path": "female-base-2.bin",
+      "bytes": 4372272,
+      "sha256": "0d4289e979f625e052338021367eceba5a006d25157d82cf7c487991df8af44a"
+    },
+    {
+      "path": "female-base-3.bin",
+      "bytes": 4002764,
+      "sha256": "a6a947583ce0b827ba0ffda88ab987720ae586133d3e16fc3b8ebdaa5a72ac13"
+    },
+    {
+      "path": "female-base-4.bin",
+      "bytes": 4015824,
+      "sha256": "bed6821db2d0106fcd855ae44a0fb95990d238541f12c02ad96ed4add49b04f5"
+    },
+    {
+      "path": "female-base-5.bin",
+      "bytes": 4050896,
+      "sha256": "5a4d814da6451c5570b4d5c85a382d3b3cd9bc1b80644e441db99ffbe8e195f7"
+    },
+    {
+      "path": "female-base-6.bin",
+      "bytes": 4061756,
+      "sha256": "4cbff6414581dbe1c7f153a81a2f82e8f65e52681417920e82746e804b7c2a2f"
+    },
+    {
+      "path": "female-base-7.bin",
+      "bytes": 4001232,
+      "sha256": "dc9e930e256ec98c4f709eae1c7f4e1bc9e181ed4046875016639e1de7a12f4f"
+    },
+    {
+      "path": "female-base-8.bin",
+      "bytes": 4001536,
+      "sha256": "da5a0f2784dce630ed11f27dcdc2534e99109dc7012643a03eeb2d2cad582f3c"
+    },
+    {
+      "path": "female-base-9.bin",
+      "bytes": 4017212,
+      "sha256": "b035540bb05fad41cb81129d8ae6ca86e59a198cb54b5f1dd771a88586e2abb5"
+    },
+    {
+      "path": "female-base-10.bin",
+      "bytes": 4005596,
+      "sha256": "e70882234e036f15f93241712a2b17d7add5f95f73c8a551efba3bef9609e84a"
+    },
+    {
+      "path": "female-base-11.bin",
+      "bytes": 4002920,
+      "sha256": "6fd3a25230b662c8dbfd325594c85315a6b4a5aa26774f28f37ad05857163eb7"
+    },
+    {
+      "path": "female-base-12.bin",
+      "bytes": 4669304,
+      "sha256": "203bbe2ac78e8d37573bb3aa1da65b7fe2969ed0aa297d312abb3fc50e814e0d"
+    },
+    {
+      "path": "female-base-13.bin",
+      "bytes": 4090912,
+      "sha256": "368e4c15bf75b215680977aaac43c93325c5cf6d9693915bbe09427971667f0f"
+    },
+    {
+      "path": "female-base-14.bin",
+      "bytes": 4012936,
+      "sha256": "277a4b410294252eeb36f846cc4da9cd1a183fbf0c34190815ec75dd268b83cd"
+    },
+    {
+      "path": "female-base-15.bin",
+      "bytes": 297812,
+      "sha256": "2c62d3128b711ed75c0b82df577a2580fbba0763e8306d2d028f1b6afa959100"
+    },
+    {
+      "path": "female-joint-additions-8d95b6b434cd4e04.bin",
+      "bytes": 15528,
+      "sha256": "8d95b6b434cd4e045e082946421768323944829b3804c5c8e479b5fb513bab26"
+    },
+    {
+      "path": "female-ligament-registration-d0014244ff9ff6c0.bin",
+      "bytes": 697024,
+      "sha256": "d0014244ff9ff6c0bcccd807c113ad754ba301fa1d85bcab5f7168e53a0f2e3b"
+    },
+    {
+      "path": "female-ligament-registration-d0014244ff9ff6c0.bin.gz",
+      "bytes": 356374,
+      "sha256": "d27fbb52d7c36a5add9187508c500bad344ce4ae06af72fb7e05723e3e28c4d4"
+    },
+    {
+      "path": "female-ligament-fit-report.json",
+      "bytes": 3038,
+      "sha256": "b56d927faa05df9aace9a7ade418b93417bf31a4addf6f3b31aeb8d2e27a42e6"
+    }
+  ],
+  "upstreamFiles": [
+    {
+      "name": "atlas-female.json",
+      "bytes": 1612830,
+      "sha256": "60a098028eedcb164249a2f7d0b99fb1b9eab56733cd2b90e90b509d29f1da5f"
+    },
+    {
+      "name": "female-fit-report.json",
+      "bytes": 273385,
+      "sha256": "3bd226a86e96ead166ca87ab45bcab4ff80188e5b179c35d47104d0e55d743e5"
+    },
+    {
+      "name": "female-base-0.bin.gz",
+      "bytes": 2279399,
+      "sha256": "6f8c4840f554fa9bd1b90f866077be877985a72d6fef39a9926b0dd196974eb4"
+    },
+    {
+      "name": "female-base-1.bin.gz",
+      "bytes": 2325209,
+      "sha256": "937fea4230ab38265005ae4a258271b35d7dedc54e340567c9f773b183301424"
+    },
+    {
+      "name": "female-base-2.bin.gz",
+      "bytes": 2388965,
+      "sha256": "61c90df32afdb1bcff5da60262278beebfe5283729d6d49d48005e0b4ed49799"
+    },
+    {
+      "name": "female-base-3.bin.gz",
+      "bytes": 2152130,
+      "sha256": "47667d765348ea054947b216ae4c7b18669103f1f61bc02b238d9723d8dd90ad"
+    },
+    {
+      "name": "female-base-4.bin.gz",
+      "bytes": 2170207,
+      "sha256": "964c63442a589089de35d12e67d1b39afa93f6c1fe1b4c931a4f20af16f6c894"
+    },
+    {
+      "name": "female-base-5.bin.gz",
+      "bytes": 2233971,
+      "sha256": "8b6d8848a23f6fff5b60e76d902dece22b37aa8bb75f59e0eb4eeedc7ae632b8"
+    },
+    {
+      "name": "female-base-6.bin.gz",
+      "bytes": 2392219,
+      "sha256": "242b580fc48aa54a302ec11c56cabf46f5190907caa7f21def0014d17ce0ec30"
+    },
+    {
+      "name": "female-base-7.bin.gz",
+      "bytes": 2391078,
+      "sha256": "12a2c1a764b449ad7d7ad2d7ab3cac0a5286c93fcfaaae45b7870d1f43c1f94d"
+    },
+    {
+      "name": "female-base-8.bin.gz",
+      "bytes": 2372384,
+      "sha256": "b09da50abe143ccb582dec3be0b22d9b9d3dd87d1c890a2a71583a49928e1783"
+    },
+    {
+      "name": "female-base-9.bin.gz",
+      "bytes": 2296708,
+      "sha256": "ea0a89fe9b0d9dfd1e0fc8a21674e864d2b0938ecc40423cf03965c65c1a6a67"
+    },
+    {
+      "name": "female-base-10.bin.gz",
+      "bytes": 2298571,
+      "sha256": "e1e8d3897e1a164c810a14f49bf901d4f39ee9f1f52bb775904e2ee606c512e3"
+    },
+    {
+      "name": "female-base-11.bin.gz",
+      "bytes": 2302440,
+      "sha256": "24979f2f2a46266b2e06de588b5164d4a5a066182eb2a13c03c58b16663cdaeb"
+    },
+    {
+      "name": "female-base-12.bin.gz",
+      "bytes": 2608638,
+      "sha256": "90a09e2d11cff48bfe1b766fe7e90a8682e2c3e3b10098d607207c89e6ceaaad"
+    },
+    {
+      "name": "female-base-13.bin.gz",
+      "bytes": 2387855,
+      "sha256": "3f9ac79f7e260a495b3ef425255b007e5f014790cb6d231d32853858a0d6d516"
+    },
+    {
+      "name": "female-base-14.bin.gz",
+      "bytes": 2352106,
+      "sha256": "36e5e66cd2e565d06b19e7dec264da9a1cb21c66b4d8a186109405be1bd9d6c1"
+    },
+    {
+      "name": "female-base-15.bin.gz",
+      "bytes": 177424,
+      "sha256": "1f29d60df0b4b8d56ae1a9f5cf1f875b607f184dc855c8de84d52bfdf6e98277"
+    },
+    {
+      "name": "female-joint-additions-8d95b6b434cd4e04.bin.gz",
+      "bytes": 9333,
+      "sha256": "4d4de687fbe5c0ba8a843088e32550380e6695bc4f307cee88afc7cd674888c6"
+    }
+  ],
+  "modifications": {
+    "parts": [
+      "VH_F_right_uterosacral_ligament",
+      "VH_F_left_uterosacral_ligament"
+    ],
+    "report": "female-ligament-fit-report.json",
+    "method": "Tessellate the source surfaces without changing their shape; join the recorded reproductive/pelvic registrations using a strictly monotone, C1 posterior-depth interpolant, then apply the unchanged pelvic body morph."
+  },
+  "importedVia": {
+    "repository": "https://github.com/isunky/Anatolume",
+    "revision": "39f2c018205faa756ab59b4b12fdf0d1295cfdaf"
+  }
+}

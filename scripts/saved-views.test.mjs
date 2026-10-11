@@ -45,7 +45,8 @@ test("sharing round-trips the camera, layers, overrides and selection under root
   for (const url of ["https://example.com/", "https://llm-junkie.github.io/ha/?test=1#old"]) {
     const link = new URL(shareViewUrl(url, view));
     assert.equal(link.pathname, new URL(url).pathname);
-    assert.equal(link.search, new URL(url).search);
+    assert.equal(link.searchParams.get("model"), "male");
+    assert.equal(link.searchParams.get("test"), new URL(url).searchParams.get("test"));
     assert.deepEqual(readViewHash(link.hash, atlas), view);
   }
   assert(!viewHash(view).includes("+"));

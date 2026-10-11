@@ -76,7 +76,7 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
               ? 'Use a production build to try installation and offline access.'
               : state.error
                 ? 'Your browser could not keep all anatomy files. Reconnect and retry, or free some device storage.'
-                : 'Let the anatomy finish loading while connected. Its download is about 33 MB; the app will confirm when the complete atlas is saved.'}
+                : 'Stay connected while both anatomy models are saved (about 68 MB combined). The app will confirm when both are ready offline.'}
       </p>
       {available && loaded && !state.ready && (state.error || !state.online) && (
         <Button variant="outline" onClick={prepareOffline} disabled={!state.online}>

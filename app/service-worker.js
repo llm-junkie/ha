@@ -4,7 +4,8 @@ const APP_CACHE = `${PREFIX}app:${CONFIG.appVersion}`;
 const DATA_CACHE = `${PREFIX}data:${CONFIG.modelVersion}`;
 const absolute = (path) => new URL(path, self.location.origin).href;
 const shell = new Map(CONFIG.shell.map((entry) => [absolute(entry.url), entry]));
-const data = new Map([CONFIG.catalogue, ...CONFIG.chunks.flatMap((chunk) =>
+const catalogues = CONFIG.catalogues || [CONFIG.catalogue];
+const data = new Map([...catalogues, ...CONFIG.chunks.flatMap((chunk) =>
   chunk.gzip ? [chunk.raw, chunk.gzip] : [chunk.raw],
 )].map((entry) => [absolute(entry.url), entry]));
 const preferred = CONFIG.chunks.map((chunk) =>
@@ -28,9 +29,11 @@ async function status() {
     .filter(Boolean).length;
   const completeShell = (await Promise.all(CONFIG.shell.map((entry) => app.match(absolute(entry.url)))))
     .every(Boolean);
+  const completeCatalogues = (await Promise.all(catalogues.map(entry => models.match(absolute(entry.url)))))
+    .every(Boolean);
   return {
     type: 'human-atlas:status', saved, total: preferred.length,
-    ready: saved === preferred.length && completeShell && !!(await models.match(absolute(CONFIG.catalogue.url))),
+    ready: saved === preferred.length && completeShell && completeCatalogues,
     error: storageError,
   };
 }
@@ -78,7 +81,7 @@ async function prepareAtlas() {
     let next = 0;
     const queue = [
       ...CONFIG.shell.map((entry) => ({ entry, cacheName: APP_CACHE })),
-      ...[CONFIG.catalogue, ...preferred].map((entry) => ({ entry, cacheName: DATA_CACHE })),
+      ...[...catalogues, ...preferred].map((entry) => ({ entry, cacheName: DATA_CACHE })),
     ];
     await Promise.all(Array.from({ length: 3 }, async () => {
       while (next < queue.length) {
@@ -103,9 +106,11 @@ self.addEventListener('install', (event) => {
       const failed = results.find((result) => result.status === 'rejected');
       if (failed) throw failed.reason;
       const models = await caches.open(DATA_CACHE);
-      const url = absolute(CONFIG.catalogue.url);
-      if (!(await models.match(url)))
-        await models.put(url, await verified(await fetch(url, { cache: 'reload' }), CONFIG.catalogue));
+      for (const catalogue of catalogues) {
+        const url = absolute(catalogue.url);
+        if (!(await models.match(url)))
+          await models.put(url, await verified(await fetch(url, { cache: 'reload' }), catalogue));
+      }
       // An update may activate after every old window closes, even without a connection.
       // Prepare its entire anatomy before allowing it to replace the working offline app.
       if (self.registration.active) {

@@ -1,6 +1,14 @@
 import { flushSync } from "react-dom";
 import "./view-library.css";
 import { assetUrl } from "./asset-url";
+import {
+  defaultLayers,
+  isModelAtlas,
+  MODELS,
+  MODEL_STORAGE_KEY,
+  readModel,
+  type ModelId,
+} from "./model-catalogue";
 import { registerAtlasTools } from "./agent-tools";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -39,6 +47,7 @@ import { prepareOffline, updateApp, usePwa } from "./pwa";
 import {
   captureSavedView,
   readViewHash,
+  viewModelFromHash,
   savedViewState,
   normalizeSavedView,
   type SavedView,
@@ -47,11 +56,7 @@ import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover
 import { buildSearchConcepts, matchesAnatomySearch, type SearchConcept } from "./anatomy-search";
 import { partIsVisible } from "./part-visibility";
 import { clearStructureOverrides } from "./structure-layers";
-import {
-  readRecentStructures,
-  rememberStructure,
-  RECENT_STRUCTURES_KEY,
-} from "./recent-structures";
+import { readRecentStructures, rememberStructure, recentStructuresKey } from "./recent-structures";
 import {
   DEFAULT_VISIBLE,
   SYSTEMS,
@@ -81,6 +86,14 @@ const initial: SceneState = {
 };
 export default function Home() {
   const pwa = usePwa();
+  const [model, setModel] = useState<ModelId>(() => {
+    const linked = viewModelFromHash(location.hash);
+    try {
+      return readModel(localStorage, location.search, linked);
+    } catch {
+      return readModel(undefined, location.search, linked);
+    }
+  });
   const aboutTitle = useRef<HTMLHeadingElement>(null);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
@@ -89,20 +102,29 @@ export default function Home() {
   const settled = useRef(false);
   const [viewReady, setViewReady] = useState(false);
   const [viewNotice, setViewNotice] = useState("");
-  const [recentIds, setRecentIds] = useState<string[]>(() => {
+  const [recentByModel, setRecentByModel] = useState<Record<ModelId, string[]>>(() => {
     try {
-      return readRecentStructures(localStorage);
+      return {
+        male: readRecentStructures(localStorage),
+        female: readRecentStructures(localStorage, "female"),
+      };
     } catch {
-      return [];
+      return { male: [], female: [] };
     }
   });
+  const recentIds = recentByModel[model];
+  const setRecentIds = (update: string[] | ((ids: string[]) => string[])) =>
+    setRecentByModel((current) => ({
+      ...current,
+      [model]: typeof update === "function" ? update(current[model]) : update,
+    }));
   useEffect(() => {
     try {
-      localStorage.setItem(RECENT_STRUCTURES_KEY, JSON.stringify(recentIds));
+      localStorage.setItem(recentStructuresKey(model), JSON.stringify(recentIds));
     } catch {
       /* Browsing still works when storage is unavailable. */
     }
-  }, [recentIds]);
+  }, [recentIds, model]);
   const [atlas, setAtlas] = useState<Atlas | null>(null),
     [state, setState] = useState(initial),
     [progress, setProgress] = useState(0),
@@ -117,23 +139,48 @@ export default function Home() {
   }, [progress]);
   useEffect(() => {
     const abort = new AbortController();
+    try {
+      localStorage.setItem(MODEL_STORAGE_KEY, model);
+    } catch {
+      /* Optional preference. */
+    }
     setProgress(0);
     setError("");
     setAtlas(null);
     setChosen(null);
     setDetails(false);
-    setState({ ...initial, visible: DEFAULT_VISIBLE });
-    fetch(assetUrl("/models/atlas.json"), { signal: abort.signal })
+    setPanel(null);
+    setQuery("");
+    setViewReady(false);
+    settled.current = false;
+    cameraPose.current = null;
+    setState({ ...initial, visible: defaultLayers(model) });
+    fetch(assetUrl(MODELS[model].manifest), { signal: abort.signal })
       .then((r) => {
         if (!r.ok) throw new Error("The anatomy catalogue could not be loaded.");
         return r.json();
       })
-      .then((data) => setAtlas(data as Atlas))
+      .then((data: unknown) => {
+        if (abort.signal.aborted) return;
+        if (!isModelAtlas(data, model))
+          throw new Error("The catalogue does not match the selected anatomy model.");
+        setState((current) => ({ ...current, visible: defaultLayers(model, data) }));
+        setAtlas(data);
+      })
       .catch((e) => {
-        if (e.name !== "AbortError") setError(e.message);
+        if (!abort.signal.aborted && e.name !== "AbortError") setError(e.message);
       });
     return () => abort.abort();
-  }, []);
+  }, [model]);
+  const changeModel = (next: ModelId, keepView = false) => {
+    if (next === model) return;
+    setAtlas(null);
+    setModel(next);
+    const url = new URL(location.href);
+    url.searchParams.set("model", next);
+    if (!keepView && url.hash.startsWith("#view=")) url.hash = "";
+    history.replaceState(null, "", url);
+  };
   useEffect(() => {
     const key = (e: KeyboardEvent) => {
       if (
@@ -172,6 +219,19 @@ export default function Home() {
     [atlas],
   );
   const activeSystems = SYSTEMS.filter((s) => counts[s.id] > 0);
+  const organSystems = activeSystems
+    .filter((s) =>
+      [
+        "cardiac",
+        "respiratory",
+        "digestive",
+        "urinary",
+        "endocrine",
+        "reproductive",
+        "mammary",
+      ].includes(s.id),
+    )
+    .map((s) => s.id);
   const selectedParts = state.selected.map((id) => parts.get(id)).filter((p) => !!p),
     selected = selectedParts[0],
     system = SYSTEMS.find((s) => s.id === selected?.system);
@@ -277,7 +337,11 @@ export default function Home() {
     }));
   };
   const reset = () => {
-    setState((s) => ({ ...initial, visible: DEFAULT_VISIBLE, reset: s.reset + 1 }));
+    setState((s) => ({
+      ...initial,
+      visible: defaultLayers(model, atlas ?? undefined),
+      reset: s.reset + 1,
+    }));
     setChosen(null);
     setDetails(false);
     setPanel(null);
@@ -314,6 +378,11 @@ export default function Home() {
   useEffect(() => {
     if (!atlas) return;
     const loadLink = () => {
+      const linked = viewModelFromHash(location.hash);
+      if (linked && linked !== model) {
+        changeModel(linked, true);
+        return;
+      }
       const view = readViewHash(location.hash, atlas);
       if (view) {
         restoreView(view);
@@ -324,7 +393,7 @@ export default function Home() {
     loadLink();
     window.addEventListener("hashchange", loadLink);
     return () => window.removeEventListener("hashchange", loadLink);
-  }, [atlas]);
+  }, [atlas, model]);
   useEffect(() => {
     if (!viewNotice) return;
     const timeout = window.setTimeout(() => setViewNotice(""), 6000);
@@ -337,6 +406,7 @@ export default function Home() {
       { ...state, inspectorOpen: details && selectedParts.length > 0 },
       cameraPose.current,
       chosen?.id,
+      model,
     );
   };
   return (
@@ -377,9 +447,18 @@ export default function Home() {
           </Badge>
         </h1>
         <div className="identity-meta">
-          {atlas ? atlas.parts.length.toLocaleString() : "2,234"} modeled pieces <span>·</span>{" "}
-          BodyParts3D
+          {atlas ? atlas.parts.length.toLocaleString() : MODELS[model].pieces.toLocaleString()}{" "}
+          modeled pieces <span>·</span> {MODELS[model].source}
         </div>
+        <select
+          className="model-select"
+          aria-label="Anatomy model"
+          value={model}
+          onChange={(event) => changeModel(event.target.value as ModelId)}
+        >
+          <option value="male">Male</option>
+          <option value="female">Female · Experimental</option>
+        </select>
       </header>
       <nav className="top-actions" aria-label="Explorer panels">
         <Button
@@ -394,6 +473,7 @@ export default function Home() {
         </Button>
         {atlas && (
           <ViewLibrary
+            key={model}
             atlas={atlas}
             ready={viewReady && !error}
             defaultName={chosen?.name ?? "My anatomy view"}
@@ -451,21 +531,10 @@ export default function Home() {
           <Button
             variant="ghost"
             aria-pressed={
-              state.visible.length === 6 &&
-              ["cardiac", "respiratory", "digestive", "urinary", "endocrine", "reproductive"].every(
-                (id) => state.visible.includes(id as SystemId),
-              )
+              state.visible.length === organSystems.length &&
+              organSystems.every((id) => state.visible.includes(id))
             }
-            onClick={() =>
-              setLayers([
-                "cardiac",
-                "respiratory",
-                "digestive",
-                "urinary",
-                "endocrine",
-                "reproductive",
-              ])
-            }
+            onClick={() => setLayers(organSystems)}
           >
             Organs
           </Button>
@@ -692,7 +761,9 @@ export default function Home() {
               ? "ANATOMICAL INVENTORY"
               : state.explode > 0.05
                 ? "SEPARATED STRUCTURES"
-                : "ADULT HUMAN · MALE"}
+                : model === "female"
+                  ? "FEMALE · EXPERIMENTAL"
+                  : "ADULT HUMAN · MALE"}
         </span>
         <span className="caption-line" />
       </div>
@@ -752,21 +823,23 @@ export default function Home() {
           Tap to inspect
         </span>
         <div className="pwa-footer-actions">
-          {pwa.support === "available" && <Button
-            variant="ghost"
-            disabled={pwa.checking || pwa.updating}
-            aria-busy={pwa.checking || pwa.updating}
-            title="Check for updates and reload when a new version is ready"
-            onClick={() => {
-              setDetails(false);
-              setPanel(null);
-              setAboutUpdates(true);
-              setAbout(true);
-              void updateApp();
-            }}
-          >
-            <RefreshCw size={12} aria-hidden="true" /> Update
-          </Button>}
+          {pwa.support === "available" && (
+            <Button
+              variant="ghost"
+              disabled={pwa.checking || pwa.updating}
+              aria-busy={pwa.checking || pwa.updating}
+              title="Check for updates and reload when a new version is ready"
+              onClick={() => {
+                setDetails(false);
+                setPanel(null);
+                setAboutUpdates(true);
+                setAbout(true);
+                void updateApp();
+              }}
+            >
+              <RefreshCw size={12} aria-hidden="true" /> Update
+            </Button>
+          )}
           <Button
             variant="ghost"
             onClick={() => {
@@ -787,7 +860,8 @@ export default function Home() {
           <div>
             <strong>Preparing the anatomy</strong>
             <span>
-              {progress}% · Loading {atlas?.parts.length.toLocaleString() ?? "2,234"} pieces
+              {progress}% · Loading{" "}
+              {atlas?.parts.length.toLocaleString() ?? MODELS[model].pieces.toLocaleString()} pieces
             </span>
             <div className="loading-track">
               <i style={{ width: `${progress}%` }} />
@@ -856,7 +930,11 @@ export default function Home() {
             )}
             <a
               className="source-link"
-              href="https://lifesciencedb.jp/bp3d/"
+              href={
+                selected?.id.startsWith("VH_F_")
+                  ? "https://doi.org/10.48539/HBM352.BTSQ.586"
+                  : "https://lifesciencedb.jp/bp3d/"
+              }
               target="_blank"
               rel="noreferrer"
             >
@@ -908,22 +986,44 @@ export default function Home() {
         </SheetContent>
       </Sheet>
       <Sheet open={about} onOpenChange={setAbout}>
-        <SheetContent className="about-sheet glass" initialFocus={aboutUpdates ? () => {
-          updateTitle.current?.parentElement?.scrollIntoView({ block: "nearest" });
-          return updateTitle.current;
-        } : aboutTitle}>
+        <SheetContent
+          className="about-sheet glass"
+          initialFocus={
+            aboutUpdates
+              ? () => {
+                  updateTitle.current?.parentElement?.scrollIntoView({ block: "nearest" });
+                  return updateTitle.current;
+                }
+              : aboutTitle
+          }
+        >
           <div className="eyebrow">SOURCE & SCOPE</div>
-          <SheetTitle ref={aboutTitle} tabIndex={-1} className="structure-title">A body, revealed.</SheetTitle>
+          <SheetTitle ref={aboutTitle} tabIndex={-1} className="structure-title">
+            A body, revealed.
+          </SheetTitle>
           <SheetDescription>
-            Explore the adult male reference anatomy from BodyParts3D.
+            {model === "female"
+              ? "Explore the experimental female study model from BodyParts3D and HRA."
+              : "Explore the adult male reference anatomy from BodyParts3D."}
           </SheetDescription>
           <PwaPanel state={pwa} loaded={progress === 100} updateTitleRef={updateTitle} />
           <div className="about-copy">
             <p>
-              <strong>Male · BodyParts3D</strong>
+              <strong>{model === "female" ? "Female · Experimental" : "Male · BodyParts3D"}</strong>
               <br />
-              2,234 individual meshes and 3,432 named concepts from an adult male reference anatomy.
+              {model === "female"
+                ? "2,245 individual meshes and 4,248 named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, and knee ligaments."
+                : "2,234 individual meshes and 3,432 named concepts from an adult male reference anatomy."}
             </p>
+            {model === "female" && (
+              <p>
+                Proportions and organ placement are estimated and await independent anatomical
+                review. Female external skin, genital surfaces, and validated urethra/pelvic-floor
+                replacements are incomplete. The uterosacral ligament registration restores the
+                source assembly's pelvic relationship; it does not validate the original attachment
+                anatomy.
+              </p>
+            )}
             <p>
               This reference does not contain every human structure or variation. Named concepts can
               contain multiple pieces; each source mesh is rendered once.
@@ -937,7 +1037,14 @@ export default function Home() {
             <p>
               BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0
               International.
+              {model === "female" &&
+                " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume."}
             </p>
+            {model === "female" && (
+              <a href="https://doi.org/10.48539/HBM352.BTSQ.586" target="_blank" rel="noreferrer">
+                Female reference organ dataset <ArrowUpRight size={14} />
+              </a>
+            )}
             <a
               href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
               target="_blank"

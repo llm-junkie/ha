@@ -50,6 +50,36 @@ function storage() {
   };
 }
 
+function twoModels() {
+  const fixture=fixtures();
+  const entry=(path,body,extra=[])=>{fixture.files.set(origin+path,Buffer.from(body));return {url:path,hashes:[hash(body),...extra]};};
+  const raw=entry('/ha/models/female.bin',Buffer.from('female model'));
+  const female={raw,gzip:entry('/ha/models/female.bin.gz',gzipSync(Buffer.from('female model')),raw.hashes)};
+  fixture.config.chunks.push(female);
+  fixture.config.catalogues=[fixture.config.catalogue,entry('/ha/models/atlas-female.json',JSON.stringify({sex:'female',chunks:[female]}))];
+  return fixture;
+}
+
+test('both catalogues and both models remain available after offline preparation',async()=>{
+  const w=worker(twoModels());
+  await w.event('install');await w.send('prepare');
+  assert.equal((await w.status()).total,4);assert.equal((await w.status()).ready,true);
+  w.environment.online=false;
+  for(const catalogue of w.config.catalogues)assert.ok(await w.get(catalogue.url));
+  for(const chunk of w.config.chunks)assert.ok(await w.get(chunk.gzip.url));
+  assert.equal(await (await w.get('/ha/?model=female','navigate')).text(),'<html>atlas</html>');
+});
+
+test('adding female anatomy cannot activate an update with an unavailable female catalogue',async()=>{
+  const old=worker();await old.event('install');await old.send('prepare');
+  const fixture=twoModels();fixture.config.appVersion='app-female';fixture.config.modelVersion='models-female';
+  fixture.files.delete(origin+'/ha/models/atlas-female.json');
+  const next=worker(fixture,old.caches,true,true);
+  await assert.rejects(next.event('install'),/unavailable/);
+  assert.equal(next.environment.skip,0);assert.equal((await old.status()).ready,true);
+  old.environment.online=false;assert.ok(await old.get('/ha/models/body-0.bin.gz'));
+});
+
 function worker(fixture = fixtures(), caches = storage(), compressed = true, updating = false) {
   const handlers = new Map(), messages = [], requests = [];
   const environment = {

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": 1,
+  "sourceRevision": "9e0d710fcc1d467dc758d61d6f417231cb1472fe",
+  "recipe": {
+    "transition": [
+      0.1,
+      0.95
+    ],
+    "coordinate": "source anterior–posterior depth",
+    "protectedSourceGenitalGapMm": 5,
+    "sliceSpacingM": 0.00025,
+    "precisionWeldM": 1e-7,
+    "monotoneDepth": true,
+    "revision": 3
+  },
+  "method": "Tessellate the source surfaces without changing their shape; join the recorded reproductive/pelvic registrations using a strictly monotone, C1 posterior-depth interpolant, then apply the unchanged pelvic body morph.",
+  "validationScope": "Source registration consistency and mesh integrity. No independent anatomical review; source soft-tissue attachments are not reconstructed or asserted to attach directly to sacral bone.",
+  "references": [
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3515066/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC3986864/",
+    "https://pmc.ncbi.nlm.nih.gov/articles/PMC1226709/"
+  ],
+  "originalChunk": 14,
+  "addedChunk": 17,
+  "originalChunkHash": "277a4b410294252eeb36f846cc4da9cd1a183fbf0c34190815ec75dd268b83cd",
+  "correctedChunkHash": "d0014244ff9ff6c0bcccd807c113ad754ba301fa1d85bcab5f7168e53a0f2e3b",
+  "parts": [
+    {
+      "id": "VH_F_right_uterosacral_ligament",
+      "minimumVertexJacobian": 0.12584593648728254,
+      "anteriorOriginalVerticesUnchanged": 77,
+      "posteriorOriginalVerticesInPelvicFrame": 15,
+      "sourceTriangles": 436,
+      "correctedTriangles": 16762
+    },
+    {
+      "id": "VH_F_left_uterosacral_ligament",
+      "minimumVertexJacobian": 0.14469475921689184,
+      "anteriorOriginalVerticesUnchanged": 66,
+      "posteriorOriginalVerticesInPelvicFrame": 15,
+      "sourceTriangles": 428,
+      "correctedTriangles": 16426
+    }
+  ],
+  "measurements": [
+    {
+      "id": "VH_F_right_uterosacral_ligament",
+      "posteriorSurfaceDistanceMm": {
+        "source": {
+          "min": 0.0011358289471641316,
+          "max": 3.3635593368075027,
+          "mean": 2.225012076972808
+        },
+        "before": {
+          "min": 47.129798756230436,
+          "max": 50.69796492225667,
+          "mean": 48.4889390284653
+        },
+        "after": {
+          "min": 0.0010598860313421519,
+          "max": 2.714090381761463,
+          "mean": 1.7920147176586874
+        }
+      },
+      "anteriorVerticesUnchanged": 77,
+      "minimumVertexJacobian": 0.12584593648728254
+    },
+    {
+      "id": "VH_F_left_uterosacral_ligament",
+      "posteriorSurfaceDistanceMm": {
+        "source": {
+          "min": 0.6335364538600998,
+          "max": 3.970505895239375,
+          "mean": 1.6633075359339329
+        },
+        "before": {
+          "min": 47.38410474570478,
+          "max": 51.3186553902312,
+          "mean": 49.524556650113475
+        },
+        "after": {
+          "min": 0.529124118094945,
+          "max": 3.333207142939779,
+          "mean": 1.3870264766748301
+        }
+      },
+      "anteriorVerticesUnchanged": 66,
+      "minimumVertexJacobian": 0.14469475921689184
+    }
+  ]
+}

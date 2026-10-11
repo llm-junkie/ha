@@ -1,11 +1,20 @@
 # Human Atlas
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Take the BodyParts3D adult male reference apart into **2,234 individually selectable meshes**, explore **15 anatomical systems**, and search **3,432 named concepts**.
+An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male BodyParts3D reference** (2,234 selectable meshes, 15 systems, 3,432 concepts) or the **experimental female study model** (2,245 meshes, 16 systems, 4,248 concepts).
 
-**[GitHub Pages site](https://llm-junkie.github.io/ha/)** (available after the first deployment).
+**[Open Human Atlas on GitHub Pages](https://llm-junkie.github.io/ha/)**
+
+## Preview
+
+| Male · BodyParts3D | Female · Experimental |
+| --- | --- |
+| [![Male anatomy explorer with the default systems and assembled model](docs/images/male-atlas.jpg)](docs/images/male-atlas.jpg) | [![Experimental female anatomy explorer with the default systems and assembled model](docs/images/female-atlas.jpg)](docs/images/female-atlas.jpg) |
+
+Captured from app **0.2.0** at the same desktop size and default three-quarter view, with anatomy assembled and no structure selected. Click either image for the full-size screenshot. The anatomy shown uses adapted BodyParts3D and HRA data under CC BY 4.0; see [Credits](#credits). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
 
 ## Explore
 
+- Choose **Male** or **Female · Experimental** beside the atlas title. The choice is remembered on this device; `?model=female` opens the female model directly.
 - Orbit, zoom toward the pointer, and select structures directly on the body.
 - Toggle systems or individual structures, or use skeleton and organ presets.
 - Move from assembled anatomy to a spaced inventory of every visible piece.
@@ -25,7 +34,7 @@ Use the bookmark button to save up to 20 named views in this browser, reopen the
 
 Open the published site and choose **Install app · App & credits** (or the information button), then **Install Human Atlas**. The button opens a native install prompt when supported; otherwise it shows installation steps. On iPhone or iPad, open the site in Safari, use **Share → Add to Home Screen**, keep **Open as Web App** turned on if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt. The install link remains visible after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
 
-Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, catalogue, credits, and all 15 model chunks automatically, reusing the normal anatomy download (about 33 MB compressed). It also supports browsers that need the uncompressed model files. The first visit can finish before the service worker takes control; offline preparation fills any missing cache entries afterward.
+Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, both catalogues, credits, and all 33 model chunks automatically (about 68 MB compressed combined). The selected model's normal download is reused, and the other model is saved in the background. Both can then be explored offline. It also supports browsers that need the uncompressed files. The first visit can finish before the service worker takes control; offline preparation fills missing cache entries afterward.
 
 Once ready, you can reopen the atlas, search, change layers, save views, and open previously copied view links without a connection. Bookmarks and offline files belong to this browser on this device. Clearing site data removes them, and browsers can evict offline files when storage is low. The panel reports incomplete saving and offers a retry; external source websites still need a connection.
 
@@ -35,7 +44,7 @@ PWA registration runs in production builds on HTTPS or localhost. Development st
 
 ## App version
 
-The initial app release is **v0.1.0**. **App & credits → App updates** shows the version currently open, including when the app is installed or offline. The display and built files read the version from `package.json`.
+The current app release is **0.1.0**. **App & credits → App updates** shows **Current version 0.1.0**, including when the app is installed or offline. The display and built files read the version from `package.json`.
 
 For the next release, run `npm version patch --no-git-tag-version` for fixes, or `npm version minor --no-git-tag-version` for new features. This updates `package.json` and `package-lock.json` together. Validate and deploy the release as usual; installed apps show the new version after an update. Each build still has a content-based cache identifier, so builds with the same release number can update correctly.
 
@@ -68,9 +77,20 @@ The production `/ha/` preview has also been reopened with its server stopped: fu
 
 ## Anatomy data
 
-The current viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. It does not represent every human structure or variation. Individual source meshes are distinct from named concepts, which may group multiple meshes. Descriptions distinguish general system context from individual organ explanations.
+The male viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. The female mode imports Anatolume's pinned experimental model, combining adapted BodyParts3D anatomy with HRA female structures. Neither represents every structure or variation. Female proportions and organ placement await independent anatomical review; female skin/genital surfaces and validated urethra/pelvic-floor replacements are incomplete.
 
-Geometry is simplified for browser performance while retaining every source mesh. The packaged model contains 2,288,268 triangles and downloads approximately 33 MB of compressed geometry. Full credits, source links, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
+The female uterosacral registration corrects a mismatch between the reproductive and pelvic transforms while preserving the genital attachment region. Source comparison, anatomical references, measurements, mesh checks, and before/after projections are documented in [female-model.md](docs/female-model.md). This verifies registration consistency, rather than independently validating the source attachment anatomy.
+
+Individual source meshes are distinct from named concepts, which may group multiple meshes. Histories and up to 20 bookmarks per model are kept separately; shared links include the model, and existing male links remain compatible.
+
+Geometry is simplified for browser performance. The male reference retains all 2,234 source meshes; the derived female model combines 2,181 adapted BodyParts3D meshes with 64 HRA meshes.
+
+| Model | Meshes | Concepts | Systems | Triangles | Compressed geometry |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Male · BodyParts3D | 2,234 | 3,432 | 15 | 2,288,268 | About 33 MB |
+| Female · Experimental | 2,245 | 4,248 | 16 | 2,469,472 | About 35.5 MB |
+
+Both models total about 68 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
 
 This is an educational explorer, not a diagnostic or surgical tool.
 
@@ -80,13 +100,13 @@ Geometry is merged into batches whose draw indices contain only visible structur
 
 Recent selections are stored locally in the browser. Muscle search shortcuts group verified source meshes without modifying the source catalogue. Guided camera movement respects the reduced-motion setting and yields to manual navigation.
 
-Rendering and navigation improvements are adapted from [isunky/Anatolume](https://github.com/isunky/Anatolume/tree/3cef53da908c902f13bd48c10cd6365de162c150); cursor zoom and muscle-group search are adapted from [wiiiimm/human-atlas](https://github.com/wiiiimm/human-atlas/tree/9c1dd3d222a54844c1a8b54870663ce63b9d53b0).
-
 The optional WebMCP tools expose anatomy search and inspection in compatible browsers. The visible interface works without them.
 
 ## Rebuilding geometry
 
 The repository includes browser-ready geometry. Rebuilding it is optional: obtain the official BodyParts3D OBJ archive and English metadata tables, prepare the joined concepts and display-system mappings, run `scripts/convert-anatomy.py`, then `node scripts/optimize-anatomy.mjs` and `node scripts/compress-models.mjs`. Simplification uses a 0.2% relative error limit per structure.
+
+The female model has a separate pinned import and registration pipeline. Follow [the female rebuild instructions](docs/female-model.md#repeat-the-checks) to reproduce its assets, measurement report, and comparison figure.
 
 ## Deploy
 
@@ -109,8 +129,25 @@ In Windows PowerShell, use `npm.cmd` in these two commands so the `--base` optio
 
 Open http://localhost:4173/ha/. A normal `npm run build` uses `/` and can also be served by another static host. `BASE_PATH` can override that default for other subpath deployments. The 3D viewer requires WebGL 2.
 
+## Credits
+
+| Contributor / source | Contribution used in this fork |
+| --- | --- |
+| **Ashe Magalhaes / [ashemag/human-atlas](https://github.com/ashemag/human-atlas)** | Original Human Atlas application, interface, anatomy explorer, and BodyParts3D conversion foundation. |
+| **isunky / Anatolume** ([viewer revision](https://github.com/isunky/Anatolume/tree/3cef53da908c902f13bd48c10cd6365de162c150), [female import revision](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf)) | Rendering performance, navigation improvements, and the packaged female model import. |
+| **[wiiiimm/human-atlas](https://github.com/wiiiimm/human-atlas/tree/9c1dd3d222a54844c1a8b54870663ce63b9d53b0)** | Cursor-centred zoom, muscle-group search, and the fork foundation used by Human Atlas Enhanced. |
+| **PrejudiceNeutrino / [Human Atlas Enhanced](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe)** | Experimental female assembly, HRA integration, estimated body/breast adaptations, and upstream fit records. |
+| **[BodyParts3D / Database Center for Life Science](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html)** | BodyParts3D 4.0 male reference geometry, anatomical names, and concept relationships. |
+| **Kristen Browne and Heidi Schlehlein / [Human Reference Atlas · HuBMAP](https://doi.org/10.48539/HBM352.BTSQ.586)** | *3D Reference Organ Set for United, Female, v1.5* (2023): the female HRA source geometry. |
+
+Human Atlas Enhanced also credits [Female Atlas by Mahendra Beniwal](https://github.com/HiMahendraBeniwal/female-atlas/tree/b0a20fa3a009ca5f6bfa07b7479312e04c862af2) as an inspiration for its breast presentation; the packaged female geometry comes from the HRA dataset above.
+
+BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0 International. HRA female source data by Kristen Browne and Heidi Schlehlein (2023), published by HuBMAP, licensed under CC BY 4.0. These data credits also apply to the anatomy rendered in the screenshots and comparison figure.
+
+This fork adds GitHub Pages deployment, dependency updates, saved views, layer opacity, PWA installation and updates, model-specific state, and the verified bilateral uterosacral registration correction. Source revisions, geometry changes, and validation limits are recorded in [the full attribution](public/ATTRIBUTION.md) and [female model notes](docs/female-model.md).
+
 ## License
 
-Original application code is released under the [MIT License](LICENSE). **The anatomy data has its own CC BY 4.0 license**; preserve the attribution when redistributing it. Third-party dependencies retain their respective licenses.
+Application code is released under the [MIT License](LICENSE), retaining the original copyright notice for ashemag. **The anatomy data has its own [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/)**; preserve dataset attribution and identify adaptations when redistributing the data or rendered anatomy images. Third-party dependencies retain their respective licenses.
 
 Issues and pull requests are welcome. Please include reproduction steps and browser/device details for interaction problems.

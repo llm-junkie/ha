@@ -6,8 +6,11 @@ import {
   type SystemId,
   type View,
 } from "./anatomy.ts";
+import type { ModelId } from "./model-catalogue.ts";
 
 export const SAVED_VIEWS_KEY = "human-atlas:saved-views:v1";
+export const savedViewsKey = (model: ModelId = "male") =>
+  model === "male" ? SAVED_VIEWS_KEY : `${SAVED_VIEWS_KEY}:female`;
 export const MAX_SAVED_VIEWS = 20;
 const MAX_PAYLOAD = 100_000;
 const views: View[] = ["three-quarter", "front", "back", "side"];
@@ -15,6 +18,7 @@ const systems = new Set(SYSTEMS.map((system) => system.id));
 type RecordValue = Record<string, unknown>;
 export interface SavedView {
   version: 1;
+  model?: ModelId;
   visible: SystemId[];
   selected: string[];
   concept?: string;
@@ -46,8 +50,13 @@ const vector = (value: unknown): value is [number, number, number] =>
   value.every((n) => typeof n === "number" && Number.isFinite(n) && Math.abs(n) <= 100);
 
 // Links and storage are untrusted. Only current atlas IDs and bounded camera values survive.
-export function normalizeSavedView(value: unknown, atlas: Pick<Atlas, "parts">): SavedView | null {
+export function normalizeSavedView(
+  value: unknown,
+  atlas: Pick<Atlas, "parts" | "sex">,
+): SavedView | null {
   if (!record(value) || value.version !== 1 || !record(value.camera)) return null;
+  const model = value.model ?? "male";
+  if ((model !== "male" && model !== "female") || model !== (atlas.sex ?? "male")) return null;
   const camera = value.camera;
   if (!vector(camera.position) || !vector(camera.target)) return null;
   const distance = Math.hypot(...camera.position.map((n, i) => n - (camera.target as number[])[i]));
@@ -82,6 +91,7 @@ export function normalizeSavedView(value: unknown, atlas: Pick<Atlas, "parts">):
     }
   return {
     version: 1,
+    model,
     visible,
     selected,
     concept:
@@ -118,9 +128,11 @@ export function captureSavedView(
   state: SceneState,
   camera: CameraPose,
   concept?: string,
+  model: ModelId = "male",
 ): SavedView {
   return {
     version: 1,
+    model,
     visible: [...state.visible],
     selected: [...state.selected],
     concept,
@@ -143,7 +155,7 @@ export function captureSavedView(
 }
 
 export function savedViewState(view: SavedView, reset: number): SceneState {
-  const { version: _version, concept: _concept, ...state } = view;
+  const { version: _version, model: _model, concept: _concept, ...state } = view;
   return { ...state, rotate: false, reset, focus: view.focusContext ? 1 : 0 };
 }
 
@@ -158,7 +170,25 @@ export function viewHash(view: SavedView): string {
   );
 }
 
-export function readViewHash(hash: string, atlas: Pick<Atlas, "parts">): SavedView | null {
+export function viewModelFromHash(hash: string): ModelId | undefined {
+  if (!hash.startsWith("#view=") || hash.length > MAX_PAYLOAD) return undefined;
+  try {
+    const text = atob(hash.slice(6).replace(/-/g, "+").replace(/_/g, "/"));
+    const value: unknown = JSON.parse(
+      new TextDecoder().decode(Uint8Array.from(text, (char) => char.charCodeAt(0))),
+    );
+    if (!record(value) || value.version !== 1) return undefined;
+    return value.model === "female"
+      ? "female"
+      : value.model === undefined || value.model === "male"
+        ? "male"
+        : undefined;
+  } catch {
+    return undefined;
+  }
+}
+
+export function readViewHash(hash: string, atlas: Pick<Atlas, "parts" | "sex">): SavedView | null {
   if (!hash.startsWith("#view=") || hash.length > MAX_PAYLOAD) return null;
   try {
     const text = atob(hash.slice(6).replace(/-/g, "+").replace(/_/g, "/"));
@@ -173,16 +203,17 @@ export function readViewHash(hash: string, atlas: Pick<Atlas, "parts">): SavedVi
 
 export function shareViewUrl(url: string, view: SavedView): string {
   const target = new URL(url);
+  target.searchParams.set("model", view.model ?? "male");
   target.hash = viewHash(view);
   return target.href;
 }
 
 export function readBookmarks(
   storage: Pick<Storage, "getItem"> | undefined,
-  atlas: Pick<Atlas, "parts">,
+  atlas: Pick<Atlas, "parts" | "sex">,
 ): Bookmark[] {
   try {
-    const raw = storage?.getItem(SAVED_VIEWS_KEY);
+    const raw = storage?.getItem(savedViewsKey(atlas.sex));
     if (!raw || raw.length > MAX_PAYLOAD * MAX_SAVED_VIEWS) return [];
     const value: unknown = JSON.parse(raw);
     if (!Array.isArray(value)) return [];
@@ -211,10 +242,11 @@ export function readBookmarks(
 export function writeBookmarks(
   storage: Pick<Storage, "setItem"> | undefined,
   bookmarks: Bookmark[],
+  model: ModelId = "male",
 ): boolean {
   try {
     if (!storage) return false;
-    storage.setItem(SAVED_VIEWS_KEY, JSON.stringify(bookmarks.slice(0, MAX_SAVED_VIEWS)));
+    storage.setItem(savedViewsKey(model), JSON.stringify(bookmarks.slice(0, MAX_SAVED_VIEWS)));
     return true;
   } catch {
     return false;

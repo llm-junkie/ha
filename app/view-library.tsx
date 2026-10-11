@@ -5,7 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import type { Atlas } from "./anatomy";
 import {
   MAX_SAVED_VIEWS,
-  SAVED_VIEWS_KEY,
+  savedViewsKey,
   readBookmarks,
   writeBookmarks,
   shareViewUrl,
@@ -36,7 +36,7 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
   const [copied, setCopied] = useState(false);
   useEffect(() => {
     const changed = (event: StorageEvent) => {
-      if (event.key === SAVED_VIEWS_KEY || event.key === null) {
+      if (event.key === savedViewsKey(atlas.sex) || event.key === null) {
         try {
           setBookmarks(readBookmarks(localStorage, atlas));
         } catch {
@@ -49,7 +49,7 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
   }, [atlas]);
   const update = (next: SavedBookmark[]) => {
     try {
-      if (!writeBookmarks(localStorage, next)) return false;
+      if (!writeBookmarks(localStorage, next, atlas.sex)) return false;
       setBookmarks(next);
       return true;
     } catch {
