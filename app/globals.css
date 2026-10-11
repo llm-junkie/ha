@@ -86,3 +86,28 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
 @media(max-width:767px){body:has(.detail-sheet) .view-controls{visibility:hidden}}
 
 @media(max-height:600px) and (orientation:landscape){body:has(.detail-sheet) .bottom-dock{left:12px;right:324px;width:auto;transform:none;max-width:none;margin:0}}
+
+/* Structure switches use the source catalogue's actual system membership. */
+.system-row{gap:5px}.system-row .system-name{font-size:12px;gap:6px;min-width:0}.system-row .system-count{margin-left:auto}
+.structure-expand{width:22px;min-width:22px;height:35px;padding:0!important}
+.structure-children{margin:2px 0 10px 12px;padding-left:9px;border-left:1px solid #18253618}
+.structure-filter{width:100%;min-width:0;padding:7px 8px;margin:5px 0;font-size:12px;border:1px solid #18253622;border-radius:4px;background:#ffffffa0;outline-offset:2px}
+.structure-row{display:flex;align-items:center;gap:6px;min-height:36px;opacity:.6}.structure-row.enabled{opacity:1}
+.structure-row .structure-name{flex:1;min-width:0;white-space:normal;text-align:left;justify-content:flex-start;height:auto;min-height:36px;padding:6px 3px;font-size:11px;line-height:1.35;overflow-wrap:anywhere}
+.structure-row [data-slot=switch]{flex-shrink:0}.structure-more{width:100%;font-size:11px}.structure-empty{font-size:12px;color:#7c8793}
+.search-history-heading{display:flex;align-items:center;justify-content:space-between;padding:6px 8px 2px;font-size:11px;color:#78828c}
+.search-history-heading button{font-size:11px;height:30px;padding:4px}.recent-tag{font-size:10px;font-weight:400;display:inline-block;margin-left:8px;color:#538779}
+.rotation-settings{width:250px!important;padding:16px!important;gap:14px!important}.rotation-heading{display:flex;align-items:center;justify-content:space-between;font-size:13px}
+.rotation-heading output{font-variant-numeric:tabular-nums;color:#637583}.rotation-speed-labels{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:#78828c}
+.rotation-speed-labels button{font-size:11px;padding:3px;height:28px}.rotation-options{border:0;padding:0;margin:0;display:flex;flex-direction:column;gap:7px}
+.rotation-options legend{font-size:12px;margin-bottom:8px}.rotation-options label{display:flex;align-items:center;gap:8px;font-size:12px;min-height:32px}
+.rotation-options input{accent-color:#263b48}.detail-focus-actions{display:flex;gap:8px}.detail-focus-actions .primary-action,.detail-focus-actions .locate-action{width:auto;flex:1;justify-content:center;min-height:44px;font-size:12px;padding:8px}
+@media(max-width:767px) and (orientation:portrait){
+ .detail-sheet.is-isolated{bottom:max(12px,env(safe-area-inset-bottom))!important}
+ body:has(.detail-sheet.is-isolated) .bottom-dock,body:has(.detail-sheet.is-isolated) .scene-caption,body:has(.detail-sheet.is-isolated) .studio-footer{visibility:hidden}
+}
+@media(max-width:767px){
+ .view-controls{gap:0}.view-controls button{width:38px;min-width:38px;height:44px}.view-controls i{margin-inline:4px}
+ .structure-row .structure-name{min-height:44px}.structure-expand{min-height:44px}.structure-filter{font-size:16px;min-height:40px}
+ .rotation-options label{min-height:44px}.rotation-settings [data-slot=slider]{padding-block:12px}.search-history-heading button{min-height:36px}
+}

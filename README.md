@@ -6,11 +6,12 @@ An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Ta
 
 ## Explore
 
-- Orbit, zoom, and select structures directly on the body.
-- Toggle individual systems or use skeleton and organ presets.
+- Orbit, zoom toward the pointer, and select structures directly on the body.
+- Toggle systems or individual structures, or use skeleton and organ presets.
 - Move from assembled anatomy to a spaced inventory of every visible piece.
-- Search anatomical names and source identifiers.
-- Isolate a selected structure and read its details.
+- Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes.
+- Reopen recent selections, smoothly locate or isolate structures, and return to the overall view.
+- Adjust automatic rotation speed and direction.
 - Use compact controls and detail panels on mobile.
 
 ## Run locally
@@ -34,6 +35,8 @@ npm run build
 
 Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, tap-versus-drag handling, asset URLs under GitHub Pages subpaths, and compressed model downloads. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
 
+Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, and cursor zoom with inspector offsets and distance limits.
+
 ## Anatomy data
 
 The current viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. It does not represent every human structure or variation. Individual source meshes are distinct from named concepts, which may group multiple meshes. Descriptions distinguish general system context from individual organ explanations.
@@ -44,7 +47,11 @@ This is an educational explorer, not a diagnostic or surgical tool.
 
 ## How it works
 
-Geometry is merged into batches. Per-structure GPU textures control translation, visibility, and selection, while component geometry supports accurate picking. Exploded layouts pack only the visible pieces. Rendering updates when the scene changes; orbit controls remain responsive without thousands of separate draw calls.
+Geometry is merged into batches whose draw indices contain only visible structures. Per-structure GPU textures control translation and selection, while component geometry supports accurate picking. Exploded layouts pack only visible pieces; layout, visibility and selection buffers stay cached during animation. The frame loop wakes for interactions, loading and animations, then stops when the view is still. It also pauses while the browser tab is hidden.
+
+Recent selections are stored locally in the browser. Muscle search shortcuts group verified source meshes without modifying the source catalogue. Guided camera movement respects the reduced-motion setting and yields to manual navigation.
+
+Rendering and navigation improvements are adapted from [isunky/Anatolume](https://github.com/isunky/Anatolume/tree/3cef53da908c902f13bd48c10cd6365de162c150); cursor zoom and muscle-group search are adapted from [wiiiimm/human-atlas](https://github.com/wiiiimm/human-atlas/tree/9c1dd3d222a54844c1a8b54870663ce63b9d53b0).
 
 The optional WebMCP tools expose anatomy search and inspection in compatible browsers. The visible interface works without them.
 

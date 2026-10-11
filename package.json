@@ -10,7 +10,7 @@
     "build": "vite build",
     "preview": "vite preview",
     "check": "tsc --noEmit",
-    "test": "node scripts/validate-atlas.mjs && node scripts/validate-interactions.mjs && node scripts/validate-assets.mjs"
+    "test": "node scripts/validate-atlas.mjs && node scripts/validate-interactions.mjs && node scripts/validate-assets.mjs && node --test scripts/viewer-navigation.test.mjs scripts/cursor-zoom.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",
