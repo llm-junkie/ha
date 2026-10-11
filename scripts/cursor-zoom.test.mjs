@@ -151,6 +151,25 @@ test("transparent body surface does not mask a solid target but works when it is
   assert(skin.camera.position.distanceTo(solid.camera.position) > 1e-3);
 });
 
+test("faded layers yield to solid surfaces; selected and lone faded structures remain targets", () => {
+  const specs = [
+    { id: "back", z: 0 },
+    { id: "foreground", z: 1, system: "skeletal" },
+  ];
+  const state = { visible: ["muscular", "skeletal"], opacity: { skeletal: 0.2 } };
+  const mixed = make(specs, { state }),
+    solid = make([specs[0]], { state });
+  mixed.wheel(mixed.event());
+  solid.wheel(solid.event());
+  near(mixed.camera.position, solid.camera.position);
+  const selected = make(specs, { state: { ...state, selected: ["foreground"] } }),
+    lone = make([specs[1]], { state });
+  selected.wheel(selected.event());
+  lone.wheel(lone.event());
+  near(selected.camera.position, lone.camera.position);
+  assert(lone.camera.position.distanceTo(solid.camera.position) > 1e-3);
+});
+
 test("wheel pixel/line/page units and trackpad pinch produce consistent zoom", () => {
   const pixels = make(),
     lines = make(),

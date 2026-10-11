@@ -1,4 +1,6 @@
-import { createAnatomyMaterial } from "./anatomy-material";
+import { createAnatomyMaterial, applyLayerOpacity } from "./anatomy-material";
+import { layerOpacity, partOpacity } from "./layer-opacity";
+import { captureCameraPose, restoreCameraPose } from "./camera-pose";
 import { updateDrawBatches, type DrawBatch } from "./draw-batches";
 import { useEffect, useRef } from "react";
 import * as T from "three";
@@ -12,24 +14,34 @@ import { PointerTap } from "./pointer-tap";
 import { partIsVisible } from "./part-visibility";
 import { createCursorZoom } from "./cursor-zoom";
 import { createFrameScheduler } from "./frame-scheduler";
-import { SYSTEMS, type Atlas, type SceneState } from "./anatomy";
+import { SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
   atlas: Atlas;
   state: SceneState;
   onSelect: (id: string) => void;
   onProgress: (n: number) => void;
   onError: (s: string) => void;
+  onCameraChange: (pose: CameraPose, settled: boolean) => void;
 }
-export default function AnatomyScene({ atlas, state, onSelect, onProgress, onError }: Props) {
+export default function AnatomyScene({
+  atlas,
+  state,
+  onSelect,
+  onProgress,
+  onError,
+  onCameraChange,
+}: Props) {
   const host = useRef<HTMLDivElement>(null),
     latest = useRef(state),
     select = useRef(onSelect),
+    cameraChanged = useRef(onCameraChange),
     wake = useRef<() => void>(() => {});
   useEffect(() => {
     wake.current();
   }, [state]);
   latest.current = state;
   select.current = onSelect;
+  cameraChanged.current = onCameraChange;
   useEffect(() => {
     const el = host.current!;
     let disposed = false,
@@ -41,6 +53,7 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
       layoutKey = "",
       amount = 0;
     let lastState: SceneState | null = null;
+    let lastRestoredCamera: CameraPose | undefined;
     let animate: (time: number) => void = () => {};
     let lastTime = 0;
     const frames = createFrameScheduler((time) => animate(time));
@@ -441,6 +454,7 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
       camera.updateProjectionMatrix();
       renderer.setSize(el.clientWidth, el.clientHeight);
       fit(latest.current.view, amount);
+      dirty = true;
       requestFrame();
     };
     const observer = new ResizeObserver(resize);
@@ -484,23 +498,28 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
       );
       raycaster.setFromCamera(pointer, camera);
       let nearest = Infinity,
+        fadedNearest = Infinity,
+        faded = -1,
         found = -1;
       activeParts.forEach((i) => {
         const mesh = pickers[i];
-        if (
-          !mesh ||
-          data[i * 4 + 3] < 0.5 ||
-          (hasSolidParts && atlas.parts[i].system === "integumentary")
-        )
-          return;
+        if (!mesh || data[i * 4 + 3] < 0.5) return;
         worldBox.copy(bounds[i]).translate(mesh.position);
         if (!raycaster.ray.intersectBox(worldBox, hitPoint)) return;
         const hits = raycaster.intersectObject(mesh, false);
+        if (partOpacity(atlas.parts[i], latest.current) < 0.5) {
+          if (hits[0] && hits[0].distance < fadedNearest) {
+            fadedNearest = hits[0].distance;
+            faded = i;
+          }
+          return;
+        }
         if (hits[0] && hits[0].distance < nearest) {
           nearest = hits[0].distance;
           found = i;
         }
       });
+      if (found < 0) found = faded;
       if (found < 0 && amount > 0.45)
         found = findTarget(
           e.clientX - rect.left,
@@ -540,6 +559,15 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
       const dt = lastTime ? Math.min((time - lastTime) / 1000, 0.05) : 1 / 60,
         s = latest.current;
       lastTime = time;
+      const restoring = ready && s.camera && s.camera !== lastRestoredCamera;
+      if (restoring) {
+        amount = s.explode;
+        lastState = null;
+      }
+      if (!s.camera) lastRestoredCamera = undefined;
+      mats.forEach((material, system) => {
+        if (applyLayerOpacity(material, layerOpacity(s, system))) dirty = true;
+      });
       const changed =
         lastState?.visible !== s.visible ||
         lastState?.selected !== s.selected ||
@@ -798,6 +826,17 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
         }
         lastSelectionFrame = selectionFrameKey;
       }
+      if (restoring && s.camera) {
+        cameraTransition = null;
+        controls.autoRotate = false;
+        controls.enableDamping = false;
+        controls.update();
+        restoreCameraPose(camera, controls.target, s.camera, el.clientWidth, el.clientHeight);
+        controls.maxDistance = Math.max(40, camera.position.distanceTo(controls.target));
+        controls.update();
+        lastRestoredCamera = s.camera;
+        dirty = true;
+      }
       controls.enableRotate = amount < 0.8;
       controls.mouseButtons.LEFT = amount < 0.8 ? T.MOUSE.ROTATE : T.MOUSE.PAN;
       controls.touches.ONE = amount < 0.8 ? T.TOUCH.ROTATE : T.TOUCH.PAN;
@@ -884,6 +923,10 @@ export default function AnatomyScene({ atlas, state, onSelect, onProgress, onErr
       if (controls.autoRotate) dirty = true;
       if (dirty) {
         renderer.render(scene, camera);
+        cameraChanged.current(
+          captureCameraPose(camera, controls.target, el.clientWidth, el.clientHeight),
+          ready && amount === s.explode && !cameraTransition,
+        );
         targetsDirty = true;
         dirty = false;
       }

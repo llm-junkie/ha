@@ -1,0 +1,28 @@
+.pwa-panel {
+  flex-shrink: 0;
+  border: 1px solid #dce4e8;
+  border-radius: 12px;
+  padding: 18px;
+  color: #394957;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: #f8fafb;
+}
+.pwa-heading, .pwa-offline {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+.pwa-heading h2 { font-size: 15px; font-weight: 600; margin: 0; }
+.pwa-panel p { margin: 0; font-size: 13px; line-height: 1.65; }
+.pwa-panel .pwa-hint { font-size: 12px; color: #70808c; }
+.pwa-panel strong { font-weight: 500; }
+.pwa-offline { padding-top: 4px; font-size: 12px; font-weight: 500; }
+.pwa-offline.is-ready { color: #37736a; }
+.pwa-panel button { min-height: 44px; width: 100%; white-space: normal; }
+.pwa-update-section { border-top: 1px solid #dce4e8; padding-top: 12px; }
+.pwa-update-section h3 { font-size: 13px; margin: 0 0 7px; font-weight: 600; }
+.pwa-update-section button { margin-top: 12px; }
+.studio-footer .pwa-footer-status { color: #37736a; }
+.studio-footer .pwa-footer-status::after { content: '·'; margin-inline: 7px; color: #9ca9b2; }

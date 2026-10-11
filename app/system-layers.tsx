@@ -2,9 +2,11 @@ import { useMemo, useState } from "react";
 import { ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
+import { Slider } from "@/components/ui/slider";
 import { SYSTEMS, type Atlas, type SceneState, type SystemId } from "./anatomy";
 import { systemStructures } from "./structure-layers";
 import { partIsVisible } from "./part-visibility";
+import { layerOpacity } from "./layer-opacity";
 
 interface Props {
   atlas: Atlas;
@@ -13,6 +15,7 @@ interface Props {
   onToggle: (system: SystemId) => void;
   onStructureToggle: (ids: string[], visible: boolean) => void;
   onInspect: (concept: { id: string; name: string; elements: string[] }) => void;
+  onOpacity: (system: SystemId, opacity: number) => void;
 }
 
 export default function SystemLayers({
@@ -22,6 +25,7 @@ export default function SystemLayers({
   onToggle,
   onStructureToggle,
   onInspect,
+  onOpacity,
 }: Props) {
   const groups = useMemo(() => systemStructures(atlas), [atlas]);
   const parts = useMemo(() => new Map(atlas.parts.map((part) => [part.id, part])), [atlas]);
@@ -76,6 +80,22 @@ export default function SystemLayers({
             </div>
             {open && (
               <div className="structure-children" id={`structures-${system.id}`}>
+                <div className="layer-opacity-control">
+                  <div>
+                    <label id={`opacity-label-${system.id}`}>Opacity</label>
+                    <output>{Math.round(layerOpacity(state, system.id) * 100)}%</output>
+                  </div>
+                  <Slider
+                    min={5}
+                    max={100}
+                    step={5}
+                    value={[Math.round(layerOpacity(state, system.id) * 100)]}
+                    aria-label={`${system.name} opacity`}
+                    onValueChange={(value) =>
+                      onOpacity(system.id, (Array.isArray(value) ? value[0] : value) / 100)
+                    }
+                  />
+                </div>
                 <input
                   className="structure-filter"
                   aria-label={`Filter ${system.name.toLowerCase()} structures`}

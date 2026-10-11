@@ -2,6 +2,7 @@ import * as T from "three";
 import type { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import type { Atlas, SceneState } from "./anatomy.ts";
 import { partIsVisible } from "./part-visibility.ts";
+import { partOpacity } from "./layer-opacity.ts";
 
 interface CursorZoomOptions {
   camera: T.PerspectiveCamera;
@@ -80,24 +81,34 @@ export function createCursorZoom({
         renderedVisibility[index * 4 + 3] > 0.5 &&
         partIsVisible(part, current, lookups),
     );
-    const hasSolid = atlas.parts.some(
-      (part, index) => visible[index] && part.system !== "integumentary",
-    );
     let nearest = Infinity,
+      fadedNearest = Infinity,
+      fadedAnchor = new T.Vector3(),
       found = false;
     pickers.forEach((mesh, index) => {
-      if (!mesh || !visible[index] || (hasSolid && atlas.parts[index].system === "integumentary"))
-        return;
+      if (!mesh || !visible[index]) return;
       worldBox.copy(bounds[index]).translate(mesh.position);
       if (!raycaster.ray.intersectBox(worldBox, hitPoint)) return;
       const hit = raycaster.intersectObject(mesh, false)[0];
-      if (!hit || hit.distance >= nearest) return;
+      if (!hit) return;
       projection.copy(hit.point).project(camera);
       if (projection.z < -1 || projection.z > 1) return;
+      if (partOpacity(atlas.parts[index], current) < 0.5) {
+        if (hit.distance < fadedNearest) {
+          fadedNearest = hit.distance;
+          fadedAnchor.copy(hit.point);
+        }
+        return;
+      }
+      if (hit.distance >= nearest) return;
       nearest = hit.distance;
       anchor.copy(hit.point);
       found = true;
     });
+    if (!found && fadedNearest < Infinity) {
+      anchor.copy(fadedAnchor);
+      found = true;
+    }
     if (!found) {
       camera.getWorldDirection(direction);
       plane.setFromNormalAndCoplanarPoint(direction, controls.target);

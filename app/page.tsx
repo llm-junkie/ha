@@ -1,4 +1,5 @@
 import { flushSync } from "react-dom";
+import "./view-library.css";
 import { assetUrl } from "./asset-url";
 import { registerAtlasTools } from "./agent-tools";
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -31,6 +32,16 @@ import {
 } from "@/components/ui/combobox";
 import AnatomyScene from "./scene";
 import SystemLayers from "./system-layers";
+import ViewLibrary from "./view-library";
+import PwaPanel, { pwaLabel } from "./pwa-panel";
+import { prepareOffline, usePwa } from "./pwa";
+import {
+  captureSavedView,
+  readViewHash,
+  savedViewState,
+  normalizeSavedView,
+  type SavedView,
+} from "./saved-views";
 import { Popover, PopoverTrigger, PopoverContent } from "@/components/ui/popover";
 import { buildSearchConcepts, matchesAnatomySearch, type SearchConcept } from "./anatomy-search";
 import { partIsVisible } from "./part-visibility";
@@ -50,6 +61,7 @@ import {
   type SceneState,
   type SystemId,
   type View,
+  type CameraPose,
 } from "./anatomy";
 const initial: SceneState = {
   explode: 0,
@@ -62,11 +74,18 @@ const initial: SceneState = {
   focus: 0,
   focusContext: false,
   partVisibility: {},
+  opacity: {},
   rotationSpeed: 1,
   rotationDirection: "clockwise",
 };
 export default function Home() {
+  const pwa = usePwa();
+  const aboutTitle = useRef<HTMLHeadingElement>(null);
   const detailTitle = useRef<HTMLHeadingElement>(null);
+  const cameraPose = useRef<CameraPose | null>(null);
+  const settled = useRef(false);
+  const [viewReady, setViewReady] = useState(false);
+  const [viewNotice, setViewNotice] = useState("");
   const [recentIds, setRecentIds] = useState<string[]>(() => {
     try {
       return readRecentStructures(localStorage);
@@ -90,6 +109,9 @@ export default function Home() {
     [about, setAbout] = useState(false),
     [query, setQuery] = useState(""),
     [chosen, setChosen] = useState<SearchConcept | null>(null);
+  useEffect(() => {
+    if (progress === 100) prepareOffline();
+  }, [progress]);
   useEffect(() => {
     const abort = new AbortController();
     setProgress(0);
@@ -261,6 +283,59 @@ export default function Home() {
     setDetails(false);
     setPanel((p) => (p === next ? null : next));
   };
+  const restoreView = (value: SavedView) => {
+    if (!atlas) return;
+    const view = normalizeSavedView(value, atlas);
+    if (!view) return;
+    const matching = concepts.find(
+      (concept) =>
+        concept.id === view.concept &&
+        concept.elements.length === view.selected.length &&
+        concept.elements.every((id) => view.selected.includes(id)),
+    );
+    const first = parts.get(view.selected[0]);
+    setChosen(
+      matching ??
+        (first
+          ? {
+              id: first.id,
+              name: view.selected.length === 1 ? first.name : "Selected structures",
+              elements: view.selected,
+            }
+          : null),
+    );
+    setDetails(view.inspectorOpen);
+    setPanel(null);
+    setState((current) => savedViewState(view, current.reset + 1));
+  };
+  useEffect(() => {
+    if (!atlas) return;
+    const loadLink = () => {
+      const view = readViewHash(location.hash, atlas);
+      if (view) {
+        restoreView(view);
+        setViewNotice("Shared view opened.");
+      } else if (location.hash.startsWith("#view="))
+        setViewNotice("This view link could not be opened. You can explore the atlas normally.");
+    };
+    loadLink();
+    window.addEventListener("hashchange", loadLink);
+    return () => window.removeEventListener("hashchange", loadLink);
+  }, [atlas]);
+  useEffect(() => {
+    if (!viewNotice) return;
+    const timeout = window.setTimeout(() => setViewNotice(""), 6000);
+    return () => window.clearTimeout(timeout);
+  }, [viewNotice]);
+  const getView = () => {
+    if (!cameraPose.current || !settled.current) return null;
+    setState((current) => ({ ...current, rotate: false }));
+    return captureSavedView(
+      { ...state, inspectorOpen: details && selectedParts.length > 0 },
+      cameraPose.current,
+      chosen?.id,
+    );
+  };
   return (
     <main className="studio">
       {atlas && (
@@ -273,9 +348,21 @@ export default function Home() {
             if (n === 100) setError("");
           }}
           onError={setError}
+          onCameraChange={(pose, ready) => {
+            cameraPose.current = pose;
+            if (settled.current !== ready) {
+              settled.current = ready;
+              setViewReady(ready);
+            }
+          }}
         />
       )}
       <div className="vignette" />
+      {viewNotice && (
+        <div className="view-notice glass" role="status">
+          {viewNotice}
+        </div>
+      )}
       <header className="identity">
         <div className="eyebrow">
           <span className="status-dot" /> INTERACTIVE ANATOMY
@@ -302,6 +389,15 @@ export default function Home() {
           <span>Find a structure</span>
           <kbd>/</kbd>
         </Button>
+        {atlas && (
+          <ViewLibrary
+            atlas={atlas}
+            ready={viewReady && !error}
+            defaultName={chosen?.name ?? "My anatomy view"}
+            getView={getView}
+            onRestore={restoreView}
+          />
+        )}
         <Button
           variant="ghost"
           className="icon-button"
@@ -378,8 +474,25 @@ export default function Home() {
             onToggle={toggle}
             onStructureToggle={toggleStructure}
             onInspect={choose}
+            onOpacity={(id, opacity) =>
+              setState((current) => ({
+                ...current,
+                opacity: { ...current.opacity, [id]: opacity },
+              }))
+            }
           />
         )}
+        <div className="opacity-help">
+          <span>Expand a system to adjust opacity.</span>
+          {Object.keys(state.opacity ?? {}).length > 0 && (
+            <Button
+              variant="ghost"
+              onClick={() => setState((current) => ({ ...current, opacity: {} }))}
+            >
+              Reset opacity
+            </Button>
+          )}
+        </div>
         <div className="panel-foot">
           <span>{visibleCount.toLocaleString()} pieces visible</span>
           <Button variant="ghost" onClick={() => setLayers([])}>
@@ -642,7 +755,8 @@ export default function Home() {
             setAbout(true);
           }}
         >
-          Source & credits <ArrowUpRight size={12} />
+          {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
+          App & credits <ArrowUpRight size={12} />
         </Button>
       </footer>
       {progress < 100 && !error && (
@@ -772,12 +886,13 @@ export default function Home() {
         </SheetContent>
       </Sheet>
       <Sheet open={about} onOpenChange={setAbout}>
-        <SheetContent className="about-sheet glass">
+        <SheetContent className="about-sheet glass" initialFocus={aboutTitle}>
           <div className="eyebrow">SOURCE & SCOPE</div>
-          <SheetTitle className="structure-title">A body, revealed.</SheetTitle>
+          <SheetTitle ref={aboutTitle} tabIndex={-1} className="structure-title">A body, revealed.</SheetTitle>
           <SheetDescription>
             Explore the adult male reference anatomy from BodyParts3D.
           </SheetDescription>
+          <PwaPanel state={pwa} loaded={progress === 100} />
           <div className="about-copy">
             <p>
               <strong>Male · BodyParts3D</strong>
