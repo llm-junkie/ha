@@ -1,4 +1,5 @@
-import { Check, Download, RefreshCw, WifiOff } from 'lucide-react';
+import { Check, Download, RefreshCw, Share, WifiOff } from 'lucide-react';
+import { useEffect, useRef, useState, type Ref } from 'react';
 import { Button } from '@/components/ui/button';
 import { installApp, prepareOffline, updateApp, type PwaState } from './pwa';
 import './pwa.css';
@@ -6,12 +7,19 @@ import './pwa.css';
 export function pwaLabel(state: PwaState) {
   if (state.updateAvailable) return 'Update available';
   if (!state.online) return 'Offline';
+  if (!state.installed && state.support === 'available') return 'Install app';
   if (state.ready) return 'Offline ready';
-  if (state.canInstall && !state.installed) return 'Install app';
   return '';
 }
 
-export default function PwaPanel({ state, loaded }: { state: PwaState; loaded: boolean }) {
+export default function PwaPanel({ state, loaded, updateTitleRef }: {
+  state: PwaState; loaded: boolean; updateTitleRef?: Ref<HTMLHeadingElement>;
+}) {
+  const [showInstallHelp, setShowInstallHelp] = useState(false);
+  const installHelp = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (showInstallHelp) installHelp.current?.scrollIntoView({ block: 'nearest' });
+  }, [showInstallHelp]);
   const available = state.support === 'available';
   const title = state.ready ? (state.online ? 'Ready offline' : 'You’re exploring offline')
     : !state.online ? 'You’re offline'
@@ -29,15 +37,30 @@ export default function PwaPanel({ state, loaded }: { state: PwaState; loaded: b
       </div>
       {state.installed ? <p>Human Atlas is installed on this device.</p> : <>
         <p>Install Human Atlas to open it from your home screen or desktop.</p>
-        {state.canInstall ? (
-          <Button onClick={() => void installApp()} disabled={state.installing}>
-            <Download size={16} /> Install Human Atlas
-          </Button>
-        ) : <p className="pwa-hint">
-          If your browser supports installation, choose <strong>Install app</strong> or{' '}
-          <strong>Add to Home Screen</strong> in its menu. On iPhone or iPad, use{' '}
-          <strong>Share → Add to Home Screen</strong>.
+        <Button onClick={() => {
+          if (state.canInstall) void installApp();
+          else setShowInstallHelp((open) => !open);
+        }} disabled={!available || state.installing}
+          aria-expanded={!state.canInstall ? showInstallHelp : undefined}
+          aria-controls={!state.canInstall ? 'pwa-install-help' : undefined}>
+          <Download size={16} aria-hidden="true" /> Install Human Atlas
+        </Button>
+        {!state.canInstall && <p className="pwa-hint">
+          {state.support === 'development' ? 'Installation is available in the published atlas.'
+            : 'This button shows installation steps for browsers that use their own menu.'}
         </p>}
+        {showInstallHelp && !state.canInstall && <div ref={installHelp} id="pwa-install-help" className="pwa-install-help">
+          <h3>Install on iPhone or iPad</h3>
+          <ol>
+            <li>Open this page in <strong>Safari</strong> and tap <Share size={14} aria-hidden="true" />{' '}
+              <strong>Share</strong>. In the compact toolbar, open the page menu first.</li>
+            <li>Choose <strong>Add to Home Screen</strong>. Tap <strong>More</strong> or{' '}
+              <strong>View More</strong> first if needed.</li>
+            <li>Keep <strong>Open as Web App</strong> turned on if shown, then tap <strong>Add</strong>.</li>
+          </ol>
+          <p className="pwa-hint">In other browsers, look for <strong>Install app</strong> or{' '}
+            <strong>Add to Home Screen</strong> in the browser menu.</p>
+        </div>}
       </>}
       <div className={`pwa-offline ${state.ready ? 'is-ready' : ''}`} role="status">
         {state.ready ? <Check size={17} /> : !state.online ? <WifiOff size={17} /> : <Download size={17} />}
@@ -45,7 +68,7 @@ export default function PwaPanel({ state, loaded }: { state: PwaState; loaded: b
       </div>
       <p className="pwa-hint">
         {state.ready
-          ? 'The atlas and all anatomy files are saved in this browser. Keep the site data to retain your offline copy and bookmarks.'
+          ? 'The atlas and all anatomy files are saved in this browser. Offline saving is separate from installation. Keep the site data to retain your offline copy and bookmarks.'
           : state.support === 'unavailable'
             ? 'You can continue exploring online. Try a browser that allows offline site storage.'
             : state.support === 'development'
@@ -59,13 +82,19 @@ export default function PwaPanel({ state, loaded }: { state: PwaState; loaded: b
           <RefreshCw size={16} /> Retry offline saving
         </Button>
       )}
-      {state.updateAvailable && <div className="pwa-update-section">
-        <h3>A new version is ready</h3>
-        <p className="pwa-hint">Update reloads open atlas windows. Your saved views stay on this device.</p>
-        <Button onClick={updateApp} disabled={state.updating}>
-          <RefreshCw size={16} /> {state.updating ? 'Updating…' : 'Update now'}
+      <div className="pwa-update-section">
+        <h3 ref={updateTitleRef} tabIndex={-1}>{state.updateAvailable ? 'A new version is ready' : 'App updates'}</h3>
+        <p className="pwa-hint">
+          {state.support === 'development' ? 'Updates are available in the published atlas.'
+            : 'Check for the latest version. Updating reloads open atlas windows; saved views stay on this device.'}
+        </p>
+        <Button onClick={() => void updateApp()} disabled={!available || state.checking || state.updating}
+          aria-busy={state.checking || state.updating}>
+          <RefreshCw size={16} aria-hidden="true" />
+          {state.updating ? 'Updating…' : state.checking ? 'Checking…' : 'Update'}
         </Button>
-      </div>}
+        {state.updateNotice && <p className="pwa-update-notice" role="status">{state.updateNotice}</p>}
+      </div>
       {state.notice && <p className="pwa-hint" role="status">{state.notice}</p>}
     </section>
   );

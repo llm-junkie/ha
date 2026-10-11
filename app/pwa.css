@@ -21,8 +21,17 @@
 .pwa-offline { padding-top: 4px; font-size: 12px; font-weight: 500; }
 .pwa-offline.is-ready { color: #37736a; }
 .pwa-panel button { min-height: 44px; width: 100%; white-space: normal; }
+.pwa-install-help { border: 1px solid #dce4e8; border-radius: 8px; padding: 12px; }
+.pwa-install-help h3 { font-size: 13px; margin: 0 0 8px; font-weight: 600; }
+.pwa-install-help ol { list-style: decimal; margin: 0 0 10px; padding-left: 18px; font-size: 12px; line-height: 1.65; }
+.pwa-install-help li + li { margin-top: 8px; }
+.pwa-install-help svg { display: inline-block; vertical-align: text-bottom; }
 .pwa-update-section { border-top: 1px solid #dce4e8; padding-top: 12px; }
 .pwa-update-section h3 { font-size: 13px; margin: 0 0 7px; font-weight: 600; }
 .pwa-update-section button { margin-top: 12px; }
+.pwa-panel .pwa-update-notice { margin-top: 10px; color: #37736a; font-size: 12px; }
+.pwa-footer-actions { display: flex; align-items: center; gap: 12px; }
+.studio-footer .pwa-footer-actions > button { white-space: nowrap; }
+@media (max-width: 767px) { .pwa-footer-actions { gap: 8px; } }
 .studio-footer .pwa-footer-status { color: #37736a; }
 .studio-footer .pwa-footer-status::after { content: '·'; margin-inline: 7px; color: #9ca9b2; }

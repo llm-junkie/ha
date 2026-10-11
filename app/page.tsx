@@ -11,6 +11,7 @@ import {
   Info,
   Layers3,
   Pause,
+  RefreshCw,
   RotateCcw,
   RotateCw,
   Search,
@@ -34,7 +35,7 @@ import AnatomyScene from "./scene";
 import SystemLayers from "./system-layers";
 import ViewLibrary from "./view-library";
 import PwaPanel, { pwaLabel } from "./pwa-panel";
-import { prepareOffline, usePwa } from "./pwa";
+import { prepareOffline, updateApp, usePwa } from "./pwa";
 import {
   captureSavedView,
   readViewHash,
@@ -81,6 +82,8 @@ const initial: SceneState = {
 export default function Home() {
   const pwa = usePwa();
   const aboutTitle = useRef<HTMLHeadingElement>(null);
+  const updateTitle = useRef<HTMLHeadingElement>(null);
+  const [aboutUpdates, setAboutUpdates] = useState(false);
   const detailTitle = useRef<HTMLHeadingElement>(null);
   const cameraPose = useRef<CameraPose | null>(null);
   const settled = useRef(false);
@@ -405,6 +408,7 @@ export default function Home() {
           onClick={() => {
             setDetails(false);
             setPanel(null);
+            setAboutUpdates(false);
             setAbout(true);
           }}
         >
@@ -747,17 +751,35 @@ export default function Home() {
           {state.explode > 0.8 ? "Drag to pan" : "Drag to orbit"} <b>·</b> Pinch to zoom <b>·</b>{" "}
           Tap to inspect
         </span>
-        <Button
-          variant="ghost"
-          onClick={() => {
-            setDetails(false);
-            setPanel(null);
-            setAbout(true);
-          }}
-        >
-          {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
-          App & credits <ArrowUpRight size={12} />
-        </Button>
+        <div className="pwa-footer-actions">
+          {pwa.support === "available" && <Button
+            variant="ghost"
+            disabled={pwa.checking || pwa.updating}
+            aria-busy={pwa.checking || pwa.updating}
+            title="Check for updates and reload when a new version is ready"
+            onClick={() => {
+              setDetails(false);
+              setPanel(null);
+              setAboutUpdates(true);
+              setAbout(true);
+              void updateApp();
+            }}
+          >
+            <RefreshCw size={12} aria-hidden="true" /> Update
+          </Button>}
+          <Button
+            variant="ghost"
+            onClick={() => {
+              setDetails(false);
+              setPanel(null);
+              setAboutUpdates(false);
+              setAbout(true);
+            }}
+          >
+            {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
+            App & credits <ArrowUpRight size={12} />
+          </Button>
+        </div>
       </footer>
       {progress < 100 && !error && (
         <div className="loading glass" role="status">
@@ -886,13 +908,16 @@ export default function Home() {
         </SheetContent>
       </Sheet>
       <Sheet open={about} onOpenChange={setAbout}>
-        <SheetContent className="about-sheet glass" initialFocus={aboutTitle}>
+        <SheetContent className="about-sheet glass" initialFocus={aboutUpdates ? () => {
+          updateTitle.current?.parentElement?.scrollIntoView({ block: "nearest" });
+          return updateTitle.current;
+        } : aboutTitle}>
           <div className="eyebrow">SOURCE & SCOPE</div>
           <SheetTitle ref={aboutTitle} tabIndex={-1} className="structure-title">A body, revealed.</SheetTitle>
           <SheetDescription>
             Explore the adult male reference anatomy from BodyParts3D.
           </SheetDescription>
-          <PwaPanel state={pwa} loaded={progress === 100} />
+          <PwaPanel state={pwa} loaded={progress === 100} updateTitleRef={updateTitle} />
           <div className="about-copy">
             <p>
               <strong>Male · BodyParts3D</strong>

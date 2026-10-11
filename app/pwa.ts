@@ -1,5 +1,6 @@
 import { useSyncExternalStore } from 'react';
 import { assetUrl } from './asset-url';
+import { findAppUpdate } from './pwa-update';
 
 interface InstallPrompt extends Event {
   prompt(): Promise<void>;
@@ -13,6 +14,8 @@ export interface PwaState {
   installing: boolean;
   updateAvailable: boolean;
   updating: boolean;
+  checking: boolean;
+  updateNotice: string;
   ready: boolean;
   saved: number;
   total: number;
@@ -27,6 +30,8 @@ let state: PwaState = {
   installing: false,
   updateAvailable: false,
   updating: false,
+  checking: false,
+  updateNotice: '',
   ready: false,
   saved: 0,
   total: 0,
@@ -68,10 +73,24 @@ export async function installApp() {
   finally { patch({ installing: false }); }
 }
 
-export function updateApp() {
-  if (!registration?.waiting || state.updating) return;
-  patch({ updating: true });
-  registration.waiting.postMessage({ type: 'human-atlas:update' });
+export async function updateApp() {
+  if (!registration || state.checking || state.updating) return;
+  if (!state.online && !registration.waiting) {
+    patch({ updateNotice: 'Connect to check for updates.' });
+    return;
+  }
+  patch({ checking: true, updateNotice: 'Checking for updates…' });
+  try {
+    const worker = await findAppUpdate(registration, () =>
+      patch({ updateNotice: 'Preparing the new version for offline use…' }),
+    );
+    if (worker) {
+      patch({ updating: true, updateAvailable: true, updateNotice: 'Updating Human Atlas…' });
+      worker.postMessage({ type: 'human-atlas:update' });
+    } else patch({ updateAvailable: false, updateNotice: 'You’re up to date.' });
+  } catch {
+    patch({ updating: false, updateNotice: 'Couldn’t update. Check your connection and available storage, then try again.' });
+  } finally { patch({ checking: false }); }
 }
 
 export function startPwa() {
@@ -126,7 +145,10 @@ export function startPwa() {
     updateViaCache: 'none',
   }).then((value) => {
     registration = value;
-    const checkWaiting = () => patch({ updateAvailable: !!value.waiting });
+    const checkWaiting = () => patch({
+      updateAvailable: !!value.waiting,
+      ...(value.waiting && !state.checking && !state.updating ? { updateNotice: '' } : {}),
+    });
     checkWaiting();
     const watchInstalling = () => {
       const worker = value.installing;
