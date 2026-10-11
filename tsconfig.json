@@ -15,8 +15,7 @@
     "moduleResolution": "bundler",
     "types": [
       "node",
-      "@cloudflare/workers-types",
-      "vinext/types"
+      "vite/client"
     ],
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -29,11 +28,8 @@
     }
   },
   "include": [
-    "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts",
-    ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
   "exclude": [
