@@ -26,7 +26,7 @@
 :root{font-family:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--primary-foreground:#ffffff;--radius:.75rem;-webkit-font-smoothing:antialiased}
 .glass{border-radius:16px;box-shadow:0 2px 5px #24334403,0 16px 48px #24334407;backdrop-filter:blur(24px)}
 h1{display:flex;align-items:center;gap:12px;font-size:32px;font-weight:600;letter-spacing:-1.3px;margin:10px 0 8px}
-h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.03em;margin:0;opacity:1;color:#697782;border-color:var(--border);padding:2px 6px;border-radius:6px}
+h1 .edition{display:inline-flex;align-items:center;font:inherit;letter-spacing:inherit;margin:0;opacity:1;color:#697782;border:1px solid var(--border);border-radius:8px;padding:2px 6px}
 .eyebrow{font-size:10px;font-weight:600;letter-spacing:.14em}
 .identity-meta{font-size:11px;letter-spacing:0}
 .anatomy-choice{margin-top:14px}.anatomy-choice [data-slot=select-trigger]{border-radius:9px;min-height:38px;color:var(--foreground);background:#ffffffd9;box-shadow:0 1px 2px #18253604}
@@ -111,29 +111,154 @@ h1 .edition{font-family:inherit;font-weight:500;font-size:10px;letter-spacing:.0
  .structure-row .structure-name{min-height:44px}.structure-expand{min-height:44px}.structure-filter{font-size:16px;min-height:40px}
  .rotation-options label{min-height:44px}.rotation-settings [data-slot=slider]{padding-block:12px}.search-history-heading button{min-height:36px}
 }
-/* Model choice stays beside the atlas identity on desktop and mobile. */
-.model-select {
-  margin-top: 10px;
-  max-width: 100%;
-  border: 1px solid rgb(64 82 75 / 18%);
-  border-radius: 10px;
-  background: rgb(255 255 255 / 80%);
-  color: #34463e;
-  padding: 6px 28px 6px 10px;
-  font: inherit;
-  font-size: 12px;
-  pointer-events: auto;
+/* The model switch shares the Systems panel's desktop alignment. */
+.studio { --systems-width: 254px; --systems-left: 30px; }
+@media (max-width: 1000px) {
+  .studio { --systems-width: 222px; --systems-left: 20px; }
 }
-.model-select:focus-visible { outline: 2px solid #688a76; outline-offset: 3px; }
+@media (min-width: 768px) {
+  .layers-panel { width: var(--systems-width); left: var(--systems-left); }
+}
+.model-switch {
+  position: absolute;
+  top: 134px;
+  left: var(--systems-left);
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: var(--systems-width);
+  min-width: 0;
+  margin: 0;
+  padding: 3px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--accent);
+}
+.model-option { position: relative; min-width: 0; cursor: pointer; }
+.model-option-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-height: 44px;
+  padding: 6px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--muted-foreground);
+  transition: background .18s, box-shadow .18s, color .18s;
+}
+.model-status { font-size: 11px; font-weight: 400; }
+.model-option input:checked + .model-option-label {
+  color: var(--primary);
+  background: var(--card);
+  box-shadow: 0 1px 3px #18253618;
+}
+.model-option input:focus-visible + .model-option-label {
+  outline: 2px solid var(--ring);
+  outline-offset: -2px;
+}
 @media (max-width: 767px) {
-  .model-select { min-height: 44px; font-size: 16px; }
+  .studio {
+    --mobile-controls-width: min(285px, calc(100% - 24px - env(safe-area-inset-left) - env(safe-area-inset-right)));
+    --mobile-footer-height: 30px;
+  }
+  .model-switch {
+    top: max(108px, calc(env(safe-area-inset-top) + 90px));
+    left: 50%;
+    transform: translateX(-50%) scale(.8);
+    transform-origin: top center;
+    width: var(--mobile-controls-width);
+  }
+  .view-controls {
+    left: 12px;
+    right: 12px;
+    width: var(--mobile-controls-width);
+    max-width: var(--mobile-controls-width);
+    margin-inline: auto;
+    transform: scale(.8);
+    transform-origin: top center;
+  }
+  .top-actions { transform: scale(.8); transform-origin: top right; }
+  .view-controls button { flex: 1; min-width: 0; width: auto; padding: 0; }
+  .bottom-dock { bottom: calc(var(--mobile-footer-height) + env(safe-area-inset-bottom)); }
+  .studio-footer {
+    left: max(12px, env(safe-area-inset-left));
+    right: max(12px, env(safe-area-inset-right));
+    bottom: env(safe-area-inset-bottom);
+    height: var(--mobile-footer-height);
+    justify-content: center;
+  }
+  .studio-footer .pwa-footer-actions { margin-inline: auto; justify-content: center; }
+  .model-option-label { font-size: 13px; }
+  .model-status { font-size: 11px; }
+}
+@media (max-width: 767px) and (max-height: 600px) and (orientation: landscape) {
+  .studio { min-height: 0; }
+  .model-switch { top: 122px; }
+}
+@media (max-width: 767px) and (max-height: 340px) and (orientation: landscape) {
+  .bottom-dock { padding-block: 8px; }
 }
 @media (max-width: 767px) and (orientation: portrait) {
-  .view-controls, .search-panel {
+  .view-controls {
+    top: max(153px, calc(env(safe-area-inset-top) + 135px));
+  }
+  .search-panel {
     top: max(164px, calc(env(safe-area-inset-top) + 146px));
   }
   .layers-panel.mobile-open {
     top: max(220px, calc(env(safe-area-inset-top) + 202px));
     max-height: none;
   }
+}
+
+/* Search results stay within the card; only the result list scrolls. */
+.search-panel {
+  --search-top: 94px;
+  top: var(--search-top);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100dvh - var(--search-top) - 16px - env(safe-area-inset-bottom));
+  overflow: hidden;
+}
+.search-panel > .panel-heading,
+.search-panel [data-slot=input-group],
+.search-panel .search-history-heading,
+.search-panel .search-note { flex-shrink: 0; }
+.search-panel .anatomy-search-results {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  max-width: none;
+  max-height: none !important;
+  margin-top: 8px;
+  border: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+.search-panel [data-slot=combobox-list] {
+  flex: 1;
+  min-height: 0;
+  max-height: 360px;
+  padding: 4px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-gutter: stable;
+  scrollbar-width: thin;
+  scrollbar-color: #b9c3cc transparent;
+}
+.search-panel [data-slot=combobox-list]::-webkit-scrollbar { display: block; width: 6px; }
+.search-panel [data-slot=combobox-list]::-webkit-scrollbar-thumb { background: #b9c3cc; border-radius: 6px; }
+.search-panel [data-slot=combobox-list]::-webkit-scrollbar-track { background: transparent; }
+.search-panel [data-slot=combobox-list]::-webkit-scrollbar-button { display: none; }
+.search-panel .anatomy-search-empty { display: block; padding: 0; flex-shrink: 0; }
+.search-panel .anatomy-search-empty:not(:empty) { padding: 16px 8px; }
+@media (max-width: 767px) and (orientation: portrait) {
+  .search-panel { --search-top: max(164px, calc(env(safe-area-inset-top) + 146px)); }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .search-panel { --search-top: 72px; }
 }

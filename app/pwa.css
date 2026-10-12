@@ -32,8 +32,11 @@
 .pwa-version strong { font-variant-numeric: tabular-nums; }
 .pwa-update-section button { margin-top: 12px; }
 .pwa-panel .pwa-update-notice { margin-top: 10px; color: #37736a; font-size: 12px; }
+.studio-footer { align-items: center; }
 .pwa-footer-actions { display: flex; align-items: center; gap: 12px; }
-.studio-footer .pwa-footer-actions > button { white-space: nowrap; }
+.studio-footer .pwa-footer-actions > button { white-space: nowrap; line-height: 1; }
+.studio-footer .pwa-footer-actions > button > span { display: inline-flex; align-items: center; }
+.studio-footer .pwa-footer-actions svg { display: block; width: 14px; height: 14px; }
 @media (max-width: 767px) { .pwa-footer-actions { gap: 8px; } }
 .studio-footer .pwa-footer-status { color: #37736a; }
 .studio-footer .pwa-footer-status::after { content: '·'; margin-inline: 7px; color: #9ca9b2; }

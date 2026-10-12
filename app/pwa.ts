@@ -69,7 +69,7 @@ export async function installApp() {
     await prompt.prompt();
     const choice = await prompt.userChoice;
     if (choice.outcome === 'accepted') patch({ notice: 'Installation requested. Follow your browser’s instructions.' });
-  } catch { patch({ notice: 'Use your browser’s menu to install Human Atlas.' }); }
+  } catch { patch({ notice: 'Use your browser’s menu to install Human Atlas +.' }); }
   finally { patch({ installing: false }); }
 }
 
@@ -85,7 +85,7 @@ export async function updateApp() {
       patch({ updateNotice: 'Preparing the new version for offline use…' }),
     );
     if (worker) {
-      patch({ updating: true, updateAvailable: true, updateNotice: 'Updating Human Atlas…' });
+      patch({ updating: true, updateAvailable: true, updateNotice: 'Updating Human Atlas +…' });
       worker.postMessage({ type: 'human-atlas:update' });
     } else patch({ updateAvailable: false, updateNotice: 'You’re up to date.' });
   } catch {
@@ -108,7 +108,7 @@ export function startPwa() {
   });
   window.addEventListener('appinstalled', () => {
     installPrompt = undefined;
-    patch({ installed: true, canInstall: false, notice: 'Human Atlas is installed.' });
+    patch({ installed: true, canInstall: false, notice: 'Human Atlas + is installed.' });
   });
   const connectivity = () => {
     patch({ online: navigator.onLine });

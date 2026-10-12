@@ -1,8 +1,8 @@
-# Human Atlas
+# Human Atlas +
 
 An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male BodyParts3D reference** (2,234 selectable meshes, 15 systems, 3,432 concepts) or the **experimental female study model** (2,245 meshes, 16 systems, 4,248 concepts).
 
-**[Open Human Atlas on GitHub Pages](https://llm-junkie.github.io/ha/)**
+**[Open Human Atlas + on GitHub Pages](https://llm-junkie.github.io/ha/)**
 
 ## Preview
 
@@ -14,7 +14,7 @@ Captured from app **0.2.0** at the same desktop size and default three-quarter v
 
 ## Explore
 
-- Choose **Male** or **Female · Experimental** beside the atlas title. The choice is remembered on this device; `?model=female` opens the female model directly.
+- Choose **Male** or **Female (Exp)** using the switch below the atlas title; **Exp** means experimental. The choice is remembered on this device; `?model=female` opens the female model directly.
 - Orbit, zoom toward the pointer, and select structures directly on the body.
 - Toggle systems or individual structures, or use skeleton and organ presets.
 - Move from assembled anatomy to a spaced inventory of every visible piece.
@@ -32,7 +32,7 @@ Use the bookmark button to save up to 20 named views in this browser, reopen the
 
 ## Install and use offline
 
-Open the published site and choose **Install app · App & credits** (or the information button), then **Install Human Atlas**. The button opens a native install prompt when supported; otherwise it shows installation steps. On iPhone or iPad, open the site in Safari, use **Share → Add to Home Screen**, keep **Open as Web App** turned on if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt. The install link remains visible after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
+Open the published site and choose **Install app · App & credits** (or the information button), then **Install Human Atlas +**. The button opens a native install prompt when supported; otherwise it shows installation steps. On iPhone or iPad, open the site in Safari, use **Share → Add to Home Screen**, keep **Open as Web App** turned on if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt. The install link remains visible after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
 
 Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, both catalogues, credits, and all 33 model chunks automatically (about 68 MB compressed combined). The selected model's normal download is reused, and the other model is saved in the background. Both can then be explored offline. It also supports browsers that need the uncompressed files. The first visit can finish before the service worker takes control; offline preparation fills missing cache entries afterward.
 

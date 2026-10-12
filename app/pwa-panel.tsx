@@ -36,15 +36,15 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
         <Download size={19} aria-hidden="true" />
         <h2 id="pwa-title">Take the atlas with you</h2>
       </div>
-      {state.installed ? <p>Human Atlas is installed on this device.</p> : <>
-        <p>Install Human Atlas to open it from your home screen or desktop.</p>
+      {state.installed ? <p>Human Atlas + is installed on this device.</p> : <>
+        <p>Install Human Atlas + to open it from your home screen or desktop.</p>
         <Button onClick={() => {
           if (state.canInstall) void installApp();
           else setShowInstallHelp((open) => !open);
         }} disabled={!available || state.installing}
           aria-expanded={!state.canInstall ? showInstallHelp : undefined}
           aria-controls={!state.canInstall ? 'pwa-install-help' : undefined}>
-          <Download size={16} aria-hidden="true" /> Install Human Atlas
+          <Download size={16} aria-hidden="true" /> Install Human Atlas +
         </Button>
         {!state.canInstall && <p className="pwa-hint">
           {state.support === 'development' ? 'Installation is available in the published atlas.'

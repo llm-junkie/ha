@@ -34,7 +34,6 @@ import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/
 import {
   Combobox,
   ComboboxInput,
-  ComboboxContent,
   ComboboxList,
   ComboboxItem,
   ComboboxEmpty,
@@ -95,6 +94,7 @@ export default function Home() {
     }
   });
   const aboutTitle = useRef<HTMLHeadingElement>(null);
+  const searchPanel = useRef<HTMLElement>(null);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
   const detailTitle = useRef<HTMLHeadingElement>(null);
@@ -196,6 +196,20 @@ export default function Home() {
     window.addEventListener("keydown", key);
     return () => window.removeEventListener("keydown", key);
   }, []);
+  useEffect(() => {
+    if (panel !== "search") return;
+    const dismiss = (event: PointerEvent) => {
+      if (!(event.target instanceof Element)) return;
+      if (
+        searchPanel.current?.contains(event.target) ||
+        event.target.closest('[aria-label="Search anatomy"]')
+      )
+        return;
+      setPanel(null);
+    };
+    document.addEventListener("pointerdown", dismiss);
+    return () => document.removeEventListener("pointerdown", dismiss);
+  }, [panel]);
   const parts = useMemo(() => new Map(atlas?.parts.map((p) => [p.id, p])), [atlas]);
   const concepts = useMemo(() => (atlas ? buildSearchConcepts(atlas) : []), [atlas]);
   const recent = useMemo(
@@ -437,29 +451,44 @@ export default function Home() {
         </div>
       )}
       <header className="identity">
-        <div className="eyebrow">
-          <span className="status-dot" /> INTERACTIVE ANATOMY
-        </div>
         <h1>
-          Human Atlas
-          <Badge variant="outline" className="edition">
-            3D
-          </Badge>
+          Human Atlas + <span className="edition">3D</span>
         </h1>
         <div className="identity-meta">
           {atlas ? atlas.parts.length.toLocaleString() : MODELS[model].pieces.toLocaleString()}{" "}
           modeled pieces <span>·</span> {MODELS[model].source}
         </div>
-        <select
-          className="model-select"
-          aria-label="Anatomy model"
-          value={model}
-          onChange={(event) => changeModel(event.target.value as ModelId)}
-        >
-          <option value="male">Male</option>
-          <option value="female">Female · Experimental</option>
-        </select>
       </header>
+      <fieldset className="model-switch">
+        <legend className="sr-only">Anatomy model</legend>
+        <label className="model-option">
+          <input
+            className="sr-only"
+            type="radio"
+            name="anatomy-model"
+            value="male"
+            checked={model === "male"}
+            onChange={() => changeModel("male")}
+          />
+          <span className="model-option-label">Male</span>
+        </label>
+        <label className="model-option">
+          <input
+            className="sr-only"
+            type="radio"
+            name="anatomy-model"
+            value="female"
+            checked={model === "female"}
+            onChange={() => changeModel("female")}
+          />
+          <span className="model-option-label">
+            Female{" "}
+            <span className="model-status" title="Experimental">
+              (Exp)
+            </span>
+          </span>
+        </label>
+      </fieldset>
       <nav className="top-actions" aria-label="Explorer panels">
         <Button
           variant="ghost"
@@ -574,7 +603,17 @@ export default function Home() {
         </div>
       </section>
       {panel === "search" && (
-        <section className="search-panel glass" aria-label="Find anatomy">
+        <section
+          ref={searchPanel}
+          className="search-panel glass"
+          aria-label="Find anatomy"
+          onKeyDown={(event) => {
+            if (event.key === "Escape") {
+              event.stopPropagation();
+              setPanel(null);
+            }
+          }}
+        >
           <div className="panel-heading">
             <span>Find a structure</span>
             <Button
@@ -596,6 +635,7 @@ export default function Home() {
             onInputValueChange={setQuery}
             itemToStringLabel={(c) => c.name}
             filter={null}
+            inline
             open
             onOpenChange={(open) => {
               if (!open) setPanel(null);
@@ -607,8 +647,10 @@ export default function Home() {
               aria-label="Search named anatomical structures"
               showTrigger={false}
             />
-            <ComboboxContent className="anatomy-search-results">
-              <ComboboxEmpty>No structures match your search.</ComboboxEmpty>
+            <div className="anatomy-search-results">
+              <ComboboxEmpty className="anatomy-search-empty">
+                No structures match your search.
+              </ComboboxEmpty>
               <div className="search-history-heading">
                 <span>
                   {query
@@ -623,7 +665,7 @@ export default function Home() {
                   </Button>
                 )}
               </div>
-              <ComboboxList>
+              <ComboboxList aria-label="Anatomical structures">
                 {(c: SearchConcept) => (
                   <ComboboxItem key={c.id} value={c}>
                     <span className="search-result-name">
@@ -638,7 +680,7 @@ export default function Home() {
                   </ComboboxItem>
                 )}
               </ComboboxList>
-            </ComboboxContent>
+            </div>
           </Combobox>
           <p className="search-note">
             {query
@@ -837,7 +879,7 @@ export default function Home() {
                 void updateApp();
               }}
             >
-              <RefreshCw size={12} aria-hidden="true" /> Update
+              <RefreshCw size={12} aria-hidden="true" /> <span>Update</span>
             </Button>
           )}
           <Button
@@ -850,7 +892,7 @@ export default function Home() {
             }}
           >
             {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
-            App & credits <ArrowUpRight size={12} />
+            <span>App & credits</span> <ArrowUpRight size={12} />
           </Button>
         </div>
       </footer>

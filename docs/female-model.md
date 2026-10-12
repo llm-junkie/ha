@@ -1,6 +1,6 @@
 # Female model and uterosacral registration
 
-The model selector adds **Female · Experimental** beside the male reference. Female search, layer opacity, isolation, muscle groups, saved views, and share links use the female catalogue. Histories and bookmarks are stored separately; old male bookmarks and links remain compatible. Shared links include the model identity. Switching aborts the previous download and disposes its scene. Both models are included in the PWA's verified offline cache and work under `/ha/` without extra routes or deployment dependencies.
+The model switch adds **Female (Exp)** beside the male reference; **Exp** means experimental. Female search, layer opacity, isolation, muscle groups, saved views, and share links use the female catalogue. Histories and bookmarks are stored separately; old male bookmarks and links remain compatible. Shared links include the model identity. Switching aborts the previous download and disposes its scene. Both models are included in the PWA's verified offline cache and work under `/ha/` without extra routes or deployment dependencies.
 
 ## Sources and scope
 
@@ -76,6 +76,6 @@ The correction script rejects already modified imports. Source pins or geometry 
 
 ## Model screenshots
 
-The [README preview](../README.md#preview) places the male and female screenshots in one row. Both were captured from the production `/ha/` preview on **2026-10-12**, app **0.1.0**, at **1422×800**. They use the default three-quarter camera, default visible layers and opacity, assembled geometry (0% explode), paused rotation, and no selected structure. These are app screenshots; the controlled before/after figure above provides the registration comparison.
+The [README preview](../README.md#preview) places the male and female screenshots in one row. Both were refreshed from the Human Atlas + production `/ha/` preview on **2026-10-12**, app **0.2.0**, at **1422×800**. They use the default three-quarter camera, default visible layers and opacity, assembled geometry (0% explode), paused rotation, and no selected structure. These are app screenshots; the controlled before/after figure above provides the registration comparison.
 
-To refresh the screenshots, build with `npm run build -- --base=/ha/` and serve with `npm run preview -- --base=/ha/`. Open `?model=male`, wait for geometry to finish, and capture the viewport. Switch to **Female · Experimental** and capture again at the same viewport size after loading. **Reset view and layers** restores the default presentation if it has changed. Save the images as `docs/images/male-atlas.jpg` and `docs/images/female-atlas.jpg`. Retain the dataset credits in [ATTRIBUTION.md](../public/ATTRIBUTION.md) when reusing the images.
+To refresh the screenshots, build with `npm run build -- --base=/ha/` and serve with `npm run preview -- --base=/ha/`. Open `?model=male`, wait for geometry to finish, and capture the viewport. Switch to **Female (Exp)** and capture again at the same viewport size after loading. **Reset view and layers** restores the default presentation if it has changed. Save the images as `docs/images/male-atlas.jpg` and `docs/images/female-atlas.jpg`. Retain the dataset credits in [ATTRIBUTION.md](../public/ATTRIBUTION.md) when reusing the images.
