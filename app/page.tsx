@@ -45,6 +45,7 @@ import SystemLayers from "./system-layers";
 import ViewLibrary from "./view-library";
 import PwaPanel, { pwaLabel } from "./pwa-panel";
 import { prepareOffline, updateApp, usePwa } from "./pwa";
+import { APP_VERSION } from "./version";
 import {
   captureSavedView,
   readViewHash,
@@ -85,11 +86,14 @@ const initial: SceneState = {
   rotationSpeed: 1,
   rotationDirection: "clockwise",
 };
+const mobileControlsQuery = "(max-width: 767px), (max-height: 600px) and (orientation: landscape)";
 export default function Home() {
   const pwa = usePwa();
   const footerStatus = pwaLabel(pwa);
   const mobileFooterStatus =
-    footerStatus === "Update available" || footerStatus === "Install app" ? footerStatus : "";
+    footerStatus === "Update available" || footerStatus === "Install app"
+      ? footerStatus
+      : pwa.installed ? `Version ${APP_VERSION}` : "";
   const [model, setModel] = useState<ModelId>(() => {
     const linked = viewModelFromHash(location.hash);
     try {
@@ -101,6 +105,24 @@ export default function Home() {
   const aboutTitle = useRef<HTMLHeadingElement>(null);
   const searchPanel = useRef<HTMLElement>(null);
   const savedPanelAnchor = useRef<HTMLDivElement>(null);
+  const rotationControls = useRef<HTMLElement>(null);
+  const [mobileControls, setMobileControls] = useState(() => window.matchMedia(mobileControlsQuery).matches);
+  useEffect(() => {
+    const media = window.matchMedia(mobileControlsQuery);
+    const update = () => setMobileControls(media.matches);
+    update();
+    media.addEventListener("change", update);
+    return () => media.removeEventListener("change", update);
+  }, []);
+  const rotationAnchor = useMemo(() => ({
+    get contextElement() { return rotationControls.current ?? undefined; },
+    getBoundingClientRect: () => new DOMRect(
+      document.documentElement.clientWidth / 2,
+      rotationControls.current?.getBoundingClientRect().bottom ?? 0,
+      0,
+      0,
+    ),
+  }), []);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
   const [aboutModel, setAboutModel] = useState<ModelId>(model);
@@ -715,7 +737,7 @@ export default function Home() {
           </p>
         </section>
       )}
-      <nav className="view-controls glass" aria-label="Camera controls">
+      <nav ref={rotationControls} className="view-controls glass" aria-label="Camera controls">
         {(["three-quarter", "front", "side", "back"] as View[]).map((view, index) => (
           <Button
             variant="ghost"
@@ -763,7 +785,16 @@ export default function Home() {
           >
             <Settings2 size={17} />
           </PopoverTrigger>
-          <PopoverContent className="rotation-settings" side="left" align="end" sideOffset={10}>
+          <PopoverContent
+            className="rotation-settings"
+            anchor={mobileControls ? rotationAnchor : undefined}
+            positionMethod={mobileControls ? "fixed" : "absolute"}
+            side={mobileControls ? "bottom" : "left"}
+            align={mobileControls ? "center" : "end"}
+            sideOffset={10}
+            collisionAvoidance={mobileControls ? { side: "shift", align: "shift", fallbackAxisSide: "none" } : undefined}
+            collisionPadding={mobileControls ? 16 : undefined}
+          >
             <div className="rotation-heading">
               <strong>Rotation speed</strong>
               <output>{Math.round((state.rotationSpeed ?? 1) * 10)}%</output>
@@ -894,7 +925,7 @@ export default function Home() {
           <Button
             variant="ghost"
             className="mobile-pwa-status"
-            onClick={() => openAbout(pwa.updateAvailable)}
+            onClick={() => openAbout(pwa.updateAvailable || pwa.installed)}
           >
             {mobileFooterStatus}
           </Button>

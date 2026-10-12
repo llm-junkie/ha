@@ -112,6 +112,14 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
  .structure-row .structure-name{min-height:44px}.structure-expand{min-height:44px}.structure-filter{font-size:16px;min-height:40px}
  .rotation-options label{min-height:44px}.rotation-settings [data-slot=slider]{padding-block:12px}.search-history-heading button{min-height:36px}
 }
+@media (max-width: 767px), (max-height: 600px) and (orientation: landscape) {
+  .rotation-settings {
+    max-width: calc(100dvw - 32px);
+    max-height: var(--available-height);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
 /* The model switch shares the Systems panel's desktop alignment. */
 .studio { --systems-width: 254px; --systems-left: 30px; }
 @media (max-width: 1000px) {
