@@ -50,11 +50,11 @@ PWA registration runs in production builds on HTTPS or localhost. Development st
 
 ## App version
 
-The current app release is **0.3.4**. **App & credits → App updates** shows **Current version 0.3.4**, including when the app is installed or offline. The display and built files read the version from `package.json`.
+The current app release is **0.3.5**. **App & credits → App updates** shows **Current version 0.3.5**, including when the app is installed or offline. The display and built files read the version from `package.json`.
 
 Release **0.2.0** adds the experimental female model, the verified bilateral uterosacral registration correction, separate model histories and saved views, model-aware share links, and offline support for both models. See [the female model notes](docs/female-model.md) for source credits, measurements, and anatomical validation limits.
 
-The fitted female skin update adds a selectable full-body surface, smoother contours, closer head/face/neck/back alignment, breast coverage, posed hand and foot skin, and medial forearm coverage. The delivered female catalogue has 2,456 meshes and 4,462 concepts. Source pins, fitting controls, comparison previews and geometry checks are documented in [the skin fit notes](docs/female-skin.md).
+Release **0.3.5** adds a selectable full-body female skin surface, smoother contours, closer head/face/neck/back alignment, breast coverage, posed hand and foot skin, and medial forearm coverage. The delivered female catalogue has 2,456 meshes and 4,462 concepts. Source pins, fitting controls, comparison previews and geometry checks are documented in [the skin fit notes](docs/female-skin.md).
 
 For the next release, run `npm version patch --no-git-tag-version` for fixes, or `npm version minor --no-git-tag-version` for new features. This updates `package.json` and `package-lock.json` together. Validate and deploy the release as usual; installed apps show the new version after an update. Each build still has a content-based cache identifier, so builds with the same release number can update correctly.
 
