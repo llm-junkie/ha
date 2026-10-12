@@ -2,7 +2,7 @@ import * as T from "three";
 
 export type DrawBatch = {
   mesh: T.Mesh;
-  source: Uint32Array;
+  source: Uint16Array | Uint32Array;
   index: T.BufferAttribute;
   spans: { part: number; start: number; count: number; visible: number }[];
 };
@@ -22,6 +22,10 @@ export function updateDrawBatches(batches: DrawBatch[], partVisibility: Uint8Arr
     batch.mesh.visible = count > 0;
     batch.mesh.geometry.setDrawRange(0, count);
     // No upload or draw call is needed for an entirely hidden batch.
-    if (count > 0) batch.index.needsUpdate = true;
+    if (count > 0) {
+      batch.index.clearUpdateRanges();
+      batch.index.addUpdateRange(0, count);
+      batch.index.needsUpdate = true;
+    }
   }
 }

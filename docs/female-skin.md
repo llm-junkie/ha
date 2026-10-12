@@ -6,7 +6,7 @@ Both models use the same skin color and material settings, but their transparenc
 
 ![Female breast skin enclosing the retained adipose tissue](images/female-skin-breast-fit.jpg)
 
-Previews from the local atlas on 2026-10-12: [forearm coverage](images/female-skin-forearms-fit.jpg), [hand fit](images/female-skin-hands-fit.jpg), [foot fit](images/female-skin-feet-fit.jpg), [face and ear alignment](images/female-skin-face-fit.jpg). Earlier stages: [head profile adjustment](images/female-skin-head-profile-fit.jpg), [scalp/neck adjustment](images/female-skin-head-neck-tightened.jpg), [upper-back adjustment](images/female-skin-back-tightened.jpg), [smoothed preview before the back adjustment](images/female-skin-smoothed.jpg), [initial fit](images/female-skin-fit.jpg). Small intersections with fine internal structures can remain visible at full opacity; the fitted source is credited below.
+Previews of the delivered fit: [forearm coverage](images/female-skin-forearms-fit.jpg), [hand fit](images/female-skin-hands-fit.jpg), [foot fit](images/female-skin-feet-fit.jpg), [face and ear alignment](images/female-skin-face-fit.jpg). Small intersections with fine internal structures can remain visible at full opacity; the fitted source is credited below.
 
 ## Source and license
 
@@ -46,7 +46,7 @@ The skin is an estimated external reference for this derived assembly. These che
 
 One additional chunk contains the skin. It has raw and gzip versions and participates automatically in the catalogue-based offline cache. The female catalogue has 2,456 meshes, 4,462 concepts and 2,889,994 triangles. Existing female mesh identities, concept memberships, classifications and geometry chunks are preserved; the male atlas is unchanged.
 
-Final validation on 2026-10-12 passed type checking, all 93 automated tests, and the production build under `/ha/`. The PWA build includes all 38 model chunks. Browser previews were checked at the supplied head, breast, hand and foot angles, and both medial forearms were checked at 100% skin opacity.
+The skin regression tests validate the delivered geometry and provenance; production builds validate all 38 model chunks in the PWA. The retained previews document the reviewed head, breast, hand, foot and medial forearm fit at full skin opacity. Run the commands below to check the current checkout.
 
 ## Rebuild and verify
 

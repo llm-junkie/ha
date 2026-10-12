@@ -33,12 +33,14 @@ function storage() {
   return {
     failPut: false,
     failOpen: false,
+    matches: 0,
     async open(name) {
       if (this.failOpen) throw new Error('Storage blocked');
       if (!maps.has(name)) maps.set(name, new Map());
       const map = maps.get(name), owner = this;
       return {
-        async match(key) { return map.get(address(key))?.clone(); },
+        async match(key) { owner.matches++; return map.get(address(key))?.clone(); },
+        async keys() { return [...map.keys()].map((url) => ({ url })); },
         async put(key, response) {
           if (owner.failPut) throw new Error('Quota exceeded');
           map.set(address(key), response.clone());
@@ -161,6 +163,15 @@ test('only GET requests for this app and its known files are intercepted', async
   for (const url of ['/ha/unknown', '/ha/models/unknown.bin', '/other-project/', '/ha-extra/', 'https://external.test/ha/'])
     assert.equal(await w.get(url, 'navigate'), undefined);
   assert.equal(await w.get('/ha/models/atlas.json', 'cors', 'POST'), undefined);
+});
+
+test('offline progress inspects cache keys without opening any model response bodies', async () => {
+  const w = worker();
+  await w.event('install');
+  await w.send('prepare');
+  const matches = w.caches.matches;
+  assert.equal((await w.status()).ready, true);
+  assert.equal(w.caches.matches, matches);
 });
 
 test('viewer downloads and offline preparation share in-flight downloads', async () => {

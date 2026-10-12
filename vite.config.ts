@@ -12,6 +12,5 @@ export default defineConfig({
   plugins: [react(), atlasPwa()],
   resolve: { alias: { '@': path('./') } },
   css: { postcss: { plugins: [tailwindcss()] } },
-  server: { watch: { usePolling: true } },
   build: { outDir: path('./dist'), emptyOutDir: true },
 });

@@ -43,7 +43,7 @@ The intervening field joins those registrations with a C1, strictly monotone dep
 
 The coarse, long source triangles are tessellated in 0.25 mm depth bands before deformation. New points within 0.1 micrometre are welded to avoid slivers below the Float32 precision; every original source vertex remains. The measured source surface area is preserved within 1e-8 relative error. Both corrected meshes are written to one additional chunk. All other geometry chunks and mesh geometry remain unchanged.
 
-The ligament-corrected base model has 18 female chunks and 2,469,472 triangles. The neural supplement adds two chunks and 346,530 triangles; current compressed female geometry is about 40.1 MB. Raw equivalents support browsers without gzip decompression. Base source and delivered catalogue checksums are recorded separately in `public/models/female-source.json`; the supplement has its own `z-anatomy-source.json` provenance.
+The ligament-corrected base model has 18 female chunks and 2,469,472 triangles. The neural supplement adds two chunks and 346,530 triangles; the skin adds one chunk and 73,992 triangles. The complete female model has 21 chunks, 2,889,994 triangles and about 41.0 MB of compressed geometry. Raw equivalents support browsers without gzip decompression. Base source and delivered catalogue checksums are recorded separately in `public/models/female-source.json`; the supplements have their own `z-anatomy-source.json` and `female-skin-source.json` provenance.
 
 ![Fixed projections of the imported and corrected assembled geometry](images/uterosacral-registration-comparison.png)
 
@@ -51,7 +51,7 @@ The retained genital region, posterior endpoint relationship, posterior course, 
 
 ## Repeat the checks
 
-Validation for this integration: all 53 tests and TypeScript checks passed, as did production builds at `/` and `/ha/`. Browser checks covered desktop, 390×844 and 320×568 portrait layouts, and 568×320 landscape. The female Organs preset includes breast tissue. Female bookmarks survived switching to male and back; a female share link restored the correct model and both ligaments.
+The regression suite checks registration, female layer membership, model-specific bookmarks and shared links. Run the commands below for the current checkout. The original integration was also reviewed at desktop, 390×844 and 320×568 portrait layouts, and 568×320 landscape; female bookmarks survived model switching and shared links restored the model and both ligaments.
 
 The PWA update completed and reported Ready offline. After stopping the preview server and confirming no listener remained, the browser reloaded the female model, switched to the male model, and opened the female shared ligament view entirely from the cache. Both geometries rendered; no browser errors were recorded. The complete pinned import/correction pipeline was also rerun in an isolated output directory and reproduced every delivered asset and report checksum.
 

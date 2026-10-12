@@ -1,5 +1,8 @@
-@import 'tailwindcss';
+@import 'tailwindcss' source(none);
 @import 'tw-animate-css';
+@source '.';
+@source '../components';
+@source '../web';
 @custom-variant dark (&:is(.dark *));
 :root{font-family:'Helvetica Neue',Arial,sans-serif;color:#20242b;background:#f3f4f4;--background:#f3f4f4;--foreground:#20242b;--card:#ffffff;--card-foreground:#20242b;--popover:#ffffff;--popover-foreground:#20242b;--primary:#263b48;--primary-foreground:#f3f4f4;--secondary:#e9ecef;--secondary-foreground:#20242b;--muted:#e9ecef;--muted-foreground:#68727d;--accent:#edf0f2;--accent-foreground:#20242b;--destructive:#a8574a;--border:#18253618;--input:#18253622;--ring:#263b48;--radius:.5rem;color-scheme:light}
 @theme inline{--color-background:var(--background);--color-foreground:var(--foreground);--color-card:var(--card);--color-card-foreground:var(--card-foreground);--color-popover:var(--popover);--color-popover-foreground:var(--popover-foreground);--color-primary:var(--primary);--color-primary-foreground:var(--primary-foreground);--color-secondary:var(--secondary);--color-secondary-foreground:var(--secondary-foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-accent-foreground:var(--accent-foreground);--color-destructive:var(--destructive);--color-border:var(--border);--color-input:var(--input);--color-ring:var(--ring)}

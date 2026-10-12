@@ -8,7 +8,7 @@ import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import { createExplosionLayout } from "./explosion-layout";
-import { decodeModelResponse } from "./model-download";
+import { decodeModelResponse, loadModelChunks } from "./model-download";
 import { assetUrl } from "./asset-url";
 import { PointerTap } from "./pointer-tap";
 import { partIsVisible } from "./part-visibility";
@@ -260,16 +260,18 @@ export default function AnatomyScene({
       }),
     );
     const batches: DrawBatch[] = [];
+    const pickingMaterial = new T.MeshBasicMaterial();
+    materials.push(pickingMaterial);
     const partVisibility = new Uint8Array(atlas.parts.length);
     let loaded = 0;
-    const loadChunk = async (ci: number) => {
+    const loadChunk = async (ci: number, signal: AbortSignal) => {
       const chunk = atlas.chunks[ci],
         compressed = !!chunk.gzip && typeof DecompressionStream !== "undefined";
       const response = await fetch(assetUrl(compressed ? chunk.gzip! : chunk.url), {
-        signal: abort.signal,
+        signal,
       });
       const buffer = await decodeModelResponse(response, chunk.bytes, compressed);
-      if (disposed) return;
+      if (disposed || signal.aborted) return;
       const groups = new Map<string, { geometry: T.BufferGeometry; part: number }[]>();
       atlas.parts.forEach((p, i) => {
         if (p.chunk !== ci) return;
@@ -286,7 +288,7 @@ export default function AnatomyScene({
         g.setIndex(new T.BufferAttribute(new Uint32Array(buffer, p.indices, p.indexCount), 1));
         g.boundingBox = bounds[i].clone();
         g.computeBoundingSphere();
-        const pick = new T.Mesh(g);
+        const pick = new T.Mesh(g, pickingMaterial);
         pick.matrixAutoUpdate = false;
         pickers[i] = pick;
         geometries.push(g);
@@ -311,7 +313,7 @@ export default function AnatomyScene({
         // user switches systems while chunks are still arriving.
         mesh.visible = false;
         const index = geometry.getIndex()!;
-        const source = new Uint32Array(index.array);
+        const source = index.array as Uint16Array | Uint32Array;
         const drawIndex = new T.BufferAttribute(new Uint32Array(source.length), 1);
         drawIndex.setUsage(T.DynamicDrawUsage);
         geometry.setIndex(drawIndex);
@@ -334,22 +336,15 @@ export default function AnatomyScene({
     };
     (async () => {
       try {
-        let cursor = 0;
-        await Promise.all(
-          Array.from({ length: 3 }, async () => {
-            while (cursor < atlas.chunks.length) {
-              const i = cursor++;
-              await loadChunk(i);
-            }
-          }),
-        );
+        await loadModelChunks(atlas.chunks.length, loadChunk, abort.signal);
         if (!disposed) {
           ready = true;
           dirty = true;
           requestFrame();
         }
       } catch (e) {
-        if (!disposed) onError(e instanceof Error ? e.message : "Could not load the anatomy.");
+        if (!disposed && !abort.signal.aborted)
+          onError(e instanceof Error ? e.message : "Could not load the anatomy.");
       }
     })();
     const viewDirection = (view: string) =>
@@ -985,6 +980,9 @@ export default function AnatomyScene({
     requestFrame();
     const contextLost = (e: Event) => {
       e.preventDefault();
+      ready = false;
+      abort.abort();
+      frames.dispose();
       onError("The 3D session was paused by your device. Reload to continue.");
     };
     renderer.domElement.addEventListener("webglcontextlost", contextLost);
@@ -996,6 +994,11 @@ export default function AnatomyScene({
       wake.current = () => {};
       changeBackground.current = () => {};
       observer.disconnect();
+      renderer.domElement.removeEventListener("webglcontextlost", contextLost);
+      renderer.domElement.removeEventListener("pointerdown", down);
+      renderer.domElement.removeEventListener("pointermove", move);
+      renderer.domElement.removeEventListener("pointerup", up);
+      renderer.domElement.removeEventListener("pointercancel", cancel);
       renderer.domElement.removeEventListener("wheel", wheel, true);
       controls.dispose();
       geometries.forEach((g) => g.dispose());
@@ -1014,6 +1017,7 @@ export default function AnatomyScene({
       markerMaterial.dispose();
       hover.remove();
       renderer.dispose();
+      renderer.forceContextLoss();
       renderer.domElement.remove();
     };
   }, [atlas]);

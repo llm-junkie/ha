@@ -1,8 +1,33 @@
+<div align="center">
+
+<img src="public/favicon.svg" alt="Human Atlas + app icon" width="160" height="160" />
+
 # Human Atlas +
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male reference** (2,444 selectable meshes, 15 systems, 3,645 concepts) or the **experimental female study model** (2,456 meshes, 16 systems, 4,462 concepts). Both include spinal and peripheral neural structures from Z-Anatomy.
+<p>
+  <a href="https://github.com/llm-junkie/ha/actions/workflows/deploy-pages.yml"><img src="https://github.com/llm-junkie/ha/actions/workflows/deploy-pages.yml/badge.svg" alt="Deploy to GitHub Pages" /></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/code-MIT-0366d6" alt="Code: MIT" /></a>
+  <a href="public/ATTRIBUTION.md"><img src="https://img.shields.io/badge/anatomy-CC_BY--SA_4.0-2b8a3e" alt="Anatomy: CC BY-SA 4.0" /></a>
+  <a href="#install-and-use-offline"><img src="https://img.shields.io/badge/PWA-offline--ready-887454" alt="PWA: offline-ready" /></a>
+</p>
 
-**[Open Human Atlas + on GitHub Pages](https://llm-junkie.github.io/ha/)**
+Interactive 3D anatomy for phones, tablets and desktops. Explore the male reference and experimental female model, search structures, adjust layers, and save or share your own views.
+
+**Free · Works offline · No account required**
+
+<a href="https://llm-junkie.github.io/ha/">
+  <img src=".github/assets/open-atlas.svg" alt="Open Human Atlas +" width="292" height="56" />
+</a>
+
+<br>
+
+Installation: [iPhone / iPad](#install-on-iphone-or-ipad) · [Mac](#install-on-mac) · [Android](#install-on-android) · [Windows](#install-on-windows) · [Linux](#install-on-linux)
+
+</div>
+
+---
+
+Built with React, Three.js, and shadcn/ui. The **male reference** includes 2,444 selectable meshes, 15 systems, and 3,645 concepts; the **experimental female study model** includes 2,456 meshes, 16 systems, and 4,462 concepts. Both include spinal and peripheral neural structures from Z-Anatomy.
 
 ## Preview
 
@@ -10,7 +35,7 @@ An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Ex
 | --- | --- |
 | [![Male anatomy explorer with the default systems and assembled model](docs/images/male-atlas.jpg)](docs/images/male-atlas.jpg) | [![Experimental female anatomy explorer with the default systems and assembled model](docs/images/female-atlas.jpg)](docs/images/female-atlas.jpg) |
 
-Captured from app **0.2.0** at the same desktop size and default three-quarter view, with anatomy assembled and no structure selected. Click either image for the full-size screenshot. The anatomy shown uses adapted BodyParts3D and HRA data under CC BY 4.0; see [Credits](#credits). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
+Captured from app **0.3.5** at the same desktop size and default three-quarter view, with anatomy assembled and no structure selected. Click either image for the full-size screenshot. The anatomy shown uses adapted BodyParts3D and HRA data under CC BY 4.0; see [Credits](#credits). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
 
 The female model now includes fitted body skin. [See the final forearm preview](docs/images/female-skin-forearms-fit.jpg) and [skin fit notes](docs/female-skin.md) for the head, neck, back, breast, hand and foot adjustments, source credits, and validation.
 
@@ -38,7 +63,7 @@ Use the bookmark button to save up to 20 named views in this browser, reopen the
 
 ## Install and use offline
 
-Open the published site and choose the **information button** (or **Install app · App & credits** in the desktop footer), then **Install Human Atlas +** in **Take the atlas with you**, at the top of the panel. On mobile, installation, updates, and credits are available through the information button; the footer is hidden to leave more room for anatomy. The install button opens a native install prompt when supported; otherwise it shows installation steps. On iPhone or iPad, open the site in Safari, use **Share → Add to Home Screen**, keep **Open as Web App** turned on if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt. The install button remains available after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
+Open the published site and choose the **information button** (or **Install app · App & credits** in the desktop footer), then **Install Human Atlas +** in **Take the atlas with you**, at the top of the panel. On mobile, installation, updates, and credits are available through the information button; the footer is hidden to leave more room for anatomy. The install button opens a native install prompt when supported; otherwise it shows installation steps. The install button remains available after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
 
 Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, both catalogues, credits, and all 38 model chunks automatically (about 78.5 MB compressed combined). The selected model's normal download is reused, and the other model is saved in the background. Both can then be explored offline. It also supports browsers that need the uncompressed files. The first visit can finish before the service worker takes control; offline preparation fills missing cache entries afterward.
 
@@ -48,11 +73,31 @@ Use the permanent **Update** button in the footer or **App & credits** panel to 
 
 PWA registration runs in production builds on HTTPS or localhost. Development stays uncached so edits appear immediately. The manifest, icons, worker scope, and offline navigation use the configured base path, including `/ha/` on GitHub Pages. No extra dependencies or deployment secrets are needed.
 
+### Install on iPhone or iPad
+
+Open [Human Atlas +](https://llm-junkie.github.io/ha/) in **Safari**, choose **Share → Add to Home Screen**, leave **Open as Web App** enabled if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt.
+
+### Install on Mac
+
+On **macOS 14 or later**, open [Human Atlas +](https://llm-junkie.github.io/ha/) in **Safari**, choose **File → Add to Dock**, then click **Add**. See [Apple's web app guide](https://support.apple.com/en-us/104996).
+
+### Install on Android
+
+Open [Human Atlas +](https://llm-junkie.github.io/ha/) in **Chrome** and use the atlas's **Install Human Atlas +** button. You can also choose **⋮ → Install and create shortcut → Install**. Confirm the prompt, then open the atlas from your Home Screen or app drawer. See [Chrome's Android installation guide](https://support.google.com/chrome/answer/9658361?hl=en&co=GENIE.Platform%3DAndroid).
+
+### Install on Windows
+
+Open [Human Atlas +](https://llm-junkie.github.io/ha/) in **Edge** or **Chrome**, click **Install Human Atlas +** in the atlas or the install icon in the browser's address bar, and confirm. Open it from the Start menu or its app shortcut.
+
+### Install on Linux
+
+Open [Human Atlas +](https://llm-junkie.github.io/ha/) in **Chrome** and click **Install Human Atlas +** in the atlas, or choose **⋮ → Cast, save, and share → Install page as app**. Confirm, then open it from your applications menu. See [Chrome's desktop installation guide](https://support.google.com/chrome/answer/9658361?hl=en&co=GENIE.Platform%3DDesktop).
+
+After installing on any device, open the installed atlas while connected and wait for **Ready offline** before disconnecting.
+
 ## App version
 
 The current app release is **0.3.5**. **App & credits → App updates** shows **Current version 0.3.5**, including when the app is installed or offline. The display and built files read the version from `package.json`.
-
-Release **0.2.0** adds the experimental female model, the verified bilateral uterosacral registration correction, separate model histories and saved views, model-aware share links, and offline support for both models. See [the female model notes](docs/female-model.md) for source credits, measurements, and anatomical validation limits.
 
 Release **0.3.5** adds a selectable full-body female skin surface, smoother contours, closer head/face/neck/back alignment, breast coverage, posed hand and foot skin, and medial forearm coverage. The delivered female catalogue has 2,456 meshes and 4,462 concepts. Source pins, fitting controls, comparison previews and geometry checks are documented in [the skin fit notes](docs/female-skin.md).
 
@@ -73,6 +118,7 @@ Open http://localhost:3016. To build the static site, run `npm run build`; the o
 
 ```sh
 npm run check
+npm run lint
 npm test
 npm run build
 ```
@@ -81,7 +127,9 @@ Validation covers mesh buffers, names and concept membership, nonoverlapping exp
 
 Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity.
 
-Female skin tests verify the source and delivered checksums, preserved underlying anatomy, finite geometry and normals, smoothing and deformation bounds, joined wrist/ankle topology, and skin coverage over breast adipose tissue, hand/toe bones and medial forearm tissue. All 93 automated tests pass for the fitted skin update; geometric checks do not replace independent anatomical review.
+Female skin tests verify the source and delivered checksums, preserved underlying anatomy, finite geometry and normals, smoothing and deformation bounds, joined wrist/ankle topology, and skin coverage over breast adipose tissue, hand/toe bones and medial forearm tissue. Geometric checks do not replace independent anatomical review.
+
+Runtime regression tests also cover malformed catalogues, bounded concurrent downloads, cancellation after a failed chunk or model switch, partial GPU index uploads, and offline progress checks without opening cached model bodies. `npm test` discovers all `scripts/*.test.mjs` files automatically; CI also runs lint to reject unused imports and other source warnings.
 
 PWA tests cover offline navigation and anatomy, subpath isolation, download deduplication, gzip and raw responses, damaged downloads, storage limits, update activation, cache reuse, and failed updates. Manual-update tests cover checking for releases, using an already prepared release without a connection, waiting for downloads, and recovering from connection or installation failures. Every production build also validates the manifest, PNG icon sizes, scoped URLs, and content hashes against the files being deployed.
 
@@ -110,7 +158,9 @@ This is an educational explorer, not a diagnostic or surgical tool.
 
 ## How it works
 
-Geometry is merged into batches whose draw indices contain only visible structures. Per-structure GPU textures control translation and selection, while component geometry supports accurate picking. Exploded layouts pack only visible pieces; layout, visibility and selection buffers stay cached during animation. The frame loop wakes for interactions, loading and animations, then stops when the view is still. It also pauses while the browser tab is hidden.
+Geometry is merged into batches whose draw indices contain only visible structures. Visibility changes upload only the used index range. Per-structure GPU textures control translation and selection, while component geometry supports accurate picking. Exploded layouts pack only visible pieces; layout, visibility and selection buffers stay cached during animation. The frame loop wakes for interactions, loading and animations, then stops when the view is still. It also pauses while the browser tab is hidden.
+
+Model downloads run three chunks at a time and cancel together on failure or a model switch. Catalogue validation checks structure, identifiers, bounds and buffer ranges before rendering. Switching models releases the previous WebGL context and its resources. Offline progress reads cache keys without reopening every model response. Styles are generated only from application, UI component and web entry sources; temporary files and documentation cannot expand the stylesheet.
 
 Recent selections are stored locally in the browser. Muscle search shortcuts group verified source meshes without modifying the source catalogue. Guided camera movement respects the reduced-motion setting and yields to manual navigation.
 
@@ -132,7 +182,7 @@ The included [GitHub Actions workflow](.github/workflows/deploy-pages.yml) build
 2. Push these changes to `main`, or run **Deploy to GitHub Pages** from the **Actions** tab.
 3. Open the site URL shown by the deployment. For this fork, it is https://llm-junkie.github.io/ha/.
 
-Every push to `main` installs dependencies with `npm ci`, checks types, runs validation, builds `dist/`, and deploys it. Pull requests run the same checks and build without publishing. No Vercel account, deployment token, or additional secrets are needed.
+Every push to `main` installs dependencies with `npm ci`, checks types, runs lint and validation, builds `dist/`, and deploys it. Pull requests run the same checks and build without publishing. No Vercel account, deployment token, or additional secrets are needed.
 
 The build reads the site's base path from GitHub Pages, so model downloads, scripts, styles, and the favicon work under a repository path such as `/ha/`, a renamed fork, or a custom domain. To test the repository path locally:
 

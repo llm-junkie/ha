@@ -25,12 +25,13 @@ async function verified(response, entry) {
 
 async function status() {
   const app = await caches.open(APP_CACHE), models = await caches.open(DATA_CACHE);
-  const saved = (await Promise.all(preferred.map((entry) => models.match(absolute(entry.url)))))
-    .filter(Boolean).length;
-  const completeShell = (await Promise.all(CONFIG.shell.map((entry) => app.match(absolute(entry.url)))))
-    .every(Boolean);
-  const completeCatalogues = (await Promise.all(catalogues.map(entry => models.match(absolute(entry.url)))))
-    .every(Boolean);
+  // Progress needs URLs only. Do not open dozens of model response bodies per download.
+  const [appKeys, modelKeys] = await Promise.all([app.keys(), models.keys()]);
+  const appUrls = new Set(appKeys.map((request) => request.url));
+  const modelUrls = new Set(modelKeys.map((request) => request.url));
+  const saved = preferred.filter((entry) => modelUrls.has(absolute(entry.url))).length;
+  const completeShell = CONFIG.shell.every((entry) => appUrls.has(absolute(entry.url)));
+  const completeCatalogues = catalogues.every((entry) => modelUrls.has(absolute(entry.url)));
   return {
     type: 'human-atlas:status', saved, total: preferred.length,
     ready: saved === preferred.length && completeShell && completeCatalogues,

@@ -31,7 +31,6 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
-import { Switch } from "@/components/ui/switch";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import {
   Combobox,
@@ -67,7 +66,6 @@ import {
   EXPLANATIONS,
   explanation,
   type Atlas,
-  type Concept,
   type SceneState,
   type SystemId,
   type View,

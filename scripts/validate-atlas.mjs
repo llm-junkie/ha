@@ -1,7 +1,9 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import { isModelAtlas } from '../app/model-catalogue.ts';
 const filename=process.argv[2]??'atlas.json';
 const base=new URL('../public/models/',import.meta.url),atlas=JSON.parse(fs.readFileSync(new URL(filename,base)));
+assert.ok(isModelAtlas(atlas, atlas.sex), 'Invalid catalogue structure or buffer ranges');
 const counts=atlas.sex==='female'?[2456,4462]:[2444,3645];
 assert.equal(atlas.parts.length,counts[0]);assert.equal(atlas.concepts.length,counts[1]);
 const ids=new Set(atlas.parts.map(p=>p.id));assert.equal(ids.size,counts[0]);

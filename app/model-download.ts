@@ -9,3 +9,29 @@ export async function decodeModelResponse(response:Response,expectedBytes:number
  if(buffer.byteLength!==expectedBytes)throw new Error('An anatomy file was incomplete. Please reload the viewer.');
  return buffer;
 }
+
+/** Keep downloads bounded, and stop the entire queue on failure or a model switch. */
+export async function loadModelChunks(
+ count: number,
+ load: (index: number, signal: AbortSignal) => Promise<void>,
+ signal: AbortSignal,
+): Promise<void> {
+ signal.throwIfAborted();
+ const controller = new AbortController();
+ const cancel = () => controller.abort(signal.reason);
+ signal.addEventListener('abort', cancel, { once: true });
+ let next = 0;
+ try {
+  await Promise.all(Array.from({ length: Math.min(3, count) }, async () => {
+   while (!controller.signal.aborted && next < count) {
+    await load(next++, controller.signal);
+   }
+  }));
+  signal.throwIfAborted();
+ } catch (error) {
+  controller.abort(error);
+  throw error;
+ } finally {
+  signal.removeEventListener('abort', cancel);
+ }
+}

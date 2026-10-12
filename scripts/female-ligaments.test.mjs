@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
 import { gunzipSync } from "node:zlib";
 import { Vector3, Triangle } from "three";
 import {
@@ -166,6 +166,7 @@ test("the correction modifies only the two ligaments and all delivered assets ma
     );
 });
 if (process.argv.includes("--report")) {
+  await mkdir(new URL("../work/", import.meta.url), { recursive: true });
   await writeFile(
     new URL("../work/ligament-measurements.json", import.meta.url),
     JSON.stringify(measurements, null, 2),

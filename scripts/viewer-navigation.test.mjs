@@ -158,7 +158,8 @@ test("draw batches submit only visible indices, suppress unchanged uploads, and 
   assert.equal(mesh.visible, false);
   updateDrawBatches([batch], Uint8Array.from([1, 0, 1]));
   assert.equal(geometry.drawRange.count, 6);
-  assert.deepEqual([...index.array.slice(0, 6)], [10, 11, 12, 30, 31, 32]);
+  assert.deepEqual(Array.from(index.array.subarray(0, 6)), [10, 11, 12, 30, 31, 32]);
+  assert.deepEqual(index.updateRanges, [{ start: 0, count: 6 }]);
   const version = index.version;
   updateDrawBatches([batch], Uint8Array.from([1, 0, 1]));
   assert.equal(index.version, version);
@@ -169,7 +170,8 @@ test("draw batches submit only visible indices, suppress unchanged uploads, and 
   updateDrawBatches([batch], Uint8Array.from([0, 1, 0]));
   assert.equal(mesh.visible, true);
   assert.equal(geometry.drawRange.count, 3);
-  assert.deepEqual([...index.array.slice(0, 3)], [20, 21, 22]);
+  assert.deepEqual(Array.from(index.array.subarray(0, 3)), [20, 21, 22]);
+  assert.deepEqual(index.updateRanges, [{ start: 0, count: 3 }]);
 });
 
 test("frame scheduling coalesces events, stops when idle or hidden, and cannot restart after disposal", () => {
