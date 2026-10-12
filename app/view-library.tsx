@@ -18,6 +18,8 @@ interface Props {
   atlas: Atlas;
   open: boolean;
   onOpenChange: (open: boolean) => void;
+  shareOpen: boolean;
+  onShareOpenChange: (open: boolean) => void;
   panelAnchor: RefObject<HTMLDivElement | null>;
   ready: boolean;
   defaultName: string;
@@ -25,7 +27,7 @@ interface Props {
   onRestore: (view: SavedView) => void;
 }
 
-export default function ViewLibrary({ atlas, open, onOpenChange, panelAnchor, ready, defaultName, getView, onRestore }: Props) {
+export default function ViewLibrary({ atlas, open, onOpenChange, shareOpen, onShareOpenChange, panelAnchor, ready, defaultName, getView, onRestore }: Props) {
   const [bookmarks, setBookmarks] = useState<SavedBookmark[]>(() => {
     try {
       return readBookmarks(localStorage, atlas);
@@ -35,7 +37,9 @@ export default function ViewLibrary({ atlas, open, onOpenChange, panelAnchor, re
   });
   const panelContent = useRef<HTMLDivElement>(null);
   const panelTitle = useRef<HTMLHeadingElement>(null);
-  usePanelViewport(panelAnchor, open, panelContent);
+  const shareContent = useRef<HTMLDivElement>(null);
+  const shareTitle = useRef<HTMLHeadingElement>(null);
+  usePanelViewport(panelAnchor, open || shareOpen, shareOpen ? shareContent : panelContent);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [link, setLink] = useState("");
@@ -191,7 +195,9 @@ export default function ViewLibrary({ atlas, open, onOpenChange, panelAnchor, re
         </PopoverContent>
       </Popover>
       <Popover
+        open={shareOpen}
         onOpenChange={(value) => {
+          onShareOpenChange(value);
           if (value) prepareLink();
         }}
       >
@@ -209,11 +215,18 @@ export default function ViewLibrary({ atlas, open, onOpenChange, panelAnchor, re
           <Link2 size={18} />
         </PopoverTrigger>
         <PopoverContent
+          ref={shareContent}
+          anchor={panelAnchor}
+          positionMethod="fixed"
           align="end"
+          sideOffset={0}
+          collisionAvoidance={{ side: "none", align: "none", fallbackAxisSide: "none" }}
+          collisionPadding={{ top: 0, left: 0, right: 0, bottom: 16 }}
+          initialFocus={shareTitle}
           className="share-view-panel glass"
           aria-label="Share current view"
         >
-          <h2>Share this view</h2>
+          <h2 ref={shareTitle} tabIndex={-1}>Share this view</h2>
           <p className="view-panel-note">This link opens the same camera, selection, and layers.</p>
           <label htmlFor="shared-view-link">View link</label>
           <input

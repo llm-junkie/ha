@@ -19,7 +19,8 @@
   font-weight: 600;
   margin: 0;
 }
-.saved-views-panel {
+.saved-views-panel,
+.share-view-panel {
   width: var(--anchor-width);
   max-height: var(--available-height);
   border-radius: 14px;

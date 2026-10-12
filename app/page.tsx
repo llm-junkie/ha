@@ -133,7 +133,7 @@ export default function Home() {
     [state, setState] = useState(initial),
     [progress, setProgress] = useState(0),
     [error, setError] = useState(""),
-    [panel, setPanel] = useState<"layers" | "search" | "saved" | null>(null),
+    [panel, setPanel] = useState<"layers" | "search" | "saved" | "share" | null>(null),
     [details, setDetails] = useState(false),
     [about, setAbout] = useState(false),
     [query, setQuery] = useState(""),
@@ -525,6 +525,11 @@ export default function Home() {
             onOpenChange={(open) => {
               if (open) setDetails(false);
               setPanel((current) => (open ? "saved" : current === "saved" ? null : current));
+            }}
+            shareOpen={panel === "share"}
+            onShareOpenChange={(open) => {
+              if (open) setDetails(false);
+              setPanel((current) => (open ? "share" : current === "share" ? null : current));
             }}
             panelAnchor={savedPanelAnchor}
             ready={viewReady && !error}
