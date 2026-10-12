@@ -1,6 +1,7 @@
 import { flushSync } from "react-dom";
 import "./view-library.css";
 import { assetUrl } from "./asset-url";
+import { searchViewportState } from "./search-viewport";
 import {
   defaultLayers,
   isModelAtlas,
@@ -97,6 +98,7 @@ export default function Home() {
   const searchPanel = useRef<HTMLElement>(null);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
+  const [aboutModel, setAboutModel] = useState<ModelId>(model);
   const detailTitle = useRef<HTMLHeadingElement>(null);
   const cameraPose = useRef<CameraPose | null>(null);
   const settled = useRef(false);
@@ -134,6 +136,13 @@ export default function Home() {
     [about, setAbout] = useState(false),
     [query, setQuery] = useState(""),
     [chosen, setChosen] = useState<SearchConcept | null>(null);
+  const openAbout = (updates = false) => {
+    setAboutModel(model);
+    setAboutUpdates(updates);
+    setDetails(false);
+    setPanel(null);
+    setAbout(true);
+  };
   useEffect(() => {
     if (progress === 100) prepareOffline();
   }, [progress]);
@@ -209,6 +218,47 @@ export default function Home() {
     };
     document.addEventListener("pointerdown", dismiss);
     return () => document.removeEventListener("pointerdown", dismiss);
+  }, [panel]);
+  useEffect(() => {
+    const element = searchPanel.current;
+    const viewport = window.visualViewport;
+    if (panel !== "search" || !element || !viewport) return;
+    const orientation = window.matchMedia("(orientation: portrait)");
+    let fullHeight = Math.max(window.innerHeight, viewport.height);
+    const update = () => {
+      fullHeight = Math.max(fullHeight, window.innerHeight, viewport.height);
+      const layout = searchViewportState(
+        viewport,
+        fullHeight,
+        document.activeElement instanceof HTMLInputElement &&
+          element.contains(document.activeElement),
+      );
+      element.style.setProperty("--search-visible-top", `${layout.offsetTop}px`);
+      element.style.setProperty("--search-visible-height", `${layout.height}px`);
+      element.toggleAttribute("data-keyboard-open", layout.keyboardOpen);
+    };
+    const rotated = () => {
+      fullHeight = Math.max(window.innerHeight, viewport.height);
+      update();
+    };
+    update();
+    viewport.addEventListener("resize", update);
+    viewport.addEventListener("scroll", update);
+    window.addEventListener("resize", update);
+    orientation.addEventListener("change", rotated);
+    document.addEventListener("focusin", update);
+    document.addEventListener("focusout", update);
+    return () => {
+      viewport.removeEventListener("resize", update);
+      viewport.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      orientation.removeEventListener("change", rotated);
+      document.removeEventListener("focusin", update);
+      document.removeEventListener("focusout", update);
+      element.style.removeProperty("--search-visible-top");
+      element.style.removeProperty("--search-visible-height");
+      element.removeAttribute("data-keyboard-open");
+    };
   }, [panel]);
   const parts = useMemo(() => new Map(atlas?.parts.map((p) => [p.id, p])), [atlas]);
   const concepts = useMemo(() => (atlas ? buildSearchConcepts(atlas) : []), [atlas]);
@@ -456,7 +506,10 @@ export default function Home() {
         </h1>
         <div className="identity-meta">
           {atlas ? atlas.parts.length.toLocaleString() : MODELS[model].pieces.toLocaleString()}{" "}
-          modeled pieces <span>·</span> {MODELS[model].source}
+          modeled pieces
+          <span className="identity-source">
+            {" "}<span>·</span> {MODELS[model].source}
+          </span>
         </div>
       </header>
       <fieldset className="model-switch">
@@ -514,12 +567,7 @@ export default function Home() {
           variant="ghost"
           className="icon-button"
           aria-label="About this atlas"
-          onClick={() => {
-            setDetails(false);
-            setPanel(null);
-            setAboutUpdates(false);
-            setAbout(true);
-          }}
+          onClick={() => openAbout()}
         >
           <Info size={18} />
         </Button>
@@ -794,21 +842,6 @@ export default function Home() {
           <RotateCcw size={17} />
         </Button>
       </nav>
-      <div className="scene-caption">
-        <span className="caption-line" />
-        <span>
-          {state.isolate
-            ? (chosen?.name ?? "SELECTED STRUCTURE")
-            : state.explode > 0.95
-              ? "ANATOMICAL INVENTORY"
-              : state.explode > 0.05
-                ? "SEPARATED STRUCTURES"
-                : model === "female"
-                  ? "FEMALE · EXPERIMENTAL"
-                  : "ADULT HUMAN · MALE"}
-        </span>
-        <span className="caption-line" />
-      </div>
       <div className="bottom-dock glass">
         <Button
           variant="ghost"
@@ -872,10 +905,7 @@ export default function Home() {
               aria-busy={pwa.checking || pwa.updating}
               title="Check for updates and reload when a new version is ready"
               onClick={() => {
-                setDetails(false);
-                setPanel(null);
-                setAboutUpdates(true);
-                setAbout(true);
+                openAbout(true);
                 void updateApp();
               }}
             >
@@ -884,12 +914,7 @@ export default function Home() {
           )}
           <Button
             variant="ghost"
-            onClick={() => {
-              setDetails(false);
-              setPanel(null);
-              setAboutUpdates(false);
-              setAbout(true);
-            }}
+            onClick={() => openAbout()}
           >
             {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
             <span>App & credits</span> <ArrowUpRight size={12} />
@@ -1039,25 +1064,54 @@ export default function Home() {
               : aboutTitle
           }
         >
-          <div className="eyebrow">SOURCE & SCOPE</div>
-          <SheetTitle ref={aboutTitle} tabIndex={-1} className="structure-title">
-            A body, revealed.
-          </SheetTitle>
+          <PwaPanel
+            state={pwa}
+            loaded={progress === 100}
+            titleRef={aboutTitle}
+            updateTitleRef={updateTitle}
+          />
+          <SheetTitle className="eyebrow">SOURCE & SCOPE</SheetTitle>
+          <fieldset className="about-model-switch">
+            <legend className="sr-only">Model information</legend>
+            <label className="model-option">
+              <input
+                className="sr-only"
+                type="radio"
+                name="about-anatomy-model"
+                value="male"
+                checked={aboutModel === "male"}
+                onChange={() => setAboutModel("male")}
+              />
+              <span className="model-option-label">Male</span>
+            </label>
+            <label className="model-option">
+              <input
+                className="sr-only"
+                type="radio"
+                name="about-anatomy-model"
+                value="female"
+                checked={aboutModel === "female"}
+                onChange={() => setAboutModel("female")}
+              />
+              <span className="model-option-label">
+                Female <span className="model-status" title="Experimental">(Exp)</span>
+              </span>
+            </label>
+          </fieldset>
           <SheetDescription>
-            {model === "female"
+            {aboutModel === "female"
               ? "Explore the experimental female study model from BodyParts3D and HRA."
               : "Explore the adult male reference anatomy from BodyParts3D."}
           </SheetDescription>
-          <PwaPanel state={pwa} loaded={progress === 100} updateTitleRef={updateTitle} />
           <div className="about-copy">
             <p>
-              <strong>{model === "female" ? "Female · Experimental" : "Male · BodyParts3D"}</strong>
+              <strong>{aboutModel === "female" ? "Female · Experimental" : "Male · BodyParts3D"}</strong>
               <br />
-              {model === "female"
+              {aboutModel === "female"
                 ? "2,245 individual meshes and 4,248 named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, and knee ligaments."
                 : "2,234 individual meshes and 3,432 named concepts from an adult male reference anatomy."}
             </p>
-            {model === "female" && (
+            {aboutModel === "female" && (
               <p>
                 Proportions and organ placement are estimated and await independent anatomical
                 review. Female external skin, genital surfaces, and validated urethra/pelvic-floor
@@ -1079,10 +1133,10 @@ export default function Home() {
             <p>
               BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0
               International.
-              {model === "female" &&
+              {aboutModel === "female" &&
                 " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume."}
             </p>
-            {model === "female" && (
+            {aboutModel === "female" && (
               <a href="https://doi.org/10.48539/HBM352.BTSQ.586" target="_blank" rel="noreferrer">
                 Female reference organ dataset <ArrowUpRight size={14} />
               </a>

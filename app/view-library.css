@@ -148,9 +148,7 @@
 }
 @media (max-width: 767px) {
   .view-library-actions {
-    position: absolute;
-    right: 0;
-    top: 46px;
+    position: static;
     gap: 4px;
   }
   .save-view-form input,

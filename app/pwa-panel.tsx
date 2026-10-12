@@ -13,8 +13,9 @@ export function pwaLabel(state: PwaState) {
   return '';
 }
 
-export default function PwaPanel({ state, loaded, updateTitleRef }: {
-  state: PwaState; loaded: boolean; updateTitleRef?: Ref<HTMLHeadingElement>;
+export default function PwaPanel({ state, loaded, titleRef, updateTitleRef }: {
+  state: PwaState; loaded: boolean; titleRef?: Ref<HTMLHeadingElement>;
+  updateTitleRef?: Ref<HTMLHeadingElement>;
 }) {
   const [showInstallHelp, setShowInstallHelp] = useState(false);
   const installHelp = useRef<HTMLDivElement>(null);
@@ -34,10 +35,9 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
     <section className="pwa-panel" aria-labelledby="pwa-title">
       <div className="pwa-heading">
         <Download size={19} aria-hidden="true" />
-        <h2 id="pwa-title">Take the atlas with you</h2>
+        <h2 id="pwa-title" ref={titleRef} tabIndex={-1}>Take the atlas with you</h2>
       </div>
       {state.installed ? <p>Human Atlas + is installed on this device.</p> : <>
-        <p>Install Human Atlas + to open it from your home screen or desktop.</p>
         <Button onClick={() => {
           if (state.canInstall) void installApp();
           else setShowInstallHelp((open) => !open);
@@ -46,9 +46,8 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
           aria-controls={!state.canInstall ? 'pwa-install-help' : undefined}>
           <Download size={16} aria-hidden="true" /> Install Human Atlas +
         </Button>
-        {!state.canInstall && <p className="pwa-hint">
-          {state.support === 'development' ? 'Installation is available in the published atlas.'
-            : 'This button shows installation steps for browsers that use their own menu.'}
+        {state.support === 'development' && <p className="pwa-hint">
+          Installation is available in the published atlas.
         </p>}
         {showInstallHelp && !state.canInstall && <div ref={installHelp} id="pwa-install-help" className="pwa-install-help">
           <h3>Install on iPhone or iPad</h3>
@@ -86,10 +85,9 @@ export default function PwaPanel({ state, loaded, updateTitleRef }: {
       <div className="pwa-update-section">
         <h3 ref={updateTitleRef} tabIndex={-1}>{state.updateAvailable ? 'A new version is ready' : 'App updates'}</h3>
         <p className="pwa-version">Current version <strong>{APP_VERSION}</strong></p>
-        <p className="pwa-hint">
-          {state.support === 'development' ? 'Updates are available in the published atlas.'
-            : 'Check for the latest version. Updating reloads open atlas windows; saved views stay on this device.'}
-        </p>
+        {state.support === 'development' && <p className="pwa-hint">
+          Updates are available in the published atlas.
+        </p>}
         <Button onClick={() => void updateApp()} disabled={!available || state.checking || state.updating}
           aria-busy={state.checking || state.updating}>
           <RefreshCw size={16} aria-hidden="true" />
