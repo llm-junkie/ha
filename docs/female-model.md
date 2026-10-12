@@ -69,6 +69,7 @@ To rebuild from the pinned import using a local Anatolume checkout:
 ```sh
 node scripts/import-female-model.mjs /path/to/Anatolume
 node scripts/fix-female-ligaments.mjs
+node scripts/apply-classification-overrides.mjs
 npm test
 ```
 

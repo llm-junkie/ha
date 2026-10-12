@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "atlas-female.json",
-      "bytes": 1613714,
-      "sha256": "14b05dae3f3685fadf42de89bdd4e8ac63ab7dd054cfef5f697d45976df7c4a2"
+      "bytes": 1613718,
+      "sha256": "57d7a86fe63e62c1883d921fb1cb64fd621877d5f500208bb35528ec5fd69c87"
     },
     {
       "path": "female-fit-report.json",
@@ -310,5 +310,14 @@
   "importedVia": {
     "repository": "https://github.com/isunky/Anatolume",
     "revision": "39f2c018205faa756ab59b4b12fdf0d1295cfdaf"
+  },
+  "classificationOverrides": {
+    "parts": [
+      "FJ1423",
+      "FJ1423M"
+    ],
+    "system": "connective",
+    "reason": "The iliotibial tracts are regions of fascia lata, classified as connective tissue in this viewer.",
+    "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2100245/"
   }
 }

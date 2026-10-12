@@ -1,0 +1,9 @@
+{
+  "schemaVersion": 1,
+  "reason": "The iliotibial tracts are regions of fascia lata, classified as connective tissue in this viewer.",
+  "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2100245/",
+  "parts": [
+    { "id": "FJ1423", "name": "Right iliotibial tract", "originalSystem": "skeletal", "system": "connective" },
+    { "id": "FJ1423M", "name": "Left iliotibial tract", "originalSystem": "skeletal", "system": "connective" }
+  ]
+}

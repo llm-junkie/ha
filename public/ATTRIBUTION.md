@@ -47,6 +47,12 @@ Local adaptation: the bilateral uterosacral source surfaces are tessellated on 0
 
 This is an experimental derived assembly with estimated proportions and unreviewed organ placement. The musculature derives from the male reference. Female external skin/genital surfaces and validated urethra/pelvic-floor replacements remain incomplete. Registration checks establish geometric consistency with the HRA source assembly; they do not independently validate its attachment anatomy.
 
+## Iliotibial tract classification
+
+Both atlases assign the right (`FJ1423`, `FMA58776`) and left (`FJ1423M`, `FMA58777`) iliotibial tracts to **Connective tissue**. BodyParts3D's retained concepts link these meshes to fascia lata. [Fairclough et al. (2006)](https://pmc.ncbi.nlm.nih.gov/articles/PMC2100245/) supports their identification as deep fascia and the structure-specific description. This corrects the viewer's Skeleton assignment; mesh geometry, source identifiers, and concept membership are preserved.
+
+The reproducible overrides are in `data/anatomy/classification-overrides.json`. The source converter applies them, and `node scripts/apply-classification-overrides.mjs` reapplies them after a female import and registration, updating the delivered catalogue checksum while retaining upstream checksums.
+
 ## Screenshots, comparison figures, and retained source fixtures
 
 The README's male/female screenshots and the uterosacral comparison figure render adaptations of the datasets credited above. The source fixture in `data/anatomy/uterosacral-source.json` retains HRA-derived geometry and registration references under the same dataset attribution. Preserve the relevant BodyParts3D/HRA credits, link CC BY 4.0, and identify adaptations when redistributing these data or anatomy images. The application code's MIT license and copyright notice remain separate from the anatomy data license.

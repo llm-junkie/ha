@@ -1,8 +1,9 @@
-import { useEffect, useState, type FormEvent } from "react";
-import { Bookmark, Link2, Trash2, Check, Copy } from "lucide-react";
+import { useEffect, useRef, useState, type FormEvent, type RefObject } from "react";
+import { Bookmark, Link2, Trash2, Check, Copy, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import type { Atlas } from "./anatomy";
+import { usePanelViewport } from "./use-panel-viewport";
 import {
   MAX_SAVED_VIEWS,
   savedViewsKey,
@@ -15,13 +16,16 @@ import {
 
 interface Props {
   atlas: Atlas;
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  panelAnchor: RefObject<HTMLDivElement | null>;
   ready: boolean;
   defaultName: string;
   getView: () => SavedView | null;
   onRestore: (view: SavedView) => void;
 }
 
-export default function ViewLibrary({ atlas, ready, defaultName, getView, onRestore }: Props) {
+export default function ViewLibrary({ atlas, open, onOpenChange, panelAnchor, ready, defaultName, getView, onRestore }: Props) {
   const [bookmarks, setBookmarks] = useState<SavedBookmark[]>(() => {
     try {
       return readBookmarks(localStorage, atlas);
@@ -29,7 +33,9 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
       return [];
     }
   });
-  const [open, setOpen] = useState(false);
+  const panelContent = useRef<HTMLDivElement>(null);
+  const panelTitle = useRef<HTMLHeadingElement>(null);
+  usePanelViewport(panelAnchor, open, panelContent);
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [link, setLink] = useState("");
@@ -86,7 +92,7 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
       <Popover
         open={open}
         onOpenChange={(value) => {
-          setOpen(value);
+          onOpenChange(value);
           if (value) {
             setName(defaultName);
             setMessage("");
@@ -105,8 +111,24 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
         >
           <Bookmark size={18} />
         </PopoverTrigger>
-        <PopoverContent align="end" className="saved-views-panel glass" aria-label="Saved views">
-          <h2>Saved views</h2>
+        <PopoverContent
+          ref={panelContent}
+          anchor={panelAnchor}
+          positionMethod="fixed"
+          align="end"
+          sideOffset={0}
+          collisionAvoidance={{ side: "none", align: "none", fallbackAxisSide: "none" }}
+          collisionPadding={{ top: 0, left: 0, right: 0, bottom: 16 }}
+          initialFocus={panelTitle}
+          className="saved-views-panel glass"
+          aria-label="Saved views"
+        >
+          <div className="panel-heading">
+            <h2 ref={panelTitle} tabIndex={-1}>Saved views</h2>
+            <Button variant="ghost" className="icon-button" onClick={() => onOpenChange(false)} aria-label="Close saved views">
+              <X size={18} />
+            </Button>
+          </div>
           <p className="view-panel-note">Keep your camera, selection, and layers on this device.</p>
           <form onSubmit={save} className="save-view-form">
             <label htmlFor="saved-view-name">View name</label>
@@ -140,7 +162,7 @@ export default function ViewLibrary({ atlas, ready, defaultName, getView, onRest
                   disabled={!ready}
                   onClick={() => {
                     onRestore(bookmark.view);
-                    setOpen(false);
+                    onOpenChange(false);
                   }}
                 >
                   {bookmark.name}

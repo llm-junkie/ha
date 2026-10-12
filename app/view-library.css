@@ -19,6 +19,19 @@
   font-weight: 600;
   margin: 0;
 }
+.saved-views-panel {
+  width: var(--anchor-width);
+  max-height: var(--available-height);
+  border-radius: 14px;
+  padding: 12px 18px 16px !important;
+}
+.saved-views-panel > .panel-heading,
+.saved-views-panel > .view-panel-note,
+.saved-views-panel > .save-view-form,
+.saved-views-panel > .view-status {
+  flex-shrink: 0;
+}
+.saved-views-panel h2 { font: inherit; }
 .view-panel-note {
   font-size: 12px;
   line-height: 1.6;
@@ -61,6 +74,8 @@
   font-size: 12px;
 }
 .saved-view-list {
+  flex-shrink: 1;
+  min-height: 0;
   max-height: 220px;
   overflow-y: auto;
   overscroll-behavior: contain;

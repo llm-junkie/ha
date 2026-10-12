@@ -15,7 +15,7 @@ export const SYSTEMS: {id:SystemId;name:string;color:string;description:string}[
  {id:'reproductive',name:'Reproductive',color:'#bda098',description:'Reproductive organs contribute to gamete production, hormone secretion, and reproduction. The structures represented depend on the selected reference model.'},
  {id:'mammary',name:'Breast tissue',color:'#c7aca5',description:'Breast tissue includes mammary glands, ducts, adipose tissue, and supporting connective tissue. It lies over the pectoral muscles; nipple and areolar surfaces appear in the optional Body surface layer.'},
  {id:'integumentary',name:'Body surface',color:'#ba9b7d',description:'The body surface provides an outer anatomical reference. The integumentary system forms a protective barrier and contributes to sensation and temperature regulation.'},
- {id:'connective',name:'Connective tissue',color:'#aec3bb',description:'Cartilage, ligaments, and other connective tissues support, connect, and separate structures. Their roles include stabilizing joints and distributing mechanical loads.'},
+ {id:'connective',name:'Connective tissue',color:'#aec3bb',description:'Fascia, cartilage, ligaments, and other connective tissues support, connect, and separate structures. Their roles include stabilizing joints and distributing mechanical loads.'},
 ];
 export interface Part {id:string;name:string;conceptId:string;system:SystemId;chunk:number;positions:number;normals:number;indices:number;vertexCount:number;indexCount:number;bounds:[number[],number[]]}
 export interface Concept {id:string;name:string;elements:string[]}
@@ -24,7 +24,11 @@ export type View = 'three-quarter'|'front'|'back'|'side';
 export interface CameraPose {position:[number,number,number];target:[number,number,number];offset:[number,number];viewport?:[number,number]}
 export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number;focus?:number;focusContext?:boolean;partVisibility?:Record<string,boolean>;opacity?:Partial<Record<SystemId,number>>;camera?:CameraPose;rotationSpeed?:number;rotationDirection?:'clockwise'|'counterclockwise'}
 export const DEFAULT_VISIBLE:SystemId[] = ['cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','mammary','connective'];
+const ILIOTIBIAL_DESCRIPTION = 'A thickened band of deep fascia (fascia lata) along the outer thigh. It receives fibers from tensor fasciae latae and gluteus maximus, with connections to the femur and an attachment on the upper outer tibia.';
 export const EXPLANATIONS:Record<string,string> = {
+ 'iliotibial tract':ILIOTIBIAL_DESCRIPTION,
+ 'right iliotibial tract':ILIOTIBIAL_DESCRIPTION,
+ 'left iliotibial tract':ILIOTIBIAL_DESCRIPTION,
  'heart':'A muscular pump in the chest. Its right side sends blood to the lungs; its left side sends blood through the systemic circulation.',
  'liver':'A large organ beneath the right side of the diaphragm. It processes absorbed nutrients, produces bile, and synthesizes many proteins carried in the blood.',
  'brain':'The central organ of the nervous system. Its interconnected regions support perception, movement, memory, language, and the regulation of bodily functions.',

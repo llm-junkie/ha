@@ -41,5 +41,12 @@ for element in metadata['elements']:
     total_triangles+=len(indices)//3
 (out/f'anatomy-{chunk}.bin').write_bytes(blob);chunks.append({'url':f'/models/anatomy-{chunk}.bin','bytes':len(blob)})
 manifest={'version':'BodyParts3D 4.0','parts':parts,'chunks':chunks,'triangles':total_triangles,'concepts':[{k:v for k,v in c.items() if k in ['id','name','elements']} for c in metadata['concepts']]}
+# Preserve verified viewer classifications when rebuilding from source metadata.
+corrections=json.loads((root/'data/anatomy/classification-overrides.json').read_text())
+for correction in corrections['parts']:
+    matches=[p for p in parts if p['id']==correction['id']]
+    assert len(matches)==1 and matches[0]['name'].lower()==correction['name'].lower(),correction['id']
+    assert matches[0]['system'] in [correction['originalSystem'],correction['system']],correction['id']
+    matches[0]['system']=correction['system']
 (out/'atlas.json').write_text(json.dumps(manifest,separators=(',',':')))
 print(json.dumps({'parts':len(parts),'concepts':len(manifest['concepts']),'triangles':total_triangles,'bytes':sum(c['bytes'] for c in chunks),'chunks':len(chunks),'systems':sorted(set(p['system'] for p in parts))},indent=2))

@@ -1,7 +1,7 @@
 import { flushSync } from "react-dom";
 import "./view-library.css";
 import { assetUrl } from "./asset-url";
-import { searchViewportState } from "./search-viewport";
+import { usePanelViewport } from "./use-panel-viewport";
 import {
   defaultLayers,
   isModelAtlas,
@@ -96,6 +96,7 @@ export default function Home() {
   });
   const aboutTitle = useRef<HTMLHeadingElement>(null);
   const searchPanel = useRef<HTMLElement>(null);
+  const savedPanelAnchor = useRef<HTMLDivElement>(null);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
   const [aboutModel, setAboutModel] = useState<ModelId>(model);
@@ -131,7 +132,7 @@ export default function Home() {
     [state, setState] = useState(initial),
     [progress, setProgress] = useState(0),
     [error, setError] = useState(""),
-    [panel, setPanel] = useState<"layers" | "search" | null>(null),
+    [panel, setPanel] = useState<"layers" | "search" | "saved" | null>(null),
     [details, setDetails] = useState(false),
     [about, setAbout] = useState(false),
     [query, setQuery] = useState(""),
@@ -219,47 +220,7 @@ export default function Home() {
     document.addEventListener("pointerdown", dismiss);
     return () => document.removeEventListener("pointerdown", dismiss);
   }, [panel]);
-  useEffect(() => {
-    const element = searchPanel.current;
-    const viewport = window.visualViewport;
-    if (panel !== "search" || !element || !viewport) return;
-    const orientation = window.matchMedia("(orientation: portrait)");
-    let fullHeight = Math.max(window.innerHeight, viewport.height);
-    const update = () => {
-      fullHeight = Math.max(fullHeight, window.innerHeight, viewport.height);
-      const layout = searchViewportState(
-        viewport,
-        fullHeight,
-        document.activeElement instanceof HTMLInputElement &&
-          element.contains(document.activeElement),
-      );
-      element.style.setProperty("--search-visible-top", `${layout.offsetTop}px`);
-      element.style.setProperty("--search-visible-height", `${layout.height}px`);
-      element.toggleAttribute("data-keyboard-open", layout.keyboardOpen);
-    };
-    const rotated = () => {
-      fullHeight = Math.max(window.innerHeight, viewport.height);
-      update();
-    };
-    update();
-    viewport.addEventListener("resize", update);
-    viewport.addEventListener("scroll", update);
-    window.addEventListener("resize", update);
-    orientation.addEventListener("change", rotated);
-    document.addEventListener("focusin", update);
-    document.addEventListener("focusout", update);
-    return () => {
-      viewport.removeEventListener("resize", update);
-      viewport.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
-      orientation.removeEventListener("change", rotated);
-      document.removeEventListener("focusin", update);
-      document.removeEventListener("focusout", update);
-      element.style.removeProperty("--search-visible-top");
-      element.style.removeProperty("--search-visible-height");
-      element.removeAttribute("data-keyboard-open");
-    };
-  }, [panel]);
+  usePanelViewport(searchPanel, panel === "search");
   const parts = useMemo(() => new Map(atlas?.parts.map((p) => [p.id, p])), [atlas]);
   const concepts = useMemo(() => (atlas ? buildSearchConcepts(atlas) : []), [atlas]);
   const recent = useMemo(
@@ -542,6 +503,7 @@ export default function Home() {
           </span>
         </label>
       </fieldset>
+      <div ref={savedPanelAnchor} className="explorer-panel-anchor" aria-hidden="true" />
       <nav className="top-actions" aria-label="Explorer panels">
         <Button
           variant="ghost"
@@ -557,6 +519,12 @@ export default function Home() {
           <ViewLibrary
             key={model}
             atlas={atlas}
+            open={panel === "saved"}
+            onOpenChange={(open) => {
+              if (open) setDetails(false);
+              setPanel((current) => open ? "saved" : current === "saved" ? null : current);
+            }}
+            panelAnchor={savedPanelAnchor}
             ready={viewReady && !error}
             defaultName={chosen?.name ?? "My anatomy view"}
             getView={getView}
