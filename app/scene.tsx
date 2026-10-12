@@ -76,7 +76,7 @@ export default function AnatomyScene({
       return;
     }
     renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.5 : 2));
-    renderer.setClearColor("#f2f3f3");
+    renderer.setClearColor(getComputedStyle(el).getPropertyValue("--background").trim());
     renderer.outputColorSpace = T.SRGBColorSpace;
     renderer.toneMapping = T.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.12;
