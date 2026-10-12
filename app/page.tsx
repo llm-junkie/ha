@@ -87,6 +87,9 @@ const initial: SceneState = {
 };
 export default function Home() {
   const pwa = usePwa();
+  const footerStatus = pwaLabel(pwa);
+  const mobileFooterStatus =
+    footerStatus === "Update available" || footerStatus === "Install app" ? footerStatus : "";
   const [model, setModel] = useState<ModelId>(() => {
     const linked = viewModelFromHash(location.hash);
     try {
@@ -823,6 +826,7 @@ export default function Home() {
           className="mobile-only dock-layers"
           onClick={() => openPanel("layers")}
           aria-label="Open system layers"
+          aria-expanded={panel === "layers"}
         >
           <Layers3 size={20} />
           <span>Systems</span>
@@ -888,10 +892,19 @@ export default function Home() {
             </Button>
           )}
           <Button variant="ghost" onClick={() => openAbout()}>
-            {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
+            {footerStatus && <span className="pwa-footer-status">{footerStatus}</span>}
             <span>App & credits</span> <ArrowUpRight size={12} />
           </Button>
         </div>
+        {mobileFooterStatus && (
+          <Button
+            variant="ghost"
+            className="mobile-pwa-status"
+            onClick={() => openAbout(pwa.updateAvailable)}
+          >
+            {mobileFooterStatus}
+          </Button>
+        )}
       </footer>
       {progress < 100 && !error && (
         <div className="loading glass" role="status">
