@@ -97,7 +97,7 @@ After installing on any device, open the installed atlas while connected and wai
 
 ## App version
 
-The current app release is **0.3.5**. **App & credits → App updates** shows **Current version 0.3.5**, including when the app is installed or offline. The display and built files read the version from `package.json`.
+The current app release is **0.3.6**. **App & credits → App updates** shows **Current version 0.3.6**, including when the app is installed or offline. The display and built files read the version from `package.json`.
 
 Release **0.3.5** adds a selectable full-body female skin surface, smoother contours, closer head/face/neck/back alignment, breast coverage, posed hand and foot skin, and medial forearm coverage. The delivered female catalogue has 2,456 meshes and 4,462 concepts. Source pins, fitting controls, comparison previews and geometry checks are documented in [the skin fit notes](docs/female-skin.md).
 
