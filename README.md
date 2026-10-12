@@ -16,18 +16,19 @@ Captured from app **0.2.0** at the same desktop size and default three-quarter v
 
 - Choose **Male** or **Female (Exp)** using the switch below the atlas title; **Exp** means experimental. The choice is remembered on this device; `?model=female` opens the female model directly.
 - The information panel has a separate Male/Female switch for browsing model descriptions and credits. It starts with the current anatomy model each time you open the panel; changing it leaves the anatomy view unchanged.
-- Orbit, zoom toward the pointer, and select structures directly on the body.
+- Orbit, zoom around the model's center, and select structures directly on the body.
 - Toggle systems or individual structures, or use skeleton and organ presets.
 - Move from assembled anatomy to a spaced inventory of every visible piece.
 - Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it.
 - Reopen recent selections, smoothly locate or isolate structures, and return to the overall view.
 - Adjust automatic rotation speed and direction.
+- Adjust background brightness with the sun button; the midpoint snaps to the default gray, with a ±100% range. The title and subtitle automatically use dark or light text for contrast.
 - Fade any anatomical system while keeping selected structures clear.
 - Save named views on your device and share links that restore the camera, selection, and layers.
 - Use compact controls and detail panels on mobile.
 - Install the atlas on your home screen or desktop and explore the complete model offline.
 
-Body surface is enabled by default at 20% opacity in both models. Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting or zooming, and selected structures stay opaque.
+Body surface is enabled by default at 20% opacity in both models. Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting, and selected structures stay opaque.
 
 Use the bookmark button to save up to 20 named views in this browser, reopen them, or delete them. The link button creates a shareable view, with a copyable field if clipboard access is unavailable. Saving or sharing pauses automatic rotation. Views include the current orbit, zoom, pan, inspector framing, visible systems, individual structure switches, opacity, and exploded layout. Shared views adapt their camera distance on narrower screens and work under the GitHub Pages repository path. Bookmarks remain on this device; links carry the view itself and need no account or server.
 

@@ -38,5 +38,5 @@
 .studio-footer .pwa-footer-actions > button > span { display: inline-flex; align-items: center; }
 .studio-footer .pwa-footer-actions svg { display: block; width: 14px; height: 14px; }
 @media (max-width: 767px) { .pwa-footer-actions { gap: 8px; } }
-.studio-footer .pwa-footer-status { color: #37736a; }
-.studio-footer .pwa-footer-status::after { content: '·'; margin-inline: 7px; color: #9ca9b2; }
+.studio-footer .pwa-footer-status { color: inherit; }
+.studio-footer .pwa-footer-status::after { content: '·'; margin-inline: 7px; color: inherit; }

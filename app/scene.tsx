@@ -17,6 +17,7 @@ import { createFrameScheduler } from "./frame-scheduler";
 import { SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
   atlas: Atlas;
+  backgroundColor: string;
   state: SceneState;
   onSelect: (id: string) => void;
   onProgress: (n: number) => void;
@@ -25,6 +26,7 @@ interface Props {
 }
 export default function AnatomyScene({
   atlas,
+  backgroundColor,
   state,
   onSelect,
   onProgress,
@@ -35,10 +37,14 @@ export default function AnatomyScene({
     latest = useRef(state),
     select = useRef(onSelect),
     cameraChanged = useRef(onCameraChange),
+    changeBackground = useRef<(color: string) => void>(() => {}),
     wake = useRef<() => void>(() => {});
   useEffect(() => {
     wake.current();
   }, [state]);
+  useEffect(() => {
+    changeBackground.current(backgroundColor);
+  }, [backgroundColor]);
   latest.current = state;
   select.current = onSelect;
   cameraChanged.current = onCameraChange;
@@ -77,6 +83,11 @@ export default function AnatomyScene({
     }
     renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.5 : 2));
     renderer.setClearColor(getComputedStyle(el).getPropertyValue("--background").trim());
+    changeBackground.current = (color) => {
+      renderer.setClearColor(color);
+      dirty = true;
+      requestFrame();
+    };
     renderer.outputColorSpace = T.SRGBColorSpace;
     renderer.toneMapping = T.ACESFilmicToneMapping;
     renderer.toneMappingExposure = 1.12;
@@ -350,10 +361,34 @@ export default function AnatomyScene({
             ? new T.Vector3(1, 0.02, 0)
             : new T.Vector3(0.35, 0.06, 1)
       ).normalize();
+    const landscapeFrame = () => {
+      const rect = el.getBoundingClientRect();
+      const sheet = latest.current.inspectorOpen
+        ? document.querySelector(".detail-sheet")?.getBoundingClientRect()
+        : undefined;
+      if (sheet && sheet.left < rect.right && sheet.right > rect.left) {
+        return { left: 16, right: Math.max(166, sheet.left - rect.left - 16), top: 12, bottom: el.clientHeight - 16 };
+      }
+      const dock = document.querySelector(".bottom-dock")?.getBoundingClientRect();
+      const rail = document.querySelector(".view-controls")?.getBoundingClientRect();
+      return {
+        left: (dock ? dock.right - rect.left : 262) + 16,
+        right: (rail ? rail.left - rect.left : el.clientWidth - 56) - 16,
+        top: 14,
+        bottom: el.clientHeight - 28,
+      };
+    };
     const fit = (view: string, extent = 0, transitionTime?: number) => {
       controls.maxDistance = 40;
       const mobile = el.clientWidth < 768;
-      const normalDistance = mobile
+      const landscape = el.clientWidth > el.clientHeight && el.clientHeight <= 600;
+      const frame = landscape ? landscapeFrame() : undefined;
+      const frameHeight = frame ? Math.max(40, frame.bottom - frame.top) : 0;
+      const frameWidth = frame ? Math.max(150, frame.right - frame.left) : 0;
+      const normalDistance = frame
+        ? (Math.max(1.8 * el.clientHeight / frameHeight, 1.25 * el.clientHeight / frameWidth) /
+            (2 * Math.tan(T.MathUtils.degToRad(camera.fov / 2)))) * 1.1
+        : mobile
         ? Math.max(
             4.5,
             (1.8 * el.clientHeight) /
@@ -361,10 +396,11 @@ export default function AnatomyScene({
               (2 * Math.tan(T.MathUtils.degToRad(camera.fov / 2))),
           )
         : 4;
-      const reservedHeight = mobile ? 350 : 270;
+      const reservedHeight = frame ? el.clientHeight - frameHeight : mobile ? 350 : 270;
       const availableAspect = Math.max(
         0.35,
-        (el.clientWidth - (mobile ? 40 : 340)) / Math.max(160, el.clientHeight - reservedHeight),
+        frame ? frameWidth / frameHeight :
+          (el.clientWidth - (mobile ? 40 : 340)) / Math.max(160, el.clientHeight - reservedHeight),
       );
       const atlasDistance =
         (Math.max(packingHeight, packingWidth / availableAspect) /
@@ -375,10 +411,14 @@ export default function AnatomyScene({
       if (extent > 0.8) view = "front";
       const direction = viewDirection(view);
       const center = new T.Vector3(
-        extent > 0.1 && !mobile ? -packingWidth * 0.12 : 0,
-        extent > 0.1 || mobile ? 0.85 : 0.68,
+        extent > 0.1 && !mobile && !landscape ? -packingWidth * 0.12 : 0,
+        extent > 0.1 || mobile || landscape ? 0.85 : 0.68,
         0,
       );
+      const destinationOffset = frame ? new T.Vector2(
+        el.clientWidth / 2 - (frame.left + frame.right) / 2,
+        el.clientHeight / 2 - (frame.top + frame.bottom) / 2,
+      ) : new T.Vector2();
       const destination = center.clone().addScaledVector(direction, distance);
       controls.autoRotate = false;
       controls.enableDamping = false;
@@ -394,14 +434,15 @@ export default function AnatomyScene({
             camera.view?.enabled ? camera.view.offsetX : 0,
             camera.view?.enabled ? camera.view.offsetY : 0,
           ),
-          destinationOffset: new T.Vector2(),
+          destinationOffset,
           orbit: true,
         };
         dirty = true;
         return;
       }
       cameraTransition = null;
-      camera.clearViewOffset();
+      if (frame) camera.setViewOffset(el.clientWidth, el.clientHeight, destinationOffset.x, destinationOffset.y, el.clientWidth, el.clientHeight);
+      else camera.clearViewOffset();
       controls.target.copy(center);
       camera.position.copy(destination);
       controls.update();
@@ -673,8 +714,7 @@ export default function AnatomyScene({
               top = mobile ? 175 : 110,
               bottom = h - 170;
             if (landscape) {
-              const dock = document.querySelector(".bottom-dock")?.getBoundingClientRect();
-              if (dock) bottom = dock.top - sceneRect.top - 16;
+              ({ left, right, top, bottom } = landscapeFrame());
             }
             if (s.inspectorOpen) {
               const sheet = document.querySelector(".detail-sheet")?.getBoundingClientRect();
@@ -954,6 +994,7 @@ export default function AnatomyScene({
       frames.dispose();
       document.removeEventListener("visibilitychange", visibilityChanged);
       wake.current = () => {};
+      changeBackground.current = () => {};
       observer.disconnect();
       renderer.domElement.removeEventListener("wheel", wheel, true);
       controls.dispose();

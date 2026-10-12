@@ -12,7 +12,7 @@ import {
   type ModelId,
 } from "./model-catalogue";
 import { registerAtlasTools } from "./agent-tools";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react";
 import {
   Activity,
   ArrowUpRight,
@@ -41,6 +41,8 @@ import {
   ComboboxEmpty,
 } from "@/components/ui/combobox";
 import AnatomyScene from "./scene";
+import BrightnessControl from "./brightness-control";
+import { backgroundColor, backgroundForeground } from "./background-brightness";
 import SystemLayers from "./system-layers";
 import ViewLibrary from "./view-library";
 import PwaPanel, { pwaLabel } from "./pwa-panel";
@@ -87,8 +89,17 @@ const initial: SceneState = {
   rotationDirection: "clockwise",
 };
 const mobileControlsQuery = "(max-width: 767px), (max-height: 600px) and (orientation: landscape)";
+const landscapeControlsQuery = "(max-height: 600px) and (orientation: landscape)";
 export default function Home() {
   const pwa = usePwa();
+  const [brightness, setBrightness] = useState(0);
+  const [defaultBackground] = useState(() =>
+    getComputedStyle(document.documentElement).getPropertyValue("--background").trim(),
+  );
+  const viewerBackground = useMemo(
+    () => backgroundColor(defaultBackground, brightness),
+    [defaultBackground, brightness],
+  );
   const footerStatus = pwaLabel(pwa);
   const mobileFooterStatus =
     footerStatus === "Update available" || footerStatus === "Install app"
@@ -107,12 +118,21 @@ export default function Home() {
   const savedPanelAnchor = useRef<HTMLDivElement>(null);
   const rotationControls = useRef<HTMLElement>(null);
   const [mobileControls, setMobileControls] = useState(() => window.matchMedia(mobileControlsQuery).matches);
+  const [landscapeControls, setLandscapeControls] = useState(() => window.matchMedia(landscapeControlsQuery).matches);
   useEffect(() => {
     const media = window.matchMedia(mobileControlsQuery);
-    const update = () => setMobileControls(media.matches);
+    const landscape = window.matchMedia(landscapeControlsQuery);
+    const update = () => {
+      setMobileControls(media.matches);
+      setLandscapeControls(landscape.matches);
+    };
     update();
     media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
+    landscape.addEventListener("change", update);
+    return () => {
+      media.removeEventListener("change", update);
+      landscape.removeEventListener("change", update);
+    };
   }, []);
   const rotationAnchor = useMemo(() => ({
     get contextElement() { return rotationControls.current ?? undefined; },
@@ -461,10 +481,14 @@ export default function Home() {
     );
   };
   return (
-    <main className="studio">
+    <main className="studio" style={{
+      "--background": viewerBackground,
+      "--scene-foreground": backgroundForeground(viewerBackground),
+    } as CSSProperties}>
       {atlas && (
         <AnatomyScene
           atlas={atlas}
+          backgroundColor={viewerBackground}
           state={{ ...state, inspectorOpen: details && selectedParts.length > 0 }}
           onSelect={choosePart}
           onProgress={(n) => {
@@ -824,23 +848,34 @@ export default function Home() {
             </div>
             <fieldset className="rotation-options">
               <legend>Direction</legend>
-              {(["clockwise", "counterclockwise"] as const).map((direction) => (
-                <label key={direction}>
-                  <input
-                    type="radio"
-                    name="rotation-direction"
-                    value={direction}
-                    checked={(state.rotationDirection ?? "clockwise") === direction}
-                    onChange={() =>
-                      setState((current) => ({ ...current, rotationDirection: direction }))
-                    }
-                  />
-                  {direction === "clockwise" ? "Clockwise" : "Counterclockwise"}
-                </label>
-              ))}
+              <div className="rotation-direction-toggle">
+                {(["clockwise", "counterclockwise"] as const).map((direction) => (
+                  <label className="model-option" key={direction}>
+                    <input
+                      className="sr-only"
+                      type="radio"
+                      name="rotation-direction"
+                      value={direction}
+                      checked={(state.rotationDirection ?? "clockwise") === direction}
+                      onChange={() =>
+                        setState((current) => ({ ...current, rotationDirection: direction }))
+                      }
+                    />
+                    <span className="model-option-label">
+                      {direction === "clockwise" ? "Clockwise" : "Counterclockwise"}
+                    </span>
+                  </label>
+                ))}
+              </div>
             </fieldset>
           </PopoverContent>
         </Popover>
+        <BrightnessControl
+          value={brightness}
+          onChange={setBrightness}
+          horizontal={mobileControls && !landscapeControls}
+          anchor={rotationControls}
+        />
         <Button variant="ghost" aria-label="Reset view and layers" title="Reset" onClick={reset}>
           <RotateCcw size={17} />
         </Button>
