@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "atlas-female.json",
-      "bytes": 1613831,
-      "sha256": "fa7c40f156d68bedc2f1dd0711906ec1565d93e062410579e6a115b68f364015"
+      "bytes": 1750645,
+      "sha256": "82e8c2ea3bc480b6afe335c50af553ea54a3468ce285a09a1353b677ed488b4c"
     },
     {
       "path": "female-fit-report.json",
@@ -1186,5 +1186,13 @@
         "url": "https://www.ncbi.nlm.nih.gov/mesh/68010210"
       }
     }
+  },
+  "neuralSupplement": {
+    "source": "Z-Anatomy",
+    "license": "CC-BY-SA-4.0",
+    "revision": "6c7f9016bd5899ac8edafd31b9900c151df42ed6",
+    "provenance": "z-anatomy-source.json",
+    "parts": 210,
+    "adaptation": "Same estimated non-breast body morph; no female-specific nerve validation"
   }
 }

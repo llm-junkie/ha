@@ -23,7 +23,7 @@ export function createAnatomyMaterial(
     roughness: 0.53,
     side: T.DoubleSide,
     transparent: system === "integumentary",
-    opacity: system === "integumentary" ? 0.1 : 1,
+    opacity: system === "integumentary" ? 0.2 : 1,
     depthWrite: system !== "integumentary",
   });
   m.onBeforeCompile = (shader) => {

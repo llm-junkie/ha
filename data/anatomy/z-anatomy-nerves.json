@@ -1,0 +1,4257 @@
+{
+  "schemaVersion": 1,
+  "repository": "https://github.com/LluisV/Z-Anatomy",
+  "revision": "6c7f9016bd5899ac8edafd31b9900c151df42ed6",
+  "license": "CC-BY-SA-4.0",
+  "files": [
+    {
+      "name": "NervousSystem100.fbx",
+      "path": "Resources/Models/FBX/NervousSystem100.fbx",
+      "bytes": 53887724,
+      "sha256": "3ea1aad64956cad27348a27b8fb50494b7cc307c6bc77bee0810ec2a67dff2b1"
+    },
+    {
+      "name": "SkeletalSystem100.fbx",
+      "path": "Resources/Models/FBX/SkeletalSystem100.fbx",
+      "bytes": 41339660,
+      "sha256": "294a649765cd060a62a4095da52b9c8ef2d97769aa447e196448aa5f7d596dea"
+    },
+    {
+      "name": "License.txt",
+      "path": "Resources/Models/License.txt",
+      "bytes": 1514,
+      "sha256": "af62c06f620b9da20138e4c22a3f56565482dd058266540994ace97a4e24b693"
+    }
+  ],
+  "registration": {
+    "rotation": [
+      [
+        0.9999961214996399,
+        0.00024929935447709386,
+        -0.002773956652539131
+      ],
+      [
+        -0.00022139014356685265,
+        0.9999494034087094,
+        0.010056918462991251
+      ],
+      [
+        0.0027763234830689766,
+        -0.010056265330567804,
+        0.9999455802970072
+      ]
+    ],
+    "offset": [
+      -0.0007451292218998909,
+      0.012524041372665495,
+      0.010701682979446757
+    ],
+    "landmarks": [
+      {
+        "id": "FJ3152",
+        "sourceName": "Hip bone.r",
+        "usedForFit": true,
+        "medianMm": 10.741473796606012,
+        "p95Mm": 24.48612993350092,
+        "maxMm": 26.970628867580146
+      },
+      {
+        "id": "FJ3154",
+        "sourceName": "Vertebra T10",
+        "usedForFit": true,
+        "medianMm": 2.4134203876411497,
+        "p95Mm": 4.700819703482229,
+        "maxMm": 6.722467998975814
+      },
+      {
+        "id": "FJ3155",
+        "sourceName": "Vertebra T11",
+        "usedForFit": true,
+        "medianMm": 1.5519236644820356,
+        "p95Mm": 3.030818763923532,
+        "maxMm": 6.143202880132092
+      },
+      {
+        "id": "FJ3156",
+        "sourceName": "Vertebra T12",
+        "usedForFit": true,
+        "medianMm": 2.121763262481427,
+        "p95Mm": 3.5718840074220153,
+        "maxMm": 4.472766060381551
+      },
+      {
+        "id": "FJ3157",
+        "sourceName": "Vertebra L1",
+        "usedForFit": true,
+        "medianMm": 3.281107647606321,
+        "p95Mm": 6.316574175828966,
+        "maxMm": 9.145064971937156
+      },
+      {
+        "id": "FJ3158",
+        "sourceName": "Vertebra T1",
+        "usedForFit": true,
+        "medianMm": 5.494762102205877,
+        "p95Mm": 10.668962861458143,
+        "maxMm": 12.664725221988098
+      },
+      {
+        "id": "FJ3159",
+        "sourceName": "Vertebra L2",
+        "usedForFit": true,
+        "medianMm": 4.046261516681528,
+        "p95Mm": 8.031000095226775,
+        "maxMm": 10.762756633517187
+      },
+      {
+        "id": "FJ3160",
+        "sourceName": "Vertebra T2",
+        "usedForFit": true,
+        "medianMm": 6.812426669048153,
+        "p95Mm": 11.424351733438918,
+        "maxMm": 12.032765873819587
+      },
+      {
+        "id": "FJ3161",
+        "sourceName": "Vertebra C3",
+        "usedForFit": true,
+        "medianMm": 5.515467990202281,
+        "p95Mm": 10.162961575132073,
+        "maxMm": 11.47748330509689
+      },
+      {
+        "id": "FJ3162",
+        "sourceName": "Vertebra L3",
+        "usedForFit": true,
+        "medianMm": 5.085218822951381,
+        "p95Mm": 13.542141005630166,
+        "maxMm": 16.169865922286725
+      },
+      {
+        "id": "FJ3163",
+        "sourceName": "Vertebra T3",
+        "usedForFit": true,
+        "medianMm": 5.994391871317148,
+        "p95Mm": 11.891569893538238,
+        "maxMm": 13.868575257625952
+      },
+      {
+        "id": "FJ3164",
+        "sourceName": "Vertebra C4",
+        "usedForFit": true,
+        "medianMm": 5.5773569708153925,
+        "p95Mm": 9.505985885494052,
+        "maxMm": 10.653225794796214
+      },
+      {
+        "id": "FJ3165",
+        "sourceName": "Vertebra L4",
+        "usedForFit": true,
+        "medianMm": 8.04382432387964,
+        "p95Mm": 17.47165415948621,
+        "maxMm": 20.98124744681105
+      },
+      {
+        "id": "FJ3166",
+        "sourceName": "Vertebra T4",
+        "usedForFit": true,
+        "medianMm": 4.575642070273289,
+        "p95Mm": 10.731511123302267,
+        "maxMm": 12.4727853152351
+      },
+      {
+        "id": "FJ3167",
+        "sourceName": "Vertebra C5",
+        "usedForFit": true,
+        "medianMm": 3.3297053333877793,
+        "p95Mm": 7.753618679561632,
+        "maxMm": 8.976574453622643
+      },
+      {
+        "id": "FJ3168",
+        "sourceName": "Vertebra L5",
+        "usedForFit": true,
+        "medianMm": 6.05776042955726,
+        "p95Mm": 17.67112478578267,
+        "maxMm": 19.81610780669315
+      },
+      {
+        "id": "FJ3169",
+        "sourceName": "Vertebra T5",
+        "usedForFit": true,
+        "medianMm": 4.067896199747777,
+        "p95Mm": 10.26680295801512,
+        "maxMm": 11.706603773594765
+      },
+      {
+        "id": "FJ3170",
+        "sourceName": "Vertebra C6",
+        "usedForFit": true,
+        "medianMm": 3.6085483840702475,
+        "p95Mm": 7.496894992153006,
+        "maxMm": 9.077614824285721
+      },
+      {
+        "id": "FJ3171",
+        "sourceName": "Vertebra T6",
+        "usedForFit": true,
+        "medianMm": 4.153738651497678,
+        "p95Mm": 9.714193102736603,
+        "maxMm": 11.397128503872297
+      },
+      {
+        "id": "FJ3172",
+        "sourceName": "Vertebra C7",
+        "usedForFit": true,
+        "medianMm": 3.8311673831443973,
+        "p95Mm": 8.522770811192052,
+        "maxMm": 9.598648425802999
+      },
+      {
+        "id": "FJ3173",
+        "sourceName": "Vertebra T7",
+        "usedForFit": true,
+        "medianMm": 3.4582919701968824,
+        "p95Mm": 8.510813583536802,
+        "maxMm": 9.33458601513035
+      },
+      {
+        "id": "FJ3174",
+        "sourceName": "Vertebra T8",
+        "usedForFit": true,
+        "medianMm": 3.065053682863273,
+        "p95Mm": 7.681008153339206,
+        "maxMm": 9.075285243922655
+      },
+      {
+        "id": "FJ3175",
+        "sourceName": "Vertebra T9",
+        "usedForFit": true,
+        "medianMm": 3.171795229304467,
+        "p95Mm": 6.062629096558083,
+        "maxMm": 8.391068446383892
+      },
+      {
+        "id": "FJ3176",
+        "sourceName": "Atlas (C1)",
+        "usedForFit": true,
+        "medianMm": 5.761238141458367,
+        "p95Mm": 10.923558523294208,
+        "maxMm": 11.87549067100572
+      },
+      {
+        "id": "FJ3177",
+        "sourceName": "Axis (C2)",
+        "usedForFit": true,
+        "medianMm": 4.419741005364212,
+        "p95Mm": 12.02292836497956,
+        "maxMm": 13.968930430178142
+      },
+      {
+        "id": "FJ3237",
+        "sourceName": "Clavicle.l",
+        "usedForFit": true,
+        "medianMm": 5.616297898376744,
+        "p95Mm": 13.567888713905267,
+        "maxMm": 17.213522426046534
+      },
+      {
+        "id": "FJ3256",
+        "sourceName": "Calcaneus.l",
+        "usedForFit": false,
+        "medianMm": 10.254847139834977,
+        "p95Mm": 16.816644405223283,
+        "maxMm": 20.66360796754211
+      },
+      {
+        "id": "FJ3259",
+        "sourceName": "Femur.l",
+        "usedForFit": true,
+        "medianMm": 7.637077365169319,
+        "p95Mm": 18.921201111546246,
+        "maxMm": 26.170022148087803
+      },
+      {
+        "id": "FJ3260",
+        "sourceName": "Fibula.l",
+        "usedForFit": true,
+        "medianMm": 6.170684097613863,
+        "p95Mm": 10.702687773248424,
+        "maxMm": 15.89780681592744
+      },
+      {
+        "id": "FJ3262",
+        "sourceName": "Humerus.l",
+        "usedForFit": true,
+        "medianMm": 6.226148995796448,
+        "p95Mm": 10.550012769463866,
+        "maxMm": 16.678734583932076
+      },
+      {
+        "id": "FJ3277",
+        "sourceName": "Radius.l",
+        "usedForFit": true,
+        "medianMm": 7.943685099103294,
+        "p95Mm": 14.837888073080755,
+        "maxMm": 17.562208873788606
+      },
+      {
+        "id": "FJ3279",
+        "sourceName": "Scapula.l",
+        "usedForFit": false,
+        "medianMm": 5.541515644719398,
+        "p95Mm": 12.239181898095636,
+        "maxMm": 15.26058830023813
+      },
+      {
+        "id": "FJ3280",
+        "sourceName": "Talus.l",
+        "usedForFit": false,
+        "medianMm": 8.159779865523694,
+        "p95Mm": 15.669816762978783,
+        "maxMm": 17.42276878050413
+      },
+      {
+        "id": "FJ3282",
+        "sourceName": "Tibia.l",
+        "usedForFit": true,
+        "medianMm": 7.447704428839063,
+        "p95Mm": 13.775632066250644,
+        "maxMm": 30.1323263907731
+      },
+      {
+        "id": "FJ3286",
+        "sourceName": "Ulna.l",
+        "usedForFit": true,
+        "medianMm": 5.795481190724983,
+        "p95Mm": 14.680530709130771,
+        "maxMm": 17.300826854383267
+      },
+      {
+        "id": "FJ3288",
+        "sourceName": "Hip bone.l",
+        "usedForFit": true,
+        "medianMm": 11.129970560798025,
+        "p95Mm": 25.17941033995303,
+        "maxMm": 26.86883017618201
+      },
+      {
+        "id": "FJ3349",
+        "sourceName": "Radius.r",
+        "usedForFit": true,
+        "medianMm": 8.256172764800542,
+        "p95Mm": 14.9645021020194,
+        "maxMm": 17.81493392690537
+      },
+      {
+        "id": "FJ3360",
+        "sourceName": "Calcaneus.r",
+        "usedForFit": false,
+        "medianMm": 10.312840299511796,
+        "p95Mm": 16.693968242396714,
+        "maxMm": 21.50301605727444
+      },
+      {
+        "id": "FJ3362",
+        "sourceName": "Clavicle.r",
+        "usedForFit": true,
+        "medianMm": 5.688148532548709,
+        "p95Mm": 14.018252809119424,
+        "maxMm": 17.06458056691258
+      },
+      {
+        "id": "FJ3365",
+        "sourceName": "Femur.r",
+        "usedForFit": true,
+        "medianMm": 7.637862589909912,
+        "p95Mm": 19.507975254680865,
+        "maxMm": 26.319359188390923
+      },
+      {
+        "id": "FJ3366",
+        "sourceName": "Fibula.r",
+        "usedForFit": true,
+        "medianMm": 6.347905581800101,
+        "p95Mm": 11.209790036893246,
+        "maxMm": 17.063281321689637
+      },
+      {
+        "id": "FJ3368",
+        "sourceName": "Humerus.r",
+        "usedForFit": true,
+        "medianMm": 6.772529056134079,
+        "p95Mm": 11.706025406539512,
+        "maxMm": 13.939014272271244
+      },
+      {
+        "id": "FJ3384",
+        "sourceName": "Scapula.r",
+        "usedForFit": false,
+        "medianMm": 6.467081834243582,
+        "p95Mm": 13.128592067221591,
+        "maxMm": 15.314033460697354
+      },
+      {
+        "id": "FJ3385",
+        "sourceName": "Talus.r",
+        "usedForFit": false,
+        "medianMm": 8.393392227592567,
+        "p95Mm": 15.235105890358602,
+        "maxMm": 17.924924273036286
+      },
+      {
+        "id": "FJ3387",
+        "sourceName": "Tibia.r",
+        "usedForFit": true,
+        "medianMm": 7.547170412341873,
+        "p95Mm": 13.790410566505601,
+        "maxMm": 21.356354611901587
+      },
+      {
+        "id": "FJ3391",
+        "sourceName": "Ulna.r",
+        "usedForFit": true,
+        "medianMm": 5.630711771065792,
+        "p95Mm": 14.84309762308059,
+        "maxMm": 17.440131732779808
+      },
+      {
+        "id": "FJ3393",
+        "sourceName": "Sacrum",
+        "usedForFit": true,
+        "medianMm": 7.906839244297452,
+        "p95Mm": 20.14514498070243,
+        "maxMm": 22.532714307529037
+      }
+    ],
+    "distalRegions": [
+      {
+        "region": "left-foot",
+        "rotation": [
+          [
+            0.9710883914978045,
+            -0.002290087330168105,
+            0.23870921934065967
+          ],
+          [
+            0.003750329087523315,
+            0.9999769311312475,
+            -0.005663235565346402
+          ],
+          [
+            -0.2386907432849927,
+            0.006394740444578662,
+            0.9710745781682809
+          ]
+        ],
+        "offset": [
+          0.005804903093963171,
+          -0.01568689655877222,
+          0.01792442100550605
+        ],
+        "landmarks": [
+          {
+            "id": "FJ3241",
+            "name": "Left first metatarsal bone",
+            "sourceName": "First metatarsal bone.l",
+            "sourceNodeId": 446254346,
+            "usedForFit": true,
+            "beforeP95Mm": 27.208391828857803,
+            "p95Mm": 2.662450789355406,
+            "medianMm": 1.2155395894438312,
+            "maxMm": 5.161036789657089
+          },
+          {
+            "id": "FJ3329",
+            "name": "Proximal phalanx of left big toe",
+            "sourceName": "Proximal phalanx of first finger of foot.l",
+            "sourceNodeId": 829496625,
+            "usedForFit": true,
+            "beforeP95Mm": 33.892773662233616,
+            "p95Mm": 3.089913726947513,
+            "medianMm": 1.7946922385918118,
+            "maxMm": 3.6562389639783692
+          },
+          {
+            "id": "FJ3182",
+            "name": "Distal phalanx of left big toe",
+            "sourceName": "Distal phalanx of first finger of foot.l",
+            "sourceNodeId": 970881426,
+            "usedForFit": false,
+            "beforeP95Mm": 36.45459022485097,
+            "p95Mm": 3.6395123869193178,
+            "medianMm": 1.99576191638685,
+            "maxMm": 4.129497821613201
+          },
+          {
+            "id": "FJ3244",
+            "name": "Left second metatarsal bone",
+            "sourceName": "Second metatarsal bone.l",
+            "sourceNodeId": 81705159,
+            "usedForFit": true,
+            "beforeP95Mm": 26.671809753613445,
+            "p95Mm": 2.4457752036408396,
+            "medianMm": 0.9282843413711818,
+            "maxMm": 4.481307201424075
+          },
+          {
+            "id": "FJ3328",
+            "name": "Proximal phalanx of left second toe",
+            "sourceName": "Proximal phalanx of second finger of foot.l",
+            "sourceNodeId": 438352460,
+            "usedForFit": true,
+            "beforeP95Mm": 36.19659425020314,
+            "p95Mm": 3.165846876262818,
+            "medianMm": 1.6352864982494415,
+            "maxMm": 4.08292036474844
+          },
+          {
+            "id": "FJ3293",
+            "name": "Middle phalanx of left second toe",
+            "sourceName": "Middle phalanx of second finger of foot.l",
+            "sourceNodeId": 950364084,
+            "usedForFit": false,
+            "beforeP95Mm": 38.40275900255239,
+            "p95Mm": 3.629699510852514,
+            "medianMm": 1.7491340011946457,
+            "maxMm": 3.8231765942785803
+          },
+          {
+            "id": "FJ3179",
+            "name": "Distal phalanx of left second toe",
+            "sourceName": "Distal phalanx of second finger of foot.l",
+            "sourceNodeId": 613801642,
+            "usedForFit": false,
+            "beforeP95Mm": 40.19546435516086,
+            "p95Mm": 3.535206977058764,
+            "medianMm": 1.3338990886699804,
+            "maxMm": 3.9725622294137213
+          },
+          {
+            "id": "FJ3247",
+            "name": "Left third metatarsal bone",
+            "sourceName": "Third metatarsal bone.l",
+            "sourceNodeId": 250709320,
+            "usedForFit": true,
+            "beforeP95Mm": 28.352765056590933,
+            "p95Mm": 2.7195014284642776,
+            "medianMm": 1.230539258123215,
+            "maxMm": 3.480334217087418
+          },
+          {
+            "id": "FJ3311",
+            "name": "Proximal phalanx of left third toe",
+            "sourceName": "Proximal phalanx of third finger of foot.l",
+            "sourceNodeId": 1871867,
+            "usedForFit": true,
+            "beforeP95Mm": 34.532831828503944,
+            "p95Mm": 2.9515162136708972,
+            "medianMm": 1.308765132257022,
+            "maxMm": 3.4562171784570714
+          },
+          {
+            "id": "FJ3294",
+            "name": "Middle phalanx of left third toe",
+            "sourceName": "Middle phalanx of third finger of foot.l",
+            "sourceNodeId": 242571427,
+            "usedForFit": false,
+            "beforeP95Mm": 38.657394004743054,
+            "p95Mm": 3.3360831219640805,
+            "medianMm": 1.4495674621321486,
+            "maxMm": 3.973129138070298
+          },
+          {
+            "id": "FJ3180",
+            "name": "Distal phalanx of left third toe",
+            "sourceName": "Distal phalanx of third finger of foot.l",
+            "sourceNodeId": 773643514,
+            "usedForFit": false,
+            "beforeP95Mm": 39.6636365307994,
+            "p95Mm": 3.542165993553327,
+            "medianMm": 1.49134355624418,
+            "maxMm": 3.8760029100658646
+          },
+          {
+            "id": "FJ3250",
+            "name": "Left fourth metatarsal bone",
+            "sourceName": "Fourth metatarsal bone.l",
+            "sourceNodeId": 58098625,
+            "usedForFit": true,
+            "beforeP95Mm": 28.316999547468395,
+            "p95Mm": 2.6979258816022837,
+            "medianMm": 1.0045785363816426,
+            "maxMm": 6.508301164787943
+          },
+          {
+            "id": "FJ3312",
+            "name": "Proximal phalanx of left fourth toe",
+            "sourceName": "Proximal phalanx of fourth finger of foot.l",
+            "sourceNodeId": 181233885,
+            "usedForFit": true,
+            "beforeP95Mm": 33.326038197238454,
+            "p95Mm": 2.7061214793469697,
+            "medianMm": 1.4563121089729927,
+            "maxMm": 3.2638517419078426
+          },
+          {
+            "id": "FJ3295",
+            "name": "Middle phalanx of left fourth toe",
+            "sourceName": "Middle phalanx of fourth finger of foot.l",
+            "sourceNodeId": 987337631,
+            "usedForFit": false,
+            "beforeP95Mm": 36.19556478479198,
+            "p95Mm": 3.086856865285907,
+            "medianMm": 1.5362829921647143,
+            "maxMm": 3.484375844933108
+          },
+          {
+            "id": "FJ3181",
+            "name": "Distal phalanx of left fourth toe",
+            "sourceName": "Distal phalanx of fourth finger of foot.l",
+            "sourceNodeId": 600546342,
+            "usedForFit": false,
+            "beforeP95Mm": 36.92627599718764,
+            "p95Mm": 3.3057758637534373,
+            "medianMm": 1.4913227488121754,
+            "maxMm": 3.531568570904171
+          },
+          {
+            "id": "FJ3253",
+            "name": "Left fifth metatarsal bone",
+            "sourceName": "Fifth metatarsal bone.l",
+            "sourceNodeId": 977966008,
+            "usedForFit": true,
+            "beforeP95Mm": 25.87400072565211,
+            "p95Mm": 2.700304452691267,
+            "medianMm": 1.193674382768862,
+            "maxMm": 4.476034897412859
+          },
+          {
+            "id": "FJ3315",
+            "name": "Proximal phalanx of left little toe",
+            "sourceName": "Proximal phalanx of fifth finger of foot.l",
+            "sourceNodeId": 499190093,
+            "usedForFit": true,
+            "beforeP95Mm": 31.934754393117,
+            "p95Mm": 2.6519119532851354,
+            "medianMm": 1.5420420761126516,
+            "maxMm": 3.4382139323550502
+          },
+          {
+            "id": "FJ3298",
+            "name": "Middle phalanx of left little toe",
+            "sourceName": "Middle phalanx of fifth finger of foot.l",
+            "sourceNodeId": 453951090,
+            "usedForFit": false,
+            "beforeP95Mm": 32.86180712192391,
+            "p95Mm": 2.760350478815856,
+            "medianMm": 1.0328724697411293,
+            "maxMm": 3.0507298012094477
+          },
+          {
+            "id": "FJ3185",
+            "name": "Distal phalanx of left little toe",
+            "sourceName": "Distal phalanx of fifth finger of foot.l",
+            "sourceNodeId": 542880636,
+            "usedForFit": false,
+            "beforeP95Mm": 35.66364656567111,
+            "p95Mm": 2.916056448024111,
+            "medianMm": 1.4078520485011112,
+            "maxMm": 3.2217505737842167
+          },
+          {
+            "id": "FJ3280",
+            "name": "Left talus",
+            "sourceName": "Talus.l",
+            "sourceNodeId": 842550418,
+            "usedForFit": true,
+            "beforeP95Mm": 15.669816762978783,
+            "p95Mm": 3.5124388049396784,
+            "medianMm": 1.6224812867871035,
+            "maxMm": 5.845729166483383
+          },
+          {
+            "id": "FJ3256",
+            "name": "Left calcaneus",
+            "sourceName": "Calcaneus.l",
+            "sourceNodeId": 381954937,
+            "usedForFit": true,
+            "beforeP95Mm": 16.816644405223283,
+            "p95Mm": 3.96437860197529,
+            "medianMm": 1.7986024877673885,
+            "maxMm": 6.625186890939978
+          },
+          {
+            "id": "FJ3258",
+            "name": "Left cuboid bone",
+            "sourceName": "Cuboid bone.l",
+            "sourceNodeId": 333456041,
+            "usedForFit": true,
+            "beforeP95Mm": 15.728495564329348,
+            "p95Mm": 2.9119547962671715,
+            "medianMm": 1.271921002466061,
+            "maxMm": 4.688455997586703
+          },
+          {
+            "id": "FJ3271",
+            "name": "Left medial cuneiform bone",
+            "sourceName": "Medial cuneiform bone.l",
+            "sourceNodeId": 407607405,
+            "usedForFit": true,
+            "beforeP95Mm": 18.580594360729503,
+            "p95Mm": 2.1770830914205535,
+            "medianMm": 0.9874777810130188,
+            "maxMm": 3.389764802376655
+          },
+          {
+            "id": "FJ3264",
+            "name": "Left intermediate cuneiform bone",
+            "sourceName": "Intermediate cuneiform bone.l",
+            "sourceNodeId": 26043397,
+            "usedForFit": true,
+            "beforeP95Mm": 18.026960585412763,
+            "p95Mm": 1.8089069403281697,
+            "medianMm": 0.8396819159315586,
+            "maxMm": 3.246389731549931
+          },
+          {
+            "id": "FJ3267",
+            "name": "Left lateral cuneiform bone",
+            "sourceName": "Lateral cuneiform bone.l",
+            "sourceNodeId": 86944487,
+            "usedForFit": true,
+            "beforeP95Mm": 16.980971080576293,
+            "p95Mm": 2.1650186888511334,
+            "medianMm": 0.8984387642235184,
+            "maxMm": 3.785717650338704
+          },
+          {
+            "id": "FJ3307",
+            "name": "Navicular bone of left foot",
+            "sourceName": "Navicular bone.l",
+            "sourceNodeId": 897601170,
+            "usedForFit": true,
+            "beforeP95Mm": 16.988843237901005,
+            "p95Mm": 2.49249178429226,
+            "medianMm": 1.1883848945907691,
+            "maxMm": 4.286989419559916
+          }
+        ],
+        "blend": {
+          "side": 1,
+          "height": [
+            0.11,
+            0.28
+          ],
+          "lateral": [
+            -0.065,
+            0.065
+          ]
+        }
+      },
+      {
+        "region": "left-hand",
+        "rotation": [
+          [
+            0.9999998590370616,
+            -0.0005135709330537152,
+            -0.00013479893973433784
+          ],
+          [
+            0.0005125888459314297,
+            0.9999740403505514,
+            -0.007187202353396799
+          ],
+          [
+            0.00013848657861997287,
+            0.007187132243834482,
+            0.9999741626420035
+          ]
+        ],
+        "offset": [
+          -0.007416791937945977,
+          0.015856897941735504,
+          -0.008526167167357095
+        ],
+        "landmarks": [
+          {
+            "id": "FJ3240",
+            "name": "Left first metacarpal bone",
+            "sourceName": "First metacarpal bone.l",
+            "sourceNodeId": 717699664,
+            "usedForFit": true,
+            "beforeP95Mm": 18.025133662412088,
+            "p95Mm": 2.4004000359860447,
+            "medianMm": 1.2854196718064723,
+            "maxMm": 4.456900231366189
+          },
+          {
+            "id": "FJ3318",
+            "name": "Proximal phalanx of left thumb",
+            "sourceName": "Proximal phalanx of first finger of hand.l",
+            "sourceNodeId": 689120827,
+            "usedForFit": true,
+            "beforeP95Mm": 19.56668599202812,
+            "p95Mm": 2.78666167728352,
+            "medianMm": 1.602504814688881,
+            "maxMm": 4.79099730947674
+          },
+          {
+            "id": "FJ3188",
+            "name": "Distal phalanx of left thumb",
+            "sourceName": "Distal phalanx of first finger of hand.l",
+            "sourceNodeId": 563939989,
+            "usedForFit": false,
+            "beforeP95Mm": 19.62291289770219,
+            "p95Mm": 2.958892741446134,
+            "medianMm": 1.804959485113481,
+            "maxMm": 3.547737133580891
+          },
+          {
+            "id": "FJ3243",
+            "name": "Left second metacarpal bone",
+            "sourceName": "Second metacarpal bone.l",
+            "sourceNodeId": 735408004,
+            "usedForFit": true,
+            "beforeP95Mm": 18.062747298697907,
+            "p95Mm": 3.744761436101209,
+            "medianMm": 1.2386459036862991,
+            "maxMm": 6.472569110621457
+          },
+          {
+            "id": "FJ3313",
+            "name": "Proximal phalanx of left index finger",
+            "sourceName": "Proximal phalanx of second finger of hand.l",
+            "sourceNodeId": 108936575,
+            "usedForFit": true,
+            "beforeP95Mm": 20.524331905434043,
+            "p95Mm": 3.3552660000691246,
+            "medianMm": 1.7181870466116471,
+            "maxMm": 3.999535394316637
+          },
+          {
+            "id": "FJ3296",
+            "name": "Middle phalanx of left index finger",
+            "sourceName": "Middle phalanx of second finger of hand.l",
+            "sourceNodeId": 263156430,
+            "usedForFit": false,
+            "beforeP95Mm": 21.3079341270687,
+            "p95Mm": 4.003382886392984,
+            "medianMm": 1.7718490357268575,
+            "maxMm": 4.290502475798476
+          },
+          {
+            "id": "FJ3183",
+            "name": "Distal phalanx of left index finger",
+            "sourceName": "Distal phalanx of second finger of hand.l",
+            "sourceNodeId": 883879154,
+            "usedForFit": false,
+            "beforeP95Mm": 20.5910770651265,
+            "p95Mm": 4.0043568601604,
+            "medianMm": 1.9580708769058333,
+            "maxMm": 4.643593554858208
+          },
+          {
+            "id": "FJ3246",
+            "name": "Left third metacarpal bone",
+            "sourceName": "Third metacarpal bone.l",
+            "sourceNodeId": 330862016,
+            "usedForFit": true,
+            "beforeP95Mm": 17.250221120376107,
+            "p95Mm": 2.5873515250343537,
+            "medianMm": 1.0042245286905465,
+            "maxMm": 3.7906306810497195
+          },
+          {
+            "id": "FJ3316",
+            "name": "Proximal phalanx of left middle finger",
+            "sourceName": "Proximal phalanx of third finger of hand.l",
+            "sourceNodeId": 925238494,
+            "usedForFit": true,
+            "beforeP95Mm": 19.465345351245507,
+            "p95Mm": 3.262363033269033,
+            "medianMm": 1.516101383347879,
+            "maxMm": 3.9665291284014934
+          },
+          {
+            "id": "FJ3299",
+            "name": "Middle phalanx of left middle finger",
+            "sourceName": "Middle phalanx of third finger of hand.l",
+            "sourceNodeId": 423029907,
+            "usedForFit": false,
+            "beforeP95Mm": 20.336446232018798,
+            "p95Mm": 4.053007201903663,
+            "medianMm": 1.9909347049596033,
+            "maxMm": 4.7136115650078
+          },
+          {
+            "id": "FJ3186",
+            "name": "Distal phalanx of left middle finger",
+            "sourceName": "Distal phalanx of third finger of hand.l",
+            "sourceNodeId": 578504447,
+            "usedForFit": false,
+            "beforeP95Mm": 21.159472300159887,
+            "p95Mm": 4.433276571255743,
+            "medianMm": 1.9449007553879154,
+            "maxMm": 5.149324922090996
+          },
+          {
+            "id": "FJ3249",
+            "name": "Left fourth metacarpal bone",
+            "sourceName": "Fourth metacarpal bone.l",
+            "sourceNodeId": 344416368,
+            "usedForFit": true,
+            "beforeP95Mm": 16.62316410290302,
+            "p95Mm": 2.7326996077664907,
+            "medianMm": 1.049193979958834,
+            "maxMm": 3.755957192805352
+          },
+          {
+            "id": "FJ3317",
+            "name": "Proximal phalanx of left ring finger",
+            "sourceName": "Proximal phalanx of fourth finger of hand.l",
+            "sourceNodeId": 823330473,
+            "usedForFit": true,
+            "beforeP95Mm": 19.458422707118547,
+            "p95Mm": 3.204345948366652,
+            "medianMm": 1.5025445148692107,
+            "maxMm": 4.5197859854636775
+          },
+          {
+            "id": "FJ3291",
+            "name": "Middle phalanx of left ring finger",
+            "sourceName": "Middle phalanx of fourth finger of hand.l",
+            "sourceNodeId": 463566005,
+            "usedForFit": false,
+            "beforeP95Mm": 20.271510973393873,
+            "p95Mm": 3.9016722821137004,
+            "medianMm": 1.8135646790563313,
+            "maxMm": 4.977707330439797
+          },
+          {
+            "id": "FJ3187",
+            "name": "Distal phalanx of left ring finger",
+            "sourceName": "Distal phalanx of fourth finger of hand.l",
+            "sourceNodeId": 193346643,
+            "usedForFit": false,
+            "beforeP95Mm": 20.436183901438476,
+            "p95Mm": 3.765716097869248,
+            "medianMm": 1.9157872897335562,
+            "maxMm": 4.271071749382137
+          },
+          {
+            "id": "FJ3252",
+            "name": "Left fifth metacarpal bone",
+            "sourceName": "Fifth metacarpal bone.l",
+            "sourceNodeId": 153338246,
+            "usedForFit": true,
+            "beforeP95Mm": 17.947972237500192,
+            "p95Mm": 2.121683593140874,
+            "medianMm": 1.0591688119712188,
+            "maxMm": 3.8521461259799943
+          },
+          {
+            "id": "FJ3314",
+            "name": "Proximal phalanx of left little finger",
+            "sourceName": "Proximal phalanx of fifth finger of hand.l",
+            "sourceNodeId": 733611733,
+            "usedForFit": true,
+            "beforeP95Mm": 18.45314826532006,
+            "p95Mm": 3.6304513907649176,
+            "medianMm": 1.9027479682548174,
+            "maxMm": 4.704447914521359
+          },
+          {
+            "id": "FJ3297",
+            "name": "Middle phalanx of left little finger",
+            "sourceName": "Middle phalanx of fifth finger of hand.l",
+            "sourceNodeId": 927271560,
+            "usedForFit": false,
+            "beforeP95Mm": 18.550602710767294,
+            "p95Mm": 3.3347453094886186,
+            "medianMm": 1.6821771894184763,
+            "maxMm": 3.989868397777487
+          },
+          {
+            "id": "FJ3184",
+            "name": "Distal phalanx of left little finger",
+            "sourceName": "Distal phalanx of fifth finger of hand.l",
+            "sourceNodeId": 116297543,
+            "usedForFit": false,
+            "beforeP95Mm": 19.950702811080287,
+            "p95Mm": 3.5623837115299297,
+            "medianMm": 1.9506230627893462,
+            "maxMm": 4.223209498259049
+          },
+          {
+            "id": "FJ3278",
+            "name": "Left scaphoid",
+            "sourceName": "Scaphoid bone.l",
+            "sourceNodeId": 161940833,
+            "usedForFit": true,
+            "beforeP95Mm": 16.60306187340133,
+            "p95Mm": 2.3361849277798803,
+            "medianMm": 1.1755336290863405,
+            "maxMm": 2.9513771564586624
+          },
+          {
+            "id": "FJ3268",
+            "name": "Left lunate",
+            "sourceName": "Lunate bone.l",
+            "sourceNodeId": 545245167,
+            "usedForFit": true,
+            "beforeP95Mm": 16.718665346058238,
+            "p95Mm": 2.621462536349259,
+            "medianMm": 1.2525268591880083,
+            "maxMm": 3.5582968291577863
+          },
+          {
+            "id": "FJ3285",
+            "name": "Left triquetral",
+            "sourceName": "Triquetrum bone.l",
+            "sourceNodeId": 767933224,
+            "usedForFit": true,
+            "beforeP95Mm": 16.756202852322808,
+            "p95Mm": 1.5201167031440443,
+            "medianMm": 0.9452309490278022,
+            "maxMm": 1.7908582406153861
+          },
+          {
+            "id": "FJ3276",
+            "name": "Left pisiform",
+            "sourceName": "Pisiform bone.l",
+            "sourceNodeId": 727291060,
+            "usedForFit": true,
+            "beforeP95Mm": 16.524952483327326,
+            "p95Mm": 1.6321593300120418,
+            "medianMm": 0.8878799547252528,
+            "maxMm": 2.0022725036688938
+          },
+          {
+            "id": "FJ3283",
+            "name": "Left trapezium",
+            "sourceName": "Trapezium bone.l",
+            "sourceNodeId": 267107480,
+            "usedForFit": true,
+            "beforeP95Mm": 16.555550778200296,
+            "p95Mm": 2.0987358759984147,
+            "medianMm": 0.9650677276351171,
+            "maxMm": 2.914879960443008
+          },
+          {
+            "id": "FJ3284",
+            "name": "Left trapezoid",
+            "sourceName": "Trapezoid bone.l",
+            "sourceNodeId": 513858077,
+            "usedForFit": true,
+            "beforeP95Mm": 17.39008169464678,
+            "p95Mm": 1.3197635981605627,
+            "medianMm": 0.6381109591174696,
+            "maxMm": 2.6894112295162396
+          },
+          {
+            "id": "FJ3257",
+            "name": "Left capitate",
+            "sourceName": "Capitate bone.l",
+            "sourceNodeId": 455624067,
+            "usedForFit": true,
+            "beforeP95Mm": 17.26024870834275,
+            "p95Mm": 3.474429819574577,
+            "medianMm": 0.9611842836918871,
+            "maxMm": 4.645214607243603
+          },
+          {
+            "id": "FJ3261",
+            "name": "Left hamate",
+            "sourceName": "Hamate bone.l",
+            "sourceNodeId": 578047441,
+            "usedForFit": true,
+            "beforeP95Mm": 17.094549243563613,
+            "p95Mm": 1.9237183221055578,
+            "medianMm": 0.7988431467157648,
+            "maxMm": 3.083009515848602
+          }
+        ],
+        "blend": {
+          "side": 1,
+          "height": [
+            0.88,
+            1.06
+          ],
+          "lateral": [
+            0.16,
+            0.21
+          ],
+          "lowerHeight": [
+            0.6,
+            0.68
+          ]
+        }
+      },
+      {
+        "region": "right-foot",
+        "rotation": [
+          [
+            0.972868812544193,
+            0.0030887688167320934,
+            -0.2313368390162891
+          ],
+          [
+            -0.004815590598277791,
+            0.9999645977988048,
+            -0.006900234507899761
+          ],
+          [
+            0.23130733595379394,
+            0.007827046458979131,
+            0.9728492450928293
+          ]
+        ],
+        "offset": [
+          -0.004557968886364519,
+          -0.015823651831389902,
+          0.018061840784408895
+        ],
+        "landmarks": [
+          {
+            "id": "FJ3351",
+            "name": "Right first metatarsal bone",
+            "sourceName": "First metatarsal bone.r",
+            "sourceNodeId": 71872664,
+            "usedForFit": true,
+            "beforeP95Mm": 25.680937854813095,
+            "p95Mm": 2.426778791067239,
+            "medianMm": 1.1408584325458144,
+            "maxMm": 3.1699698135310195
+          },
+          {
+            "id": "FJ3310",
+            "name": "Proximal phalanx of right big toe",
+            "sourceName": "Proximal phalanx of first finger of foot.r",
+            "sourceNodeId": 292104824,
+            "usedForFit": true,
+            "beforeP95Mm": 32.11029689751732,
+            "p95Mm": 3.1038262751942898,
+            "medianMm": 1.8497193922612953,
+            "maxMm": 3.6397323682940526
+          },
+          {
+            "id": "FJ3192",
+            "name": "Distal phalanx of right big toe",
+            "sourceName": "Distal phalanx of first finger of foot.r",
+            "sourceNodeId": 470392727,
+            "usedForFit": false,
+            "beforeP95Mm": 34.485238199764765,
+            "p95Mm": 3.6260825043925196,
+            "medianMm": 1.9774774337115728,
+            "maxMm": 3.9581888682783353
+          },
+          {
+            "id": "FJ3353",
+            "name": "Right second metatarsal bone",
+            "sourceName": "Second metatarsal bone.r",
+            "sourceNodeId": 825680108,
+            "usedForFit": true,
+            "beforeP95Mm": 25.158915865488336,
+            "p95Mm": 2.1360959815499885,
+            "medianMm": 0.6612752860402832,
+            "maxMm": 3.380598238439423
+          },
+          {
+            "id": "FJ3319",
+            "name": "Proximal phalanx of right second toe",
+            "sourceName": "Proximal phalanx of second finger of foot.r",
+            "sourceNodeId": 981629279,
+            "usedForFit": true,
+            "beforeP95Mm": 34.16487905712402,
+            "p95Mm": 3.1161235301472874,
+            "medianMm": 1.70038122591773,
+            "maxMm": 3.231066211199773
+          },
+          {
+            "id": "FJ3300",
+            "name": "Middle phalanx of right second toe",
+            "sourceName": "Middle phalanx of second finger of foot.r",
+            "sourceNodeId": 922716480,
+            "usedForFit": false,
+            "beforeP95Mm": 36.415690682847504,
+            "p95Mm": 3.564050006213266,
+            "medianMm": 1.7267123752164601,
+            "maxMm": 3.7140242284339027
+          },
+          {
+            "id": "FJ3189",
+            "name": "Distal phalanx of right second toe",
+            "sourceName": "Distal phalanx of second finger of foot.r",
+            "sourceNodeId": 441905918,
+            "usedForFit": false,
+            "beforeP95Mm": 38.12035413311885,
+            "p95Mm": 3.635429264685389,
+            "medianMm": 1.5302273597248148,
+            "maxMm": 4.080532633537763
+          },
+          {
+            "id": "FJ3355",
+            "name": "Right third metatarsal bone",
+            "sourceName": "Third metatarsal bone.r",
+            "sourceNodeId": 126800031,
+            "usedForFit": true,
+            "beforeP95Mm": 26.43069037867023,
+            "p95Mm": 2.820214885085875,
+            "medianMm": 1.0687689066507615,
+            "maxMm": 5.291913190779473
+          },
+          {
+            "id": "FJ3320",
+            "name": "Proximal phalanx of right third toe",
+            "sourceName": "Proximal phalanx of third finger of foot.r",
+            "sourceNodeId": 630288525,
+            "usedForFit": true,
+            "beforeP95Mm": 32.73546526681946,
+            "p95Mm": 3.0114842351099824,
+            "medianMm": 1.3046431810084722,
+            "maxMm": 3.168238945574656
+          },
+          {
+            "id": "FJ3301",
+            "name": "Middle phalanx of right third toe",
+            "sourceName": "Middle phalanx of third finger of foot.r",
+            "sourceNodeId": 357880105,
+            "usedForFit": false,
+            "beforeP95Mm": 36.623986203907776,
+            "p95Mm": 3.435541003770096,
+            "medianMm": 1.4223366079733637,
+            "maxMm": 3.597623937467708
+          },
+          {
+            "id": "FJ3190",
+            "name": "Distal phalanx of right third toe",
+            "sourceName": "Distal phalanx of third finger of foot.r",
+            "sourceNodeId": 225701867,
+            "usedForFit": false,
+            "beforeP95Mm": 37.6960697011631,
+            "p95Mm": 3.665273188305998,
+            "medianMm": 1.8174354790947225,
+            "maxMm": 3.96357473226062
+          },
+          {
+            "id": "FJ3357",
+            "name": "Right fourth metatarsal bone",
+            "sourceName": "Fourth metatarsal bone.r",
+            "sourceNodeId": 482649735,
+            "usedForFit": true,
+            "beforeP95Mm": 26.00930997449636,
+            "p95Mm": 2.250099791918841,
+            "medianMm": 0.8777688271104411,
+            "maxMm": 4.339145821160688
+          },
+          {
+            "id": "FJ3321",
+            "name": "Proximal phalanx of right fourth toe",
+            "sourceName": "Proximal phalanx of fourth finger of foot.r",
+            "sourceNodeId": 953594762,
+            "usedForFit": true,
+            "beforeP95Mm": 31.529994530280135,
+            "p95Mm": 2.858270088652955,
+            "medianMm": 1.2945372231492696,
+            "maxMm": 3.018399840390366
+          },
+          {
+            "id": "FJ3302",
+            "name": "Middle phalanx of right fourth toe",
+            "sourceName": "Middle phalanx of fourth finger of foot.r",
+            "sourceNodeId": 575321222,
+            "usedForFit": false,
+            "beforeP95Mm": 34.23200859702619,
+            "p95Mm": 3.114247991100065,
+            "medianMm": 1.340974100892265,
+            "maxMm": 3.34127848504096
+          },
+          {
+            "id": "FJ3191",
+            "name": "Distal phalanx of right fourth toe",
+            "sourceName": "Distal phalanx of fourth finger of foot.r",
+            "sourceNodeId": 651075231,
+            "usedForFit": false,
+            "beforeP95Mm": 34.976785088009244,
+            "p95Mm": 3.3865998913713415,
+            "medianMm": 1.515868876775214,
+            "maxMm": 3.6250642373019315
+          },
+          {
+            "id": "FJ3359",
+            "name": "Right fifth metatarsal bone",
+            "sourceName": "Fifth metatarsal bone.r",
+            "sourceNodeId": 69651960,
+            "usedForFit": true,
+            "beforeP95Mm": 24.360850408053476,
+            "p95Mm": 2.1855235476067865,
+            "medianMm": 1.1309374564507313,
+            "maxMm": 4.3676933397911695
+          },
+          {
+            "id": "FJ3324",
+            "name": "Proximal phalanx of right little toe",
+            "sourceName": "Proximal phalanx of fifth finger of foot.r",
+            "sourceNodeId": 812296112,
+            "usedForFit": true,
+            "beforeP95Mm": 30.06834245228369,
+            "p95Mm": 2.746568424712799,
+            "medianMm": 1.5556777037987204,
+            "maxMm": 3.333114115517266
+          },
+          {
+            "id": "FJ3305",
+            "name": "Middle phalanx of right little toe",
+            "sourceName": "Middle phalanx of fifth finger of foot.r",
+            "sourceNodeId": 290886934,
+            "usedForFit": false,
+            "beforeP95Mm": 31.25696958011296,
+            "p95Mm": 2.9600034894221423,
+            "medianMm": 1.1764122060475288,
+            "maxMm": 3.1339403693614782
+          },
+          {
+            "id": "FJ3195",
+            "name": "Distal phalanx of right little toe",
+            "sourceName": "Distal phalanx of fifth finger of foot.r",
+            "sourceNodeId": 634302512,
+            "usedForFit": false,
+            "beforeP95Mm": 33.78730477399426,
+            "p95Mm": 3.0158176397853285,
+            "medianMm": 1.53695181688599,
+            "maxMm": 3.3384903240072377
+          },
+          {
+            "id": "FJ3385",
+            "name": "Right talus",
+            "sourceName": "Talus.r",
+            "sourceNodeId": 81077546,
+            "usedForFit": true,
+            "beforeP95Mm": 15.235105890358602,
+            "p95Mm": 2.8765790029802893,
+            "medianMm": 1.4895685512706425,
+            "maxMm": 8.179809929815194
+          },
+          {
+            "id": "FJ3360",
+            "name": "Right calcaneus",
+            "sourceName": "Calcaneus.r",
+            "sourceNodeId": 958396538,
+            "usedForFit": true,
+            "beforeP95Mm": 16.693968242396714,
+            "p95Mm": 3.642638027637504,
+            "medianMm": 1.6762642889504802,
+            "maxMm": 5.410827160728015
+          },
+          {
+            "id": "FJ3364",
+            "name": "Right cuboid bone",
+            "sourceName": "Cuboid bone.r",
+            "sourceNodeId": 444117336,
+            "usedForFit": true,
+            "beforeP95Mm": 15.713617796958466,
+            "p95Mm": 1.7136018281430467,
+            "medianMm": 0.9392448084412062,
+            "maxMm": 3.4479082575855973
+          },
+          {
+            "id": "FJ3377",
+            "name": "Right medial cuneiform bone",
+            "sourceName": "Medial cuneiform bone.r",
+            "sourceNodeId": 734101807,
+            "usedForFit": true,
+            "beforeP95Mm": 17.38284515923213,
+            "p95Mm": 1.6106925051187853,
+            "medianMm": 0.7999179986822971,
+            "maxMm": 2.9703891461236
+          },
+          {
+            "id": "FJ3370",
+            "name": "Right intermediate cuneiform bone",
+            "sourceName": "Intermediate cuneiform bone.r",
+            "sourceNodeId": 314913365,
+            "usedForFit": true,
+            "beforeP95Mm": 17.271103189601703,
+            "p95Mm": 1.081769808875491,
+            "medianMm": 0.6194718243999457,
+            "maxMm": 1.2649230285676938
+          },
+          {
+            "id": "FJ3373",
+            "name": "Right lateral cuneiform bone",
+            "sourceName": "Lateral cuneiform bone.r",
+            "sourceNodeId": 962625739,
+            "usedForFit": true,
+            "beforeP95Mm": 16.32776752492456,
+            "p95Mm": 2.098412350278132,
+            "medianMm": 0.6132720025245222,
+            "maxMm": 3.6417178984721628
+          },
+          {
+            "id": "FJ3308",
+            "name": "Navicular bone of right foot",
+            "sourceName": "Navicular bone.r",
+            "sourceNodeId": 487761000,
+            "usedForFit": true,
+            "beforeP95Mm": 16.28428043867384,
+            "p95Mm": 1.7026316962741217,
+            "medianMm": 0.9796649798849086,
+            "maxMm": 5.682716411095601
+          }
+        ],
+        "blend": {
+          "side": -1,
+          "height": [
+            0.11,
+            0.28
+          ],
+          "lateral": [
+            -0.065,
+            0.065
+          ]
+        }
+      },
+      {
+        "region": "right-hand",
+        "rotation": [
+          [
+            0.9999826500710441,
+            -0.0003133136329578925,
+            0.005882294744288779
+          ],
+          [
+            0.0003555582108091425,
+            0.9999741460535427,
+            -0.007181977641735782
+          ],
+          [
+            -0.005879892452248596,
+            0.007183944533128883,
+            0.9999569079743862
+          ]
+        ],
+        "offset": [
+          0.009155221291367088,
+          0.01592561304176876,
+          -0.008498944870337546
+        ],
+        "landmarks": [
+          {
+            "id": "FJ3350",
+            "name": "Right first metacarpal bone",
+            "sourceName": "First metacarpal bone.r",
+            "sourceNodeId": 416182835,
+            "usedForFit": true,
+            "beforeP95Mm": 18.478725471839322,
+            "p95Mm": 2.1322731059772906,
+            "medianMm": 1.1719169427377534,
+            "maxMm": 3.2706587969356122
+          },
+          {
+            "id": "FJ3327",
+            "name": "Proximal phalanx of right thumb",
+            "sourceName": "Proximal phalanx of first finger of hand.r",
+            "sourceNodeId": 132596225,
+            "usedForFit": true,
+            "beforeP95Mm": 19.69581080100749,
+            "p95Mm": 2.5889584867678375,
+            "medianMm": 1.564001912845145,
+            "maxMm": 2.7135260196409496
+          },
+          {
+            "id": "FJ3198",
+            "name": "Distal phalanx of right thumb",
+            "sourceName": "Distal phalanx of first finger of hand.r",
+            "sourceNodeId": 737843148,
+            "usedForFit": false,
+            "beforeP95Mm": 19.8918799160592,
+            "p95Mm": 3.1821146420221362,
+            "medianMm": 1.7313225236884748,
+            "maxMm": 3.5116656461713585
+          },
+          {
+            "id": "FJ3352",
+            "name": "Right second metacarpal bone",
+            "sourceName": "Second metacarpal bone.r",
+            "sourceNodeId": 341971365,
+            "usedForFit": true,
+            "beforeP95Mm": 18.267579753498712,
+            "p95Mm": 2.3085753554389656,
+            "medianMm": 0.9322618940209235,
+            "maxMm": 5.3634673022101484
+          },
+          {
+            "id": "FJ3322",
+            "name": "Proximal phalanx of right index finger",
+            "sourceName": "Proximal phalanx of second finger of hand.r",
+            "sourceNodeId": 150797896,
+            "usedForFit": true,
+            "beforeP95Mm": 20.756118166394486,
+            "p95Mm": 3.3956837336881716,
+            "medianMm": 1.665061998985666,
+            "maxMm": 3.5340541575294555
+          },
+          {
+            "id": "FJ3303",
+            "name": "Middle phalanx of right index finger",
+            "sourceName": "Middle phalanx of second finger of hand.r",
+            "sourceNodeId": 596666712,
+            "usedForFit": false,
+            "beforeP95Mm": 21.33346551994807,
+            "p95Mm": 3.9654355940991004,
+            "medianMm": 1.9266371387542747,
+            "maxMm": 4.170451268737111
+          },
+          {
+            "id": "FJ3193",
+            "name": "Distal phalanx of right index finger",
+            "sourceName": "Distal phalanx of second finger of hand.r",
+            "sourceNodeId": 820509740,
+            "usedForFit": false,
+            "beforeP95Mm": 20.429093998800415,
+            "p95Mm": 4.079999471219143,
+            "medianMm": 2.333741213760778,
+            "maxMm": 4.591697234719889
+          },
+          {
+            "id": "FJ3354",
+            "name": "Right third metacarpal bone",
+            "sourceName": "Third metacarpal bone.r",
+            "sourceNodeId": 795100603,
+            "usedForFit": true,
+            "beforeP95Mm": 17.37744040456587,
+            "p95Mm": 2.281314549618019,
+            "medianMm": 0.7199190297068421,
+            "maxMm": 5.3165654771117445
+          },
+          {
+            "id": "FJ3325",
+            "name": "Proximal phalanx of right middle finger",
+            "sourceName": "Proximal phalanx of third finger of hand.r",
+            "sourceNodeId": 165068577,
+            "usedForFit": true,
+            "beforeP95Mm": 19.374518373680175,
+            "p95Mm": 3.3648446510063805,
+            "medianMm": 1.4331734554002842,
+            "maxMm": 4.057958180236455
+          },
+          {
+            "id": "FJ3306",
+            "name": "Middle phalanx of right middle finger",
+            "sourceName": "Middle phalanx of third finger of hand.r",
+            "sourceNodeId": 976357831,
+            "usedForFit": false,
+            "beforeP95Mm": 20.365456726205657,
+            "p95Mm": 4.029014905225324,
+            "medianMm": 1.8034728303991696,
+            "maxMm": 4.30913945262134
+          },
+          {
+            "id": "FJ3196",
+            "name": "Distal phalanx of right middle finger",
+            "sourceName": "Distal phalanx of third finger of hand.r",
+            "sourceNodeId": 881053541,
+            "usedForFit": false,
+            "beforeP95Mm": 20.742047283986295,
+            "p95Mm": 4.407617971853024,
+            "medianMm": 2.027160101377781,
+            "maxMm": 4.703749121329628
+          },
+          {
+            "id": "FJ3356",
+            "name": "Right fourth metacarpal bone",
+            "sourceName": "Fourth metacarpal bone.r",
+            "sourceNodeId": 337449242,
+            "usedForFit": true,
+            "beforeP95Mm": 17.45804414931865,
+            "p95Mm": 2.096798505353528,
+            "medianMm": 0.7685157640048945,
+            "maxMm": 4.755314457672356
+          },
+          {
+            "id": "FJ3326",
+            "name": "Proximal phalanx of right ring finger",
+            "sourceName": "Proximal phalanx of fourth finger of hand.r",
+            "sourceNodeId": 510086973,
+            "usedForFit": true,
+            "beforeP95Mm": 19.740392375478088,
+            "p95Mm": 3.0320631885626987,
+            "medianMm": 1.617926655442075,
+            "maxMm": 3.497725900197759
+          },
+          {
+            "id": "FJ3292",
+            "name": "Middle phalanx of right ring finger",
+            "sourceName": "Middle phalanx of fourth finger of hand.r",
+            "sourceNodeId": 166014089,
+            "usedForFit": false,
+            "beforeP95Mm": 20.372298665390193,
+            "p95Mm": 3.882841944221275,
+            "medianMm": 1.804528041175289,
+            "maxMm": 4.385524069774679
+          },
+          {
+            "id": "FJ3197",
+            "name": "Distal phalanx of right ring finger",
+            "sourceName": "Distal phalanx of fourth finger of hand.r",
+            "sourceNodeId": 552924046,
+            "usedForFit": false,
+            "beforeP95Mm": 20.76386437530163,
+            "p95Mm": 4.141532947553613,
+            "medianMm": 1.9914955080310255,
+            "maxMm": 4.398443470847399
+          },
+          {
+            "id": "FJ3358",
+            "name": "Right fifth metacarpal bone",
+            "sourceName": "Fifth metacarpal bone.r",
+            "sourceNodeId": 614544724,
+            "usedForFit": true,
+            "beforeP95Mm": 18.196413382282316,
+            "p95Mm": 2.1009709789028,
+            "medianMm": 0.887376086712663,
+            "maxMm": 4.102389409073048
+          },
+          {
+            "id": "FJ3323",
+            "name": "Proximal phalanx of right little finger",
+            "sourceName": "Proximal phalanx of fifth finger of hand.r",
+            "sourceNodeId": 74747612,
+            "usedForFit": true,
+            "beforeP95Mm": 18.525435391253055,
+            "p95Mm": 2.923879378401043,
+            "medianMm": 1.6770583524832083,
+            "maxMm": 3.7201873792809668
+          },
+          {
+            "id": "FJ3304",
+            "name": "Middle phalanx of right little finger",
+            "sourceName": "Middle phalanx of fifth finger of hand.r",
+            "sourceNodeId": 352352420,
+            "usedForFit": false,
+            "beforeP95Mm": 19.161628734758928,
+            "p95Mm": 3.0555616484421844,
+            "medianMm": 1.5639331097567695,
+            "maxMm": 3.511986471257265
+          },
+          {
+            "id": "FJ3194",
+            "name": "Distal phalanx of right little finger",
+            "sourceName": "Distal phalanx of fifth finger of hand.r",
+            "sourceNodeId": 809204707,
+            "usedForFit": false,
+            "beforeP95Mm": 20.24824535233549,
+            "p95Mm": 3.7088678988875,
+            "medianMm": 2.06409730369871,
+            "maxMm": 4.604824220431827
+          },
+          {
+            "id": "FJ3383",
+            "name": "Right scaphoid",
+            "sourceName": "Scaphoid bone.r",
+            "sourceNodeId": 367424422,
+            "usedForFit": true,
+            "beforeP95Mm": 17.14353477647062,
+            "p95Mm": 1.4097576094739657,
+            "medianMm": 0.9954683198789629,
+            "maxMm": 3.056149749534074
+          },
+          {
+            "id": "FJ3374",
+            "name": "Right lunate",
+            "sourceName": "Lunate bone.r",
+            "sourceNodeId": 351627303,
+            "usedForFit": true,
+            "beforeP95Mm": 17.044200858354582,
+            "p95Mm": 2.16212901506149,
+            "medianMm": 0.8805566424583267,
+            "maxMm": 3.166835296482361
+          },
+          {
+            "id": "FJ3390",
+            "name": "Right triquetral",
+            "sourceName": "Triquetrum bone.r",
+            "sourceNodeId": 356927805,
+            "usedForFit": true,
+            "beforeP95Mm": 17.31753292243247,
+            "p95Mm": 1.3364463991097453,
+            "medianMm": 0.8690155419257551,
+            "maxMm": 2.5563802644103713
+          },
+          {
+            "id": "FJ3382",
+            "name": "Right pisiform",
+            "sourceName": "Pisiform bone.r",
+            "sourceNodeId": 689786370,
+            "usedForFit": true,
+            "beforeP95Mm": 16.99095875528917,
+            "p95Mm": 1.96366779199602,
+            "medianMm": 0.9117855375823891,
+            "maxMm": 3.1631503604600297
+          },
+          {
+            "id": "FJ3388",
+            "name": "Right trapezium",
+            "sourceName": "Trapezium bone.r",
+            "sourceNodeId": 903303769,
+            "usedForFit": true,
+            "beforeP95Mm": 17.22955957652218,
+            "p95Mm": 1.4883448006932092,
+            "medianMm": 0.7804460636647221,
+            "maxMm": 4.263980149398076
+          },
+          {
+            "id": "FJ3389",
+            "name": "Right trapezoid",
+            "sourceName": "Trapezoid bone.r",
+            "sourceNodeId": 878805469,
+            "usedForFit": true,
+            "beforeP95Mm": 17.502096494508283,
+            "p95Mm": 0.8645933605260752,
+            "medianMm": 0.5413971854927541,
+            "maxMm": 2.3277949483312823
+          },
+          {
+            "id": "FJ3361",
+            "name": "Right capitate",
+            "sourceName": "Capitate bone.r",
+            "sourceNodeId": 612730781,
+            "usedForFit": true,
+            "beforeP95Mm": 17.55638434101561,
+            "p95Mm": 1.235869160489278,
+            "medianMm": 0.682098755095421,
+            "maxMm": 2.701119011875769
+          },
+          {
+            "id": "FJ3367",
+            "name": "Right hamate",
+            "sourceName": "Hamate bone.r",
+            "sourceNodeId": 832512231,
+            "usedForFit": true,
+            "beforeP95Mm": 17.11756234616623,
+            "p95Mm": 1.0241845445814792,
+            "medianMm": 0.5798238090701072,
+            "maxMm": 1.810597964345246
+          }
+        ],
+        "blend": {
+          "side": -1,
+          "height": [
+            0.88,
+            1.06
+          ],
+          "lateral": [
+            0.16,
+            0.21
+          ],
+          "lowerHeight": [
+            0.6,
+            0.68
+          ]
+        }
+      }
+    ],
+    "distalMethod": "Four local rigid bone fits, 80 trimmed nearest-vertex iterations; 70 fitting bones and 36 held-out finger/toe bones. C1 spatial blending into wrists/ankles, before the existing female body morph."
+  },
+  "parts": [
+    {
+      "id": "ZA_N701778379",
+      "sourceNodeId": 701778379,
+      "sourceName": "Spinal dura",
+      "name": "Spinal dura",
+      "side": null,
+      "sourceTriangles": 24902,
+      "sourceVertices": 74706,
+      "parent": "Dura.g",
+      "role": "meninges"
+    },
+    {
+      "id": "ZA_N191242368",
+      "sourceNodeId": 191242368,
+      "sourceName": "White matter of spinal cord",
+      "name": "White matter of spinal cord",
+      "side": null,
+      "sourceTriangles": 15554,
+      "sourceVertices": 46662,
+      "parent": "White matter of spinal cord.g",
+      "role": "cord"
+    },
+    {
+      "id": "ZA_N301888098",
+      "sourceNodeId": 301888098,
+      "sourceName": "Posterior horn of spinal cord",
+      "name": "Posterior horn of spinal cord",
+      "side": null,
+      "sourceTriangles": 12928,
+      "sourceVertices": 38784,
+      "parent": "Posterior horn of spinal cord.g",
+      "role": "cord"
+    },
+    {
+      "id": "ZA_N929879093",
+      "sourceNodeId": 929879093,
+      "sourceName": "Lateral intermediate substance",
+      "name": "Lateral intermediate substance",
+      "side": null,
+      "sourceTriangles": 13332,
+      "sourceVertices": 39996,
+      "parent": "Intermediate zone of spinal cord.g",
+      "role": "cord"
+    },
+    {
+      "id": "ZA_N154705191",
+      "sourceNodeId": 154705191,
+      "sourceName": "Anterior horn of spinal cord",
+      "name": "Anterior horn of spinal cord",
+      "side": null,
+      "sourceTriangles": 8888,
+      "sourceVertices": 26664,
+      "parent": "Anterior horn of spinal cord.g",
+      "role": "cord"
+    },
+    {
+      "id": "ZA_N229509708",
+      "sourceNodeId": 229509708,
+      "sourceName": "Spinal ganglion.l",
+      "name": "Left spinal ganglion",
+      "side": "left",
+      "sourceTriangles": 1680,
+      "sourceVertices": 5040,
+      "parent": "Ganglia.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N352741008",
+      "sourceNodeId": 352741008,
+      "sourceName": "Spinal ganglion.r",
+      "name": "Right spinal ganglion",
+      "side": "right",
+      "sourceTriangles": 1680,
+      "sourceVertices": 5040,
+      "parent": "Ganglia.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N57896901",
+      "sourceNodeId": 57896901,
+      "sourceName": "Sympathetic nerves.r",
+      "name": "Right sympathetic nerves",
+      "side": "right",
+      "sourceTriangles": 24480,
+      "sourceVertices": 73440,
+      "parent": "Thoracolumbar part of autonomic division.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N460356588",
+      "sourceNodeId": 460356588,
+      "sourceName": "Sympathetic trunk.l",
+      "name": "Left sympathetic trunk",
+      "side": "left",
+      "sourceTriangles": 25328,
+      "sourceVertices": 75984,
+      "parent": "Thoracolumbar part of autonomic division.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N586537821",
+      "sourceNodeId": 586537821,
+      "sourceName": "Ganglia of sympathetic trunk.l",
+      "name": "Left ganglia of sympathetic trunk",
+      "side": "left",
+      "sourceTriangles": 25344,
+      "sourceVertices": 76032,
+      "parent": "Sympathetic trunk.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N478001266",
+      "sourceNodeId": 478001266,
+      "sourceName": "Sympathetic trunk.r",
+      "name": "Right sympathetic trunk",
+      "side": "right",
+      "sourceTriangles": 25328,
+      "sourceVertices": 75984,
+      "parent": "Thoracolumbar part of autonomic division.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N572192471",
+      "sourceNodeId": 572192471,
+      "sourceName": "Ganglia of sympathetic trunk.r",
+      "name": "Right ganglia of sympathetic trunk",
+      "side": "right",
+      "sourceTriangles": 25344,
+      "sourceVertices": 76032,
+      "parent": "Sympathetic trunk.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N880286237",
+      "sourceNodeId": 880286237,
+      "sourceName": "Sympathetic nerves.l",
+      "name": "Left sympathetic nerves",
+      "side": "left",
+      "sourceTriangles": 24480,
+      "sourceVertices": 73440,
+      "parent": "Thoracolumbar part of autonomic division.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N495043956",
+      "sourceNodeId": 495043956,
+      "sourceName": "Vagus nerve (X).l",
+      "name": "Left vagus nerve (X)",
+      "side": "left",
+      "sourceTriangles": 14536,
+      "sourceVertices": 43608,
+      "parent": "Cranial nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N807336202",
+      "sourceNodeId": 807336202,
+      "sourceName": "Vagus nerve (X).r",
+      "name": "Right vagus nerve (X)",
+      "side": "right",
+      "sourceTriangles": 45920,
+      "sourceVertices": 137760,
+      "parent": "Cranial nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N41491164",
+      "sourceNodeId": 41491164,
+      "sourceName": "Radial nerve.r",
+      "name": "Right radial nerve",
+      "side": "right",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N1353341",
+      "sourceNodeId": 1353341,
+      "sourceName": "Inferior lateral brachial cutaneous nerve.r",
+      "name": "Right inferior lateral brachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N281977780",
+      "sourceNodeId": 281977780,
+      "sourceName": "Superficial branch of radial nerve.r",
+      "name": "Right superficial branch of radial nerve",
+      "side": "right",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N758065898",
+      "sourceNodeId": 758065898,
+      "sourceName": "Dorsal digital branches of radial nerve.r",
+      "name": "Right dorsal digital branches of radial nerve",
+      "side": "right",
+      "sourceTriangles": 13536,
+      "sourceVertices": 40608,
+      "parent": "Superficial branch of radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N744841522",
+      "sourceNodeId": 744841522,
+      "sourceName": "Deep branch of radial nerve.r",
+      "name": "Right deep branch of radial nerve",
+      "side": "right",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N53071547",
+      "sourceNodeId": 53071547,
+      "sourceName": "Posterior interosseous nerve of forearm.r",
+      "name": "Right posterior interosseous nerve of forearm",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Deep branch of radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N814264957",
+      "sourceNodeId": 814264957,
+      "sourceName": "Posterior antebrachial cutaneous nerve.r",
+      "name": "Right posterior antebrachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N907729869",
+      "sourceNodeId": 907729869,
+      "sourceName": "Muscular branches of radial nerve.r",
+      "name": "Right muscular branches of radial nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Radial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N78079758",
+      "sourceNodeId": 78079758,
+      "sourceName": "Inferior subscapular nerve.r",
+      "name": "Right inferior subscapular nerve",
+      "side": "right",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N83601616",
+      "sourceNodeId": 83601616,
+      "sourceName": "Radial nerve.l",
+      "name": "Left radial nerve",
+      "side": "left",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N128778268",
+      "sourceNodeId": 128778268,
+      "sourceName": "Muscular branches of radial nerve.l",
+      "name": "Left muscular branches of radial nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N168989295",
+      "sourceNodeId": 168989295,
+      "sourceName": "Posterior antebrachial cutaneous nerve.l",
+      "name": "Left posterior antebrachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N641617122",
+      "sourceNodeId": 641617122,
+      "sourceName": "Inferior lateral brachial cutaneous nerve.l",
+      "name": "Left inferior lateral brachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N738404704",
+      "sourceNodeId": 738404704,
+      "sourceName": "Deep branch of radial nerve.l",
+      "name": "Left deep branch of radial nerve",
+      "side": "left",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N71664824",
+      "sourceNodeId": 71664824,
+      "sourceName": "Posterior interosseous nerve of forearm.l",
+      "name": "Left posterior interosseous nerve of forearm",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Deep branch of radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N755279658",
+      "sourceNodeId": 755279658,
+      "sourceName": "Superficial branch of radial nerve.l",
+      "name": "Left superficial branch of radial nerve",
+      "side": "left",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N761954016",
+      "sourceNodeId": 761954016,
+      "sourceName": "Dorsal digital branches of radial nerve.l",
+      "name": "Left dorsal digital branches of radial nerve",
+      "side": "left",
+      "sourceTriangles": 13536,
+      "sourceVertices": 40608,
+      "parent": "Superficial branch of radial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N168765396",
+      "sourceNodeId": 168765396,
+      "sourceName": "Axillary nerve.r",
+      "name": "Right axillary nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N69121626",
+      "sourceNodeId": 69121626,
+      "sourceName": "Superior lateral brachial cutaneous nerve.r",
+      "name": "Right superior lateral brachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Axillary nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N423204758",
+      "sourceNodeId": 423204758,
+      "sourceName": "Muscular branches of axillary nerve.r",
+      "name": "Right muscular branches of axillary nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Axillary nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N263668711",
+      "sourceNodeId": 263668711,
+      "sourceName": "Superior subscapular nerve.l",
+      "name": "Left superior subscapular nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N550528658",
+      "sourceNodeId": 550528658,
+      "sourceName": "Axillary nerve.l",
+      "name": "Left axillary nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N400522400",
+      "sourceNodeId": 400522400,
+      "sourceName": "Superior lateral brachial cutaneous nerve.l",
+      "name": "Left superior lateral brachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Axillary nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N604990605",
+      "sourceNodeId": 604990605,
+      "sourceName": "Muscular branches of axillary nerve.l",
+      "name": "Left muscular branches of axillary nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Axillary nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N583098546",
+      "sourceNodeId": 583098546,
+      "sourceName": "Thoracodorsal nerve.l",
+      "name": "Left thoracodorsal nerve",
+      "side": "left",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N602370931",
+      "sourceNodeId": 602370931,
+      "sourceName": "Thoracodorsal nerve.r",
+      "name": "Right thoracodorsal nerve",
+      "side": "right",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N760979221",
+      "sourceNodeId": 760979221,
+      "sourceName": "Inferior subscapular nerve.l",
+      "name": "Left inferior subscapular nerve",
+      "side": "left",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Branches of posterior cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N498796664",
+      "sourceNodeId": 498796664,
+      "sourceName": "Median nerve.l",
+      "name": "Left median nerve",
+      "side": "left",
+      "sourceTriangles": 5184,
+      "sourceVertices": 15552,
+      "parent": "Brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N344612353",
+      "sourceNodeId": 344612353,
+      "sourceName": "Anterior interosseous nerve of forearm.l",
+      "name": "Left anterior interosseous nerve of forearm",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N346119974",
+      "sourceNodeId": 346119974,
+      "sourceName": "(Communicating branch of median nerve with ulnar nerve).l",
+      "name": "Left communicating branch of median nerve with ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N645884486",
+      "sourceNodeId": 645884486,
+      "sourceName": "Palmar branch of median nerve.l",
+      "name": "Left palmar branch of median nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N781746655",
+      "sourceNodeId": 781746655,
+      "sourceName": "Muscular branches of median nerve.l",
+      "name": "Left muscular branches of median nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N791375398",
+      "sourceNodeId": 791375398,
+      "sourceName": "Common palmar digital branches of median nerve.l",
+      "name": "Left common palmar digital branches of median nerve",
+      "side": "left",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N273121387",
+      "sourceNodeId": 273121387,
+      "sourceName": "Proper palmar digital branches of median nerve.l",
+      "name": "Left proper palmar digital branches of median nerve",
+      "side": "left",
+      "sourceTriangles": 10944,
+      "sourceVertices": 32832,
+      "parent": "Common palmar digital branches of median nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N178111302",
+      "sourceNodeId": 178111302,
+      "sourceName": "Medial pectoral nerve.r",
+      "name": "Right medial pectoral nerve",
+      "side": "right",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N333905952",
+      "sourceNodeId": 333905952,
+      "sourceName": "Medial antebrachial cutaneous nerve.l",
+      "name": "Left medial antebrachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N170028625",
+      "sourceNodeId": 170028625,
+      "sourceName": "Posterior branch of medial antebrachial cutaneous nerve.l",
+      "name": "Left posterior branch of medial antebrachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Medial antebrachial cutaneous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N380724763",
+      "sourceNodeId": 380724763,
+      "sourceName": "Anterior branch of medial antebrachial cutaneous nerve.l",
+      "name": "Left anterior branch of medial antebrachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Medial antebrachial cutaneous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N458663615",
+      "sourceNodeId": 458663615,
+      "sourceName": "Medial brachial cutaneous nerve.l",
+      "name": "Left medial brachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N519443865",
+      "sourceNodeId": 519443865,
+      "sourceName": "Medial pectoral nerve.l",
+      "name": "Left medial pectoral nerve",
+      "side": "left",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N617420384",
+      "sourceNodeId": 617420384,
+      "sourceName": "Medial brachial cutaneous nerve.r",
+      "name": "Right medial brachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N636624012",
+      "sourceNodeId": 636624012,
+      "sourceName": "Medial antebrachial cutaneous nerve.r",
+      "name": "Right medial antebrachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N181492296",
+      "sourceNodeId": 181492296,
+      "sourceName": "Anterior branch of medial antebrachial cutaneous nerve.r",
+      "name": "Right anterior branch of medial antebrachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Medial antebrachial cutaneous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N463520591",
+      "sourceNodeId": 463520591,
+      "sourceName": "Posterior branch of medial antebrachial cutaneous nerve.r",
+      "name": "Right posterior branch of medial antebrachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Medial antebrachial cutaneous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N649745495",
+      "sourceNodeId": 649745495,
+      "sourceName": "Ulnar nerve.r",
+      "name": "Right ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N34206970",
+      "sourceNodeId": 34206970,
+      "sourceName": "Deep branch of ulnar nerve.r",
+      "name": "Right deep branch of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N71766937",
+      "sourceNodeId": 71766937,
+      "sourceName": "Palmar branch of ulnar nerve.r",
+      "name": "Right palmar branch of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N337585711",
+      "sourceNodeId": 337585711,
+      "sourceName": "Dorsal branch of ulnar nerve.r",
+      "name": "Right dorsal branch of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N472904590",
+      "sourceNodeId": 472904590,
+      "sourceName": "Dorsal digital branches of ulnar nerve.r",
+      "name": "Right dorsal digital branches of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Dorsal branch of ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N562498712",
+      "sourceNodeId": 562498712,
+      "sourceName": "Superficial branch of ulnar nerve.r",
+      "name": "Right superficial branch of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N456042733",
+      "sourceNodeId": 456042733,
+      "sourceName": "Common palmar digital branches of ulnar nerve.r",
+      "name": "Right common palmar digital branches of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Superficial branch of ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N530982836",
+      "sourceNodeId": 530982836,
+      "sourceName": "Proper palmar digital branches of ulnar nerve.r",
+      "name": "Right proper palmar digital branches of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 5760,
+      "sourceVertices": 17280,
+      "parent": "Common palmar digital branches of ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N793803314",
+      "sourceNodeId": 793803314,
+      "sourceName": "Muscular branches of ulnar nerve.r",
+      "name": "Right muscular branches of ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Ulnar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N877192689",
+      "sourceNodeId": 877192689,
+      "sourceName": "Ulnar nerve.l",
+      "name": "Left ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Branches of medial cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N197868622",
+      "sourceNodeId": 197868622,
+      "sourceName": "Palmar branch of ulnar nerve.l",
+      "name": "Left palmar branch of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N232691940",
+      "sourceNodeId": 232691940,
+      "sourceName": "Muscular branches of ulnar nerve.l",
+      "name": "Left muscular branches of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N482821071",
+      "sourceNodeId": 482821071,
+      "sourceName": "Deep branch of ulnar nerve.l",
+      "name": "Left deep branch of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N517579178",
+      "sourceNodeId": 517579178,
+      "sourceName": "Dorsal branch of ulnar nerve.l",
+      "name": "Left dorsal branch of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N681218634",
+      "sourceNodeId": 681218634,
+      "sourceName": "Dorsal digital branches of ulnar nerve.l",
+      "name": "Left dorsal digital branches of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Dorsal branch of ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N777462548",
+      "sourceNodeId": 777462548,
+      "sourceName": "Superficial branch of ulnar nerve.l",
+      "name": "Left superficial branch of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N621233157",
+      "sourceNodeId": 621233157,
+      "sourceName": "Common palmar digital branches of ulnar nerve.l",
+      "name": "Left common palmar digital branches of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Superficial branch of ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N44468205",
+      "sourceNodeId": 44468205,
+      "sourceName": "Proper palmar digital branches of ulnar nerve.l",
+      "name": "Left proper palmar digital branches of ulnar nerve",
+      "side": "left",
+      "sourceTriangles": 5760,
+      "sourceVertices": 17280,
+      "parent": "Common palmar digital branches of ulnar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N241201147",
+      "sourceNodeId": 241201147,
+      "sourceName": "Posterior cord of brachial plexus.l",
+      "name": "Left posterior cord of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Infraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N978614789",
+      "sourceNodeId": 978614789,
+      "sourceName": "Posterior cord of brachial plexus.r",
+      "name": "Right posterior cord of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Infraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N114726656",
+      "sourceNodeId": 114726656,
+      "sourceName": "Suprascapular nerve.r",
+      "name": "Right suprascapular nerve",
+      "side": "right",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N453608729",
+      "sourceNodeId": 453608729,
+      "sourceName": "Subclavian nerve.r",
+      "name": "Right subclavian nerve",
+      "side": "right",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N512424127",
+      "sourceNodeId": 512424127,
+      "sourceName": "Long thoracic nerve.r",
+      "name": "Right long thoracic nerve",
+      "side": "right",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N515216750",
+      "sourceNodeId": 515216750,
+      "sourceName": "Subclavian nerve.l",
+      "name": "Left subclavian nerve",
+      "side": "left",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N582201452",
+      "sourceNodeId": 582201452,
+      "sourceName": "Dorsal scapular nerve.r",
+      "name": "Right dorsal scapular nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N688217087",
+      "sourceNodeId": 688217087,
+      "sourceName": "Dorsal scapular nerve.l",
+      "name": "Left dorsal scapular nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N689431685",
+      "sourceNodeId": 689431685,
+      "sourceName": "Suprascapular nerve.l",
+      "name": "Left suprascapular nerve",
+      "side": "left",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N818295912",
+      "sourceNodeId": 818295912,
+      "sourceName": "Long thoracic nerve.l",
+      "name": "Left long thoracic nerve",
+      "side": "left",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Supraclavicular branches of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N104757744",
+      "sourceNodeId": 104757744,
+      "sourceName": "Middle trunk of brachial plexus.l",
+      "name": "Left middle trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N664884397",
+      "sourceNodeId": 664884397,
+      "sourceName": "Posterior division of middle trunk of brachial plexus.l",
+      "name": "Left posterior division of middle trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Middle trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N672509789",
+      "sourceNodeId": 672509789,
+      "sourceName": "Anterior division of middle trunk of brachial plexus.l",
+      "name": "Left anterior division of middle trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Middle trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N143717930",
+      "sourceNodeId": 143717930,
+      "sourceName": "Inferior trunk of brachial plexus.l",
+      "name": "Left inferior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N51760265",
+      "sourceNodeId": 51760265,
+      "sourceName": "Anterior division of inferior trunk of brachial plexus.l",
+      "name": "Left anterior division of inferior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Inferior trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N889582750",
+      "sourceNodeId": 889582750,
+      "sourceName": "Posterior division of inferior trunk of brachial plexus.l",
+      "name": "Left posterior division of inferior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Inferior trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N208648482",
+      "sourceNodeId": 208648482,
+      "sourceName": "Inferior trunk of brachial plexus.r",
+      "name": "Right inferior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N150925922",
+      "sourceNodeId": 150925922,
+      "sourceName": "Posterior division of inferior trunk of brachial plexus.r",
+      "name": "Right posterior division of inferior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Inferior trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N413748403",
+      "sourceNodeId": 413748403,
+      "sourceName": "Anterior division of inferior trunk of brachial plexus.r",
+      "name": "Right anterior division of inferior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Inferior trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N373690407",
+      "sourceNodeId": 373690407,
+      "sourceName": "Middle trunk of brachial plexus.r",
+      "name": "Right middle trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N680798551",
+      "sourceNodeId": 680798551,
+      "sourceName": "Anterior division of middle trunk of brachial plexus.r",
+      "name": "Right anterior division of middle trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Middle trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N828702681",
+      "sourceNodeId": 828702681,
+      "sourceName": "Posterior division of middle trunk of brachial plexus.r",
+      "name": "Right posterior division of middle trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Middle trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N443613078",
+      "sourceNodeId": 443613078,
+      "sourceName": "Superior trunk of brachial plexus.r",
+      "name": "Right superior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N350342407",
+      "sourceNodeId": 350342407,
+      "sourceName": "Posterior division of superior trunk of brachial plexus.r",
+      "name": "Right posterior division of superior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Superior trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N420017778",
+      "sourceNodeId": 420017778,
+      "sourceName": "Anterior division of superior trunk of brachial plexus.r",
+      "name": "Right anterior division of superior trunk of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Superior trunk of brachial plexus.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N451035696",
+      "sourceNodeId": 451035696,
+      "sourceName": "Superior trunk of brachial plexus.l",
+      "name": "Left superior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N498134673",
+      "sourceNodeId": 498134673,
+      "sourceName": "Anterior division of superior trunk of brachial plexus.l",
+      "name": "Left anterior division of superior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Superior trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N975254458",
+      "sourceNodeId": 975254458,
+      "sourceName": "Posterior division of superior trunk of brachial plexus.l",
+      "name": "Left posterior division of superior trunk of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Superior trunk of brachial plexus.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N680949521",
+      "sourceNodeId": 680949521,
+      "sourceName": "Roots of brachial plexus.r",
+      "name": "Right roots of brachial plexus",
+      "side": "right",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N750578364",
+      "sourceNodeId": 750578364,
+      "sourceName": "Roots of brachial plexus.l",
+      "name": "Left roots of brachial plexus",
+      "side": "left",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Supraclavicular part of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N874085510",
+      "sourceNodeId": 874085510,
+      "sourceName": "Median nerve.r",
+      "name": "Right median nerve",
+      "side": "right",
+      "sourceTriangles": 5184,
+      "sourceVertices": 15552,
+      "parent": "Brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N183457789",
+      "sourceNodeId": 183457789,
+      "sourceName": "Palmar branch of median nerve.r",
+      "name": "Right palmar branch of median nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N192360059",
+      "sourceNodeId": 192360059,
+      "sourceName": "Muscular branches of median nerve.r",
+      "name": "Right muscular branches of median nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N286050092",
+      "sourceNodeId": 286050092,
+      "sourceName": "Common palmar digital branches of median nerve.r",
+      "name": "Right common palmar digital branches of median nerve",
+      "side": "right",
+      "sourceTriangles": 2304,
+      "sourceVertices": 6912,
+      "parent": "Median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N234221008",
+      "sourceNodeId": 234221008,
+      "sourceName": "Proper palmar digital branches of median nerve.r",
+      "name": "Right proper palmar digital branches of median nerve",
+      "side": "right",
+      "sourceTriangles": 10944,
+      "sourceVertices": 32832,
+      "parent": "Common palmar digital branches of median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N331287564",
+      "sourceNodeId": 331287564,
+      "sourceName": "(Communicating branch of median nerve with ulnar nerve).r",
+      "name": "Right communicating branch of median nerve with ulnar nerve",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N638244209",
+      "sourceNodeId": 638244209,
+      "sourceName": "Anterior interosseous nerve of forearm.r",
+      "name": "Right anterior interosseous nerve of forearm",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Median nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N44955414",
+      "sourceNodeId": 44955414,
+      "sourceName": "Lateral pectoral nerve.r",
+      "name": "Right lateral pectoral nerve",
+      "side": "right",
+      "sourceTriangles": 7200,
+      "sourceVertices": 21600,
+      "parent": "Branches of lateral cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N122786892",
+      "sourceNodeId": 122786892,
+      "sourceName": "Musculocutaneous nerve.r",
+      "name": "Right musculocutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Branches of lateral cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N825669402",
+      "sourceNodeId": 825669402,
+      "sourceName": "Lateral antebrachial cutaneous nerve.r",
+      "name": "Right lateral antebrachial cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Musculocutaneous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N190377147",
+      "sourceNodeId": 190377147,
+      "sourceName": "Musculocutaneous nerve.l",
+      "name": "Left musculocutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Branches of lateral cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N430125746",
+      "sourceNodeId": 430125746,
+      "sourceName": "Lateral antebrachial cutaneous nerve.l",
+      "name": "Left lateral antebrachial cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Musculocutaneous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N406097593",
+      "sourceNodeId": 406097593,
+      "sourceName": "Lateral pectoral nerve.l",
+      "name": "Left lateral pectoral nerve",
+      "side": "left",
+      "sourceTriangles": 7200,
+      "sourceVertices": 21600,
+      "parent": "Branches of lateral cord of brachial plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N64151471",
+      "sourceNodeId": 64151471,
+      "sourceName": "Posterior root of spinal nerve.l",
+      "name": "Left posterior root of spinal nerve",
+      "side": "left",
+      "sourceTriangles": 6048,
+      "sourceVertices": 18144,
+      "parent": "Spinal nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N67860681",
+      "sourceNodeId": 67860681,
+      "sourceName": "Anterior root of spinal nerve.r",
+      "name": "Right anterior root of spinal nerve",
+      "side": "right",
+      "sourceTriangles": 6624,
+      "sourceVertices": 19872,
+      "parent": "Spinal nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N25487874",
+      "sourceNodeId": 25487874,
+      "sourceName": "Ilio-inguinal nerve.r",
+      "name": "Right ilio-inguinal nerve",
+      "side": "right",
+      "sourceTriangles": 3744,
+      "sourceVertices": 11232,
+      "parent": "Anterior rami of lumbar nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N550511520",
+      "sourceNodeId": 550511520,
+      "sourceName": "Iliohypogastric nerve.r",
+      "name": "Right iliohypogastric nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Anterior rami of lumbar nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N556039548",
+      "sourceNodeId": 556039548,
+      "sourceName": "Iliohypogastric nerve.l",
+      "name": "Left iliohypogastric nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Anterior rami of lumbar nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N670702611",
+      "sourceNodeId": 670702611,
+      "sourceName": "Ilio-inguinal nerve.l",
+      "name": "Left ilio-inguinal nerve",
+      "side": "left",
+      "sourceTriangles": 3744,
+      "sourceVertices": 11232,
+      "parent": "Anterior rami of lumbar nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N12512128",
+      "sourceNodeId": 12512128,
+      "sourceName": "Lateral femoral cutaneous nerve.l",
+      "name": "Left lateral femoral cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Branches of posterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N360236341",
+      "sourceNodeId": 360236341,
+      "sourceName": "Superior subscapular nerve.r",
+      "name": "Right superior subscapular nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Branches of posterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N724837128",
+      "sourceNodeId": 724837128,
+      "sourceName": "Lateral femoral cutaneous nerve.r",
+      "name": "Right lateral femoral cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 4608,
+      "sourceVertices": 13824,
+      "parent": "Branches of posterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N728835402",
+      "sourceNodeId": 728835402,
+      "sourceName": "Femoral nerve.r",
+      "name": "Right femoral nerve",
+      "side": "right",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Branches of posterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N49195991",
+      "sourceNodeId": 49195991,
+      "sourceName": "Anterior cutaneous branches of femoral nerve.r",
+      "name": "Right anterior cutaneous branches of femoral nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Femoral nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N895453984",
+      "sourceNodeId": 895453984,
+      "sourceName": "Saphenous nerve.r",
+      "name": "Right saphenous nerve",
+      "side": "right",
+      "sourceTriangles": 6624,
+      "sourceVertices": 19872,
+      "parent": "Femoral nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N712939031",
+      "sourceNodeId": 712939031,
+      "sourceName": "Medial crural cutaneous branches of saphenous nerve.r",
+      "name": "Right medial crural cutaneous branches of saphenous nerve",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Saphenous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N824761477",
+      "sourceNodeId": 824761477,
+      "sourceName": "Infrapatellar branch of saphenous nerve.r",
+      "name": "Right infrapatellar branch of saphenous nerve",
+      "side": "right",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Saphenous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N836789433",
+      "sourceNodeId": 836789433,
+      "sourceName": "Femoral nerve.l",
+      "name": "Left femoral nerve",
+      "side": "left",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Branches of posterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N97344575",
+      "sourceNodeId": 97344575,
+      "sourceName": "Anterior cutaneous branches of femoral nerve.l",
+      "name": "Left anterior cutaneous branches of femoral nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Femoral nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N873554455",
+      "sourceNodeId": 873554455,
+      "sourceName": "Saphenous nerve.l",
+      "name": "Left saphenous nerve",
+      "side": "left",
+      "sourceTriangles": 6624,
+      "sourceVertices": 19872,
+      "parent": "Femoral nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N60396968",
+      "sourceNodeId": 60396968,
+      "sourceName": "Infrapatellar branch of saphenous nerve.l",
+      "name": "Left infrapatellar branch of saphenous nerve",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Saphenous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N948429231",
+      "sourceNodeId": 948429231,
+      "sourceName": "Medial crural cutaneous branches of saphenous nerve.l",
+      "name": "Left medial crural cutaneous branches of saphenous nerve",
+      "side": "left",
+      "sourceTriangles": 576,
+      "sourceVertices": 1728,
+      "parent": "Saphenous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N260899918",
+      "sourceNodeId": 260899918,
+      "sourceName": "Genitofemoral nerve.r",
+      "name": "Right genitofemoral nerve",
+      "side": "right",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Branches of anterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N173251366",
+      "sourceNodeId": 173251366,
+      "sourceName": "Genital branch of genitofemoral nerve.r",
+      "name": "Right genital branch of genitofemoral nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Genitofemoral nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N307055880",
+      "sourceNodeId": 307055880,
+      "sourceName": "Femoral branch of genitofemoral nerve.r",
+      "name": "Right femoral branch of genitofemoral nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Genitofemoral nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N285921066",
+      "sourceNodeId": 285921066,
+      "sourceName": "Obturator nerve.r",
+      "name": "Right obturator nerve",
+      "side": "right",
+      "sourceTriangles": 3456,
+      "sourceVertices": 10368,
+      "parent": "Branches of anterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N757343665",
+      "sourceNodeId": 757343665,
+      "sourceName": "Posterior branch of obturator nerve.r",
+      "name": "Right posterior branch of obturator nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Obturator nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N929627465",
+      "sourceNodeId": 929627465,
+      "sourceName": "Anterior branch of obturator nerve.r",
+      "name": "Right anterior branch of obturator nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Obturator nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N501893514",
+      "sourceNodeId": 501893514,
+      "sourceName": "Genitofemoral nerve.l",
+      "name": "Left genitofemoral nerve",
+      "side": "left",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Branches of anterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N224443935",
+      "sourceNodeId": 224443935,
+      "sourceName": "Genital branch of genitofemoral nerve.l",
+      "name": "Left genital branch of genitofemoral nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Genitofemoral nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N842428226",
+      "sourceNodeId": 842428226,
+      "sourceName": "Femoral branch of genitofemoral nerve.l",
+      "name": "Left femoral branch of genitofemoral nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Genitofemoral nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N901954279",
+      "sourceNodeId": 901954279,
+      "sourceName": "Obturator nerve.l",
+      "name": "Left obturator nerve",
+      "side": "left",
+      "sourceTriangles": 3456,
+      "sourceVertices": 10368,
+      "parent": "Branches of anterior part of lumbar plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N380790336",
+      "sourceNodeId": 380790336,
+      "sourceName": "Posterior branch of obturator nerve.l",
+      "name": "Left posterior branch of obturator nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Obturator nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N629970877",
+      "sourceNodeId": 629970877,
+      "sourceName": "Anterior branch of obturator nerve.l",
+      "name": "Left anterior branch of obturator nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Obturator nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N144062171",
+      "sourceNodeId": 144062171,
+      "sourceName": "Posterior root of posterior femoral cutaneous nerve.l",
+      "name": "Left posterior root of posterior femoral cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N245243411",
+      "sourceNodeId": 245243411,
+      "sourceName": "Posterior femoral cutaneous nerve.r",
+      "name": "Right posterior femoral cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N337976527",
+      "sourceNodeId": 337976527,
+      "sourceName": "Nerve to quadratus femoris muscle.l",
+      "name": "Left nerve to quadratus femoris muscle",
+      "side": "left",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N439392231",
+      "sourceNodeId": 439392231,
+      "sourceName": "Nerve to piriformis muscle.r",
+      "name": "Right nerve to piriformis muscle",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N443336714",
+      "sourceNodeId": 443336714,
+      "sourceName": "Superior gluteal nerve.l",
+      "name": "Left superior gluteal nerve",
+      "side": "left",
+      "sourceTriangles": 3456,
+      "sourceVertices": 10368,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N472420027",
+      "sourceNodeId": 472420027,
+      "sourceName": "Sciatic nerve.l",
+      "name": "Left sciatic nerve",
+      "side": "left",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N380553564",
+      "sourceNodeId": 380553564,
+      "sourceName": "Tibial nerve.l",
+      "name": "Left tibial nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Sciatic nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N117896034",
+      "sourceNodeId": 117896034,
+      "sourceName": "Lateral plantar nerve.l",
+      "name": "Left lateral plantar nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Tibial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N157898247",
+      "sourceNodeId": 157898247,
+      "sourceName": "Common plantar digital branches of lateral plantar nerve.l",
+      "name": "Left common plantar digital branches of lateral plantar nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Lateral plantar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N551571812",
+      "sourceNodeId": 551571812,
+      "sourceName": "Proper plantar digital branches of lateral plantar nerve.l",
+      "name": "Left proper plantar digital branches of lateral plantar nerve",
+      "side": "left",
+      "sourceTriangles": 7488,
+      "sourceVertices": 22464,
+      "parent": "Common plantar digital branches of lateral plantar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N443450730",
+      "sourceNodeId": 443450730,
+      "sourceName": "Medial plantar nerve.l",
+      "name": "Left medial plantar nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Tibial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N408498760",
+      "sourceNodeId": 408498760,
+      "sourceName": "Common plantar digital branches of medial plantar nerve.l",
+      "name": "Left common plantar digital branches of medial plantar nerve",
+      "side": "left",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Medial plantar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N183788633",
+      "sourceNodeId": 183788633,
+      "sourceName": "Proper plantar digital branches of medial plantar nerve.l",
+      "name": "Left proper plantar digital branches of medial plantar nerve",
+      "side": "left",
+      "sourceTriangles": 6336,
+      "sourceVertices": 19008,
+      "parent": "Common plantar digital branches of medial plantar nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N944746845",
+      "sourceNodeId": 944746845,
+      "sourceName": "Medial sural cutaneous nerve.l",
+      "name": "Left medial sural cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Tibial nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N968069445",
+      "sourceNodeId": 968069445,
+      "sourceName": "Sural nerve.l",
+      "name": "Left sural nerve",
+      "side": "left",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Medial sural cutaneous nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N389033561",
+      "sourceNodeId": 389033561,
+      "sourceName": "Common fibular nerve.l",
+      "name": "Left common fibular nerve",
+      "side": "left",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Sciatic nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N54873856",
+      "sourceNodeId": 54873856,
+      "sourceName": "Superficial fibular nerve.l",
+      "name": "Left superficial fibular nerve",
+      "side": "left",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Common fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N335209237",
+      "sourceNodeId": 335209237,
+      "sourceName": "Intermediate dorsal cutaneous nerve of foot.l",
+      "name": "Left intermediate dorsal cutaneous nerve of foot",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Superficial fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N529308533",
+      "sourceNodeId": 529308533,
+      "sourceName": "Medial dorsal cutaneous nerve of foot.l",
+      "name": "Left medial dorsal cutaneous nerve of foot",
+      "side": "left",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Superficial fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N738339174",
+      "sourceNodeId": 738339174,
+      "sourceName": "Dorsal digital branches of superficial fibular nerve.l",
+      "name": "Left dorsal digital branches of superficial fibular nerve",
+      "side": "left",
+      "sourceTriangles": 8352,
+      "sourceVertices": 25056,
+      "parent": "Superficial fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N501158054",
+      "sourceNodeId": 501158054,
+      "sourceName": "Sural communicating branch of common fibular nerve.l",
+      "name": "Left sural communicating branch of common fibular nerve",
+      "side": "left",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Common fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N640738843",
+      "sourceNodeId": 640738843,
+      "sourceName": "Deep fibular nerve.l",
+      "name": "Left deep fibular nerve",
+      "side": "left",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Common fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N330757515",
+      "sourceNodeId": 330757515,
+      "sourceName": "Muscular branches of deep fibular nerve.l",
+      "name": "Left muscular branches of deep fibular nerve",
+      "side": "left",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Deep fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N625631212",
+      "sourceNodeId": 625631212,
+      "sourceName": "Dorsal digital branches of deep fibular nerve.l",
+      "name": "Left dorsal digital branches of deep fibular nerve",
+      "side": "left",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Deep fibular nerve.l",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N490390097",
+      "sourceNodeId": 490390097,
+      "sourceName": "Nerve to piriformis muscle.l",
+      "name": "Left nerve to piriformis muscle",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N539986605",
+      "sourceNodeId": 539986605,
+      "sourceName": "Posterior root of posterior femoral cutaneous nerve.r",
+      "name": "Right posterior root of posterior femoral cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N623096950",
+      "sourceNodeId": 623096950,
+      "sourceName": "Pudendal nerve.r",
+      "name": "Right pudendal nerve",
+      "side": "right",
+      "sourceTriangles": 3744,
+      "sourceVertices": 11232,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N736400610",
+      "sourceNodeId": 736400610,
+      "sourceName": "Pudendal nerve.l",
+      "name": "Left pudendal nerve",
+      "side": "left",
+      "sourceTriangles": 3744,
+      "sourceVertices": 11232,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N761705300",
+      "sourceNodeId": 761705300,
+      "sourceName": "Anterior root of posterior femoral cutaneous nerve.r",
+      "name": "Right anterior root of posterior femoral cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N809851269",
+      "sourceNodeId": 809851269,
+      "sourceName": "Sciatic nerve.r",
+      "name": "Right sciatic nerve",
+      "side": "right",
+      "sourceTriangles": 4896,
+      "sourceVertices": 14688,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N85997353",
+      "sourceNodeId": 85997353,
+      "sourceName": "Tibial nerve.r",
+      "name": "Right tibial nerve",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Sciatic nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N356827246",
+      "sourceNodeId": 356827246,
+      "sourceName": "Lateral plantar nerve.r",
+      "name": "Right lateral plantar nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Tibial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N669294869",
+      "sourceNodeId": 669294869,
+      "sourceName": "Common plantar digital branches of lateral plantar nerve.r",
+      "name": "Right common plantar digital branches of lateral plantar nerve",
+      "side": "right",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Lateral plantar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N745869149",
+      "sourceNodeId": 745869149,
+      "sourceName": "Proper plantar digital branches of lateral plantar nerve.r",
+      "name": "Right proper plantar digital branches of lateral plantar nerve",
+      "side": "right",
+      "sourceTriangles": 7488,
+      "sourceVertices": 22464,
+      "parent": "Common plantar digital branches of lateral plantar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N473222863",
+      "sourceNodeId": 473222863,
+      "sourceName": "Medial plantar nerve.r",
+      "name": "Right medial plantar nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Tibial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N461385956",
+      "sourceNodeId": 461385956,
+      "sourceName": "Common plantar digital branches of medial plantar nerve",
+      "name": "Right common plantar digital branches of medial plantar nerve",
+      "side": "right",
+      "sourceTriangles": 1728,
+      "sourceVertices": 5184,
+      "parent": "Medial plantar nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N322416916",
+      "sourceNodeId": 322416916,
+      "sourceName": "Proper plantar digital branches of medial plantar nerve.r",
+      "name": "Right proper plantar digital branches of medial plantar nerve",
+      "side": "right",
+      "sourceTriangles": 6336,
+      "sourceVertices": 19008,
+      "parent": "Common plantar digital branches of medial plantar nerve",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N930034075",
+      "sourceNodeId": 930034075,
+      "sourceName": "Medial sural cutaneous nerve.r",
+      "name": "Right medial sural cutaneous nerve",
+      "side": "right",
+      "sourceTriangles": 288,
+      "sourceVertices": 864,
+      "parent": "Tibial nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N627998463",
+      "sourceNodeId": 627998463,
+      "sourceName": "Sural nerve.r",
+      "name": "Right sural nerve",
+      "side": "right",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Medial sural cutaneous nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N713806063",
+      "sourceNodeId": 713806063,
+      "sourceName": "Common fibular nerve.r",
+      "name": "Right common fibular nerve",
+      "side": "right",
+      "sourceTriangles": 2016,
+      "sourceVertices": 6048,
+      "parent": "Sciatic nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N649582416",
+      "sourceNodeId": 649582416,
+      "sourceName": "Superficial fibular nerve.r",
+      "name": "Right superficial fibular nerve",
+      "side": "right",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Common fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N7847410",
+      "sourceNodeId": 7847410,
+      "sourceName": "Medial dorsal cutaneous nerve of foot.r",
+      "name": "Right medial dorsal cutaneous nerve of foot",
+      "side": "right",
+      "sourceTriangles": 4032,
+      "sourceVertices": 12096,
+      "parent": "Superficial fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N163619047",
+      "sourceNodeId": 163619047,
+      "sourceName": "Intermediate dorsal cutaneous nerve of foot.r",
+      "name": "Right intermediate dorsal cutaneous nerve of foot",
+      "side": "right",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Superficial fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N603777131",
+      "sourceNodeId": 603777131,
+      "sourceName": "Dorsal digital branches of superficial fibular nerve.r",
+      "name": "Right dorsal digital branches of superficial fibular nerve",
+      "side": "right",
+      "sourceTriangles": 8352,
+      "sourceVertices": 25056,
+      "parent": "Superficial fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N774368285",
+      "sourceNodeId": 774368285,
+      "sourceName": "Sural communicating branch of common fibular nerve.r",
+      "name": "Right sural communicating branch of common fibular nerve",
+      "side": "right",
+      "sourceTriangles": 1152,
+      "sourceVertices": 3456,
+      "parent": "Common fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N804557147",
+      "sourceNodeId": 804557147,
+      "sourceName": "Deep fibular nerve.r",
+      "name": "Right deep fibular nerve",
+      "side": "right",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Common fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N515672210",
+      "sourceNodeId": 515672210,
+      "sourceName": "Muscular branches of deep fibular nerve.r",
+      "name": "Right muscular branches of deep fibular nerve",
+      "side": "right",
+      "sourceTriangles": 864,
+      "sourceVertices": 2592,
+      "parent": "Deep fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N797175592",
+      "sourceNodeId": 797175592,
+      "sourceName": "Dorsal digital branches of deep fibular nerve.r",
+      "name": "Right dorsal digital branches of deep fibular nerve",
+      "side": "right",
+      "sourceTriangles": 3168,
+      "sourceVertices": 9504,
+      "parent": "Deep fibular nerve.r",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N905776914",
+      "sourceNodeId": 905776914,
+      "sourceName": "Superior gluteal nerve.r",
+      "name": "Right superior gluteal nerve",
+      "side": "right",
+      "sourceTriangles": 3456,
+      "sourceVertices": 10368,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N921759337",
+      "sourceNodeId": 921759337,
+      "sourceName": "Posterior femoral cutaneous nerve.l",
+      "name": "Left posterior femoral cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 2592,
+      "sourceVertices": 7776,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N985352108",
+      "sourceNodeId": 985352108,
+      "sourceName": "Nerve to quadratus femoris muscle.r",
+      "name": "Right nerve to quadratus femoris muscle",
+      "side": "right",
+      "sourceTriangles": 4320,
+      "sourceVertices": 12960,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N998880308",
+      "sourceNodeId": 998880308,
+      "sourceName": "Anterior root of posterior femoral cutaneous nerve.l",
+      "name": "Left anterior root of posterior femoral cutaneous nerve",
+      "side": "left",
+      "sourceTriangles": 1440,
+      "sourceVertices": 4320,
+      "parent": "Sacral plexus.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N162690283",
+      "sourceNodeId": 162690283,
+      "sourceName": "Accessory nerve (XI).l",
+      "name": "Left accessory nerve (XI)",
+      "side": "left",
+      "sourceTriangles": 15384,
+      "sourceVertices": 46152,
+      "parent": "Cervical nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N463124001",
+      "sourceNodeId": 463124001,
+      "sourceName": "Accessory nerve (XI).r",
+      "name": "Right accessory nerve (XI)",
+      "side": "right",
+      "sourceTriangles": 15384,
+      "sourceVertices": 46152,
+      "parent": "Cervical nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N237508656",
+      "sourceNodeId": 237508656,
+      "sourceName": "Intercostal nerves.l",
+      "name": "Left intercostal nerves",
+      "side": "left",
+      "sourceTriangles": 51552,
+      "sourceVertices": 154656,
+      "parent": "Thoracic nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N720596488",
+      "sourceNodeId": 720596488,
+      "sourceName": "Intercostal nerves.r",
+      "name": "Right intercostal nerves",
+      "side": "right",
+      "sourceTriangles": 51552,
+      "sourceVertices": 154656,
+      "parent": "Thoracic nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N836986210",
+      "sourceNodeId": 836986210,
+      "sourceName": "Posterior root of spinal nerve.r",
+      "name": "Right posterior root of spinal nerve",
+      "side": "right",
+      "sourceTriangles": 6048,
+      "sourceVertices": 18144,
+      "parent": "Spinal nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N922291677",
+      "sourceNodeId": 922291677,
+      "sourceName": "Anterior root of spinal nerve.l",
+      "name": "Left anterior root of spinal nerve",
+      "side": "left",
+      "sourceTriangles": 6624,
+      "sourceVertices": 19872,
+      "parent": "Spinal nerves.g",
+      "role": "nerve"
+    },
+    {
+      "id": "ZA_N733539646",
+      "sourceNodeId": 733539646,
+      "sourceName": "Cauda equina",
+      "name": "Cauda equina",
+      "side": null,
+      "sourceTriangles": 13824,
+      "sourceVertices": 41472,
+      "parent": "Roots of nerves.g",
+      "role": "nerve"
+    }
+  ],
+  "base": {
+    "male": {
+      "partsSha256": "ca07a3a1371c3cf366e2d39c7fcce05028be2b95d29b645cbf76f99675ccfe7d",
+      "conceptsSha256": "e6114519b17dc518e5ec343c63d5213ab3469004d431bf19df4a62036a444abf",
+      "chunks": [
+        {
+          "url": "/models/body-0.bin",
+          "sha256": "b33b2b5aac20f35fbf6871f916607bf3c4d386321c8c0fdadcca6b5d24e3641e"
+        },
+        {
+          "url": "/models/body-1.bin",
+          "sha256": "aa077a4675f0d0dd3c9b0af39dc8cf6bcb348c3bf7d283478d4206ce30a5a0de"
+        },
+        {
+          "url": "/models/body-2.bin",
+          "sha256": "4b3acfc35b91e4427eaca0e3be897d33f144354342ae0e52a2328b582ca8bdbe"
+        },
+        {
+          "url": "/models/body-3.bin",
+          "sha256": "6febb76b50423331f66802a63bb43f04f99ce08129837015910eed43d0719268"
+        },
+        {
+          "url": "/models/body-4.bin",
+          "sha256": "0509e6c996fe5b935ace770a5dbf2d83a474330b7e541a844052a080bbf814bb"
+        },
+        {
+          "url": "/models/body-5.bin",
+          "sha256": "32a967198ffed45839968228898f3d246c67f86fb26892c3ae270be30e2f1149"
+        },
+        {
+          "url": "/models/body-6.bin",
+          "sha256": "1c98dae807210cc51a4abc806134727c9544155cad0cc328cf2e1ae1f954d3ff"
+        },
+        {
+          "url": "/models/body-7.bin",
+          "sha256": "06340f48478eb989cec117a558290c0cd54eeead9641b565cbb8aab255b4e56b"
+        },
+        {
+          "url": "/models/body-8.bin",
+          "sha256": "18beacfdeadc8ad483d692672aae165f4323704cd7a9bfcbebbd703f5e268e25"
+        },
+        {
+          "url": "/models/body-9.bin",
+          "sha256": "0aa8aa09a379a2d759872659a2ef68fc4510ee37e435c4ebc63ee679722a4547"
+        },
+        {
+          "url": "/models/body-10.bin",
+          "sha256": "4a959d998acd35cf88518a0f2f8ab99b42d9f69c7ce0d6a814df315eeac807ac"
+        },
+        {
+          "url": "/models/body-11.bin",
+          "sha256": "e8c1afe7f30fe710ad164ec9cd2287a32881606e7eb590af47d76b3f84405027"
+        },
+        {
+          "url": "/models/body-12.bin",
+          "sha256": "61a6c8da89bb20df50c575964ac81aa4090eabfc2cb27ad2155aea325f31c6c0"
+        },
+        {
+          "url": "/models/body-13.bin",
+          "sha256": "4c51b6be85d5b705d2b52b79b9ad1cdae0b65ad03c9402a2f2673c7633fd94f3"
+        },
+        {
+          "url": "/models/body-14.bin",
+          "sha256": "58604526a0cd9e7dca4d8587cd9a42f9dd03ec6c4ebbc22a9bf017b31246f7e7"
+        }
+      ]
+    },
+    "female": {
+      "partsSha256": "41abdeb58b1dc18821b23ac2bb7737379f5709439f20d39dc95485405145eadb",
+      "conceptsSha256": "6b0a70dbe42009ff0dab8562ae01d84af87c5721627099f3cd539cbd6d94b46d",
+      "chunks": [
+        {
+          "url": "/models/female-base-0.bin",
+          "sha256": "5dfc3c73c8f61befe07ae60687ed410669631e298275d0150c04a0e9433b3483"
+        },
+        {
+          "url": "/models/female-base-1.bin",
+          "sha256": "00f0351b3c5fa57b27f538042a03ea4cd60cbd192e3b9a475d92c5155ad0d0f1"
+        },
+        {
+          "url": "/models/female-base-2.bin",
+          "sha256": "0d4289e979f625e052338021367eceba5a006d25157d82cf7c487991df8af44a"
+        },
+        {
+          "url": "/models/female-base-3.bin",
+          "sha256": "a6a947583ce0b827ba0ffda88ab987720ae586133d3e16fc3b8ebdaa5a72ac13"
+        },
+        {
+          "url": "/models/female-base-4.bin",
+          "sha256": "bed6821db2d0106fcd855ae44a0fb95990d238541f12c02ad96ed4add49b04f5"
+        },
+        {
+          "url": "/models/female-base-5.bin",
+          "sha256": "5a4d814da6451c5570b4d5c85a382d3b3cd9bc1b80644e441db99ffbe8e195f7"
+        },
+        {
+          "url": "/models/female-base-6.bin",
+          "sha256": "4cbff6414581dbe1c7f153a81a2f82e8f65e52681417920e82746e804b7c2a2f"
+        },
+        {
+          "url": "/models/female-base-7.bin",
+          "sha256": "dc9e930e256ec98c4f709eae1c7f4e1bc9e181ed4046875016639e1de7a12f4f"
+        },
+        {
+          "url": "/models/female-base-8.bin",
+          "sha256": "da5a0f2784dce630ed11f27dcdc2534e99109dc7012643a03eeb2d2cad582f3c"
+        },
+        {
+          "url": "/models/female-base-9.bin",
+          "sha256": "b035540bb05fad41cb81129d8ae6ca86e59a198cb54b5f1dd771a88586e2abb5"
+        },
+        {
+          "url": "/models/female-base-10.bin",
+          "sha256": "e70882234e036f15f93241712a2b17d7add5f95f73c8a551efba3bef9609e84a"
+        },
+        {
+          "url": "/models/female-base-11.bin",
+          "sha256": "6fd3a25230b662c8dbfd325594c85315a6b4a5aa26774f28f37ad05857163eb7"
+        },
+        {
+          "url": "/models/female-base-12.bin",
+          "sha256": "203bbe2ac78e8d37573bb3aa1da65b7fe2969ed0aa297d312abb3fc50e814e0d"
+        },
+        {
+          "url": "/models/female-base-13.bin",
+          "sha256": "368e4c15bf75b215680977aaac43c93325c5cf6d9693915bbe09427971667f0f"
+        },
+        {
+          "url": "/models/female-base-14.bin",
+          "sha256": "277a4b410294252eeb36f846cc4da9cd1a183fbf0c34190815ec75dd268b83cd"
+        },
+        {
+          "url": "/models/female-base-15.bin",
+          "sha256": "2c62d3128b711ed75c0b82df577a2580fbba0763e8306d2d028f1b6afa959100"
+        },
+        {
+          "url": "/models/female-joint-additions-8d95b6b434cd4e04.bin",
+          "sha256": "8d95b6b434cd4e045e082946421768323944829b3804c5c8e479b5fb513bab26"
+        },
+        {
+          "url": "/models/female-ligament-registration-d0014244ff9ff6c0.bin",
+          "sha256": "d0014244ff9ff6c0bcccd807c113ad754ba301fa1d85bcab5f7168e53a0f2e3b"
+        }
+      ]
+    }
+  },
+  "classificationSources": [
+    {
+      "id": "mesh-peripheral",
+      "url": "https://meshb.nlm.nih.gov/record/ui?ui=D010525",
+      "supports": "Cranial, spinal and autonomic nerves are peripheral nerves in the nervous system."
+    },
+    {
+      "id": "mesh-pns",
+      "url": "https://meshb.nlm.nih.gov/record/ui?ui=D017933",
+      "supports": "Peripheral nerves and their ganglia; somatic and autonomic divisions."
+    },
+    {
+      "id": "mesh-dura",
+      "url": "https://www.ncbi.nlm.nih.gov/mesh/D004388",
+      "supports": "Dura as a supporting meningeal layer; follows the existing atlas grouping of supporting meninges with neural structures."
+    },
+    {
+      "id": "uams-leg",
+      "url": "https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/nerve-tables/nerves-of-the-lower-limb/",
+      "supports": "Distinct femoral, lateral femoral cutaneous, sciatic, tibial, fibular, saphenous, obturator, plantar and pudendal nerve identities; avoid substring grouping."
+    },
+    {
+      "id": "cord",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK559056/?report=printable",
+      "supports": "Spinal cord white matter, gray matter horns and intermediate region."
+    },
+    {
+      "id": "uams-arm",
+      "url": "https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/nerve-tables/nerves-of-the-upper-limb/",
+      "supports": "Brachial plexus, arm/hand nerve trunks and distinct branches."
+    }
+  ],
+  "verifiedOn": "2026-10-12",
+  "namingNotes": [
+    {
+      "sourceNodeId": 461385956,
+      "rule": "Right side inherited from exact parent Medial plantar nerve.r; original name has no side suffix."
+    },
+    {
+      "rule": "Translate exact .l/.r suffix to Left/Right; remove enclosing parentheses for communicating branches; keep original source names in provenance."
+    }
+  ]
+}

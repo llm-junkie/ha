@@ -5,7 +5,7 @@ export function layerOpacity(state: Pick<SceneState, "opacity">, system: SystemI
   return typeof value === "number" && Number.isFinite(value)
     ? Math.max(0.05, Math.min(1, value))
     : system === "integumentary"
-      ? 0.1
+      ? 0.2
       : 1;
 }
 

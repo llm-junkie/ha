@@ -1,6 +1,6 @@
 # Human Atlas +
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male BodyParts3D reference** (2,234 selectable meshes, 15 systems, 3,432 concepts) or the **experimental female study model** (2,245 meshes, 16 systems, 4,248 concepts).
+An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male reference** (2,444 selectable meshes, 15 systems, 3,645 concepts) or the **experimental female study model** (2,455 meshes, 16 systems, 4,461 concepts). Both include spinal and peripheral neural structures from Z-Anatomy.
 
 **[Open Human Atlas + on GitHub Pages](https://llm-junkie.github.io/ha/)**
 
@@ -86,14 +86,14 @@ The female uterosacral registration corrects a mismatch between the reproductive
 
 Individual source meshes are distinct from named concepts, which may group multiple meshes. Histories and up to 20 bookmarks per model are kept separately; shared links include the model, and existing male links remain compatible.
 
-Geometry is simplified for browser performance. The male reference retains all 2,234 source meshes; the derived female model combines 2,181 adapted BodyParts3D meshes with 64 HRA meshes.
+Geometry is simplified for browser performance. The male reference retains all 2,234 BodyParts3D meshes; the derived female model combines 2,181 adapted BodyParts3D meshes with 64 HRA meshes. Each adds 210 Z-Anatomy meshes for spinal cord tissue, roots/ganglia, trunk and limb nerves. Branches remain independently selectable. Their registration is estimated; [the neural model notes](docs/z-anatomy-nerves.md) record source identities, reliable classification references and measured placement limits.
 
 | Model | Meshes | Concepts | Systems | Triangles | Compressed geometry |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Male · BodyParts3D | 2,234 | 3,432 | 15 | 2,288,268 | About 33 MB |
-| Female · Experimental | 2,245 | 4,248 | 16 | 2,469,472 | About 35.5 MB |
+| Male · BodyParts3D + Z-Anatomy | 2,444 | 3,645 | 15 | 2,634,798 | About 37.4 MB |
+| Female · Experimental | 2,455 | 4,461 | 16 | 2,816,002 | About 40.1 MB |
 
-Both models total about 68 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
+Both models total about 77.5 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
 
 Both catalogues include 140 source-verified classification overrides, including the iliotibial tracts and corrections for muscles, cartilage/discs, teeth, cerebral fluid spaces, liver segments, and papillary heart muscles. The [classification audit](docs/anatomy-classification.md) documents the layer policy, references, and reproducible corrections.
 
@@ -112,6 +112,8 @@ The optional WebMCP tools expose anatomy search and inspection in compatible bro
 The repository includes browser-ready geometry. Rebuilding it is optional: obtain the official BodyParts3D OBJ archive and English metadata tables, prepare the joined concepts and display-system mappings, run `scripts/convert-anatomy.py`, then `node scripts/optimize-anatomy.mjs` and `node scripts/compress-models.mjs`. Simplification uses a 0.2% relative error limit per structure.
 
 The female model has a separate pinned import and registration pipeline. Follow [the female rebuild instructions](docs/female-model.md#repeat-the-checks) to reproduce its assets, measurement report, and comparison figure.
+
+After the base imports and classification corrections, [reapply the Z-Anatomy supplement](docs/z-anatomy-nerves.md#reproduce). Its pinned FBX import uses the existing Node dependencies, preserves the base meshes and refreshes the female catalogue checksum. The new chunks are included automatically in offline model caching.
 
 ## Deploy
 
@@ -144,6 +146,8 @@ Open http://localhost:4173/ha/. A normal `npm run build` uses `/` and can also b
 | **PrejudiceNeutrino / [Human Atlas Enhanced](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe)** | Experimental female assembly, HRA integration, estimated body/breast adaptations, and upstream fit records. |
 | **[BodyParts3D / Database Center for Life Science](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html)** | BodyParts3D 4.0 male reference geometry, anatomical names, and concept relationships. |
 | **Kristen Browne and Heidi Schlehlein / [Human Reference Atlas · HuBMAP](https://doi.org/10.48539/HBM352.BTSQ.586)** | *3D Reference Organ Set for United, Female, v1.5* (2023): the female HRA source geometry. |
+| **Gauthier Kervyn and contributors / [Z-Anatomy](https://github.com/Z-Anatomy/Models-of-human-anatomy), distributed by [Lluís Vinent Juanico](https://github.com/LluisV/Z-Anatomy)** | Spinal and peripheral neural source surfaces, adapted for both models under CC BY-SA 4.0. |
+| **[Rayzi0417 / PR #283](https://github.com/ashemag/human-atlas/pull/283)** | Reference for the peripheral-nerve integration. |
 
 Human Atlas Enhanced also credits [Female Atlas by Mahendra Beniwal](https://github.com/HiMahendraBeniwal/female-atlas/tree/b0a20fa3a009ca5f6bfa07b7479312e04c862af2) as an inspiration for its breast presentation; the packaged female geometry comes from the HRA dataset above.
 
@@ -153,6 +157,6 @@ This fork adds GitHub Pages deployment, dependency updates, saved views, layer o
 
 ## License
 
-Application code is released under the [MIT License](LICENSE), retaining the original copyright notice for ashemag. **The anatomy data has its own [CC BY 4.0 license](https://creativecommons.org/licenses/by/4.0/)**; preserve dataset attribution and identify adaptations when redistributing the data or rendered anatomy images. Third-party dependencies retain their respective licenses.
+Application code is released under the [MIT License](LICENSE), retaining the original copyright notice for ashemag. Original BodyParts3D and HRA mesh assets use [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). **Z-Anatomy adaptations and the combined atlas catalogues use [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)**. Preserve source credits, identify modifications and follow applicable share-alike terms for derived data and rendered images. Full notices and adaptation records are in [ATTRIBUTION.md](public/ATTRIBUTION.md). Third-party dependencies retain their respective licenses.
 
 Issues and pull requests are welcome. Please include reproduction steps and browser/device details for interaction problems.

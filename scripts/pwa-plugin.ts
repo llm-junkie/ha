@@ -95,6 +95,7 @@ export function atlasPwa(): Plugin {
           "icons/icon-maskable-512.png",
           "icons/apple-touch-icon.png",
           "ATTRIBUTION.md",
+          "licenses/z-anatomy-models.txt",
         ]),
       ]
         .filter((file) => !file.endsWith(".map"))

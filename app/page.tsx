@@ -3,6 +3,7 @@ import "./view-library.css";
 import { assetUrl } from "./asset-url";
 import { usePanelViewport } from "./use-panel-viewport";
 import {
+  anatomicalSources,
   defaultLayers,
   isModelAtlas,
   MODELS,
@@ -469,7 +470,8 @@ export default function Home() {
           {atlas ? atlas.parts.length.toLocaleString() : MODELS[model].pieces.toLocaleString()}{" "}
           modeled pieces
           <span className="identity-source">
-            {" "}<span>·</span> {MODELS[model].source}
+            {" "}
+            <span>·</span> {MODELS[model].source}
           </span>
         </div>
       </header>
@@ -522,7 +524,7 @@ export default function Home() {
             open={panel === "saved"}
             onOpenChange={(open) => {
               if (open) setDetails(false);
-              setPanel((current) => open ? "saved" : current === "saved" ? null : current);
+              setPanel((current) => (open ? "saved" : current === "saved" ? null : current));
             }}
             panelAnchor={savedPanelAnchor}
             ready={viewReady && !error}
@@ -880,10 +882,7 @@ export default function Home() {
               <RefreshCw size={12} aria-hidden="true" /> <span>Update</span>
             </Button>
           )}
-          <Button
-            variant="ghost"
-            onClick={() => openAbout()}
-          >
+          <Button variant="ghost" onClick={() => openAbout()}>
             {pwaLabel(pwa) && <span className="pwa-footer-status">{pwaLabel(pwa)}</span>}
             <span>App & credits</span> <ArrowUpRight size={12} />
           </Button>
@@ -940,6 +939,9 @@ export default function Home() {
                 System overview · structure identified from source anatomy
               </span>
             )}
+            {selectedParts.some((p) => p.id.startsWith("ZA_N")) && (
+              <span className="context-note">Z-Anatomy · estimated registration</span>
+            )}
             <div className="structure-meta">
               <span>
                 {chosen?.searchGroup ? "Explorer group" : "Atlas reference"}
@@ -963,18 +965,17 @@ export default function Home() {
                 )}
               </div>
             )}
-            <a
-              className="source-link"
-              href={
-                selected?.id.startsWith("VH_F_")
-                  ? "https://doi.org/10.48539/HBM352.BTSQ.586"
-                  : "https://lifesciencedb.jp/bp3d/"
-              }
-              target="_blank"
-              rel="noreferrer"
-            >
-              View anatomical source <ArrowUpRight size={14} />
-            </a>
+            {anatomicalSources(selectedParts).map((source) => (
+              <a
+                key={source.name}
+                className="source-link"
+                href={source.url}
+                target="_blank"
+                rel="noreferrer"
+              >
+                {source.name} source <ArrowUpRight size={14} />
+              </a>
+            ))}
           </div>
           <div className="detail-actions">
             <div className="detail-focus-actions">
@@ -1062,22 +1063,32 @@ export default function Home() {
                 onChange={() => setAboutModel("female")}
               />
               <span className="model-option-label">
-                Female <span className="model-status" title="Experimental">(Exp)</span>
+                Female{" "}
+                <span className="model-status" title="Experimental">
+                  (Exp)
+                </span>
               </span>
             </label>
           </fieldset>
           <SheetDescription>
             {aboutModel === "female"
-              ? "Explore the experimental female study model from BodyParts3D and HRA."
-              : "Explore the adult male reference anatomy from BodyParts3D."}
+              ? "Explore the experimental female study model from BodyParts3D, HRA, and Z-Anatomy."
+              : "Explore the adult male reference anatomy from BodyParts3D, with nerves from Z-Anatomy."}
           </SheetDescription>
           <div className="about-copy">
             <p>
-              <strong>{aboutModel === "female" ? "Female · Experimental" : "Male · BodyParts3D"}</strong>
+              <strong>
+                {aboutModel === "female" ? "Female · Experimental" : "Male · BodyParts3D"}
+              </strong>
               <br />
               {aboutModel === "female"
-                ? "2,245 individual meshes and 4,248 named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, and knee ligaments."
-                : "2,234 individual meshes and 3,432 named concepts from an adult male reference anatomy."}
+                ? `${MODELS.female.pieces.toLocaleString()} individual meshes and ${MODELS.female.concepts.toLocaleString()} named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, and knee ligaments, plus Z-Anatomy neural structures.`
+                : `${MODELS.male.pieces.toLocaleString()} individual meshes and ${MODELS.male.concepts.toLocaleString()} named concepts from BodyParts3D and Z-Anatomy.`}
+            </p>
+            <p>
+              Z-Anatomy adds 210 meshes for spinal cord tissue, spinal roots, trunk nerves, and arm
+              and leg nerves. Their placement is estimated against the reference skeleton; the
+              female version follows this model's estimated body proportions.
             </p>
             {aboutModel === "female" && (
               <p>
@@ -1103,7 +1114,20 @@ export default function Home() {
               International.
               {aboutModel === "female" &&
                 " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume."}
+              {
+                " Z-Anatomy — the open source atlas of anatomy; models by Gauthier Kervyn and contributors, distributed by Lluís Vinent Juanico's Z-Anatomy project. Adapted neural data: CC BY-SA 4.0."
+              }
             </p>
+            <a href="https://github.com/LluisV/Z-Anatomy" target="_blank" rel="noreferrer">
+              Z-Anatomy source models <ArrowUpRight size={14} />
+            </a>
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Neural data license <ArrowUpRight size={14} />
+            </a>
             {aboutModel === "female" && (
               <a href="https://doi.org/10.48539/HBM352.BTSQ.586" target="_blank" rel="noreferrer">
                 Female reference organ dataset <ArrowUpRight size={14} />

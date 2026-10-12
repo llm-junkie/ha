@@ -175,7 +175,7 @@ test("bookmarks persist, deduplicate IDs, cap their size and reject damaged stor
 });
 
 test("layer fading preserves selected structures and updates actual material render settings", () => {
-  assert.equal(layerOpacity({}, "integumentary"), 0.1);
+  assert.equal(layerOpacity({}, "integumentary"), 0.2);
   assert.equal(layerOpacity({}, "muscular"), 1);
   assert.equal(layerOpacity({ opacity: { muscular: NaN } }, "muscular"), 1);
   assert.equal(partOpacity(first, state), 1);

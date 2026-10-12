@@ -4,7 +4,7 @@ The model switch adds **Female (Exp)** beside the male reference; **Exp** means 
 
 ## Sources and scope
 
-Assets are pinned to [Anatolume 39f2c01](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf), importing [Human Atlas Enhanced 9e0d710](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe). The female catalogue contains 2,181 adapted BodyParts3D meshes and 64 HRA meshes: pelvis (8), reproductive structures (38), breasts (16), and knee ligaments (2). There are 2,245 selectable meshes and 4,248 concepts. Breast tissue is separate from the optional nipple/areolar surface layer.
+Base assets are pinned to [Anatolume 39f2c01](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf), importing [Human Atlas Enhanced 9e0d710](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe). That assembly contains 2,181 adapted BodyParts3D meshes and 64 HRA meshes: pelvis (8), reproductive structures (38), breasts (16), and knee ligaments (2), totaling 2,245 selectable meshes and 4,248 concepts. The [Z-Anatomy supplement](z-anatomy-nerves.md) adds 210 neural meshes and 213 concepts; the current female catalogue has 2,455 meshes and 4,461 concepts. Breast tissue is separate from the optional nipple/areolar surface layer.
 
 The application originates with **Ashe Magalhaes / [ashemag/human-atlas](https://github.com/ashemag/human-atlas)**, under MIT. Anatolume supplies the imported package; PrejudiceNeutrino's Human Atlas Enhanced supplies the female assembly and adaptation records, building on wiiiimm's fork. BodyParts3D is credited to the Database Center for Life Science. The female HRA geometry is by **Kristen Browne and Heidi Schlehlein**, *3D Reference Organ Set for United, Female, v1.5* (2023), published by HuBMAP, [DOI 10.48539/HBM352.BTSQ.586](https://doi.org/10.48539/HBM352.BTSQ.586). Both anatomy datasets use CC BY 4.0. The upstream female assembly also credits [Female Atlas by Mahendra Beniwal](https://github.com/HiMahendraBeniwal/female-atlas/tree/b0a20fa3a009ca5f6bfa07b7479312e04c862af2) as breast-presentation inspiration.
 
@@ -41,7 +41,7 @@ The intervening field joins those registrations with a C1, strictly monotone dep
 
 The coarse, long source triangles are tessellated in 0.25 mm depth bands before deformation. New points within 0.1 micrometre are welded to avoid slivers below the Float32 precision; every original source vertex remains. The measured source surface area is preserved within 1e-8 relative error. Both corrected meshes are written to one additional chunk. All other geometry chunks and mesh geometry remain unchanged.
 
-The model now has 18 female chunks and 2,469,472 triangles. Compressed female geometry is about 35.5 MB; both models total about 68 MB. Raw equivalents support browsers without gzip decompression. Source and delivered file checksums are recorded separately in `public/models/female-source.json`.
+The ligament-corrected base model has 18 female chunks and 2,469,472 triangles. The neural supplement adds two chunks and 346,530 triangles; current compressed female geometry is about 40.1 MB. Raw equivalents support browsers without gzip decompression. Base source and delivered catalogue checksums are recorded separately in `public/models/female-source.json`; the supplement has its own `z-anatomy-source.json` provenance.
 
 ![Fixed projections of the imported and corrected assembled geometry](images/uterosacral-registration-comparison.png)
 
@@ -70,6 +70,7 @@ To rebuild from the pinned import using a local Anatolume checkout:
 node scripts/import-female-model.mjs /path/to/Anatolume
 node scripts/fix-female-ligaments.mjs
 node scripts/apply-classification-overrides.mjs
+node scripts/import-z-anatomy-nerves.mjs --source-dir D:\DEV\ha\tmp\z-anatomy --download
 npm test
 ```
 

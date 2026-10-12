@@ -41,11 +41,33 @@ Female reference anatomy: **Kristen Browne and Heidi Schlehlein**, *3D Reference
 
 The derived study model was adapted by [PrejudiceNeutrino / Human Atlas Enhanced](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe), based on wiiiimm / Human Atlas. It was imported through [isunky / Anatolume](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf). Exact source revisions, asset hashes, and local changes are recorded in `models/female-source.json`.
 
-The model retains 2,181 reshaped BodyParts3D meshes and adds 64 HRA source meshes: 8 pelvic bones, 38 reproductive structures, 16 breast structures, and 2 knee ligaments. Pelvic and reproductive placements use separate recorded bounding-box fits; non-breast anatomy follows a shared estimated body morph. Original HRA breasts receive a separate estimated contour and placement. Geometry is simplified and normals quantized. There are 2,245 selectable meshes and 4,248 named concepts; breast tissue and optional nipple/areolar surfaces have separate layers.
+The imported model retains 2,181 reshaped BodyParts3D meshes and adds 64 HRA source meshes: 8 pelvic bones, 38 reproductive structures, 16 breast structures, and 2 knee ligaments. Pelvic and reproductive placements use separate recorded bounding-box fits; non-breast anatomy follows a shared estimated body morph. Original HRA breasts receive a separate estimated contour and placement. Geometry is simplified and normals quantized. This imported assembly has 2,245 selectable meshes and 4,248 named concepts; the neural supplement below adds 210 meshes and 213 concepts. Breast tissue and optional nipple/areolar surfaces have separate layers.
 
 Local adaptation: the bilateral uterosacral source surfaces are tessellated on 0.25 mm depth intervals before joining the recorded reproductive and pelvic registrations with a monotone, C1 depth map. New vertices are welded only within Float32 precision. The cervicovaginal cap retains its imported geometry; the posterior cap follows the same transform as the HRA pelvis. No source surface is cut away or hidden. Every other imported geometry chunk remains unchanged. The correction and quantitative checks are recorded in `models/female-ligament-fit-report.json` and [the model notes](https://github.com/llm-junkie/ha/blob/main/docs/female-model.md).
 
 This is an experimental derived assembly with estimated proportions and unreviewed organ placement. The musculature derives from the male reference. Female external skin/genital surfaces and validated urethra/pelvic-floor replacements remain incomplete. Registration checks establish geometric consistency with the HRA source assembly; they do not independently validate its attachment anatomy.
+
+## Z-Anatomy neural supplement
+
+**Z-Anatomy — The open source atlas of anatomy — CC-BY-SA 4.0.** Models by **Gauthier Kervyn and contributors**; Blender template by Gauthier Kervyn and Marcin Zielinski. FBX distribution and Unity project by **Lluís Vinent Juanico**, [LluisV/Z-Anatomy](https://github.com/LluisV/Z-Anatomy/tree/6c7f9016bd5899ac8edafd31b9900c151df42ed6).
+
+The upstream model notice also requests this attribution: **BodyParts3D — The Database Center for Life Science — CC-BY-SA 2.1 Japan**. This is retained for the Z-Anatomy-derived content; the separately imported BodyParts3D 4.0 source meshes use the current official CC BY 4.0 license above.
+
+- Source revision: `6c7f9016bd5899ac8edafd31b9900c151df42ed6`, `Resources/Models/FBX/NervousSystem100.fbx`; registration bones from `SkeletalSystem100.fbx`.
+- Original model notice: [z-anatomy-models.txt](licenses/z-anatomy-models.txt), preserved from `Resources/Models/License.txt`.
+- Terms: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
+- Source hashes, exact object names, side-label evidence, and anatomical references: `data/anatomy/z-anatomy-nerves.json`.
+- Delivered assets, adaptation measurements and hashes: `models/z-anatomy-source.json`; geometry: `models/z-nerves-male-*.bin[.gz]` and `models/z-nerves-female-*.bin[.gz]`.
+
+Adaptations: 210 selected source mesh surfaces are converted from centimetres to metres, rigidly registered against corresponding BodyParts3D bones, simplified with a maximum 0.1 mm meshoptimizer error target, tessellated to 10 mm maximum source edges, and packed with quantized normals. Four further bone-fitted hand/foot transforms blend smoothly into forearms/shins, aligning the assemblies' differing hand positions and foot orientations. Normals follow the inverse-transpose differential of the composed field. Side suffixes become readable labels; one unsuffixed right-foot mesh inherits its side from its explicit source parent. Source identifiers and names remain in provenance. The female supplement follows the assembly's existing estimated body morph after the hand/foot correction. Original BodyParts3D and HRA mesh geometry and the verified classifications remain unchanged.
+
+The supplement includes spinal cord tissue, supporting spinal dura, spinal roots and ganglia, cauda equina, sympathetic/intercostal nerves, brachial plexus components, and separately named arm/hand and leg/foot nerves. Four cord tissue meshes extend the existing spinal-cord concept, retaining its original canal membership. The combined male catalogue has 2,444 meshes and 3,645 concepts; the female catalogue has 2,455 meshes and 4,461 concepts.
+
+**The adapted neural data, its catalogue records, and the combined atlas catalogues are distributed under CC BY-SA 4.0.** Original geometry assets retain their credited source licenses; application code remains MIT. Retain these credits, identify adaptations, and apply share-alike to redistributed adaptations of the Z-Anatomy data and combined catalogues. Rendered images containing the supplement also require the Z-Anatomy attribution and applicable CC BY-SA terms. Historical screenshots made before this supplement retain the source credits applicable when captured.
+
+The source bundle also lists third-party brain, cranial-nerve, inner-ear and kidney assets with separate licenses. It credits **University of Dundee, CAHID — Cranial Nerves and Foramina — CC-BY 4.0**; that upstream credit is retained for the selected vagus/accessory nerve surfaces. This import is restricted to the reviewed neural object allowlist; it does not import the brain, ear or kidney assemblies. The [model notes](https://github.com/llm-junkie/ha/blob/main/docs/z-anatomy-nerves.md) document its scope and measured registration limits. It is not a complete nervous system or independently validated anatomy.
+
+[Rayzi0417's PR #283](https://github.com/ashemag/human-atlas/pull/283) supplied the integration reference. This fork uses a new import from the pinned FBX surfaces, with separate branch identities, both model registrations, and reproducible source checks.
 
 ## Iliotibial tract classification
 
