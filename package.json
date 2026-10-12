@@ -11,7 +11,7 @@
     "postbuild": "node scripts/validate-pwa-build.mjs",
     "preview": "vite preview",
     "check": "tsc --noEmit",
-    "test": "node scripts/validate-atlas.mjs && node scripts/validate-atlas.mjs atlas-female.json && node scripts/validate-interactions.mjs && node scripts/validate-assets.mjs && node --test scripts/viewer-navigation.test.mjs scripts/wheel-zoom.test.mjs scripts/background-brightness.test.mjs scripts/saved-views.test.mjs scripts/pwa-worker.test.mjs scripts/pwa-update.test.mjs scripts/female-model.test.mjs scripts/female-ligaments.test.mjs scripts/search-viewport.test.mjs scripts/anatomy-classification.test.mjs scripts/z-anatomy-nerves.test.mjs"
+    "test": "node scripts/validate-atlas.mjs && node scripts/validate-atlas.mjs atlas-female.json && node scripts/validate-interactions.mjs && node scripts/validate-assets.mjs && node --test scripts/viewer-navigation.test.mjs scripts/wheel-zoom.test.mjs scripts/background-brightness.test.mjs scripts/saved-views.test.mjs scripts/pwa-worker.test.mjs scripts/pwa-update.test.mjs scripts/female-model.test.mjs scripts/female-ligaments.test.mjs scripts/female-skin.test.mjs scripts/search-viewport.test.mjs scripts/anatomy-classification.test.mjs scripts/z-anatomy-nerves.test.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.9.0",

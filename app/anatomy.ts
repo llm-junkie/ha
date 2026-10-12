@@ -26,6 +26,7 @@ export interface SceneState {inspectorOpen?:boolean;explode:number;visible:Syste
 export const DEFAULT_VISIBLE:SystemId[] = ['cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','mammary','integumentary','connective'];
 const ILIOTIBIAL_DESCRIPTION = 'A thickened band of deep fascia (fascia lata) along the outer thigh. It receives fibers from tensor fasciae latae and gluteus maximus, with connections to the femur and an attachment on the upper outer tibia.';
 export const EXPLANATIONS:Record<string,string> = {
+ 'female body skin':'The full-body external female skin surface, fitted from the Human Reference Atlas to this experimental anatomy assembly. It provides an outer body reference; the fit and proportions have not been independently reviewed.',
  'iliotibial tract':ILIOTIBIAL_DESCRIPTION,
  'right iliotibial tract':ILIOTIBIAL_DESCRIPTION,
  'left iliotibial tract':ILIOTIBIAL_DESCRIPTION,

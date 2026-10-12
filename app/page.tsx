@@ -1160,7 +1160,7 @@ export default function Home() {
               </strong>
               <br />
               {aboutModel === "female"
-                ? `${MODELS.female.pieces.toLocaleString()} individual meshes and ${MODELS.female.concepts.toLocaleString()} named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, and knee ligaments, plus Z-Anatomy neural structures.`
+                ? `${MODELS.female.pieces.toLocaleString()} individual meshes and ${MODELS.female.concepts.toLocaleString()} named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, knee ligaments, and fitted body skin, plus Z-Anatomy neural structures.`
                 : `${MODELS.male.pieces.toLocaleString()} individual meshes and ${MODELS.male.concepts.toLocaleString()} named concepts from BodyParts3D and Z-Anatomy.`}
             </p>
             <p>
@@ -1171,8 +1171,9 @@ export default function Home() {
             {aboutModel === "female" && (
               <p>
                 Proportions and organ placement are estimated and await independent anatomical
-                review. Female external skin, genital surfaces, and validated urethra/pelvic-floor
-                replacements are incomplete. The uterosacral ligament registration restores the
+                review. The full-body female skin is fitted to this assembly. Detailed external
+                genital anatomy and validated urethra/pelvic-floor replacements remain incomplete.
+                The uterosacral ligament registration restores the
                 source assembly's pelvic relationship; it does not validate the original attachment
                 anatomy.
               </p>
@@ -1191,7 +1192,7 @@ export default function Home() {
               BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0
               International.
               {aboutModel === "female" &&
-                " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume."}
+                " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume. Female body skin from the HuBMAP CCF 3D Reference Object Library v1.3, fitted locally under CC BY 4.0."}
               {
                 " Z-Anatomy — the open source atlas of anatomy; models by Gauthier Kervyn and contributors, distributed by Lluís Vinent Juanico's Z-Anatomy project. Adapted neural data: CC BY-SA 4.0."
               }

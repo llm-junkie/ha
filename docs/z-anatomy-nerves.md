@@ -4,7 +4,7 @@ The nervous layer includes **210 additional source meshes in each model**: spina
 
 The existing spinal-cord concept (`FMA7647`) retains its original small canal mesh and gains four source cord-tissue surfaces. The new objects have `ZA_N…` mesh and `ZA_C…` concept identifiers derived from pinned FBX node IDs. These are local source identifiers, not invented FMA mappings. Three compound selections provide peripheral nerves/ganglia, represented brachial plexus roots/trunks/divisions, and spinal roots/cauda equina. Missing source components are not generated or implied by these selections.
 
-The male catalogue has 2,444 meshes and 3,645 concepts; the female catalogue has 2,455 meshes and 4,461 concepts. Existing mesh identities, classification corrections, and geometry are preserved. Only the spinal-cord concept's membership is extended. The supplement adds 346,530 triangles and about 4.5 MB of compressed geometry per model.
+The male catalogue has 2,444 meshes and 3,645 concepts; the female catalogue at the neural-import stage has 2,455 meshes and 4,461 concepts. The later [female skin supplement](female-skin.md) brings it to 2,456 meshes and 4,462 concepts. Existing mesh identities, classification corrections, and geometry are preserved. Only the spinal-cord concept's membership is extended. The supplement adds 346,530 triangles and about 4.5 MB of compressed geometry per model.
 
 ## Source and classification evidence
 

@@ -1,0 +1,633 @@
+{
+  "schemaVersion": 1,
+  "source": {
+    "repository": "https://github.com/hubmapconsortium/ccf-releases",
+    "revision": "b036a91aaf7234f462b1249d4a5f4fb0e982f412",
+    "url": "https://raw.githubusercontent.com/hubmapconsortium/ccf-releases/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.3/models/3d-vh-f-skin.glb",
+    "bytes": 12246132,
+    "sha256": "0fc377c7a2e7e9644b81d318feda9d0b2c5a38f39bd14e74966f8b6364eb0a78",
+    "stageYOffsetM": 0.794760942,
+    "maximumSimplificationErrorM": 0.0002,
+    "release": "HuBMAP CCF 3D Reference Object Library v1.3",
+    "sourceName": "VH_F_skin",
+    "sourceTriangles": 382640,
+    "authors": "Human Reference Atlas / HuBMAP; Kristen Browne and contributors",
+    "libraryUrl": "https://humanatlas.io/3d-reference-library",
+    "license": "CC-BY-4.0"
+  },
+  "license": "CC-BY-4.0",
+  "recipeSha256": "7e94518f0e064ac1a48113fd889cac1243da7458f3c84737f956fe6e43705dac",
+  "method": "Pinned HRA female skin; meshoptimizer simplification with 0.2 mm absolute error target; paired outer-surface sections against BodyParts3D skin in the existing female morph and the installed HRA breast envelope; independent head, hand/fingertip and foot pose fits; thin-plate radial basis field with a continuous global solve; sparse clearance controls against retained bone, muscle and breast surfaces. The original female source supplies the complete external surface; no male genital skin is imported. Normals recomputed after deformation. A smooth regional radial clearance envelope accommodates the retained anatomy; its composed Jacobian is checked with the registration. Distance-weighted Taubin mesh relaxation softens local contour noise after fitting, with protected face/extremity regions, bounded displacement and inward movement, and orientation checks on every delivered triangle. Torso control regularization is blended smoothly from the original 0.0001 to 0.0101 to suppress larger chest/waist fitting ripples while retaining the original head and limb control strength. A localized posterior depth adjustment tightens the upper back and neck with smooth height, depth and shoulder transitions; it preserves extra room over the spine and fades out before the scalp. This adjustment is included in the composed field Jacobian check before mesh relaxation. Local head/neck tightening reduces lateral neck clearance with tapered shoulder, jaw and anterior masks, and reduces crown height/width above the face. The full composed field is checked before relaxation. A coordinated anterior face/chin/throat depth profile and local posterior scalp correction reduce the mismatch against retained skull, jaw and neck anatomy. The nose is lowered locally by up to 3 mm. Region masks taper into the cheeks, shoulders, forehead and lower scalp. These adjustments are included in the composed field Jacobian check.; localized lateral breast envelope clearance; external hand/foot reference patches in the atlas pose joined at wrist/ankle collars",
+  "limitations": [
+    "Estimated fit across two reference assemblies; independent anatomical review pending.",
+    "Skin is an external reference surface. It does not supply validated female urethra or pelvic-floor structures, or a separately annotated external genital model.",
+    "Source topology and openings are retained after simplification. Sampling does not establish complete enclosure or absence of all self-intersections. Small local intersections may remain, especially at the toes and existing breast surface details."
+  ],
+  "base": {
+    "parts": 2455,
+    "concepts": 4461,
+    "partsSha256": "8a5198dec3a7cb2e787a2e684ae4f568eca4882148b1d50f33a6507db8f0fc4e",
+    "conceptsSha256": "d37e4c426d101415172cc1a5a3f9a2c1f26da6f5111407df583a64dd09a00592",
+    "chunks": [
+      {
+        "url": "/models/female-base-0.bin",
+        "bytes": 4019496,
+        "gzip": "/models/female-base-0.bin.gz",
+        "gzipBytes": 2279399,
+        "sha256": "5dfc3c73c8f61befe07ae60687ed410669631e298275d0150c04a0e9433b3483"
+      },
+      {
+        "url": "/models/female-base-1.bin",
+        "bytes": 4470564,
+        "gzip": "/models/female-base-1.bin.gz",
+        "gzipBytes": 2325209,
+        "sha256": "00f0351b3c5fa57b27f538042a03ea4cd60cbd192e3b9a475d92c5155ad0d0f1"
+      },
+      {
+        "url": "/models/female-base-2.bin",
+        "bytes": 4372272,
+        "gzip": "/models/female-base-2.bin.gz",
+        "gzipBytes": 2388965,
+        "sha256": "0d4289e979f625e052338021367eceba5a006d25157d82cf7c487991df8af44a"
+      },
+      {
+        "url": "/models/female-base-3.bin",
+        "bytes": 4002764,
+        "gzip": "/models/female-base-3.bin.gz",
+        "gzipBytes": 2152130,
+        "sha256": "a6a947583ce0b827ba0ffda88ab987720ae586133d3e16fc3b8ebdaa5a72ac13"
+      },
+      {
+        "url": "/models/female-base-4.bin",
+        "bytes": 4015824,
+        "gzip": "/models/female-base-4.bin.gz",
+        "gzipBytes": 2170207,
+        "sha256": "bed6821db2d0106fcd855ae44a0fb95990d238541f12c02ad96ed4add49b04f5"
+      },
+      {
+        "url": "/models/female-base-5.bin",
+        "bytes": 4050896,
+        "gzip": "/models/female-base-5.bin.gz",
+        "gzipBytes": 2233971,
+        "sha256": "5a4d814da6451c5570b4d5c85a382d3b3cd9bc1b80644e441db99ffbe8e195f7"
+      },
+      {
+        "url": "/models/female-base-6.bin",
+        "bytes": 4061756,
+        "gzip": "/models/female-base-6.bin.gz",
+        "gzipBytes": 2392219,
+        "sha256": "4cbff6414581dbe1c7f153a81a2f82e8f65e52681417920e82746e804b7c2a2f"
+      },
+      {
+        "url": "/models/female-base-7.bin",
+        "bytes": 4001232,
+        "gzip": "/models/female-base-7.bin.gz",
+        "gzipBytes": 2391078,
+        "sha256": "dc9e930e256ec98c4f709eae1c7f4e1bc9e181ed4046875016639e1de7a12f4f"
+      },
+      {
+        "url": "/models/female-base-8.bin",
+        "bytes": 4001536,
+        "gzip": "/models/female-base-8.bin.gz",
+        "gzipBytes": 2372384,
+        "sha256": "da5a0f2784dce630ed11f27dcdc2534e99109dc7012643a03eeb2d2cad582f3c"
+      },
+      {
+        "url": "/models/female-base-9.bin",
+        "bytes": 4017212,
+        "gzip": "/models/female-base-9.bin.gz",
+        "gzipBytes": 2296708,
+        "sha256": "b035540bb05fad41cb81129d8ae6ca86e59a198cb54b5f1dd771a88586e2abb5"
+      },
+      {
+        "url": "/models/female-base-10.bin",
+        "bytes": 4005596,
+        "gzip": "/models/female-base-10.bin.gz",
+        "gzipBytes": 2298571,
+        "sha256": "e70882234e036f15f93241712a2b17d7add5f95f73c8a551efba3bef9609e84a"
+      },
+      {
+        "url": "/models/female-base-11.bin",
+        "bytes": 4002920,
+        "gzip": "/models/female-base-11.bin.gz",
+        "gzipBytes": 2302440,
+        "sha256": "6fd3a25230b662c8dbfd325594c85315a6b4a5aa26774f28f37ad05857163eb7"
+      },
+      {
+        "url": "/models/female-base-12.bin",
+        "bytes": 4669304,
+        "gzip": "/models/female-base-12.bin.gz",
+        "gzipBytes": 2608638,
+        "sha256": "203bbe2ac78e8d37573bb3aa1da65b7fe2969ed0aa297d312abb3fc50e814e0d"
+      },
+      {
+        "url": "/models/female-base-13.bin",
+        "bytes": 4090912,
+        "gzip": "/models/female-base-13.bin.gz",
+        "gzipBytes": 2387855,
+        "sha256": "368e4c15bf75b215680977aaac43c93325c5cf6d9693915bbe09427971667f0f"
+      },
+      {
+        "url": "/models/female-base-14.bin",
+        "bytes": 4012936,
+        "gzip": "/models/female-base-14.bin.gz",
+        "gzipBytes": 2352106,
+        "sha256": "277a4b410294252eeb36f846cc4da9cd1a183fbf0c34190815ec75dd268b83cd"
+      },
+      {
+        "url": "/models/female-base-15.bin",
+        "bytes": 297812,
+        "gzip": "/models/female-base-15.bin.gz",
+        "gzipBytes": 177424,
+        "sha256": "2c62d3128b711ed75c0b82df577a2580fbba0763e8306d2d028f1b6afa959100"
+      },
+      {
+        "url": "/models/female-joint-additions-8d95b6b434cd4e04.bin",
+        "bytes": 15528,
+        "gzip": "/models/female-joint-additions-8d95b6b434cd4e04.bin.gz",
+        "gzipBytes": 9333,
+        "sha256": "8d95b6b434cd4e045e082946421768323944829b3804c5c8e479b5fb513bab26"
+      },
+      {
+        "url": "/models/female-ligament-registration-d0014244ff9ff6c0.bin",
+        "bytes": 697024,
+        "gzip": "/models/female-ligament-registration-d0014244ff9ff6c0.bin.gz",
+        "gzipBytes": 356374,
+        "sha256": "d0014244ff9ff6c0bcccd807c113ad754ba301fa1d85bcab5f7168e53a0f2e3b"
+      },
+      {
+        "url": "/models/z-nerves-female-0.bin",
+        "bytes": 4056160,
+        "gzip": "/models/z-nerves-female-0.bin.gz",
+        "gzipBytes": 2383624,
+        "sha256": "29fb15f2e7cee1d23b761a118548046a1207da4f1e325933dc01a7c17e853fbd"
+      },
+      {
+        "url": "/models/z-nerves-female-1.bin",
+        "bytes": 3623456,
+        "gzip": "/models/z-nerves-female-1.bin.gz",
+        "gzipBytes": 2179380,
+        "sha256": "8e2414792b4cff88bc8ad14a5c4a498d828134e04b86cbc1a9fea2c9b188d365"
+      }
+    ]
+  },
+  "registration": {
+    "controls": 2008,
+    "smoothing": 0.0001,
+    "torsoControlSmoothing": 0.01,
+    "clearanceEnvelope": {
+      "bodyScale": 1.035,
+      "limbScale": 1.08,
+      "headScale": 1.045,
+      "kneeExtraScale": 0.06,
+      "footExtraScale": 0.05,
+      "neckExtraScale": 0.09,
+      "posteriorHeadExtraScale": 0.18
+    },
+    "jacobianSamples": 44723,
+    "minimumSampledJacobian": 0.10366364524652026,
+    "nonPositiveJacobianSamples": 0,
+    "jacobianStage": "Registration, clearance, posterior contour adjustment, head/neck tightening, facial/profile registration and breast envelope before mesh relaxation",
+    "posteriorTightening": {
+      "settings": {
+        "backShiftM": 0.014,
+        "neckShiftM": 0.022,
+        "centralBackWeight": 0.2,
+        "backHeightFadeInM": [
+          1,
+          1.15
+        ],
+        "backHeightFadeOutM": [
+          1.32,
+          1.43
+        ],
+        "neckHeightFadeInM": [
+          1.3,
+          1.4
+        ],
+        "neckHeightFadeOutM": [
+          1.445,
+          1.49
+        ],
+        "spineWidthFadeM": [
+          0.02,
+          0.06
+        ],
+        "lateralWidthFadeM": [
+          0.12,
+          0.22
+        ],
+        "posteriorDepthFadeM": [
+          -0.07,
+          -0.01
+        ]
+      },
+      "affectedVertices": 6985,
+      "maximumForwardShiftM": 0.022,
+      "anteriorVerticesShifted": 0,
+      "scalpVerticesShifted": 0,
+      "lateralVerticesShifted": 0
+    },
+    "headNeckTightening": {
+      "settings": {
+        "neckWidthReduction": 0.24,
+        "neckHeightFadeInM": [
+          1.31,
+          1.39
+        ],
+        "neckHeightFadeOutM": [
+          1.455,
+          1.495
+        ],
+        "shoulderWidthFadeM": [
+          0.12,
+          0.2
+        ],
+        "anteriorDepthFadeM": [
+          0.025,
+          0.06
+        ],
+        "crownWidthReduction": 0.025,
+        "crownWidthHeightFadeM": [
+          1.56,
+          1.615
+        ],
+        "crownLoweringM": 0.0065,
+        "crownHeightFadeM": [
+          1.565,
+          1.625
+        ]
+      },
+      "affectedVertices": 6879,
+      "maximumLateralShiftM": 0.0268959583205267,
+      "maximumCrownLoweringM": 0.0065,
+      "belowShoulderVerticesShifted": 0,
+      "faceVerticesShifted": 0
+    },
+    "headProfileRegistration": {
+      "settings": {
+        "anteriorHeightsM": [
+          1.31,
+          1.34,
+          1.37,
+          1.39,
+          1.41,
+          1.425,
+          1.44,
+          1.47,
+          1.5,
+          1.51,
+          1.53,
+          1.55,
+          1.58
+        ],
+        "anteriorRetractionM": [
+          0,
+          0,
+          0.0015,
+          0.003,
+          0.014,
+          0.017,
+          0.011,
+          0.009,
+          0.011,
+          0.01,
+          0.003,
+          0,
+          0
+        ],
+        "neckWidthFadeM": [
+          0.008,
+          0.032
+        ],
+        "faceWidthFadeM": [
+          0.025,
+          0.07
+        ],
+        "faceHeightBlendM": [
+          1.405,
+          1.45
+        ],
+        "anteriorDepthFadeM": [
+          0.005,
+          0.03
+        ],
+        "noseHeightM": 1.504,
+        "noseHeightSigmaM": 0.013,
+        "noseWidthFadeM": [
+          0.012,
+          0.04
+        ],
+        "noseLoweringM": 0.003,
+        "posteriorHeightFadeInM": [
+          1.525,
+          1.548
+        ],
+        "posteriorHeightFadeOutM": [
+          1.62,
+          1.635
+        ],
+        "posteriorDepthFadeM": [
+          -0.065,
+          -0.025
+        ],
+        "posteriorWidthFadeM": [
+          0.06,
+          0.09
+        ],
+        "posteriorRetractionM": 0.013,
+        "posteriorHeightM": 1.575,
+        "posteriorHeightSigmaM": 0.03
+      },
+      "affectedVertices": 3184,
+      "maximumAnteriorRetractionM": 0.01699889173238862,
+      "maximumPosteriorRetractionM": 0.012999047086753295,
+      "maximumNoseLoweringM": 0.0029985705567941636,
+      "belowShoulderVerticesShifted": 0
+    },
+    "breastEnvelope": {
+      "settings": {
+        "lateralExpansionM": 0.012,
+        "lateralFadeInM": [
+          0.11,
+          0.13
+        ],
+        "lateralFadeOutM": [
+          0.16,
+          0.2
+        ],
+        "heightFadeInM": [
+          1.1,
+          1.15
+        ],
+        "heightFadeOutM": [
+          1.23,
+          1.3
+        ],
+        "anteriorFadeInM": [
+          0.015,
+          0.06
+        ],
+        "anteriorFadeOutM": [
+          0.115,
+          0.145
+        ]
+      },
+      "affectedVertices": 1694,
+      "maximumLateralExpansionM": 0.012,
+      "posteriorVerticesShifted": 0,
+      "outsideChestVerticesShifted": 0
+    },
+    "meshSmoothing": {
+      "method": "Distance-weighted Taubin relaxation, detail masks, smooth displacement caps and local orientation backtracking",
+      "settings": {
+        "iterations": 100,
+        "lambda": 0.5,
+        "mu": -0.53,
+        "minimumEdgeWeightLengthM": 0.0004,
+        "bodyDisplacementLimitM": 0.006,
+        "detailDisplacementLimitM": 0.001,
+        "bodyInwardLimitM": 0.0015,
+        "detailInwardLimitM": 0.0004
+      },
+      "vertices": 42092,
+      "trianglesChecked": 84180,
+      "reversedTriangles": 0,
+      "maximumDisplacementM": 0.00599273712077568,
+      "p95DisplacementM": 0.00333459347778881,
+      "rmsDisplacementM": 0.0016372931527174894,
+      "bodyLaplacianEnergyRatio": 0.10065636424162337,
+      "signedVolumeRatio": 1.0068866708335227,
+      "backtrackingPasses": 8
+    },
+    "posedExtremities": {
+      "settings": {
+        "path": "female-skin-extremities.npz",
+        "sha256": "bfd44bd8eb3a483a8d88059b64e03bfc2095ee33276b4dc10b171438d13a501d",
+        "bytes": 77135,
+        "source": "BodyParts3D FJ2810 external skin, transformed by the existing female body morph",
+        "license": "CC-BY-4.0",
+        "regions": [
+          {
+            "name": "left_hand",
+            "side": 1,
+            "bodyCutM": 0.9,
+            "patchCutM": 0.885,
+            "outwardClearanceM": 0.0035
+          },
+          {
+            "name": "right_hand",
+            "side": -1,
+            "bodyCutM": 0.9,
+            "patchCutM": 0.885,
+            "outwardClearanceM": 0.0035
+          },
+          {
+            "name": "left_foot",
+            "side": 1,
+            "bodyCutM": 0.175,
+            "patchCutM": 0.155,
+            "outwardClearanceM": 0.003
+          },
+          {
+            "name": "right_foot",
+            "side": -1,
+            "bodyCutM": 0.175,
+            "patchCutM": 0.155,
+            "outwardClearanceM": 0.003
+          }
+        ],
+        "referenceChunk": {
+          "path": "body-10.bin",
+          "sha256": "4a959d998acd35cf88518a0f2f8ab99b42d9f69c7ce0d6a814df315eeac807ac"
+        },
+        "referenceMorphReportSha256": "3bd226a86e96ead166ca87ab45bcab4ff80188e5b179c35d47104d0e55d743e5"
+      },
+      "collars": [
+        {
+          "region": "left_hand",
+          "bodyBoundaryVertices": 123,
+          "patchBoundaryVertices": 61,
+          "seamTriangles": 184,
+          "patchTriangles": 2091
+        },
+        {
+          "region": "right_hand",
+          "bodyBoundaryVertices": 98,
+          "patchBoundaryVertices": 61,
+          "seamTriangles": 159,
+          "patchTriangles": 2017
+        },
+        {
+          "region": "left_foot",
+          "bodyBoundaryVertices": 143,
+          "patchBoundaryVertices": 66,
+          "seamTriangles": 209,
+          "patchTriangles": 1750
+        },
+        {
+          "region": "right_foot",
+          "bodyBoundaryVertices": 123,
+          "patchBoundaryVertices": 62,
+          "seamTriangles": 185,
+          "patchTriangles": 1752
+        }
+      ]
+    },
+    "faceAlignment": {
+      "settings": {
+        "heightsM": [
+          1.4,
+          1.435,
+          1.455,
+          1.48,
+          1.51,
+          1.535,
+          1.555,
+          1.58
+        ],
+        "loweringM": [
+          0,
+          0.002,
+          0.006,
+          0.009,
+          0.01,
+          0.01,
+          0.003,
+          0
+        ],
+        "anteriorDepthFadeM": [
+          0.01,
+          0.035
+        ],
+        "faceWidthFadeM": [
+          0.06,
+          0.08
+        ],
+        "earWidthFadeM": [
+          0.06,
+          0.074
+        ],
+        "earHeightFadeInM": [
+          1.46,
+          1.49
+        ],
+        "earHeightFadeOutM": [
+          1.535,
+          1.565
+        ],
+        "earDepthFadeInM": [
+          -0.06,
+          -0.035
+        ],
+        "earDepthFadeOutM": [
+          0.01,
+          0.03
+        ],
+        "earLoweringM": 0.006,
+        "earForwardM": 0.004,
+        "earOutwardM": 0.002
+      },
+      "affectedVertices": 2645,
+      "maximumLoweringM": 0.01,
+      "crownVerticesShifted": 0
+    },
+    "forearmEnvelope": {
+      "settings": {
+        "medialExpansionM": 0.008,
+        "heightFadeInM": [
+          0.9,
+          0.935
+        ],
+        "heightFadeOutM": [
+          1.065,
+          1.125
+        ],
+        "axisHeightsM": [
+          0.9,
+          0.96,
+          1.02,
+          1.08,
+          1.125
+        ],
+        "axisAbsXM": [
+          0.25,
+          0.239,
+          0.227,
+          0.209,
+          0.195
+        ],
+        "innerDistanceFadeInM": [
+          -0.08,
+          -0.06
+        ],
+        "outerDistanceFadeOutM": [
+          -0.02,
+          0.02
+        ],
+        "minimumLateralFadeM": [
+          0.145,
+          0.16
+        ],
+        "posteriorFadeInM": [
+          -0.09,
+          -0.06
+        ],
+        "anteriorFadeOutM": [
+          0.025,
+          0.065
+        ]
+      },
+      "affectedVertices": 2647,
+      "maximumMedialExpansionM": 0.008,
+      "belowWristVerticesShifted": 0,
+      "aboveElbowVerticesShifted": 0,
+      "centralTorsoVerticesShifted": 0,
+      "stage": "Localized envelope after mesh relaxation and posed extremity collars",
+      "jacobianSamples": 39311,
+      "minimumSampledJacobian": 0.6145427184156014,
+      "nonPositiveJacobianSamples": 0,
+      "trianglesChecked": 73992,
+      "reversedTriangles": 0
+    },
+    "minimumTriangleAreaM2": 2.4327923777261363e-11,
+    "sourceSeamNormalFallbacks": 2,
+    "surfaceAreaM2": 1.7002729843701827,
+    "vertices": 36998,
+    "triangles": 73992,
+    "bounds": [
+      [
+        -0.32568952441215515,
+        -0.003992612008005381,
+        -0.14145678281784058
+      ],
+      [
+        0.3245059549808502,
+        1.629578709602356,
+        0.142441987991333
+      ]
+    ]
+  },
+  "simplifiedSource": {
+    "vertices": 42092,
+    "triangles": 84180,
+    "positionsSha256": "f932abd8af1e87464953de79e296df87a4b51fc40b54c042e7c8db0bb8ebe520",
+    "indicesSha256": "267c7878f2ff4f1de0ccb0633b498970fbca85a71e726111deb02cd2dc87c5fe",
+    "errorM": 0.0001647804892854765
+  },
+  "addedPart": "VH_F_skin",
+  "addedConcept": "HRA:VH_F_skin",
+  "addedTriangles": 73992,
+  "assets": [
+    {
+      "path": "female-skin-245a5704d92cbabf.bin",
+      "bytes": 1553868,
+      "sha256": "245a5704d92cbabfff8915f30648daee32c6d27e23b98b275bb92a1fea928980"
+    },
+    {
+      "path": "female-skin-245a5704d92cbabf.bin.gz",
+      "bytes": 911684,
+      "sha256": "9b1f96c06f588594d3cc2b7c9e1300586e433396795fbf52ba125801307e8776"
+    }
+  ]
+}

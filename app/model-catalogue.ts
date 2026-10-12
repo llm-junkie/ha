@@ -14,8 +14,8 @@ export const MODELS = {
     manifest: "/models/atlas-female.json",
     label: "Female · Experimental",
     source: "BodyParts3D + HRA + Z-Anatomy",
-    pieces: 2455,
-    concepts: 4461,
+    pieces: 2456,
+    concepts: 4462,
   },
 } as const;
 
@@ -26,14 +26,19 @@ export function anatomicalSources(parts: readonly Pick<Part, "id">[]) {
       url: "https://github.com/LluisV/Z-Anatomy/tree/6c7f9016bd5899ac8edafd31b9900c151df42ed6/Resources/Models/FBX",
     },
     hra: { name: "HRA", url: "https://doi.org/10.48539/HBM352.BTSQ.586" },
+    skin: {
+      name: "HRA",
+      url: "https://github.com/hubmapconsortium/ccf-releases/blob/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.3/models/3d-vh-f-skin.glb",
+    },
     bp: {
       name: "BodyParts3D",
       url: "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html",
     },
   };
   const keys = new Set(
-    parts.map((p) => (p.id.startsWith("ZA_N") ? "z" : p.id.startsWith("VH_F_") ? "hra" : "bp")),
+    parts.map((p) => (p.id.startsWith("ZA_N") ? "z" : p.id === "VH_F_skin" ? "skin" : p.id.startsWith("VH_F_") ? "hra" : "bp")),
   );
+  if (parts.some((p) => p.id === "VH_F_skin")) keys.add("bp");
   return [...keys].map((key) => sources[key]);
 }
 

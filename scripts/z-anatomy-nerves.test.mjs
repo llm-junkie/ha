@@ -60,11 +60,11 @@ for (const atlas of atlases) {
     parts = atlas.parts.filter((p) => records.has(p.id));
   const buffers = await Promise.all(atlas.chunks.map((c) => read(c.url.split("/").at(-1))));
   test(`${sex}: existing identities, classifications, geometry and concepts are retained`, async () => {
-    const base = atlas.parts.filter((p) => !records.has(p.id));
+    const base = atlas.parts.filter((p) => !records.has(p.id) && p.id !== "VH_F_skin");
     assert.equal(hash(JSON.stringify(base)), model.partsSha256);
     assert.equal(base.length, model.baseParts);
     const concepts = atlas.concepts
-      .filter((c) => !c.id.startsWith("ZA_"))
+      .filter((c) => !c.id.startsWith("ZA_") && c.id !== "HRA:VH_F_skin")
       .map((c) => ({
         ...c,
         elements: c.elements.filter((id) => !records.has(id)),
@@ -194,14 +194,22 @@ for (const atlas of atlases) {
     );
   });
   test(`${sex}: additive installation is idempotent and leaves the input unchanged`, () => {
-    const original = JSON.stringify(atlas),
+    // Replay the neural import at its own pipeline stage, before the later skin supplement.
+    const neuralAtlas = structuredClone(atlas);
+    neuralAtlas.parts = neuralAtlas.parts.filter((p) => p.id !== "VH_F_skin");
+    neuralAtlas.concepts = neuralAtlas.concepts.filter((c) => c.id !== "HRA:VH_F_skin");
+    neuralAtlas.chunks = neuralAtlas.chunks.filter((c) => !/\/female-skin-/.test(c.url));
+    neuralAtlas.supplements = neuralAtlas.supplements.filter((s) => s.source === "Z-Anatomy");
+    neuralAtlas.triangles = neuralAtlas.parts.reduce((s, p) => s + p.indexCount / 3, 0);
+    neuralAtlas.optimized.preservedMeshes = neuralAtlas.parts.length;
+    const original = JSON.stringify(neuralAtlas),
       offset = model.baseChunks.length;
     const packed = {
       parts: parts.map((p) => ({ ...p, chunk: p.chunk - offset })),
-      chunks: atlas.chunks.slice(offset),
+      chunks: neuralAtlas.chunks.slice(offset),
     };
-    assert.deepEqual(installSupplement(atlas, packed, recipe).atlas, atlas);
-    assert.equal(JSON.stringify(atlas), original);
+    assert.deepEqual(installSupplement(neuralAtlas, packed, recipe).atlas, neuralAtlas);
+    assert.equal(JSON.stringify(neuralAtlas), original);
   });
 }
 

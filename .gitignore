@@ -28,4 +28,5 @@ yarn-error.log*
 /dist/
 /outputs/
 /work/
+__pycache__/
 *.tsbuildinfo

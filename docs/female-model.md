@@ -4,11 +4,13 @@ The model switch adds **Female (Exp)** beside the male reference; **Exp** means 
 
 ## Sources and scope
 
-Base assets are pinned to [Anatolume 39f2c01](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf), importing [Human Atlas Enhanced 9e0d710](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe). That assembly contains 2,181 adapted BodyParts3D meshes and 64 HRA meshes: pelvis (8), reproductive structures (38), breasts (16), and knee ligaments (2), totaling 2,245 selectable meshes and 4,248 concepts. The [Z-Anatomy supplement](z-anatomy-nerves.md) adds 210 neural meshes and 213 concepts; the current female catalogue has 2,455 meshes and 4,461 concepts. Breast tissue is separate from the optional nipple/areolar surface layer.
+Base assets are pinned to [Anatolume 39f2c01](https://github.com/isunky/Anatolume/tree/39f2c018205faa756ab59b4b12fdf0d1295cfdaf), importing [Human Atlas Enhanced 9e0d710](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe). That assembly contains 2,181 adapted BodyParts3D meshes and 64 HRA meshes: pelvis (8), reproductive structures (38), breasts (16), and knee ligaments (2), totaling 2,245 selectable meshes and 4,248 concepts. The [Z-Anatomy supplement](z-anatomy-nerves.md) adds 210 neural meshes and 213 concepts; the assembly at that stage has 2,455 meshes and 4,461 concepts. Breast tissue is separate from the nipple/areolar surface layer.
 
 The application originates with **Ashe Magalhaes / [ashemag/human-atlas](https://github.com/ashemag/human-atlas)**, under MIT. Anatolume supplies the imported package; PrejudiceNeutrino's Human Atlas Enhanced supplies the female assembly and adaptation records, building on wiiiimm's fork. BodyParts3D is credited to the Database Center for Life Science. The female HRA geometry is by **Kristen Browne and Heidi Schlehlein**, *3D Reference Organ Set for United, Female, v1.5* (2023), published by HuBMAP, [DOI 10.48539/HBM352.BTSQ.586](https://doi.org/10.48539/HBM352.BTSQ.586). Both anatomy datasets use CC BY 4.0. The upstream female assembly also credits [Female Atlas by Mahendra Beniwal](https://github.com/HiMahendraBeniwal/female-atlas/tree/b0a20fa3a009ca5f6bfa07b7479312e04c862af2) as breast-presentation inspiration.
 
-This is an experimental derived model. The musculature comes from the male reference; proportions and organ placement are estimates. Female skin/genital surfaces and validated urethra/pelvic-floor replacements remain incomplete. Independent anatomical review is still pending. The upstream fit report is retained unchanged; the local registration has a separate report. Dataset attribution and adaptation notes are in [ATTRIBUTION.md](../public/ATTRIBUTION.md).
+This is an experimental derived model. The musculature comes from the male reference; proportions and organ placement are estimates. A later [HRA female skin supplement](female-skin.md) adds the complete external body surface, bringing the catalogue to 2,456 meshes and 4,462 concepts. Detailed external genital anatomy and validated urethra/pelvic-floor replacements remain incomplete. Independent anatomical review is still pending. The upstream fit report is retained unchanged; the local registrations have separate reports. Dataset attribution and adaptation notes are in [ATTRIBUTION.md](../public/ATTRIBUTION.md).
+
+The skin supplement includes smoother contours, localized head/face/ear/neck/back alignment, coverage around both breasts and medial forearms, and external hand/foot patches in the existing female pose. It uses the Body surface controls and is searchable as **Female body skin**. The [skin fit notes](female-skin.md) document the final previews, source and patch hashes, fitting recipe, opacity behavior, rebuild sequence, and geometric validation limits.
 
 ## Reproducing the reported defect
 
@@ -71,6 +73,7 @@ node scripts/import-female-model.mjs /path/to/Anatolume
 node scripts/fix-female-ligaments.mjs
 node scripts/apply-classification-overrides.mjs
 node scripts/import-z-anatomy-nerves.mjs --source-dir D:\DEV\ha\tmp\z-anatomy --download
+node scripts/import-female-skin.mjs --download
 npm test
 ```
 

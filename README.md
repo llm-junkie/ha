@@ -1,6 +1,6 @@
 # Human Atlas +
 
-An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male reference** (2,444 selectable meshes, 15 systems, 3,645 concepts) or the **experimental female study model** (2,455 meshes, 16 systems, 4,461 concepts). Both include spinal and peripheral neural structures from Z-Anatomy.
+An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Explore the **male reference** (2,444 selectable meshes, 15 systems, 3,645 concepts) or the **experimental female study model** (2,456 meshes, 16 systems, 4,462 concepts). Both include spinal and peripheral neural structures from Z-Anatomy.
 
 **[Open Human Atlas + on GitHub Pages](https://llm-junkie.github.io/ha/)**
 
@@ -11,6 +11,8 @@ An interactive 3D anatomy explorer built with React, Three.js, and shadcn/ui. Ex
 | [![Male anatomy explorer with the default systems and assembled model](docs/images/male-atlas.jpg)](docs/images/male-atlas.jpg) | [![Experimental female anatomy explorer with the default systems and assembled model](docs/images/female-atlas.jpg)](docs/images/female-atlas.jpg) |
 
 Captured from app **0.2.0** at the same desktop size and default three-quarter view, with anatomy assembled and no structure selected. Click either image for the full-size screenshot. The anatomy shown uses adapted BodyParts3D and HRA data under CC BY 4.0; see [Credits](#credits). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
+
+The female model now includes fitted body skin. [See the final forearm preview](docs/images/female-skin-forearms-fit.jpg) and [skin fit notes](docs/female-skin.md) for the head, neck, back, breast, hand and foot adjustments, source credits, and validation.
 
 ## Explore
 
@@ -30,13 +32,15 @@ Captured from app **0.2.0** at the same desktop size and default three-quarter v
 
 Body surface is enabled by default at 20% opacity in both models. Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting, and selected structures stay opaque.
 
+The same percentage can look different between models: male skin includes inner and outer surfaces that blend together, while the fitted female skin uses one outer surface. Both use the same color and material settings. Around 35–36% female opacity can look closer to 20% male opacity; the visual match depends on the camera and visible anatomy.
+
 Use the bookmark button to save up to 20 named views in this browser, reopen them, or delete them. The link button creates a shareable view, with a copyable field if clipboard access is unavailable. Saving or sharing pauses automatic rotation. Views include the current orbit, zoom, pan, inspector framing, visible systems, individual structure switches, opacity, and exploded layout. Shared views adapt their camera distance on narrower screens and work under the GitHub Pages repository path. Bookmarks remain on this device; links carry the view itself and need no account or server.
 
 ## Install and use offline
 
 Open the published site and choose the **information button** (or **Install app · App & credits** in the desktop footer), then **Install Human Atlas +** in **Take the atlas with you**, at the top of the panel. On mobile, installation, updates, and credits are available through the information button; the footer is hidden to leave more room for anatomy. The install button opens a native install prompt when supported; otherwise it shows installation steps. On iPhone or iPad, open the site in Safari, use **Share → Add to Home Screen**, keep **Open as Web App** turned on if shown, then tap **Add**. You may need to open the page menu to find Share, or tap More / View More to find Add to Home Screen. Safari does not provide a website-triggered install prompt. The install button remains available after offline saving finishes. **Ready offline** confirms that files are saved, independently of installation; the atlas also works offline in a regular browser tab.
 
-Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, both catalogues, credits, and all 33 model chunks automatically (about 68 MB compressed combined). The selected model's normal download is reused, and the other model is saved in the background. Both can then be explored offline. It also supports browsers that need the uncompressed files. The first visit can finish before the service worker takes control; offline preparation fills missing cache entries afterward.
+Stay connected until the anatomy finishes loading and the panel confirms **Ready offline**. The app saves its interface, both catalogues, credits, and all 38 model chunks automatically (about 78.5 MB compressed combined). The selected model's normal download is reused, and the other model is saved in the background. Both can then be explored offline. It also supports browsers that need the uncompressed files. The first visit can finish before the service worker takes control; offline preparation fills missing cache entries afterward.
 
 Once ready, you can reopen the atlas, search, change layers, save views, and open previously copied view links without a connection. Bookmarks and offline files belong to this browser on this device. Clearing site data removes them, and browsers can evict offline files when storage is low. The panel reports incomplete saving and offers a retry; external source websites still need a connection.
 
@@ -46,9 +50,11 @@ PWA registration runs in production builds on HTTPS or localhost. Development st
 
 ## App version
 
-The current app release is **0.2.0**. **App & credits → App updates** shows **Current version 0.2.0**, including when the app is installed or offline. The display and built files read the version from `package.json`.
+The current app release is **0.3.4**. **App & credits → App updates** shows **Current version 0.3.4**, including when the app is installed or offline. The display and built files read the version from `package.json`.
 
 Release **0.2.0** adds the experimental female model, the verified bilateral uterosacral registration correction, separate model histories and saved views, model-aware share links, and offline support for both models. See [the female model notes](docs/female-model.md) for source credits, measurements, and anatomical validation limits.
+
+The fitted female skin update adds a selectable full-body surface, smoother contours, closer head/face/neck/back alignment, breast coverage, posed hand and foot skin, and medial forearm coverage. The delivered female catalogue has 2,456 meshes and 4,462 concepts. Source pins, fitting controls, comparison previews and geometry checks are documented in [the skin fit notes](docs/female-skin.md).
 
 For the next release, run `npm version patch --no-git-tag-version` for fixes, or `npm version minor --no-git-tag-version` for new features. This updates `package.json` and `package-lock.json` together. Validate and deploy the release as usual; installed apps show the new version after an update. Each build still has a content-based cache identifier, so builds with the same release number can update correctly.
 
@@ -75,13 +81,15 @@ Validation covers mesh buffers, names and concept membership, nonoverlapping exp
 
 Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity.
 
+Female skin tests verify the source and delivered checksums, preserved underlying anatomy, finite geometry and normals, smoothing and deformation bounds, joined wrist/ankle topology, and skin coverage over breast adipose tissue, hand/toe bones and medial forearm tissue. All 93 automated tests pass for the fitted skin update; geometric checks do not replace independent anatomical review.
+
 PWA tests cover offline navigation and anatomy, subpath isolation, download deduplication, gzip and raw responses, damaged downloads, storage limits, update activation, cache reuse, and failed updates. Manual-update tests cover checking for releases, using an already prepared release without a connection, waiting for downloads, and recovering from connection or installation failures. Every production build also validates the manifest, PNG icon sizes, scoped URLs, and content hashes against the files being deployed.
 
 The production `/ha/` preview has also been reopened with its server stopped: full anatomy, search, and isolation remained usable. Browser checks confirmed that **Update** applies a new release, reports when the app is current, and allows retrying a failed connection. Update controls and feedback remain visible on a small phone layout. Saved views were retained after an update. The manual install button, expandable iPhone/iPad steps, persistent install link, and offline status were checked on a small phone layout; OS-level installation on physical phones has not been tested.
 
 ## Anatomy data
 
-The male viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. The female mode imports Anatolume's pinned experimental model, combining adapted BodyParts3D anatomy with HRA female structures. Neither represents every structure or variation. Female proportions and organ placement await independent anatomical review; female skin/genital surfaces and validated urethra/pelvic-floor replacements are incomplete.
+The male viewer uses **BodyParts3D 4.0**, an adult male reference anatomy, licensed **CC BY 4.0**. The female mode imports Anatolume's pinned experimental model, combining adapted BodyParts3D anatomy with HRA female structures. It also includes [fitted HRA female body skin](docs/female-skin.md), using the same Body surface controls as the male model. Neither represents every structure or variation. Female proportions and organ placement await independent anatomical review; detailed external genital anatomy and validated urethra/pelvic-floor replacements remain incomplete.
 
 The female uterosacral registration corrects a mismatch between the reproductive and pelvic transforms while preserving the genital attachment region. Source comparison, anatomical references, measurements, mesh checks, and before/after projections are documented in [female-model.md](docs/female-model.md). This verifies registration consistency, rather than independently validating the source attachment anatomy.
 
@@ -92,9 +100,9 @@ Geometry is simplified for browser performance. The male reference retains all 2
 | Model | Meshes | Concepts | Systems | Triangles | Compressed geometry |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | Male · BodyParts3D + Z-Anatomy | 2,444 | 3,645 | 15 | 2,634,798 | About 37.4 MB |
-| Female · Experimental | 2,455 | 4,461 | 16 | 2,816,002 | About 40.1 MB |
+| Female · Experimental | 2,456 | 4,462 | 16 | 2,889,994 | About 41.0 MB |
 
-Both models total about 77.5 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
+Both models total about 78.5 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
 
 Both catalogues include 140 source-verified classification overrides, including the iliotibial tracts and corrections for muscles, cartilage/discs, teeth, cerebral fluid spaces, liver segments, and papillary heart muscles. The [classification audit](docs/anatomy-classification.md) documents the layer policy, references, and reproducible corrections.
 
@@ -114,7 +122,7 @@ The repository includes browser-ready geometry. Rebuilding it is optional: obtai
 
 The female model has a separate pinned import and registration pipeline. Follow [the female rebuild instructions](docs/female-model.md#repeat-the-checks) to reproduce its assets, measurement report, and comparison figure.
 
-After the base imports and classification corrections, [reapply the Z-Anatomy supplement](docs/z-anatomy-nerves.md#reproduce). Its pinned FBX import uses the existing Node dependencies, preserves the base meshes and refreshes the female catalogue checksum. The new chunks are included automatically in offline model caching.
+After the base imports and classification corrections, [reapply the Z-Anatomy supplement](docs/z-anatomy-nerves.md#reproduce), then [reapply the female skin](docs/female-skin.md#rebuild-and-verify). Both supplements preserve the existing meshes and refresh the female catalogue checksum. The new chunks are included automatically in offline model caching.
 
 ## Deploy
 
@@ -147,6 +155,7 @@ Open http://localhost:4173/ha/. A normal `npm run build` uses `/` and can also b
 | **PrejudiceNeutrino / [Human Atlas Enhanced](https://github.com/PrejudiceNeutrino/human-atlas-enhanced/tree/9e0d710fcc1d467dc758d61d6f417231cb1472fe)** | Experimental female assembly, HRA integration, estimated body/breast adaptations, and upstream fit records. |
 | **[BodyParts3D / Database Center for Life Science](https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html)** | BodyParts3D 4.0 male reference geometry, anatomical names, and concept relationships. |
 | **Kristen Browne and Heidi Schlehlein / [Human Reference Atlas · HuBMAP](https://doi.org/10.48539/HBM352.BTSQ.586)** | *3D Reference Organ Set for United, Female, v1.5* (2023): the female HRA source geometry. |
+| **Kristen Browne and contributors / [HuBMAP CCF 3D Reference Object Library](https://github.com/hubmapconsortium/ccf-releases/blob/b036a91aaf7234f462b1249d4a5f4fb0e982f412/v1.3/models/3d-vh-f-skin.glb)** | Female body skin from v1.3, fitted locally with posed BodyParts3D hand/foot patches under CC BY 4.0. |
 | **Gauthier Kervyn and contributors / [Z-Anatomy](https://github.com/Z-Anatomy/Models-of-human-anatomy), distributed by [Lluís Vinent Juanico](https://github.com/LluisV/Z-Anatomy)** | Spinal and peripheral neural source surfaces, adapted for both models under CC BY-SA 4.0. |
 | **[Rayzi0417 / PR #283](https://github.com/ashemag/human-atlas/pull/283)** | Reference for the peripheral-nerve integration. |
 

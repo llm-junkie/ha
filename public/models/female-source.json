@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "atlas-female.json",
-      "bytes": 1750645,
-      "sha256": "82e8c2ea3bc480b6afe335c50af553ea54a3468ce285a09a1353b677ed488b4c"
+      "bytes": 1751664,
+      "sha256": "d4d4bb6bd50c30e74bbe6d6270e8e3a9c5917c5e8fcec5780eb0877afff47a8a"
     },
     {
       "path": "female-fit-report.json",
@@ -200,6 +200,21 @@
       "path": "female-ligament-fit-report.json",
       "bytes": 3038,
       "sha256": "b56d927faa05df9aace9a7ade418b93417bf31a4addf6f3b31aeb8d2e27a42e6"
+    },
+    {
+      "path": "female-skin-245a5704d92cbabf.bin",
+      "bytes": 1553868,
+      "sha256": "245a5704d92cbabfff8915f30648daee32c6d27e23b98b275bb92a1fea928980"
+    },
+    {
+      "path": "female-skin-245a5704d92cbabf.bin.gz",
+      "bytes": 911684,
+      "sha256": "9b1f96c06f588594d3cc2b7c9e1300586e433396795fbf52ba125801307e8776"
+    },
+    {
+      "path": "female-skin-source.json",
+      "bytes": 20105,
+      "sha256": "65388885b4d02448c8a9e677310c8dca127cfc2e73a27b4af0edceb93de07ad3"
     }
   ],
   "upstreamFiles": [
@@ -1194,5 +1209,13 @@
     "provenance": "z-anatomy-source.json",
     "parts": 210,
     "adaptation": "Same estimated non-breast body morph; no female-specific nerve validation"
+  },
+  "skinSupplement": {
+    "source": "Human Reference Atlas + BodyParts3D",
+    "license": "CC-BY-4.0",
+    "parts": 1,
+    "provenance": "female-skin-source.json",
+    "sourceSha256": "0fc377c7a2e7e9644b81d318feda9d0b2c5a38f39bd14e74966f8b6364eb0a78",
+    "adaptation": "Female HRA body surface with posed external BodyParts3D hand/foot patches fitted to the existing derived anatomy; experimental"
   }
 }
