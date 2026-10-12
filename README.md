@@ -27,7 +27,7 @@ Captured from app **0.2.0** at the same desktop size and default three-quarter v
 - Use compact controls and detail panels on mobile.
 - Install the atlas on your home screen or desktop and explore the complete model offline.
 
-Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting or zooming, and selected structures stay opaque.
+Body surface is enabled by default at 20% opacity in both models. Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting or zooming, and selected structures stay opaque.
 
 Use the bookmark button to save up to 20 named views in this browser, reopen them, or delete them. The link button creates a shareable view, with a copyable field if clipboard access is unavailable. Saving or sharing pauses automatic rotation. Views include the current orbit, zoom, pan, inspector framing, visible systems, individual structure switches, opacity, and exploded layout. Shared views adapt their camera distance on narrower screens and work under the GitHub Pages repository path. Bookmarks remain on this device; links carry the view itself and need no account or server.
 

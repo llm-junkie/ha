@@ -48,6 +48,8 @@ test("model choice honors links and query, remembers preferences, and tolerates 
   assert(!isModelAtlas({}, "male"));
   assert(defaultLayers("female", female).includes("mammary"));
   assert(!defaultLayers("male", male).includes("mammary"));
+  assert(defaultLayers("male", male).includes("integumentary"));
+  assert(defaultLayers("female", female).includes("integumentary"));
 });
 
 test("female anatomy search and layer visibility keep reproductive and breast structures independent", () => {
