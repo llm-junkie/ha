@@ -4,12 +4,15 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const corrections = JSON.parse(await readFile(new URL("../data/anatomy/classification-overrides.json", import.meta.url)));
+// Hash the parsed definition so Windows checkout line endings do not change provenance.
+const correctionHash = createHash("sha256").update(JSON.stringify(corrections)).digest("hex");
 
 /** Verify pinned identities before changing only the viewer's layer assignment. */
 export function applyClassificationOverrides(atlas) {
   const targets = corrections.parts.map((record) => {
     const matches = atlas.parts.filter((part) => part.id === record.id);
-    if (matches.length !== 1 || matches[0].name.toLowerCase() !== record.name.toLowerCase())
+    if (matches.length !== 1 || matches[0].name.toLowerCase() !== record.name.toLowerCase() ||
+        matches[0].conceptId !== record.conceptId)
       throw new Error(`Classification correction has an unexpected source identity: ${record.id}`);
     const part = matches[0];
     if (![record.originalSystem, record.system].includes(part.system))
@@ -42,10 +45,13 @@ async function main() {
   femaleRecord.bytes = female.bytes.length;
   femaleRecord.sha256 = createHash("sha256").update(female.bytes).digest("hex");
   source.classificationOverrides = {
-    parts: corrections.parts.map((part) => part.id),
-    system: "connective",
-    reason: corrections.reason,
-    reference: corrections.reference,
+    schemaVersion: corrections.schemaVersion,
+    verifiedOn: corrections.verifiedOn,
+    definition: "data/anatomy/classification-overrides.json",
+    sha256: correctionHash,
+    parts: corrections.parts.map(({ id, system, group }) => ({ id, system, group })),
+    groups: corrections.groups,
+    sources: corrections.sources,
   };
   await writeFile(new URL("female-source.json", folder), JSON.stringify(source, null, 2));
 }

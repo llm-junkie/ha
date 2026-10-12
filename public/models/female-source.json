@@ -8,8 +8,8 @@
   "files": [
     {
       "path": "atlas-female.json",
-      "bytes": 1613718,
-      "sha256": "57d7a86fe63e62c1883d921fb1cb64fd621877d5f500208bb35528ec5fd69c87"
+      "bytes": 1613831,
+      "sha256": "fa7c40f156d68bedc2f1dd0711906ec1565d93e062410579e6a115b68f364015"
     },
     {
       "path": "female-fit-report.json",
@@ -312,12 +312,879 @@
     "revision": "39f2c018205faa756ab59b4b12fdf0d1295cfdaf"
   },
   "classificationOverrides": {
+    "schemaVersion": 2,
+    "verifiedOn": "2026-10-12",
+    "definition": "data/anatomy/classification-overrides.json",
+    "sha256": "56b0943b68d0331f61472ec74c98684745604efb60d7dc180ff172295c60ee73",
     "parts": [
-      "FJ1423",
-      "FJ1423M"
+      {
+        "id": "FJ1252",
+        "system": "digestive",
+        "group": "gingiva"
+      },
+      {
+        "id": "FJ1253",
+        "system": "digestive",
+        "group": "gingiva"
+      },
+      {
+        "id": "FJ1254",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1255",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1256",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1257",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1258",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1259",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1260",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1261",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1262",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1263",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1264",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1265",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1266",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1267",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1268",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1269",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1270",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1271",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1272",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1273",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1274",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1275",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1276",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1277",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1278",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1279",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1280",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1281",
+        "system": "digestive",
+        "group": "teeth"
+      },
+      {
+        "id": "FJ1291",
+        "system": "connective",
+        "group": "orbital-tendon"
+      },
+      {
+        "id": "FJ1342",
+        "system": "connective",
+        "group": "orbital-tendon"
+      },
+      {
+        "id": "FJ1409",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1409M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1410",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1410M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1411",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1411M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1423",
+        "system": "connective",
+        "group": "iliotibial"
+      },
+      {
+        "id": "FJ1423M",
+        "system": "connective",
+        "group": "iliotibial"
+      },
+      {
+        "id": "FJ1438",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1438M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1439",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1439M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1440",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1440M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1471",
+        "system": "connective",
+        "group": "retinacula"
+      },
+      {
+        "id": "FJ1471M",
+        "system": "connective",
+        "group": "retinacula"
+      },
+      {
+        "id": "FJ1504",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1504M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1532",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1532M",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ1730",
+        "system": "nervous",
+        "group": "ventricular-system"
+      },
+      {
+        "id": "FJ1731",
+        "system": "nervous",
+        "group": "ventricular-system"
+      },
+      {
+        "id": "FJ1752",
+        "system": "nervous",
+        "group": "ventricular-system"
+      },
+      {
+        "id": "FJ1755",
+        "system": "nervous",
+        "group": "choroid-plexus"
+      },
+      {
+        "id": "FJ1767",
+        "system": "nervous",
+        "group": "ventricular-system"
+      },
+      {
+        "id": "FJ1803",
+        "system": "nervous",
+        "group": "choroid-plexus"
+      },
+      {
+        "id": "FJ1814",
+        "system": "nervous",
+        "group": "ventricular-system"
+      },
+      {
+        "id": "FJ1858",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2409",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2418",
+        "system": "cardiac",
+        "group": "papillary-muscles"
+      },
+      {
+        "id": "FJ2419",
+        "system": "cardiac",
+        "group": "papillary-muscles"
+      },
+      {
+        "id": "FJ2429",
+        "system": "cardiac",
+        "group": "papillary-muscles"
+      },
+      {
+        "id": "FJ2430",
+        "system": "cardiac",
+        "group": "papillary-muscles"
+      },
+      {
+        "id": "FJ2437",
+        "system": "cardiac",
+        "group": "papillary-muscles"
+      },
+      {
+        "id": "FJ2440",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2554",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2555",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2556",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2557",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2558",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2740",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2742",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2743",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2745",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2746",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2747",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2752",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2754",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2755",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2757",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2758",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2759",
+        "system": "muscular",
+        "group": "skeletal-muscles"
+      },
+      {
+        "id": "FJ2769",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2773",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2775",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2776",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2792",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2793",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2795",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2808",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ2818",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2819",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2820",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2821",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2822",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2823",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ2824",
+        "system": "digestive",
+        "group": "liver-segments"
+      },
+      {
+        "id": "FJ3202",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3203",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3204",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3205",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3206",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3207",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3208",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3209",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3210",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3211",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3212",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3213",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3214",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3215",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3216",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3217",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3218",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3219",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3220",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3221",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3222",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3223",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3224",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3239",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3242",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3245",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3248",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3251",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3254",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3255",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3263",
+        "system": "skeletal",
+        "group": "skull-bones"
+      },
+      {
+        "id": "FJ3265",
+        "system": "skeletal",
+        "group": "skull-bones"
+      },
+      {
+        "id": "FJ3333",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3335",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3337",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3339",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3341",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3343",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3345",
+        "system": "connective",
+        "group": "cartilage"
+      },
+      {
+        "id": "FJ3369",
+        "system": "skeletal",
+        "group": "skull-bones"
+      },
+      {
+        "id": "FJ3371",
+        "system": "skeletal",
+        "group": "skull-bones"
+      }
     ],
-    "system": "connective",
-    "reason": "The iliotibial tracts are regions of fascia lata, classified as connective tissue in this viewer.",
-    "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2100245/"
+    "groups": {
+      "iliotibial": {
+        "reason": "The iliotibial tracts are thickened fascia lata; this viewer places standalone fascia in Connective tissue.",
+        "sources": [
+          "bp3d",
+          "iliotibial"
+        ]
+      },
+      "skeletal-muscles": {
+        "reason": "These are skeletal muscle organs, including pharyngeal muscles, rather than bones, fascia, or airways.",
+        "sources": [
+          "bp3d",
+          "lowerMuscles",
+          "shoulderMuscles",
+          "pharynx"
+        ]
+      },
+      "skull-bones": {
+        "reason": "The inferior nasal conchae and lacrimal bones are bone organs; this viewer places individual bones in Skeleton.",
+        "sources": [
+          "bp3d",
+          "skull"
+        ]
+      },
+      "cartilage": {
+        "reason": "The meshes represent cartilage or intervertebral discs; this viewer places separately selectable cartilage and discs in Connective tissue.",
+        "sources": [
+          "bp3d",
+          "cartilage",
+          "discs",
+          "costal",
+          "larynx"
+        ]
+      },
+      "teeth": {
+        "reason": "Teeth are accessory digestive organs used for mechanical digestion; the Skeleton layer describes bones.",
+        "sources": [
+          "bp3d",
+          "oral"
+        ]
+      },
+      "gingiva": {
+        "reason": "Gingiva is oral mucosa surrounding the teeth, grouped with the mouth in Digestive.",
+        "sources": [
+          "bp3d",
+          "oral",
+          "gingiva"
+        ]
+      },
+      "retinacula": {
+        "reason": "The wrist flexor retinacula are fibrous bands forming the roof of the carpal tunnel.",
+        "sources": [
+          "bp3d",
+          "retinaculum"
+        ]
+      },
+      "orbital-tendon": {
+        "reason": "The common tendinous rings are fibrous origins of extraocular muscles, grouped with standalone tendons and orbital check ligaments.",
+        "sources": [
+          "bp3d",
+          "annulus"
+        ]
+      },
+      "ventricular-system": {
+        "reason": "These are cerebral ventricles and the interventricular foramen of the brain, grouped in Nervous system.",
+        "sources": [
+          "bp3d",
+          "ventricles",
+          "ventricularAnatomy"
+        ]
+      },
+      "choroid-plexus": {
+        "reason": "The cerebral choroid plexuses produce cerebrospinal fluid within the brain ventricular system.",
+        "sources": [
+          "bp3d",
+          "ventricles",
+          "ventricularAnatomy"
+        ]
+      },
+      "liver-segments": {
+        "reason": "Hepatovenous segments are liver regions defined by drainage territories, grouped in Digestive.",
+        "sources": [
+          "bp3d",
+          "liver"
+        ]
+      },
+      "papillary-muscles": {
+        "reason": "Papillary muscles are ventricular myocardium, grouped in Heart rather than the skeletal Muscles layer.",
+        "sources": [
+          "bp3d",
+          "papillary"
+        ]
+      }
+    },
+    "sources": {
+      "bp3d": {
+        "title": "BodyParts3D 4.0 official IS-A and PART-OF element tables",
+        "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html"
+      },
+      "iliotibial": {
+        "title": "Fairclough et al. (2006), functional anatomy of the iliotibial band",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/16533314/"
+      },
+      "lowerMuscles": {
+        "title": "UAMS, Muscles of the Lower Limb",
+        "url": "https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/muscle-tables/muscles-of-the-lower-limb/"
+      },
+      "shoulderMuscles": {
+        "title": "StatPearls, Shoulder Muscles",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK534836/"
+      },
+      "pharynx": {
+        "title": "NLM MeSH, Pharyngeal Muscles (D010609)",
+        "url": "https://meshb.nlm.nih.gov/record/ui?ui=D010609"
+      },
+      "skull": {
+        "title": "StatPearls, Nasal Cavity",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK544232/"
+      },
+      "cartilage": {
+        "title": "OpenStax, Connective Tissue Supports and Protects",
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/4-3-connective-tissue-supports-and-protects"
+      },
+      "discs": {
+        "title": "StatPearls, Anatomy, Cartilage",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK532964/"
+      },
+      "costal": {
+        "title": "NLM MeSH, Costal Cartilage (D066186)",
+        "url": "https://www.ncbi.nlm.nih.gov/mesh/D066186"
+      },
+      "larynx": {
+        "title": "StatPearls, Larynx Cartilage",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK553185/"
+      },
+      "oral": {
+        "title": "OpenStax, The Mouth, Pharynx, and Esophagus",
+        "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus"
+      },
+      "gingiva": {
+        "title": "StatPearls, Oral Gingiva",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK560662/"
+      },
+      "retinaculum": {
+        "title": "StatPearls, Wrist Flexor Retinaculum",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK545198/"
+      },
+      "annulus": {
+        "title": "Kim et al. (2022), Tendinous annulus of Zinn: histological study",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/35157253/"
+      },
+      "ventricles": {
+        "title": "Purves et al., Neuroscience, The Ventricular System",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK11083/"
+      },
+      "ventricularAnatomy": {
+        "title": "StatPearls, Neuroanatomy, Ventricular System",
+        "url": "https://www.ncbi.nlm.nih.gov/books/NBK532932/"
+      },
+      "liver": {
+        "title": "Gupta et al. (1981), Hepatovenous segments in the human liver",
+        "url": "https://pubmed.ncbi.nlm.nih.gov/7319897/"
+      },
+      "papillary": {
+        "title": "NLM MeSH, Papillary Muscles (D010210)",
+        "url": "https://www.ncbi.nlm.nih.gov/mesh/68010210"
+      }
+    }
   }
 }

@@ -1,9 +1,1434 @@
 {
-  "schemaVersion": 1,
-  "reason": "The iliotibial tracts are regions of fascia lata, classified as connective tissue in this viewer.",
-  "reference": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2100245/",
+  "schemaVersion": 2,
+  "verifiedOn": "2026-10-12",
+  "sources": {
+    "bp3d": {
+      "title": "BodyParts3D 4.0 official IS-A and PART-OF element tables",
+      "url": "https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html"
+    },
+    "iliotibial": {
+      "title": "Fairclough et al. (2006), functional anatomy of the iliotibial band",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16533314/"
+    },
+    "lowerMuscles": {
+      "title": "UAMS, Muscles of the Lower Limb",
+      "url": "https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/muscle-tables/muscles-of-the-lower-limb/"
+    },
+    "shoulderMuscles": {
+      "title": "StatPearls, Shoulder Muscles",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK534836/"
+    },
+    "pharynx": {
+      "title": "NLM MeSH, Pharyngeal Muscles (D010609)",
+      "url": "https://meshb.nlm.nih.gov/record/ui?ui=D010609"
+    },
+    "skull": {
+      "title": "StatPearls, Nasal Cavity",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK544232/"
+    },
+    "cartilage": {
+      "title": "OpenStax, Connective Tissue Supports and Protects",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/4-3-connective-tissue-supports-and-protects"
+    },
+    "discs": {
+      "title": "StatPearls, Anatomy, Cartilage",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK532964/"
+    },
+    "costal": {
+      "title": "NLM MeSH, Costal Cartilage (D066186)",
+      "url": "https://www.ncbi.nlm.nih.gov/mesh/D066186"
+    },
+    "larynx": {
+      "title": "StatPearls, Larynx Cartilage",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK553185/"
+    },
+    "oral": {
+      "title": "OpenStax, The Mouth, Pharynx, and Esophagus",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-3-the-mouth-pharynx-and-esophagus"
+    },
+    "gingiva": {
+      "title": "StatPearls, Oral Gingiva",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK560662/"
+    },
+    "retinaculum": {
+      "title": "StatPearls, Wrist Flexor Retinaculum",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545198/"
+    },
+    "annulus": {
+      "title": "Kim et al. (2022), Tendinous annulus of Zinn: histological study",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/35157253/"
+    },
+    "ventricles": {
+      "title": "Purves et al., Neuroscience, The Ventricular System",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK11083/"
+    },
+    "ventricularAnatomy": {
+      "title": "StatPearls, Neuroanatomy, Ventricular System",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK532932/"
+    },
+    "liver": {
+      "title": "Gupta et al. (1981), Hepatovenous segments in the human liver",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/7319897/"
+    },
+    "papillary": {
+      "title": "NLM MeSH, Papillary Muscles (D010210)",
+      "url": "https://www.ncbi.nlm.nih.gov/mesh/68010210"
+    }
+  },
+  "groups": {
+    "iliotibial": {
+      "reason": "The iliotibial tracts are thickened fascia lata; this viewer places standalone fascia in Connective tissue.",
+      "sources": [
+        "bp3d",
+        "iliotibial"
+      ]
+    },
+    "skeletal-muscles": {
+      "reason": "These are skeletal muscle organs, including pharyngeal muscles, rather than bones, fascia, or airways.",
+      "sources": [
+        "bp3d",
+        "lowerMuscles",
+        "shoulderMuscles",
+        "pharynx"
+      ]
+    },
+    "skull-bones": {
+      "reason": "The inferior nasal conchae and lacrimal bones are bone organs; this viewer places individual bones in Skeleton.",
+      "sources": [
+        "bp3d",
+        "skull"
+      ]
+    },
+    "cartilage": {
+      "reason": "The meshes represent cartilage or intervertebral discs; this viewer places separately selectable cartilage and discs in Connective tissue.",
+      "sources": [
+        "bp3d",
+        "cartilage",
+        "discs",
+        "costal",
+        "larynx"
+      ]
+    },
+    "teeth": {
+      "reason": "Teeth are accessory digestive organs used for mechanical digestion; the Skeleton layer describes bones.",
+      "sources": [
+        "bp3d",
+        "oral"
+      ]
+    },
+    "gingiva": {
+      "reason": "Gingiva is oral mucosa surrounding the teeth, grouped with the mouth in Digestive.",
+      "sources": [
+        "bp3d",
+        "oral",
+        "gingiva"
+      ]
+    },
+    "retinacula": {
+      "reason": "The wrist flexor retinacula are fibrous bands forming the roof of the carpal tunnel.",
+      "sources": [
+        "bp3d",
+        "retinaculum"
+      ]
+    },
+    "orbital-tendon": {
+      "reason": "The common tendinous rings are fibrous origins of extraocular muscles, grouped with standalone tendons and orbital check ligaments.",
+      "sources": [
+        "bp3d",
+        "annulus"
+      ]
+    },
+    "ventricular-system": {
+      "reason": "These are cerebral ventricles and the interventricular foramen of the brain, grouped in Nervous system.",
+      "sources": [
+        "bp3d",
+        "ventricles",
+        "ventricularAnatomy"
+      ]
+    },
+    "choroid-plexus": {
+      "reason": "The cerebral choroid plexuses produce cerebrospinal fluid within the brain ventricular system.",
+      "sources": [
+        "bp3d",
+        "ventricles",
+        "ventricularAnatomy"
+      ]
+    },
+    "liver-segments": {
+      "reason": "Hepatovenous segments are liver regions defined by drainage territories, grouped in Digestive.",
+      "sources": [
+        "bp3d",
+        "liver"
+      ]
+    },
+    "papillary-muscles": {
+      "reason": "Papillary muscles are ventricular myocardium, grouped in Heart rather than the skeletal Muscles layer.",
+      "sources": [
+        "bp3d",
+        "papillary"
+      ]
+    }
+  },
   "parts": [
-    { "id": "FJ1423", "name": "Right iliotibial tract", "originalSystem": "skeletal", "system": "connective" },
-    { "id": "FJ1423M", "name": "Left iliotibial tract", "originalSystem": "skeletal", "system": "connective" }
+    {
+      "id": "FJ1252",
+      "name": "Gingiva of upper jaw",
+      "conceptId": "FMA59763",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "gingiva",
+      "evidenceConceptId": "FMA59762"
+    },
+    {
+      "id": "FJ1253",
+      "name": "Gingiva of lower jaw",
+      "conceptId": "FMA59764",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "gingiva",
+      "evidenceConceptId": "FMA59762"
+    },
+    {
+      "id": "FJ1254",
+      "name": "Left lower first secondary molar tooth",
+      "conceptId": "FMA55704",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1255",
+      "name": "Left lower first secondary premolar tooth",
+      "conceptId": "FMA55693",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1256",
+      "name": "Left lower second secondary molar tooth",
+      "conceptId": "FMA55703",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1257",
+      "name": "Left lower second secondary premolar tooth",
+      "conceptId": "FMA55692",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1258",
+      "name": "Left lower central secondary incisor tooth",
+      "conceptId": "FMA57143",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1259",
+      "name": "Left lower lateral secondary incisor tooth",
+      "conceptId": "FMA57141",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1260",
+      "name": "Left lower secondary canine tooth",
+      "conceptId": "FMA55687",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1261",
+      "name": "Left upper first secondary molar tooth",
+      "conceptId": "FMA55699",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1262",
+      "name": "Left upper first secondary premolar tooth",
+      "conceptId": "FMA55690",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1263",
+      "name": "Left upper second secondary molar tooth",
+      "conceptId": "FMA55700",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1264",
+      "name": "Left upper second secondary premolar tooth",
+      "conceptId": "FMA55691",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1265",
+      "name": "Left upper central secondary incisor tooth",
+      "conceptId": "FMA55682",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1266",
+      "name": "Left upper lateral secondary incisor tooth",
+      "conceptId": "FMA55683",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1267",
+      "name": "Left upper secondary canine tooth",
+      "conceptId": "FMA55799",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1268",
+      "name": "Right lower first secondary molar tooth",
+      "conceptId": "FMA55705",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1269",
+      "name": "Right lower first secondary premolar tooth",
+      "conceptId": "FMA55694",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1270",
+      "name": "Right lower second secondary molar tooth",
+      "conceptId": "FMA55706",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1271",
+      "name": "Right lower second secondary premolar tooth",
+      "conceptId": "FMA55695",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1272",
+      "name": "Right lower central secondary incisor tooth",
+      "conceptId": "FMA57142",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1273",
+      "name": "Right lower lateral secondary incisor tooth",
+      "conceptId": "FMA57140",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1274",
+      "name": "Right lower secondary canine tooth",
+      "conceptId": "FMA55686",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1275",
+      "name": "Right upper second secondary molar tooth",
+      "conceptId": "FMA55697",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1276",
+      "name": "Right upper first secondary molar tooth",
+      "conceptId": "FMA55698",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1277",
+      "name": "Right upper first secondary premolar tooth",
+      "conceptId": "FMA55689",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1278",
+      "name": "Right upper second secondary premolar tooth",
+      "conceptId": "FMA55688",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1279",
+      "name": "Right upper central secondary incisor tooth",
+      "conceptId": "FMA55681",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1280",
+      "name": "Right upper lateral secondary incisor tooth",
+      "conceptId": "FMA55680",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1281",
+      "name": "Right upper secondary canine tooth",
+      "conceptId": "FMA55798",
+      "originalSystem": "skeletal",
+      "system": "digestive",
+      "group": "teeth",
+      "evidenceConceptId": "FMA12516"
+    },
+    {
+      "id": "FJ1291",
+      "name": "Left common tendinous ring",
+      "conceptId": "FMA49073",
+      "originalSystem": "sensory",
+      "system": "connective",
+      "group": "orbital-tendon",
+      "evidenceConceptId": "FMA49071"
+    },
+    {
+      "id": "FJ1342",
+      "name": "Right common tendinous ring",
+      "conceptId": "FMA49072",
+      "originalSystem": "sensory",
+      "system": "connective",
+      "group": "orbital-tendon",
+      "evidenceConceptId": "FMA49071"
+    },
+    {
+      "id": "FJ1409",
+      "name": "Right fibularis brevis",
+      "conceptId": "FMA22554",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1409M",
+      "name": "Left fibularis brevis",
+      "conceptId": "FMA22555",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1410",
+      "name": "Right fibularis longus",
+      "conceptId": "FMA22552",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1410M",
+      "name": "Left fibularis longus",
+      "conceptId": "FMA22553",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1411",
+      "name": "Right fibularis tertius",
+      "conceptId": "FMA22550",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1411M",
+      "name": "Left fibularis tertius",
+      "conceptId": "FMA22551",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1423",
+      "name": "Right iliotibial tract",
+      "conceptId": "FMA58776",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "iliotibial",
+      "evidenceConceptId": "FMA51044"
+    },
+    {
+      "id": "FJ1423M",
+      "name": "Left iliotibial tract",
+      "conceptId": "FMA58777",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "iliotibial",
+      "evidenceConceptId": "FMA51045"
+    },
+    {
+      "id": "FJ1438",
+      "name": "Right tensor fasciae latae",
+      "conceptId": "FMA22425",
+      "originalSystem": "connective",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1438M",
+      "name": "Left tensor fasciae latae",
+      "conceptId": "FMA22426",
+      "originalSystem": "connective",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1439",
+      "name": "Right tibialis anterior",
+      "conceptId": "FMA22544",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1439M",
+      "name": "Left tibialis anterior",
+      "conceptId": "FMA22545",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1440",
+      "name": "Right tibialis posterior",
+      "conceptId": "FMA65018",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1440M",
+      "name": "Left tibialis posterior",
+      "conceptId": "FMA65019",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1471",
+      "name": "Flexor retinaculum of right wrist",
+      "conceptId": "FMA40120",
+      "originalSystem": "sensory",
+      "system": "connective",
+      "group": "retinacula",
+      "evidenceConceptId": "FMA7646"
+    },
+    {
+      "id": "FJ1471M",
+      "name": "Flexor retinaculum of left wrist",
+      "conceptId": "FMA40121",
+      "originalSystem": "sensory",
+      "system": "connective",
+      "group": "retinacula",
+      "evidenceConceptId": "FMA7646"
+    },
+    {
+      "id": "FJ1504",
+      "name": "Right subscapularis",
+      "conceptId": "FMA13414",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1504M",
+      "name": "Left subscapularis",
+      "conceptId": "FMA13415",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1532",
+      "name": "Right levator scapulae",
+      "conceptId": "FMA32540",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1532M",
+      "name": "Left levator scapulae",
+      "conceptId": "FMA32541",
+      "originalSystem": "skeletal",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ1730",
+      "name": "Third ventricle",
+      "conceptId": "FMA78454",
+      "originalSystem": "cardiac",
+      "system": "nervous",
+      "group": "ventricular-system",
+      "evidenceConceptId": "FMA78447"
+    },
+    {
+      "id": "FJ1731",
+      "name": "Fourth ventricle",
+      "conceptId": "FMA78469",
+      "originalSystem": "cardiac",
+      "system": "nervous",
+      "group": "ventricular-system",
+      "evidenceConceptId": "FMA78447"
+    },
+    {
+      "id": "FJ1752",
+      "name": "Interventricular foramen",
+      "conceptId": "FMA75351",
+      "originalSystem": "cardiac",
+      "system": "nervous",
+      "group": "ventricular-system",
+      "evidenceConceptId": "FMA75351"
+    },
+    {
+      "id": "FJ1755",
+      "name": "Choroid plexus of cerebral hemisphere",
+      "conceptId": "FMA61934",
+      "originalSystem": "sensory",
+      "system": "nervous",
+      "group": "choroid-plexus",
+      "evidenceConceptId": "FMA61934"
+    },
+    {
+      "id": "FJ1767",
+      "name": "Left lateral ventricle",
+      "conceptId": "FMA78450",
+      "originalSystem": "cardiac",
+      "system": "nervous",
+      "group": "ventricular-system",
+      "evidenceConceptId": "FMA78447"
+    },
+    {
+      "id": "FJ1803",
+      "name": "Choroid plexus of cerebral hemisphere",
+      "conceptId": "FMA61934",
+      "originalSystem": "sensory",
+      "system": "nervous",
+      "group": "choroid-plexus",
+      "evidenceConceptId": "FMA61934"
+    },
+    {
+      "id": "FJ1814",
+      "name": "Right lateral ventricle",
+      "conceptId": "FMA78449",
+      "originalSystem": "cardiac",
+      "system": "nervous",
+      "group": "ventricular-system",
+      "evidenceConceptId": "FMA78447"
+    },
+    {
+      "id": "FJ1858",
+      "name": "Hepatovenous segment IX",
+      "conceptId": "FMA15747",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2409",
+      "name": "Hepatovenous segment VII",
+      "conceptId": "FMA15745",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2418",
+      "name": "Anterolateral head of lateral papillary muscle of left ventricle",
+      "conceptId": "FMA7265",
+      "originalSystem": "muscular",
+      "system": "cardiac",
+      "group": "papillary-muscles",
+      "evidenceConceptId": "FMA7088"
+    },
+    {
+      "id": "FJ2419",
+      "name": "Anterior papillary muscle of right ventricle",
+      "conceptId": "FMA7260",
+      "originalSystem": "muscular",
+      "system": "cardiac",
+      "group": "papillary-muscles",
+      "evidenceConceptId": "FMA7088"
+    },
+    {
+      "id": "FJ2429",
+      "name": "Lateral papillary muscle of left ventricle",
+      "conceptId": "FMA7264",
+      "originalSystem": "muscular",
+      "system": "cardiac",
+      "group": "papillary-muscles",
+      "evidenceConceptId": "FMA7088"
+    },
+    {
+      "id": "FJ2430",
+      "name": "Posterior papillary muscle of right ventricle",
+      "conceptId": "FMA7261",
+      "originalSystem": "muscular",
+      "system": "cardiac",
+      "group": "papillary-muscles",
+      "evidenceConceptId": "FMA7088"
+    },
+    {
+      "id": "FJ2437",
+      "name": "Septal papillary muscle of right ventricle",
+      "conceptId": "FMA7262",
+      "originalSystem": "muscular",
+      "system": "cardiac",
+      "group": "papillary-muscles",
+      "evidenceConceptId": "FMA7088"
+    },
+    {
+      "id": "FJ2440",
+      "name": "Cricoid cartilage",
+      "conceptId": "FMA9615",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2554",
+      "name": "Right major alar cartilage",
+      "conceptId": "FMA59505",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2555",
+      "name": "Left major alar cartilage",
+      "conceptId": "FMA59506",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2556",
+      "name": "Left lateral nasal cartilage",
+      "conceptId": "FMA59513",
+      "originalSystem": "respiratory",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2557",
+      "name": "Septal nasal cartilage",
+      "conceptId": "FMA59503",
+      "originalSystem": "respiratory",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2558",
+      "name": "Right lateral nasal cartilage",
+      "conceptId": "FMA59512",
+      "originalSystem": "respiratory",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2740",
+      "name": "Left inferior pharyngeal constrictor",
+      "conceptId": "FMA46636",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2742",
+      "name": "Right middle pharyngeal constrictor",
+      "conceptId": "FMA46633",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2743",
+      "name": "Left palatopharyngeus",
+      "conceptId": "FMA46672",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2745",
+      "name": "Left salpingopharyngeus",
+      "conceptId": "FMA46670",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2746",
+      "name": "Left stylopharyngeus",
+      "conceptId": "FMA46668",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2747",
+      "name": "Left superior pharyngeal constrictor",
+      "conceptId": "FMA46632",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2752",
+      "name": "Right inferior pharyngeal constrictor",
+      "conceptId": "FMA46635",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2754",
+      "name": "Left middle pharyngeal constrictor",
+      "conceptId": "FMA46634",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2755",
+      "name": "Right palatopharyngeus",
+      "conceptId": "FMA46671",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2757",
+      "name": "Right salpingopharyngeus",
+      "conceptId": "FMA46669",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2758",
+      "name": "Right stylopharyngeus",
+      "conceptId": "FMA46667",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2759",
+      "name": "Right superior pharyngeal constrictor",
+      "conceptId": "FMA46631",
+      "originalSystem": "respiratory",
+      "system": "muscular",
+      "group": "skeletal-muscles",
+      "evidenceConceptId": "FMA5022"
+    },
+    {
+      "id": "FJ2769",
+      "name": "Cricoid cartilage",
+      "conceptId": "FMA9615",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2773",
+      "name": "Left cuneiform cartilage",
+      "conceptId": "FMA55118",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2775",
+      "name": "Left arytenoid cartilage",
+      "conceptId": "FMA55114",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2776",
+      "name": "Left corniculate cartilage",
+      "conceptId": "FMA55116",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2792",
+      "name": "Right arytenoid cartilage",
+      "conceptId": "FMA55113",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2793",
+      "name": "Right corniculate cartilage",
+      "conceptId": "FMA55115",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2795",
+      "name": "Right cuneiform cartilage",
+      "conceptId": "FMA55117",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2808",
+      "name": "Thyroid cartilage",
+      "conceptId": "FMA55099",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ2818",
+      "name": "Hepatovenous segment II",
+      "conceptId": "FMA15739",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2819",
+      "name": "Hepatovenous segment III",
+      "conceptId": "FMA15741",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2820",
+      "name": "Hepatovenous segment IV",
+      "conceptId": "FMA15742",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2821",
+      "name": "Hepatovenous segment V",
+      "conceptId": "FMA15743",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2822",
+      "name": "Hepatovenous segment VI",
+      "conceptId": "FMA15744",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2823",
+      "name": "Hepatovenous segment VIII",
+      "conceptId": "FMA15746",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ2824",
+      "name": "Hepatovenous segment VIII",
+      "conceptId": "FMA15746",
+      "originalSystem": "venous",
+      "system": "digestive",
+      "group": "liver-segments",
+      "evidenceConceptId": "FMA15737"
+    },
+    {
+      "id": "FJ3202",
+      "name": "Intervertebral disk of axis",
+      "conceptId": "FMA25058",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3203",
+      "name": "Intervertebral disk of fourth thoracic vertebra",
+      "conceptId": "FMA13501",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3204",
+      "name": "Intervertebral disk of fifth thoracic vertebra",
+      "conceptId": "FMA13502",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3205",
+      "name": "Intervertebral disk of sixth thoracic vertebra",
+      "conceptId": "FMA13503",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3206",
+      "name": "Intervertebral disk of seventh thoracic vertebra",
+      "conceptId": "FMA13504",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3207",
+      "name": "Intervertebral disk of eighth thoracic vertebra",
+      "conceptId": "FMA13505",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3208",
+      "name": "Intervertebral disk of ninth thoracic vertebra",
+      "conceptId": "FMA13506",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3209",
+      "name": "Intervertebral disk of tenth thoracic vertebra",
+      "conceptId": "FMA13507",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3210",
+      "name": "Intervertebral disk of eleventh thoracic vertebra",
+      "conceptId": "FMA13508",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3211",
+      "name": "Intervertebral disk",
+      "conceptId": "FMA10446",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3212",
+      "name": "Intervertebral disk of first lumbar vertebra",
+      "conceptId": "FMA16033",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3213",
+      "name": "Intervertebral disk of third cervical vertebra",
+      "conceptId": "FMA13896",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3214",
+      "name": "Intervertebral disk of second lumbar vertebra",
+      "conceptId": "FMA16034",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3215",
+      "name": "Intervertebral disk of third lumbar vertebra",
+      "conceptId": "FMA16035",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3216",
+      "name": "Intervertebral disk of fourth lumbar vertebra",
+      "conceptId": "FMA16036",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3217",
+      "name": "Intervertebral disk of fifth lumbar vertebra",
+      "conceptId": "FMA16037",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3218",
+      "name": "Intervertebral disk of fourth cervical vertebra",
+      "conceptId": "FMA13897",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3219",
+      "name": "Intervertebral disk of fifth cervical vertebra",
+      "conceptId": "FMA13898",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3220",
+      "name": "Intervertebral disk of sixth cervical vertebra",
+      "conceptId": "FMA13899",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3221",
+      "name": "Intervertebral disk of seventh cervical vertebra",
+      "conceptId": "FMA13900",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3222",
+      "name": "Intervertebral disk of first thoracic vertebra",
+      "conceptId": "FMA10458",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3223",
+      "name": "Intervertebral disk of second thoracic vertebra",
+      "conceptId": "FMA13495",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3224",
+      "name": "Intervertebral disk of third thoracic vertebra",
+      "conceptId": "FMA13500",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA55107"
+    },
+    {
+      "id": "FJ3239",
+      "name": "Left first costal cartilage",
+      "conceptId": "FMA8005",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3242",
+      "name": "Left second costal cartilage",
+      "conceptId": "FMA8031",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3245",
+      "name": "Left third costal cartilage",
+      "conceptId": "FMA8058",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3248",
+      "name": "Left fourth costal cartilage",
+      "conceptId": "FMA8167",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3251",
+      "name": "Left fifth costal cartilage",
+      "conceptId": "FMA8112",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3254",
+      "name": "Left sixth costal cartilage",
+      "conceptId": "FMA8221",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3255",
+      "name": "Left seventh costal cartilage",
+      "conceptId": "FMA8275",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3263",
+      "name": "Left inferior nasal concha",
+      "conceptId": "FMA54738",
+      "originalSystem": "respiratory",
+      "system": "skeletal",
+      "group": "skull-bones",
+      "evidenceConceptId": "FMA5018"
+    },
+    {
+      "id": "FJ3265",
+      "name": "Left lacrimal bone",
+      "conceptId": "FMA53646",
+      "originalSystem": "sensory",
+      "system": "skeletal",
+      "group": "skull-bones",
+      "evidenceConceptId": "FMA5018"
+    },
+    {
+      "id": "FJ3333",
+      "name": "Right first costal cartilage",
+      "conceptId": "FMA7875",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3335",
+      "name": "Right second costal cartilage",
+      "conceptId": "FMA7886",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3337",
+      "name": "Right third costal cartilage",
+      "conceptId": "FMA7913",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3339",
+      "name": "Right fourth costal cartilage",
+      "conceptId": "FMA7976",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3341",
+      "name": "Right fifth costal cartilage",
+      "conceptId": "FMA8070",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3343",
+      "name": "Right sixth costal cartilage",
+      "conceptId": "FMA8194",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3345",
+      "name": "Right seventh costal cartilage",
+      "conceptId": "FMA8248",
+      "originalSystem": "skeletal",
+      "system": "connective",
+      "group": "cartilage",
+      "evidenceConceptId": "FMA7538"
+    },
+    {
+      "id": "FJ3369",
+      "name": "Right inferior nasal concha",
+      "conceptId": "FMA54737",
+      "originalSystem": "respiratory",
+      "system": "skeletal",
+      "group": "skull-bones",
+      "evidenceConceptId": "FMA5018"
+    },
+    {
+      "id": "FJ3371",
+      "name": "Right lacrimal bone",
+      "conceptId": "FMA53645",
+      "originalSystem": "sensory",
+      "system": "skeletal",
+      "group": "skull-bones",
+      "evidenceConceptId": "FMA5018"
+    }
   ]
 }

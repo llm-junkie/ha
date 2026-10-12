@@ -95,7 +95,7 @@ Geometry is simplified for browser performance. The male reference retains all 2
 
 Both models total about 68 MB compressed. Full source links, licenses, and adaptation details are in [ATTRIBUTION.md](public/ATTRIBUTION.md).
 
-Both iliotibial tracts belong to **Connective tissue**, with a fascia-specific explanation. Their classification correction, source reference, and reproducible overrides are documented in [ATTRIBUTION.md](public/ATTRIBUTION.md#iliotibial-tract-classification).
+Both catalogues include 140 source-verified classification overrides, including the iliotibial tracts and corrections for muscles, cartilage/discs, teeth, cerebral fluid spaces, liver segments, and papillary heart muscles. The [classification audit](docs/anatomy-classification.md) documents the layer policy, references, and reproducible corrections.
 
 This is an educational explorer, not a diagnostic or surgical tool.
 

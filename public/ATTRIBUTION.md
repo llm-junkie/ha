@@ -53,6 +53,12 @@ Both atlases assign the right (`FJ1423`, `FMA58776`) and left (`FJ1423M`, `FMA58
 
 The reproducible overrides are in `data/anatomy/classification-overrides.json`. The source converter applies them, and `node scripts/apply-classification-overrides.mjs` reapplies them after a female import and registration, updating the delivered catalogue checksum while retaining upstream checksums.
 
+## Catalogue classification audit
+
+The [classification audit](https://github.com/llm-junkie/ha/blob/main/docs/anatomy-classification.md) documents 138 additional layer corrections in each catalogue, with the viewer policy and corroborating medical references. The 140 pinned BodyParts3D identities now include the previously corrected iliotibial tracts. Mesh geometry and the original source ontology remain unchanged.
+
+`data/anatomy/classification-evidence.json` contains selected official BodyParts3D IS-A/PART-OF concept-to-mesh relationships downloaded on 2026-10-12, with source URLs and full-table SHA-256 hashes. These retained extracts share the BodyParts3D attribution and CC BY 4.0 license above. `data/anatomy/classification-overrides.json` records each corrected system, exact identity, evidence concept, rationale, and independent references. The female provenance records mixed target systems and a hash of this definition.
+
 ## Screenshots, comparison figures, and retained source fixtures
 
 The README's male/female screenshots and the uterosacral comparison figure render adaptations of the datasets credited above. The source fixture in `data/anatomy/uterosacral-source.json` retains HRA-derived geometry and registration references under the same dataset attribution. Preserve the relevant BodyParts3D/HRA credits, link CC BY 4.0, and identify adaptations when redistributing these data or anatomy images. The application code's MIT license and copyright notice remain separate from the anatomy data license.

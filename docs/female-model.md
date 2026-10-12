@@ -73,6 +73,8 @@ node scripts/apply-classification-overrides.mjs
 npm test
 ```
 
+The override pass applies all 140 verified classification records and refreshes the delivered catalogue checksum. See the [classification audit](anatomy-classification.md) for source references, layer policy, and the 138 additional corrections shared with the male catalogue.
+
 The correction script rejects already modified imports. Source pins or geometry changes require renewed endpoint, path, surface, and visual checks. Automated passing results establish mesh integrity and source registration consistency; they do not replace independent anatomical review.
 
 ## Model screenshots
