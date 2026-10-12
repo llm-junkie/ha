@@ -12,7 +12,7 @@ import { decodeModelResponse } from "./model-download";
 import { assetUrl } from "./asset-url";
 import { PointerTap } from "./pointer-tap";
 import { partIsVisible } from "./part-visibility";
-import { createCursorZoom } from "./cursor-zoom";
+import { createWheelZoom } from "./wheel-zoom";
 import { createFrameScheduler } from "./frame-scheduler";
 import { SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
@@ -104,6 +104,7 @@ export default function AnatomyScene({
     controls.target.set(0, 0.85, 0);
     controls.enableDamping = true;
     controls.dampingFactor = 0.085;
+    controls.zoomToCursor = false;
     controls.minDistance = 0.07;
     controls.maxDistance = 40;
     controls.maxPolarAngle = Math.PI * 0.96;
@@ -498,15 +499,10 @@ export default function AnatomyScene({
     renderer.domElement.addEventListener("pointermove", move);
     renderer.domElement.addEventListener("pointerup", up);
     renderer.domElement.addEventListener("pointercancel", cancel);
-    const wheel = createCursorZoom({
+    const wheel = createWheelZoom({
       camera,
       controls,
       canvas: renderer.domElement,
-      atlas,
-      pickers,
-      bounds,
-      renderedVisibility: data,
-      state: () => latest.current,
       ready: () => ready,
       onZoom: () => {
         cameraTransition = null;

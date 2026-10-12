@@ -21,9 +21,9 @@ import {
   Info,
   Layers3,
   Pause,
+  Play,
   RefreshCw,
   RotateCcw,
-  RotateCw,
   Search,
   Settings2,
   X,
@@ -748,13 +748,7 @@ export default function Home() {
           className={state.rotate ? "active" : ""}
           onClick={() => setState((current) => ({ ...current, rotate: !current.rotate }))}
         >
-          {state.rotate ? (
-            <Pause size={17} />
-          ) : state.rotationDirection === "counterclockwise" ? (
-            <RotateCcw size={18} />
-          ) : (
-            <RotateCw size={18} />
-          )}
+          {state.rotate ? <Pause size={17} /> : <Play size={18} />}
         </Button>
         <Popover>
           <PopoverTrigger

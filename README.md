@@ -72,7 +72,7 @@ npm run build
 
 Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, tap-versus-drag handling, asset URLs under GitHub Pages subpaths, and compressed model downloads. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
 
-Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, cursor zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity.
+Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity.
 
 PWA tests cover offline navigation and anatomy, subpath isolation, download deduplication, gzip and raw responses, damaged downloads, storage limits, update activation, cache reuse, and failed updates. Manual-update tests cover checking for releases, using an already prepared release without a connection, waiting for downloads, and recovering from connection or installation failures. Every production build also validates the manifest, PNG icon sizes, scoped URLs, and content hashes against the files being deployed.
 
