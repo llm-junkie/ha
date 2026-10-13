@@ -129,7 +129,7 @@ export default function ViewLibrary({ atlas, open, onOpenChange, shareOpen, onSh
         >
           <div className="panel-heading">
             <h2 ref={panelTitle} tabIndex={-1}>Saved views</h2>
-            <Button variant="ghost" className="icon-button" onClick={() => onOpenChange(false)} aria-label="Close saved views">
+            <Button variant="ghost" className="icon-button panel-close" onClick={() => onOpenChange(false)} aria-label="Close saved views">
               <X size={18} />
             </Button>
           </div>

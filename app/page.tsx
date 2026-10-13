@@ -20,16 +20,17 @@ import {
   Focus,
   Info,
   Layers3,
+  Mars,
   Pause,
   Play,
   RefreshCw,
   RotateCcw,
   Search,
   Settings2,
+  Venus,
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Slider } from "@/components/ui/slider";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import {
@@ -88,6 +89,7 @@ const initial: SceneState = {
 };
 const mobileControlsQuery = "(max-width: 767px), (max-height: 600px) and (orientation: landscape)";
 const landscapeControlsQuery = "(max-height: 600px) and (orientation: landscape)";
+const systemsPinnedKey = "human-atlas:systems-pinned";
 export default function Home() {
   const pwa = usePwa();
   const [brightness, setBrightness] = useState(0);
@@ -115,6 +117,7 @@ export default function Home() {
   const searchPanel = useRef<HTMLElement>(null);
   const savedPanelAnchor = useRef<HTMLDivElement>(null);
   const rotationControls = useRef<HTMLElement>(null);
+  const rotationSettingsButton = useRef<HTMLButtonElement>(null);
   const [mobileControls, setMobileControls] = useState(() => window.matchMedia(mobileControlsQuery).matches);
   const [landscapeControls, setLandscapeControls] = useState(() => window.matchMedia(landscapeControlsQuery).matches);
   useEffect(() => {
@@ -135,12 +138,14 @@ export default function Home() {
   const rotationAnchor = useMemo(() => ({
     get contextElement() { return rotationControls.current ?? undefined; },
     getBoundingClientRect: () => new DOMRect(
-      document.documentElement.clientWidth / 2,
+      landscapeControls
+        ? document.documentElement.clientWidth / 2
+        : rotationSettingsButton.current?.getBoundingClientRect().right ?? document.documentElement.clientWidth / 2,
       rotationControls.current?.getBoundingClientRect().bottom ?? 0,
       0,
       0,
     ),
-  }), []);
+  }), [landscapeControls]);
   const updateTitle = useRef<HTMLHeadingElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
   const [aboutModel, setAboutModel] = useState<ModelId>(model);
@@ -181,6 +186,21 @@ export default function Home() {
     [about, setAbout] = useState(false),
     [query, setQuery] = useState(""),
     [chosen, setChosen] = useState<SearchConcept | null>(null);
+  const [systemsPinned, setSystemsPinned] = useState(() => {
+    try {
+      return localStorage.getItem(systemsPinnedKey) !== "false";
+    } catch {
+      return true;
+    }
+  });
+  const systemsOpen = mobileControls ? panel === "layers" : systemsPinned;
+  useEffect(() => {
+    try {
+      localStorage.setItem(systemsPinnedKey, String(systemsPinned));
+    } catch {
+      /* Pinning still works when storage is unavailable. */
+    }
+  }, [systemsPinned]);
   const openAbout = (updates = false) => {
     setAboutModel(model);
     setAboutUpdates(updates);
@@ -288,6 +308,7 @@ export default function Home() {
     [atlas],
   );
   const activeSystems = SYSTEMS.filter((s) => counts[s.id] > 0);
+  const enabledSystemCount = activeSystems.filter((system) => state.visible.includes(system.id)).length;
   const organSystems = activeSystems
     .filter((s) =>
       [
@@ -304,6 +325,9 @@ export default function Home() {
   const selectedParts = state.selected.map((id) => parts.get(id)).filter((p) => !!p),
     selected = selectedParts[0],
     system = SYSTEMS.find((s) => s.id === selected?.system);
+  const inspectorOpen = details && selectedParts.length > 0;
+  // Opening interface panels must not restart the camera's remaining orbit damping.
+  const sceneState = useMemo(() => ({ ...state, inspectorOpen }), [state, inspectorOpen]);
   const visibleCount = atlas?.parts.filter((part) => partIsVisible(part, state)).length ?? 0;
   const results = useMemo(() => {
     const term = query.toLowerCase().trim();
@@ -416,7 +440,7 @@ export default function Home() {
     setPanel(null);
   };
   const openPanel = (next: "layers" | "search") => {
-    setDetails(false);
+    if (next !== "layers") setDetails(false);
     setPanel((p) => (p === next ? null : next));
   };
   const restoreView = (value: SavedView) => {
@@ -487,7 +511,7 @@ export default function Home() {
         <AnatomyScene
           atlas={atlas}
           backgroundColor={viewerBackground}
-          state={{ ...state, inspectorOpen: details && selectedParts.length > 0 }}
+          state={sceneState}
           onSelect={choosePart}
           onProgress={(n) => {
             setProgress(n);
@@ -522,36 +546,6 @@ export default function Home() {
           </span>
         </div>
       </header>
-      <fieldset className="model-switch">
-        <legend className="sr-only">Anatomy model</legend>
-        <label className="model-option">
-          <input
-            className="sr-only"
-            type="radio"
-            name="anatomy-model"
-            value="male"
-            checked={model === "male"}
-            onChange={() => changeModel("male")}
-          />
-          <span className="model-option-label">Male</span>
-        </label>
-        <label className="model-option">
-          <input
-            className="sr-only"
-            type="radio"
-            name="anatomy-model"
-            value="female"
-            checked={model === "female"}
-            onChange={() => changeModel("female")}
-          />
-          <span className="model-option-label">
-            Female{" "}
-            <span className="model-status" title="Experimental">
-              (Exp)
-            </span>
-          </span>
-        </label>
-      </fieldset>
       <div ref={savedPanelAnchor} className="explorer-panel-anchor" aria-hidden="true" />
       <nav className="top-actions" aria-label="Explorer panels">
         <Button
@@ -595,22 +589,24 @@ export default function Home() {
         </Button>
       </nav>
       <section
-        className={`layers-panel glass ${panel === "layers" ? "mobile-open" : ""}`}
+        id="systems-panel"
+        className={`layers-panel glass ${mobileControls && panel === "layers" ? "mobile-open" : ""}`}
+        hidden={!systemsOpen}
         aria-label="Anatomical layers"
       >
         <div className="panel-heading">
-          <span>Systems</span>
+          <span>Systems ({enabledSystemCount})</span>
           <Button
             variant="ghost"
-            className="mobile-only icon-button"
-            onClick={() => setPanel(null)}
+            className="icon-button panel-close"
+            onClick={() => {
+              setPanel(null);
+              if (!mobileControls) setSystemsPinned(false);
+            }}
             aria-label="Close systems"
           >
             <X size={18} />
           </Button>
-          <Badge variant="secondary" className="desktop-only small-number">
-            {activeSystems.length}
-          </Badge>
         </div>
         <div className="layer-presets">
           <Button
@@ -688,7 +684,7 @@ export default function Home() {
             <span>Find a structure</span>
             <Button
               variant="ghost"
-              className="icon-button"
+              className="icon-button panel-close"
               onClick={() => setPanel(null)}
               aria-label="Close search"
             >
@@ -759,132 +755,172 @@ export default function Home() {
           </p>
         </section>
       )}
-      <nav ref={rotationControls} className="view-controls glass" aria-label="Camera controls">
-        {(["three-quarter", "front", "side", "back"] as View[]).map((view, index) => (
-          <Button
-            variant="ghost"
-            key={view}
-            className={state.view === view ? "active" : ""}
-            aria-pressed={state.view === view}
-            disabled={state.explode > 0.8 && view !== "front"}
-            onClick={() =>
-              setState((current) => ({
-                ...current,
-                view,
-                reset: current.reset + 1,
-                rotate: false,
-                focus: 0,
-                focusContext: false,
-              }))
-            }
-            title={view + " view"}
-            aria-label={view + " view"}
-          >
-            <span>{["¾", "F", "S", "B"][index]}</span>
-          </Button>
-        ))}
-        <i />
-        <Button
-          variant="ghost"
-          disabled={state.explode >= 0.4}
-          aria-label={state.rotate ? "Pause rotation" : "Rotate body"}
-          title="Auto rotate"
-          className={state.rotate ? "active" : ""}
-          onClick={() => setState((current) => ({ ...current, rotate: !current.rotate }))}
-        >
-          {state.rotate ? <Pause size={17} /> : <Play size={18} />}
-        </Button>
-        <Popover>
-          <PopoverTrigger
-            render={
-              <Button
-                variant="ghost"
-                disabled={state.explode >= 0.4}
-                aria-label="Rotation settings"
-                title="Rotation settings"
-              />
-            }
-          >
-            <Settings2 size={17} />
-          </PopoverTrigger>
-          <PopoverContent
-            className="rotation-settings"
-            anchor={mobileControls ? rotationAnchor : undefined}
-            positionMethod={mobileControls ? "fixed" : "absolute"}
-            side={mobileControls ? "bottom" : "left"}
-            align={mobileControls ? "center" : "end"}
-            sideOffset={10}
-            collisionAvoidance={mobileControls ? { side: "shift", align: "shift", fallbackAxisSide: "none" } : undefined}
-            collisionPadding={mobileControls ? 16 : undefined}
-          >
-            <div className="rotation-heading">
-              <strong>Rotation speed</strong>
-              <output>{Math.round((state.rotationSpeed ?? 1) * 10)}%</output>
-            </div>
-            <Slider
-              aria-label="Rotation speed"
-              min={1}
-              max={100}
-              step={1}
-              value={[(state.rotationSpeed ?? 1) * 10]}
-              onValueChange={(value) =>
+      <div className="viewer-controls">
+        <fieldset className="model-switch glass">
+          <legend className="sr-only">Anatomy model</legend>
+          <label className="model-option" title="Male model">
+            <input
+              className="sr-only"
+              type="radio"
+              name="anatomy-model"
+              value="male"
+              checked={model === "male"}
+              onChange={() => changeModel("male")}
+            />
+            <span className="model-option-label">
+              <Mars size={19} aria-hidden="true" />
+              <span className="sr-only">Male</span>
+            </span>
+          </label>
+          <label className="model-option" title="Female model (experimental)">
+            <input
+              className="sr-only"
+              type="radio"
+              name="anatomy-model"
+              value="female"
+              checked={model === "female"}
+              onChange={() => changeModel("female")}
+            />
+            <span className="model-option-label">
+              <Venus size={19} aria-hidden="true" />
+              <span className="sr-only">Female (experimental)</span>
+            </span>
+          </label>
+        </fieldset>
+        <nav ref={rotationControls} className="view-controls glass" aria-label="Camera controls">
+          {(["three-quarter", "front", "side", "back"] as View[]).map((view, index) => (
+            <Button
+              variant="ghost"
+              key={view}
+              className={state.view === view ? "active" : ""}
+              aria-pressed={state.view === view}
+              disabled={state.explode > 0.8 && view !== "front"}
+              onClick={() =>
                 setState((current) => ({
                   ...current,
-                  rotationSpeed: (Array.isArray(value) ? value[0] : value) / 10,
+                  view,
+                  reset: current.reset + 1,
+                  rotate: false,
+                  focus: 0,
+                  focusContext: false,
                 }))
               }
-            />
-            <div className="rotation-speed-labels">
-              <span>1%</span>
-              <Button
-                variant="ghost"
-                onClick={() => setState((current) => ({ ...current, rotationSpeed: 1 }))}
-              >
-                Standard · 10%
-              </Button>
-              <span>100%</span>
-            </div>
-            <fieldset className="rotation-options">
-              <legend>Direction</legend>
-              <div className="rotation-direction-toggle">
-                {(["clockwise", "counterclockwise"] as const).map((direction) => (
-                  <label className="model-option" key={direction}>
-                    <input
-                      className="sr-only"
-                      type="radio"
-                      name="rotation-direction"
-                      value={direction}
-                      checked={(state.rotationDirection ?? "clockwise") === direction}
-                      onChange={() =>
-                        setState((current) => ({ ...current, rotationDirection: direction }))
-                      }
-                    />
-                    <span className="model-option-label">
-                      {direction === "clockwise" ? "Clockwise" : "Counterclockwise"}
-                    </span>
-                  </label>
-                ))}
+              title={view + " view"}
+              aria-label={view + " view"}
+            >
+              <span>{["¾", "F", "S", "B"][index]}</span>
+            </Button>
+          ))}
+          <i />
+          <Button
+            variant="ghost"
+            disabled={state.explode >= 0.4}
+            aria-label={state.rotate ? "Pause rotation" : "Rotate body"}
+            title="Auto rotate"
+            className={state.rotate ? "active" : ""}
+            onClick={() => setState((current) => ({ ...current, rotate: !current.rotate }))}
+          >
+            {state.rotate ? <Pause size={17} /> : <Play size={18} />}
+          </Button>
+          <Popover>
+            <PopoverTrigger
+              ref={rotationSettingsButton}
+              render={
+                <Button
+                  variant="ghost"
+                  disabled={state.explode >= 0.4}
+                  aria-label="Rotation settings"
+                  title="Rotation settings"
+                />
+              }
+            >
+              <Settings2 size={17} />
+            </PopoverTrigger>
+            <PopoverContent
+              className="rotation-settings"
+              anchor={mobileControls ? rotationAnchor : undefined}
+              positionMethod={mobileControls ? "fixed" : "absolute"}
+              side={mobileControls ? "bottom" : "left"}
+              align={mobileControls && landscapeControls ? "center" : "end"}
+              sideOffset={10}
+              collisionAvoidance={mobileControls ? { side: "shift", align: "shift", fallbackAxisSide: "none" } : undefined}
+              collisionPadding={mobileControls ? 16 : undefined}
+            >
+              <div className="rotation-heading">
+                <strong>Rotation speed</strong>
+                <output>{Math.round((state.rotationSpeed ?? 1) * 10)}%</output>
               </div>
-            </fieldset>
-          </PopoverContent>
-        </Popover>
-        <BrightnessControl
-          value={brightness}
-          onChange={setBrightness}
-          horizontal={mobileControls && !landscapeControls}
-          anchor={rotationControls}
-        />
-        <Button variant="ghost" aria-label="Reset view and layers" title="Reset" onClick={reset}>
-          <RotateCcw size={17} />
-        </Button>
-      </nav>
+              <Slider
+                aria-label="Rotation speed"
+                min={1}
+                max={100}
+                step={1}
+                value={[(state.rotationSpeed ?? 1) * 10]}
+                onValueChange={(value) =>
+                  setState((current) => ({
+                    ...current,
+                    rotationSpeed: (Array.isArray(value) ? value[0] : value) / 10,
+                  }))
+                }
+              />
+              <div className="rotation-speed-labels">
+                <span>1%</span>
+                <Button
+                  variant="ghost"
+                  onClick={() => setState((current) => ({ ...current, rotationSpeed: 1 }))}
+                >
+                  Standard · 10%
+                </Button>
+                <span>100%</span>
+              </div>
+              <fieldset className="rotation-options">
+                <legend>Direction</legend>
+                <div className="rotation-direction-toggle">
+                  {(["clockwise", "counterclockwise"] as const).map((direction) => (
+                    <label className="model-option" key={direction}>
+                      <input
+                        className="sr-only"
+                        type="radio"
+                        name="rotation-direction"
+                        value={direction}
+                        checked={(state.rotationDirection ?? "clockwise") === direction}
+                        onChange={() =>
+                          setState((current) => ({ ...current, rotationDirection: direction }))
+                        }
+                      />
+                      <span className="model-option-label">
+                        {direction === "clockwise" ? "Clockwise" : "Counterclockwise"}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </fieldset>
+            </PopoverContent>
+          </Popover>
+          <BrightnessControl
+            value={brightness}
+            onChange={setBrightness}
+            horizontal={mobileControls && !landscapeControls}
+            anchor={rotationControls}
+          />
+        </nav>
+      </div>
       <div className="bottom-dock glass">
         <Button
           variant="ghost"
-          className="mobile-only dock-layers"
-          onClick={() => openPanel("layers")}
-          aria-label="Open system layers"
-          aria-expanded={panel === "layers"}
+          className="dock-layers"
+          onClick={() => {
+            if (mobileControls) openPanel("layers");
+            else {
+              setPanel(systemsPinned ? null : "layers");
+              setSystemsPinned((pinned) => !pinned);
+            }
+          }}
+          aria-label={mobileControls ? "Open system layers" : "Pin systems panel"}
+          aria-pressed={mobileControls ? undefined : systemsPinned}
+          aria-expanded={systemsOpen}
+          aria-controls="systems-panel"
+          title={mobileControls ? undefined : systemsPinned ? "Unpin systems panel" : "Pin systems panel"}
         >
           <Layers3 size={20} />
           <span>Systems</span>
@@ -914,10 +950,6 @@ export default function Home() {
               }))
             }
           />
-          <div className="slider-endpoints">
-            <span>Assembled</span>
-            <span>Every piece</span>
-          </div>
         </div>
         <Button
           variant="ghost"
@@ -988,10 +1020,22 @@ export default function Home() {
         </div>
       )}
       <Sheet
-        open={details && selectedParts.length > 0}
+        open={details && selectedParts.length > 0 && panel !== "layers"}
         modal={false}
         disablePointerDismissal
-        onOpenChange={setDetails}
+        onOpenChange={(open) => {
+          setDetails(open);
+          if (!open) {
+            setChosen(null);
+            setState((current) => ({
+              ...current,
+              selected: [],
+              isolate: false,
+              focus: 0,
+              focusContext: false,
+            }));
+          }
+        }}
       >
         <SheetContent
           initialFocus={detailTitle}

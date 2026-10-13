@@ -1,6 +1,12 @@
 import * as T from "three";
 import { SYSTEMS } from "./anatomy.ts";
 
+export function selectionHighlightColor(color: T.Color): T.Color {
+  // Keep the original hue; darkening also makes neutral pieces distinguishable.
+  const { h, s, l } = color.getHSL({ h: 0, s: 0, l: 0 }, T.SRGBColorSpace);
+  return new T.Color().setHSL(h, Math.min(1, s * 2), l * 0.75, T.SRGBColorSpace);
+}
+
 export function applyLayerOpacity(material: T.MeshStandardMaterial, opacity: number): boolean {
   const transparent = opacity < 1;
   if (material.opacity === opacity && material.transparent === transparent) return false;
@@ -30,17 +36,18 @@ export function createAnatomyMaterial(
     shader.uniforms.partState = { value: partTexture };
     shader.uniforms.selectionState = { value: selectionTexture };
     shader.uniforms.stateWidth = { value: width };
+    shader.uniforms.selectedColor = { value: selectionHighlightColor(m.color) };
     shader.vertexShader =
-      "attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying float partSelected;\n" +
+      "attribute float partIndex; uniform sampler2D partState; uniform sampler2D selectionState; uniform float stateWidth; varying vec2 partSelection;\n" +
       shader.vertexShader;
     shader.vertexShader = shader.vertexShader.replace(
       "#include <begin_vertex>",
-      "#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partSelected = texture2D(selectionState, stateUv).r;",
+      "#include <begin_vertex>\nvec2 stateUv = vec2((partIndex + 0.5) / stateWidth, 0.5); vec4 state = texture2D(partState, stateUv); transformed += state.xyz; partSelection = texture2D(selectionState, stateUv).rg;",
     );
-    shader.fragmentShader = "varying float partSelected;\n" + shader.fragmentShader;
+    shader.fragmentShader = "uniform vec3 selectedColor; varying vec2 partSelection;\n" + shader.fragmentShader;
     shader.fragmentShader = shader.fragmentShader.replace(
       "#include <color_fragment>",
-      "#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, vec3(0.42, 0.85, 0.78), partSelected * 0.75); diffuseColor.a = mix(diffuseColor.a, 1.0, partSelected);",
+      "#include <color_fragment>\ndiffuseColor.rgb = mix(diffuseColor.rgb, selectedColor, partSelection.g); diffuseColor.a = mix(diffuseColor.a, 1.0, partSelection.r);",
     );
   };
   return m;

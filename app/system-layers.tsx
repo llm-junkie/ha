@@ -32,9 +32,12 @@ export default function SystemLayers({
   const [expanded, setExpanded] = useState<SystemId[]>([]);
   const [filters, setFilters] = useState<Partial<Record<SystemId, string>>>({});
   const [limits, setLimits] = useState<Partial<Record<SystemId, number>>>({});
+  const systems = SYSTEMS.filter((system) => groups.has(system.id)).sort(
+    (a, b) => Number(b.id === "integumentary") - Number(a.id === "integumentary"),
+  );
   return (
     <div className="system-list">
-      {SYSTEMS.filter((system) => groups.has(system.id)).map((system) => {
+      {systems.map((system) => {
         const structures = groups.get(system.id)!;
         const open = expanded.includes(system.id);
         const query = (filters[system.id] ?? "").trim().toLowerCase();

@@ -41,11 +41,11 @@ The female model now includes fitted body skin. [See the final forearm preview](
 
 ## Explore
 
-- Choose **Male** or **Female (Exp)** using the switch below the atlas title; **Exp** means experimental. The choice is remembered on this device; `?model=female` opens the female model directly.
+- Choose **Male (♂)** or **Female (♀)** using the compact icons beside the camera controls. The female model is experimental. The choice is remembered on this device; `?model=female` opens the female model directly.
 - The information panel has a separate Male/Female switch for browsing model descriptions and credits. It starts with the current anatomy model each time you open the panel; changing it leaves the anatomy view unchanged.
 - Orbit, zoom around the model's center, and select structures directly on the body.
-- Toggle systems or individual structures, or use skeleton and organ presets.
-- Move from assembled anatomy to a spaced inventory of every visible piece.
+- Toggle systems or individual structures, or use skeleton and organ presets. **Systems (count)** shows the number of enabled system toggles and updates immediately; **Body surface** is first in the list.
+- Move from assembled anatomy to a spaced inventory of every visible piece. Use **Reset** in the bottom dock to restore the view and layers.
 - Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it.
 - Reopen recent selections, smoothly locate or isolate structures, and return to the overall view.
 - Adjust automatic rotation speed and direction.
@@ -55,9 +55,13 @@ The female model now includes fitted body skin. [See the final forearm preview](
 - Use compact controls and detail panels on mobile.
 - Install the atlas on your home screen or desktop and explore the complete model offline.
 
+The **Systems** button is available in the bottom dock at every screen size, and the panel has an **X** to close it. On desktop, Systems starts pinned open; closing or reopening it remembers that preference on this device. On phones it starts closed, and in portrait it fills the space between the camera controls and bottom dock. Opening or closing Systems overlays the anatomy without changing the camera or rearranging the pieces. The desktop exploded inventory uses balanced left and right space regardless of whether Systems is open.
+
 Body surface is enabled by default at 20% opacity in both models. Expand a system in the layers panel to adjust its opacity from 5% to 100%. **Reset opacity** restores the default appearance; the system switches still control visibility. Faded surfaces yield to solid structures behind them when selecting, and selected structures stay opaque.
 
 The same percentage can look different between models: male skin includes inner and outer surfaces that blend together, while the fitted female skin uses one outer surface. Both use the same color and material settings. Around 35–36% female opacity can look closer to 20% male opacity; the visual match depends on the camera and visible anatomy.
+
+Selection preserves each structure's original hue, doubles its saturation (up to 100%), and reduces its lightness by 25%, so white and gray structures also stand out. **Isolate** shows the original colors; **Surroundings** restores the selection highlight. Closing the detail panel clears the selection and its highlight.
 
 Use the bookmark button to save up to 20 named views in this browser, reopen them, or delete them. The link button creates a shareable view, with a copyable field if clipboard access is unavailable. Saving or sharing pauses automatic rotation. Views include the current orbit, zoom, pan, inspector framing, visible systems, individual structure switches, opacity, and exploded layout. Shared views adapt their camera distance on narrower screens and work under the GitHub Pages repository path. Bookmarks remain on this device; links carry the view itself and need no account or server.
 
@@ -125,7 +129,9 @@ npm run build
 
 Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, tap-versus-drag handling, asset URLs under GitHub Pages subpaths, and compressed model downloads. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
 
-Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity.
+Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity. Selection-color tests check saturation limits, white and gray colors, preserved hue, and repeated selection without modifying the original material color.
+
+WebKit and Chromium browser checks cover Systems counts and presets in both models, closing and reopening the panel without changing camera matrices, close-button spacing, slider layouts, phone panel height, and consistent desktop row heights across the 1400px breakpoint. These checks use desktop browser engines, not physical iOS or iPadOS devices.
 
 Female skin tests verify the source and delivered checksums, preserved underlying anatomy, finite geometry and normals, smoothing and deformation bounds, joined wrist/ankle topology, and skin coverage over breast adipose tissue, hand/toe bones and medial forearm tissue. Geometric checks do not replace independent anatomical review.
 

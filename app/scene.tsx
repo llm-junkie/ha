@@ -1,4 +1,4 @@
-import { createAnatomyMaterial, applyLayerOpacity } from "./anatomy-material";
+import { createAnatomyMaterial, applyLayerOpacity, selectionHighlightColor } from "./anatomy-material";
 import { layerOpacity, partOpacity } from "./layer-opacity";
 import { captureCameraPose, restoreCameraPose } from "./camera-pose";
 import { updateDrawBatches, type DrawBatch } from "./draw-batches";
@@ -169,14 +169,7 @@ export default function AnatomyScene({
           ),
       );
     const contextHighlight = new T.Group();
-    const contextHighlightMaterial = new T.MeshBasicMaterial({
-      color: "#6bd5bf",
-      transparent: true,
-      opacity: 0.65,
-      depthWrite: false,
-      depthFunc: T.GreaterDepth,
-    });
-    materials.push(contextHighlightMaterial);
+    const contextHighlightMaterials = new Map<string, T.MeshBasicMaterial>();
     scene.add(contextHighlight);
     let contextHighlightKey = "";
     const availableSystems = SYSTEMS.filter((system) =>
@@ -373,6 +366,20 @@ export default function AnatomyScene({
         bottom: el.clientHeight - 28,
       };
     };
+    const desktopFrame = () => {
+      const rect = el.getBoundingClientRect();
+      const rail = document.querySelector(".viewer-controls")?.getBoundingClientRect();
+      const heading = document.querySelector(".identity")?.getBoundingClientRect();
+      const actions = document.querySelector(".top-actions")?.getBoundingClientRect();
+      const dock = document.querySelector(".bottom-dock")?.getBoundingClientRect();
+      const sideGap = rail ? rect.right - rail.left + 16 : 20;
+      return {
+        left: sideGap,
+        right: el.clientWidth - sideGap,
+        top: Math.max(heading?.bottom ?? rect.top, actions?.bottom ?? rect.top) - rect.top + 24,
+        bottom: (dock?.top ?? rect.bottom) - rect.top - 20,
+      };
+    };
     const fit = (view: string, extent = 0, transitionTime?: number) => {
       controls.maxDistance = 40;
       const mobile = el.clientWidth < 768;
@@ -391,11 +398,15 @@ export default function AnatomyScene({
               (2 * Math.tan(T.MathUtils.degToRad(camera.fov / 2))),
           )
         : 4;
-      const reservedHeight = frame ? el.clientHeight - frameHeight : mobile ? 350 : 270;
+      const packingFrame = !mobile && !landscape ? desktopFrame() : frame;
+      const reservedHeight = packingFrame
+        ? el.clientHeight - (packingFrame.bottom - packingFrame.top)
+        : 350;
       const availableAspect = Math.max(
         0.35,
         frame ? frameWidth / frameHeight :
-          (el.clientWidth - (mobile ? 40 : 340)) / Math.max(160, el.clientHeight - reservedHeight),
+          (packingFrame ? packingFrame.right - packingFrame.left : el.clientWidth - 40) /
+            Math.max(160, el.clientHeight - reservedHeight),
       );
       const atlasDistance =
         (Math.max(packingHeight, packingWidth / availableAspect) /
@@ -406,14 +417,14 @@ export default function AnatomyScene({
       if (extent > 0.8) view = "front";
       const direction = viewDirection(view);
       const center = new T.Vector3(
-        extent > 0.1 && !mobile && !landscape ? -packingWidth * 0.12 : 0,
+        0,
         extent > 0.1 || mobile || landscape ? 0.85 : 0.68,
         0,
       );
-      const destinationOffset = frame ? new T.Vector2(
-        el.clientWidth / 2 - (frame.left + frame.right) / 2,
-        el.clientHeight / 2 - (frame.top + frame.bottom) / 2,
-      ) : new T.Vector2();
+      const destinationOffset = packingFrame ? new T.Vector2(
+        el.clientWidth / 2 - (packingFrame.left + packingFrame.right) / 2,
+        el.clientHeight / 2 - (packingFrame.top + packingFrame.bottom) / 2,
+      ).multiplyScalar(landscape ? 1 : extent) : new T.Vector2();
       const destination = center.clone().addScaledVector(direction, distance);
       controls.autoRotate = false;
       controls.enableDamping = false;
@@ -436,7 +447,7 @@ export default function AnatomyScene({
         return;
       }
       cameraTransition = null;
-      if (frame) camera.setViewOffset(el.clientWidth, el.clientHeight, destinationOffset.x, destinationOffset.y, el.clientWidth, el.clientHeight);
+      if (packingFrame) camera.setViewOffset(el.clientWidth, el.clientHeight, destinationOffset.x, destinationOffset.y, el.clientWidth, el.clientHeight);
       else camera.clearViewOffset();
       controls.target.copy(center);
       camera.position.copy(destination);
@@ -597,7 +608,9 @@ export default function AnatomyScene({
           const shown = partIsVisible(p, s, { visible, selected: selection });
           partVisibility[i] = shown ? 1 : 0;
           data[i * 4 + 3] = shown ? 1 : 0;
+          // Selection keeps pieces opaque; only surrounding views boost their color.
           selectedData[i * 4] = selected ? 255 : 0;
+          selectedData[i * 4 + 1] = selected && !s.isolate ? 255 : 0;
           if (shown) {
             activeParts.push(i);
             if (p.system !== "integumentary") hasSolidParts = true;
@@ -606,10 +619,14 @@ export default function AnatomyScene({
         const visibleParts = atlas.parts.filter((p) =>
           partIsVisible(p, s, { visible, selected: selection }),
         );
+        const frame = el.clientWidth >= 768 && el.clientHeight > 600 ? desktopFrame() : undefined;
+        const packingAspect = frame
+          ? (frame.right - frame.left) / Math.max(160, frame.bottom - frame.top)
+          : camera.aspect;
         const nextLayoutKey =
-          visibleParts.map((p) => p.id).join(",") + ":" + camera.aspect.toFixed(3);
+          visibleParts.map((p) => p.id).join(",") + ":" + packingAspect.toFixed(3);
         if (nextLayoutKey !== layoutKey) {
-          const layout = createExplosionLayout(visibleParts, camera.aspect);
+          const layout = createExplosionLayout(visibleParts, packingAspect);
           packingWidth = layout.width;
           packingHeight = layout.height;
           atlas.parts.forEach((p, i) => {
@@ -704,12 +721,14 @@ export default function AnatomyScene({
             const sceneRect = el.getBoundingClientRect();
             const mobile = w < 768,
               landscape = w > h && h <= 600;
-            let left = mobile ? 20 : w > 1100 ? 285 : 25,
+            let left = 20,
               right = w - 20,
               top = mobile ? 175 : 110,
               bottom = h - 170;
             if (landscape) {
               ({ left, right, top, bottom } = landscapeFrame());
+            } else if (!mobile) {
+              ({ left, right, top, bottom } = desktopFrame());
             }
             if (s.inspectorOpen) {
               const sheet = document.querySelector(".detail-sheet")?.getBoundingClientRect();
@@ -843,7 +862,20 @@ export default function AnatomyScene({
             if (!pickers[i]) return;
             // Only occluded surfaces get this overlay; exposed surfaces retain
             // their normal selection shading. Shared geometry stays cached.
-            const mesh = new T.Mesh(pickers[i]!.geometry, contextHighlightMaterial);
+            const system = atlas.parts[i].system;
+            let material = contextHighlightMaterials.get(system);
+            if (!material) {
+              material = new T.MeshBasicMaterial({
+                color: selectionHighlightColor(mats.get(system)!.color),
+                transparent: true,
+                opacity: 0.65,
+                depthWrite: false,
+                depthFunc: T.GreaterDepth,
+              });
+              contextHighlightMaterials.set(system, material);
+              materials.push(material);
+            }
+            const mesh = new T.Mesh(pickers[i]!.geometry, material);
             mesh.userData.part = i;
             mesh.renderOrder = 20;
             contextHighlight.add(mesh);
