@@ -2,12 +2,33 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import * as T from "three";
 import { SYSTEMS } from "../app/anatomy.ts";
-import { selectionHighlightColor } from "../app/anatomy-material.ts";
+import { createAnatomyMaterial, createLocateMaterial, selectionHighlightColor } from "../app/anatomy-material.ts";
 
 const hsl = (color) => color.getHSL({ h: 0, s: 0, l: 0 }, T.SRGBColorSpace);
 // Three.js uses approximate sRGB conversions; tolerate their small round-trip error.
 const close = (actual, expected) => assert.ok(Math.abs(actual - expected) < 1e-5,
   `expected ${expected}, got ${actual}`);
+
+test("Locate retains lit surface properties and depth between selected pieces", () => {
+  for (const system of SYSTEMS) {
+    const source = createAnatomyMaterial(system.id, new T.DataTexture(), new T.DataTexture(), 1);
+    const material = createLocateMaterial(source);
+    assert(material.isMeshStandardMaterial);
+    assert(material.color.equals(selectionHighlightColor(source.color)));
+    assert.equal(material.roughness, source.roughness);
+    assert.equal(material.metalness, source.metalness);
+    assert.equal(material.side, source.side);
+    assert.equal(material.opacity, 1);
+    assert.equal(material.transparent, false);
+    assert.equal(material.depthTest, true);
+    assert.equal(material.depthWrite, true);
+    assert.equal(material.depthFunc, T.LessEqualDepth);
+    assert.notEqual(material.onBeforeCompile, source.onBeforeCompile, "Standalone meshes must not apply the batched position offset twice");
+    assert.equal(source.color.getHexString(), new T.Color(system.color).getHexString());
+    source.dispose();
+    material.dispose();
+  }
+});
 
 test("selection doubles saturation and darkens each system by 25% while preserving its hue", () => {
   for (const system of SYSTEMS) {

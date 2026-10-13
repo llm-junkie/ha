@@ -1,4 +1,4 @@
-import { createAnatomyMaterial, applyLayerOpacity, selectionHighlightColor } from "./anatomy-material";
+import { createAnatomyMaterial, applyLayerOpacity, createLocateMaterial } from "./anatomy-material";
 import { layerOpacity, partOpacity } from "./layer-opacity";
 import { captureCameraPose, restoreCameraPose } from "./camera-pose";
 import { updateDrawBatches, type DrawBatch } from "./draw-batches";
@@ -143,6 +143,10 @@ export default function AnatomyScene({
     const rim = new T.DirectionalLight(0xe9f0ff, 1.8);
     rim.position.set(2, 2, -3);
     scene.add(rim);
+    // Share the same lighting with the selected anatomy's separate depth pass.
+    scene.traverse((object) => {
+      if (object instanceof T.Light) object.layers.enable(1);
+    });
     const width = T.MathUtils.ceilPowerOfTwo(atlas.parts.length),
       data = new Float32Array(width * 4),
       partTexture = new T.DataTexture(data, width, 1, T.RGBAFormat, T.FloatType);
@@ -168,7 +172,7 @@ export default function AnatomyScene({
           ),
       );
     const contextHighlight = new T.Group();
-    const contextHighlightMaterials = new Map<string, T.MeshBasicMaterial>();
+    const contextHighlightMaterials = new Map<string, T.MeshStandardMaterial>();
     scene.add(contextHighlight);
     let contextHighlightKey = "";
     const availableSystems = SYSTEMS.filter((system) =>
@@ -833,24 +837,18 @@ export default function AnatomyScene({
         if (highlightKey)
           selectedIndices.forEach((i) => {
             if (!pickers[i]) return;
-            // Only occluded surfaces get this overlay; exposed surfaces retain
-            // their normal selection shading. Shared geometry stays cached.
+            // Preserve normal lighting and self-occlusion, including between
+            // pieces of a selected structure. Shared geometry stays cached.
             const system = atlas.parts[i].system;
             let material = contextHighlightMaterials.get(system);
             if (!material) {
-              material = new T.MeshBasicMaterial({
-                color: selectionHighlightColor(mats.get(system)!.color),
-                transparent: true,
-                opacity: 0.65,
-                depthWrite: false,
-                depthFunc: T.GreaterDepth,
-              });
+              material = createLocateMaterial(mats.get(system)!);
               contextHighlightMaterials.set(system, material);
               materials.push(material);
             }
             const mesh = new T.Mesh(pickers[i]!.geometry, material);
             mesh.userData.part = i;
-            mesh.renderOrder = 20;
+            mesh.layers.set(1);
             contextHighlight.add(mesh);
           });
         contextHighlightKey = highlightKey;
@@ -918,6 +916,16 @@ export default function AnatomyScene({
       if (controls.autoRotate) dirty = true;
       if (dirty) {
         renderer.render(scene, camera);
+        if (contextHighlight.children.length) {
+          // Reveal selected anatomy through its surroundings, while keeping its
+          // own nearest surfaces and shading instead of stacking hidden faces.
+          renderer.autoClear = false;
+          renderer.clearDepth();
+          camera.layers.set(1);
+          renderer.render(scene, camera);
+          camera.layers.set(0);
+          renderer.autoClear = true;
+        }
         cameraChanged.current(
           captureCameraPose(camera, controls.target, el.clientWidth, el.clientHeight),
           ready && amount === s.explode && !cameraTransition,
