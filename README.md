@@ -44,6 +44,7 @@ The female model now includes fitted body skin. [See the final forearm preview](
 - Choose **Male (♂)** or **Female (♀)** using the compact icons beside the camera controls. The female model is experimental. The choice is remembered on this device; `?model=female` opens the female model directly.
 - The information panel has a separate Male/Female switch for browsing model descriptions and credits. It starts with the current anatomy model each time you open the panel; changing it leaves the anatomy view unchanged.
 - Orbit, zoom around the model's center, and select structures directly on the body.
+- Right-drag to reposition the view while keeping rotation centered on the body or located structure. Panning preserves the explode percentage and layers; zoom and auto-rotation keep the same anchor.
 - Toggle systems or individual structures, or use skeleton and organ presets. **Systems (count)** shows the number of enabled system toggles and updates immediately; **Body surface** is first in the list.
 - Move from assembled anatomy to a spaced inventory of every visible piece. Ticks mark **45%** and **79%**, where the slider snaps when dragging or tapping nearby; arrow keys retain precise 1% adjustments. Use **Reset** in the bottom dock to restore the view and layers.
 - Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it.

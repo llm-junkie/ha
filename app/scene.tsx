@@ -13,6 +13,7 @@ import { assetUrl } from "./asset-url";
 import { PointerTap } from "./pointer-tap";
 import { partIsEnabled, partIsVisible } from "./part-visibility";
 import { createWheelZoom } from "./wheel-zoom";
+import { anchorPan } from "./anchored-pan";
 import { createFrameScheduler } from "./frame-scheduler";
 import { DEFAULT_ROTATION_SPEED, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED, SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
@@ -99,6 +100,7 @@ export default function AnatomyScene({
     const scene = new T.Scene(),
       camera = new T.PerspectiveCamera(34, 1, 0.005, 100),
       controls = new OrbitControls(camera, renderer.domElement);
+    const releaseAnchoredPan = anchorPan(controls, camera, renderer.domElement);
     const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
     let cameraTransition: {
       start: number;
@@ -1014,6 +1016,7 @@ export default function AnatomyScene({
       renderer.domElement.removeEventListener("pointerup", up);
       renderer.domElement.removeEventListener("pointercancel", cancel);
       renderer.domElement.removeEventListener("wheel", wheel, true);
+      releaseAnchoredPan();
       controls.dispose();
       geometries.forEach((g) => g.dispose());
       materials.forEach((m) => m.dispose());
