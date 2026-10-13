@@ -2,7 +2,7 @@ import { createAnatomyMaterial, applyLayerOpacity, createLocateMaterial } from "
 import { layerOpacity, partOpacity } from "./layer-opacity";
 import { captureCameraPose, restoreCameraPose } from "./camera-pose";
 import { updateDrawBatches, type DrawBatch } from "./draw-batches";
-import { useEffect, useRef } from "react";
+import { useEffect, useLayoutEffect, useRef } from "react";
 import * as T from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -15,6 +15,7 @@ import { partIsEnabled, partIsVisible } from "./part-visibility";
 import { createWheelZoom } from "./wheel-zoom";
 import { anchorPan } from "./anchored-pan";
 import { createFrameScheduler } from "./frame-scheduler";
+import { scenePixelRatio } from "./render-budget";
 import { DEFAULT_ROTATION_SPEED, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED, SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
   atlas: Atlas;
@@ -49,7 +50,10 @@ export default function AnatomyScene({
   latest.current = state;
   select.current = onSelect;
   cameraChanged.current = onCameraChange;
-  useEffect(() => {
+  // OrbitControls removes its document listeners via canvas.getRootNode().
+  // Dispose before React detaches the host; passive cleanup targets the detached
+  // host instead of the document and retains the entire previous model.
+  useLayoutEffect(() => {
     const el = host.current!;
     let disposed = false,
       dirty = true,
@@ -72,7 +76,7 @@ export default function AnatomyScene({
       renderer = new T.WebGLRenderer({
         antialias: true,
         alpha: false,
-        powerPreference: "high-performance",
+        powerPreference: "default",
       });
     } catch {
       frames.dispose();
@@ -82,7 +86,7 @@ export default function AnatomyScene({
       );
       return;
     }
-    renderer.setPixelRatio(Math.min(devicePixelRatio, innerWidth < 768 ? 1.5 : 2));
+    renderer.setPixelRatio(scenePixelRatio(el.clientWidth, el.clientHeight, devicePixelRatio));
     renderer.setClearColor(getComputedStyle(el).getPropertyValue("--background").trim());
     changeBackground.current = (color) => {
       renderer.setClearColor(color);
@@ -466,11 +470,12 @@ export default function AnatomyScene({
       dirty = true;
     };
     const resize = () => {
+      if (!el.clientWidth || !el.clientHeight) return;
       layoutKey = "";
       lastSelectionFrame = "";
       lastState = null;
       renderer.setPixelRatio(
-        Math.min(devicePixelRatio, el.clientWidth < 768 || el.clientHeight < 600 ? 1.5 : 2),
+        scenePixelRatio(el.clientWidth, el.clientHeight, devicePixelRatio),
       );
       camera.aspect = el.clientWidth / el.clientHeight;
       camera.updateProjectionMatrix();
@@ -595,7 +600,7 @@ export default function AnatomyScene({
       }
       const moving = Math.abs(amount - s.explode) > 0.0001;
       if (moving) {
-        amount = T.MathUtils.damp(amount, s.explode, 8, dt);
+        amount = reducedMotion.matches ? s.explode : T.MathUtils.damp(amount, s.explode, 8, dt);
         if (Math.abs(amount - s.explode) <= 0.0001) amount = s.explode;
         dirty = true;
       }
@@ -841,6 +846,11 @@ export default function AnatomyScene({
       // Isolation only changes visibility; Locate uses the current exploded positions.
       const highlightKey = ready && s.focus && !s.isolate ? selectedKey : "";
       if (highlightKey !== contextHighlightKey) {
+        // Picking keeps the CPU geometry, but past Locate selections no longer
+        // need their individual GPU buffers in addition to the merged batches.
+        contextHighlight.children.forEach((object) => {
+          if (object instanceof T.Mesh) object.geometry.dispose();
+        });
         contextHighlight.clear();
         if (highlightKey)
           selectedIndices.forEach((i) => {
@@ -867,7 +877,7 @@ export default function AnatomyScene({
         mesh.position.set(data[i * 4], data[i * 4 + 1], data[i * 4 + 2]);
       });
       const rotationSpeed = T.MathUtils.clamp(s.rotationSpeed ?? DEFAULT_ROTATION_SPEED, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED);
-      controls.autoRotate = s.rotate && controls.enableRotate;
+      controls.autoRotate = s.rotate && ready && activeParts.length > 0 && controls.enableRotate;
       controls.autoRotateSpeed =
         0.65 *
         rotationSpeed *

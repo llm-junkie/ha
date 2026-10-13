@@ -40,7 +40,7 @@ for element in metadata['elements']:
     parts.append({'id':element['id'],'name':record.get('name',name),'conceptId':record.get('conceptId',element['conceptId']),'system':system,'chunk':chunk,'positions':po,'normals':no,'indices':io,'vertexCount':len(vertices)//3,'indexCount':len(indices),'bounds':bounds})
     total_triangles+=len(indices)//3
 (out/f'anatomy-{chunk}.bin').write_bytes(blob);chunks.append({'url':f'/models/anatomy-{chunk}.bin','bytes':len(blob)})
-manifest={'version':'BodyParts3D 4.0','parts':parts,'chunks':chunks,'triangles':total_triangles,'concepts':[{k:v for k,v in c.items() if k in ['id','name','elements']} for c in metadata['concepts']]}
+manifest={'version':'BodyParts3D 4.0','sex':'male','parts':parts,'chunks':chunks,'triangles':total_triangles,'concepts':[{k:v for k,v in c.items() if k in ['id','name','elements']} for c in metadata['concepts']]}
 # Preserve verified viewer classifications when rebuilding from source metadata.
 corrections=json.loads((root/'data/anatomy/classification-overrides.json').read_text())
 targets=[]

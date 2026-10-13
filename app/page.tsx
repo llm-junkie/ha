@@ -332,7 +332,10 @@ export default function Home() {
   const inspectorOpen = details && selectedParts.length > 0;
   // Opening interface panels must not restart the camera's remaining orbit damping.
   const sceneState = useMemo(() => ({ ...state, inspectorOpen }), [state, inspectorOpen]);
-  const visibleCount = atlas?.parts.filter((part) => partIsVisible(part, state)).length ?? 0;
+  const visibleCount = useMemo(() => {
+    const lookups = { visible: new Set(state.visible), selected: new Set(state.selected) };
+    return atlas?.parts.reduce((count, part) => count + Number(partIsVisible(part, state, lookups)), 0) ?? 0;
+  }, [atlas, state.visible, state.selected, state.isolate, state.partVisibility]);
   const results = useMemo(() => {
     const term = query.toLowerCase().trim();
     if (term)
@@ -495,7 +498,7 @@ export default function Home() {
       "--background": viewerBackground,
       "--scene-foreground": backgroundForeground(viewerBackground),
     } as CSSProperties}>
-      {atlas && (
+      {atlas && !error && (
         <AnatomyScene
           atlas={atlas}
           backgroundColor={viewerBackground}
@@ -625,6 +628,7 @@ export default function Home() {
         {atlas && (
           <SystemLayers
             atlas={atlas}
+            panelOpen={systemsOpen}
             state={state}
             onOnly={(id) => setLayers([id])}
             onToggle={toggle}

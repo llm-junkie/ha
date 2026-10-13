@@ -143,6 +143,15 @@ npm test
 npm run build
 ```
 
+For browser memory, rendering, recovery, offline and responsive-interface checks:
+
+```sh
+npx playwright install chromium webkit
+npm run test:browser
+```
+
+These checks build the production app under `/ha/` and run browsers one at a time. CI runs the Chromium suite before the deployment build. On Windows, an existing Edge installation can run the Chromium project with `$env:PLAYWRIGHT_CHANNEL='msedge'; npm.cmd run test:browser -- --project=chromium`. See the [runtime audit](docs/runtime-audit.md) for measured memory results, covered scenarios and hardware-testing limits.
+
 Validation covers mesh buffers, names and concept membership, nonoverlapping exploded layouts at desktop and mobile aspect ratios, search and inspection contracts, tap-versus-drag handling, asset URLs under GitHub Pages subpaths, and compressed model downloads. Browser interaction checks have exercised selection, system controls, search, isolation, rotation, and 390×844, 320×568, and 844×390 layouts. Phone controls stay clear of the exploded inventory, and isolated structures fit the space above or beside the detail panel. Physical-device performance and real multitouch hardware have not been tested.
 
 Focused viewer tests also cover muscle-group membership, individual visibility, recent history, hidden-geometry drawing, frame scheduling, centered wheel zoom with inspector offsets and distance limits, saved-view and link validation, storage failures, camera restoration, and layer opacity. Selection-color tests check saturation limits, white and gray colors, preserved hue, and repeated selection without modifying the original material color.
@@ -183,6 +192,8 @@ This is an educational explorer, not a diagnostic or surgical tool.
 Geometry is merged into batches whose draw indices contain only visible structures. Visibility changes upload only the used index range. Per-structure GPU textures control translation and selection, while component geometry supports accurate picking. Exploded layouts pack only visible pieces; layout, visibility and selection buffers stay cached during animation. The frame loop wakes for interactions, loading and animations, then stops when the view is still. It also pauses while the browser tab is hidden.
 
 Model downloads run three chunks at a time and cancel together on failure or a model switch. Catalogue validation checks structure, identifiers, bounds and buffer ranges before rendering. Switching models releases the previous WebGL context and its resources. Offline progress reads cache keys without reopening every model response. Styles are generated only from application, UI component and web entry sources; temporary files and documentation cannot expand the stylesheet.
+
+Viewer cleanup runs before its canvas is detached, so navigation listeners cannot retain previous models. Failed sessions release partial geometry, and closing Locate releases its extra GPU buffers. Rendering uses the browser's default GPU preference and a four-million-pixel budget, with the existing phone/tablet pixel-density caps; interface text stays at native resolution. Empty scenes stop automatic rotation work, and reduced-motion preferences also apply to the exploded-layout transition. Hidden Systems panels release their expanded controls and recreate them on reopening, retaining filters and expansion choices.
 
 Recent selections are stored locally in the browser. Muscle search shortcuts group verified source meshes without modifying the source catalogue. Guided camera movement respects the reduced-motion setting and yields to manual navigation.
 

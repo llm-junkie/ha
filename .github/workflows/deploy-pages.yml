@@ -40,10 +40,14 @@ jobs:
         if: github.event_name != 'pull_request'
         id: pages
         uses: actions/configure-pages@v6
+      - name: Install Chromium for runtime checks
+        run: npx playwright install --with-deps chromium
+      - name: Check viewer lifecycle and usability
+        run: npm run test:browser -- --project=chromium
       - name: Build site
         run: npm run build
         env:
-          # Pull requests also exercise a subpath without needing Pages enabled.
+          # Restore the deployment path after tests exercise the /ha/ subpath.
           BASE_PATH: ${{ steps.pages.outputs.base_path || (github.event_name == 'pull_request' && '/preview') || '' }}/
       - name: Upload site
         if: github.event_name != 'pull_request'

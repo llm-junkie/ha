@@ -10,6 +10,7 @@ import { layerOpacity } from "./layer-opacity";
 
 interface Props {
   atlas: Atlas;
+  panelOpen: boolean;
   state: SceneState;
   onOnly: (system: SystemId) => void;
   onToggle: (system: SystemId) => void;
@@ -20,6 +21,7 @@ interface Props {
 
 export default function SystemLayers({
   atlas,
+  panelOpen,
   state,
   onOnly,
   onToggle,
@@ -81,7 +83,9 @@ export default function SystemLayers({
                 aria-label={`Show ${system.name.toLowerCase()}`}
               />
             </div>
-            {open && (
+            {/* Hidden sliders can lose their measured thumb position. Recreate
+                expanded controls on reopen and release their observers on close. */}
+            {open && panelOpen && (
               <div className="structure-children" id={`structures-${system.id}`}>
                 <div className="layer-opacity-control">
                   <div>
