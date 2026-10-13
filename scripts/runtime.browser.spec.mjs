@@ -2,6 +2,19 @@ import { test, expect } from '@playwright/test';
 import { preview } from 'vite';
 
 async function ready(page) {
+  // Loading and the first software-rendered frame can exceed an ordinary UI wait.
+  // Surface an actual viewer error immediately instead of timing out on Share.
+  const outcome = await page.waitForFunction(() => {
+    const error = document.querySelector('.loading[role="alert"]');
+    if (error) return error.textContent;
+    const share = document.querySelector('button[aria-label="Share current view"]');
+    return share && !share.disabled && !document.querySelector('.loading') ? 'ready' : null;
+  }, null, { timeout: process.env.CI ? 120_000 : 30_000 });
+  try {
+    expect(await outcome.jsonValue(), 'The viewer should finish loading without an error').toBe('ready');
+  } finally {
+    await outcome.dispose();
+  }
   await expect(page.getByRole('button', { name: 'Share current view', exact: true })).toBeEnabled();
   await expect(page.locator('.loading')).toHaveCount(0);
 }
@@ -39,11 +52,14 @@ function trackRendering() {
 }
 
 async function assertIdle(page) {
-  // Allow camera damping and UI transitions to finish, then observe a quiet window.
+  // Allow camera damping and UI transitions to finish, then require a quiet window.
+  // Software rendering can delay the last queued callback beyond a fixed sleep.
   await page.waitForTimeout(1800);
-  const before = await page.evaluate(() => ({ frames: window.__renderAudit.frames, draws: window.__renderAudit.draws }));
-  await page.waitForTimeout(600);
-  expect(await page.evaluate(() => ({ frames: window.__renderAudit.frames, draws: window.__renderAudit.draws }))).toEqual(before);
+  await expect(async () => {
+    const before = await page.evaluate(() => ({ frames: window.__renderAudit.frames, draws: window.__renderAudit.draws }));
+    await page.waitForTimeout(600);
+    expect(await page.evaluate(() => ({ frames: window.__renderAudit.frames, draws: window.__renderAudit.draws }))).toEqual(before);
+  }).toPass({ timeout: 30_000, intervals: [500] });
 }
 
 test('model switching releases old geometry and document listeners', async ({ page, context, browserName }, testInfo) => {
@@ -186,7 +202,7 @@ test('WebGL startup failure leaves accessible recovery controls', async ({ page 
   await expect(page.getByRole('button', { name: 'Reload viewer', exact: true })).toBeEnabled();
 });
 
-test('both saved models reopen when the origin server is unavailable', async ({ browser, browserName }) => {
+test('both saved models reopen when the origin server is unavailable', async ({ browser, browserName, contextOptions }) => {
   // Use a dedicated origin so it can be stopped without disturbing other tests.
   // Frozen WebKit builds reject SW navigation with setOffline(true):
   // https://github.com/microsoft/playwright/issues/42775
@@ -197,7 +213,7 @@ test('both saved models reopen when the origin server is unavailable', async ({ 
     server.httpServer.closeAllConnections();
   });
   const baseURL = `http://127.0.0.1:${server.httpServer.address().port}/ha/`;
-  const context = await browser.newContext({ serviceWorkers: 'allow', baseURL });
+  const context = await browser.newContext({ ...contextOptions, serviceWorkers: 'allow', baseURL });
   try {
     const page = await context.newPage();
     await page.goto('./');
