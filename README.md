@@ -31,11 +31,24 @@ Built with React, Three.js, and shadcn/ui. The **male reference** includes 2,444
 
 ## Preview
 
-| Male · BodyParts3D | Female · Experimental |
+| Exploded anatomy · 45% | Heart inspection |
 | --- | --- |
-| [![Male anatomy explorer with the default systems and assembled model](docs/images/male-atlas.jpg)](docs/images/male-atlas.jpg) | [![Experimental female anatomy explorer with the default systems and assembled model](docs/images/female-atlas.jpg)](docs/images/female-atlas.jpg) |
+| [![Anatomical systems separated with the explode slider at 45%](docs/images/example_45p.jpg)](docs/images/example_45p.jpg) | [![Selected heart shown with surrounding anatomy and structure details](docs/images/example_heart.jpg)](docs/images/example_heart.jpg) |
 
-Captured from app **0.3.5** at the same desktop size and default three-quarter view, with anatomy assembled and no structure selected. Click either image for the full-size screenshot. The anatomy shown uses adapted BodyParts3D and HRA data under CC BY 4.0; see [Credits](#credits). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
+**On phones**
+
+<p align="center">
+  <a href="docs/images/example_phone_overview.jpg"><img src="docs/images/example_phone_overview.jpg" alt="Phone layout showing the full male anatomy and compact controls" title="Full-body exploration" width="23%" /></a>
+  <a href="docs/images/example_phone_45p.jpg"><img src="docs/images/example_phone_45p.jpg" alt="Phone layout showing the male anatomy separated by system at 45% explosion" title="Exploded anatomy · 45%" width="23%" /></a>
+  <a href="docs/images/example_phone_heart.jpg"><img src="docs/images/example_phone_heart.jpg" alt="Phone layout showing the located heart in the female model above its structure details" title="Heart inspection" width="23%" /></a>
+  <a href="docs/images/example_phone_layers.jpg"><img src="docs/images/example_phone_layers.jpg" alt="Phone layout showing the Systems panel with body surface opacity and individual structure controls" title="System layers and opacity" width="23%" /></a>
+</p>
+
+Left to right: **Full-body exploration** · **Exploded anatomy at 45%** · **Heart inspection** · **System layers and opacity**.
+
+Phone screenshots are **1290 × 2796 pixels**, captured from a 430 × 932 layout at 3× resolution, including the 3D anatomy.
+
+Examples from app **0.5.2**, showing the male reference and heart inspection in the experimental female model. Click any image for the full-size screenshot. The anatomy uses adapted BodyParts3D, HRA, and Z-Anatomy data; see [Credits](#credits) and [dataset licenses](public/ATTRIBUTION.md). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
 
 The female model now includes fitted body skin. [See the final forearm preview](docs/images/female-skin-forearms-fit.jpg) and [skin fit notes](docs/female-skin.md) for the head, neck, back, breast, hand and foot adjustments, source credits, and validation.
 
@@ -47,13 +60,13 @@ The female model now includes fitted body skin. [See the final forearm preview](
 - Right-drag to reposition the view while keeping rotation centered on the body or located structure. Panning preserves the explode percentage and layers; zoom and auto-rotation keep the same anchor.
 - Toggle systems or individual structures, or use skeleton and organ presets. **Systems (count)** shows the number of enabled system toggles and updates immediately; **Body surface** is first in the list.
 - Move from assembled anatomy to a spaced inventory of every visible piece. Ticks mark **45%** and **79%**, where the slider snaps when dragging or tapping nearby; arrow keys retain precise 1% adjustments. Use **Reset** in the bottom dock to restore the view and layers.
-- Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it.
+- Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it. Landscape search fills the available height with safe gaps at the screen edges and shrinks when the keyboard opens.
 - Reopen recent selections, smoothly locate or isolate structures, and return to the overall view.
 - Adjust automatic rotation speed and choose its direction. The slider uses a 0–100% scale, with a minimum selectable speed of 10%. The default is 50%, marked at the midpoint with a snap when dragging or tapping nearby; arrow keys keep precise 1% adjustments. Auto-rotate remains available below 80% explosion, matching manual orbit; at 80% and above, the inventory uses panning.
 - Adjust background brightness with the sun button; the midpoint snaps to the default gray, with a ±100% range. The title and subtitle automatically use dark or light text for contrast.
 - Fade any anatomical system while keeping selected structures clear.
 - Save named views on your device and share links that restore the camera, selection, and layers.
-- Use compact controls and detail panels on mobile.
+- Use compact controls and detail panels on mobile. In phone portrait, structure details stay below the screen's midpoint and sit 16px above the dock; shorter screens keep the contents scrollable. The model and camera controls remain available during inspection in both orientations. In landscape, the detail panel sits beside the controls, the dock stays visible, and Locate frames the selected anatomy above it.
 - Install the atlas on your home screen or desktop and explore the complete model offline.
 
 The **Systems** button is available in the bottom dock at every screen size, and the panel has an **X** to close it. On desktop, Systems starts pinned open; closing or reopening it remembers that preference on this device. On phones it starts closed, and in portrait it fills the space between the camera controls and bottom dock. Opening or closing Systems overlays the anatomy without changing the camera or rearranging the pieces. The desktop exploded inventory uses balanced left and right space regardless of whether Systems is open.

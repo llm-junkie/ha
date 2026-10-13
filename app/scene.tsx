@@ -356,13 +356,19 @@ export default function AnatomyScene({
       ).normalize();
     const landscapeFrame = () => {
       const rect = el.getBoundingClientRect();
+      const dock = document.querySelector(".bottom-dock")?.getBoundingClientRect();
       const sheet = latest.current.inspectorOpen
         ? document.querySelector(".detail-sheet")?.getBoundingClientRect()
         : undefined;
       if (sheet && sheet.left < rect.right && sheet.right > rect.left) {
-        return { left: 16, right: Math.max(166, sheet.left - rect.left - 16), top: 12, bottom: el.clientHeight - 16 };
+        const heading = document.querySelector(".identity")?.getBoundingClientRect();
+        return {
+          left: 16,
+          right: Math.max(166, sheet.left - rect.left - 16),
+          top: (heading?.bottom ?? rect.top) - rect.top + 16,
+          bottom: (dock?.top ?? rect.bottom) - rect.top - 16,
+        };
       }
-      const dock = document.querySelector(".bottom-dock")?.getBoundingClientRect();
       const rail = document.querySelector(".view-controls")?.getBoundingClientRect();
       return {
         left: (dock ? dock.right - rect.left : 262) + 16,
@@ -735,7 +741,7 @@ export default function AnatomyScene({
               ) {
                 if (mobile && !landscape) {
                   top =
-                    (document.querySelector(".identity")?.getBoundingClientRect().bottom ?? 94) -
+                    (document.querySelector(".viewer-controls")?.getBoundingClientRect().bottom ?? 159) -
                     sceneRect.top +
                     16;
                   bottom = Math.max(top + 40, sheet.top - sceneRect.top - 16);

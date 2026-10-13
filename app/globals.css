@@ -82,11 +82,10 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
  .view-controls button{width:44px;height:44px}.view-controls i{width:1px;height:28px;margin:8px 4px}
  .layers-panel.mobile-open{top:12px;bottom:12px;left:max(12px,env(safe-area-inset-left));width:280px;max-height:none}
  .detail-sheet,.detail-sheet.is-isolated{top:12px!important;bottom:12px!important;right:max(12px,env(safe-area-inset-right))!important;left:auto!important;width:300px!important;max-height:none!important;padding:16px!important;gap:12px!important}
- body:has(.detail-sheet) .view-controls,body:has(.detail-sheet) .top-actions{visibility:hidden}
+ body:has(.detail-sheet) .top-actions{visibility:hidden}
  .search-panel{top:72px;width:350px;left:auto;right:12px}.search-panel input{font-size:16px}.search-note{display:none}
  .anatomy-search-results{max-height:calc(100dvh - 190px)!important}
 }
-@media(max-width:767px){body:has(.detail-sheet) .view-controls{visibility:hidden}}
 
 @media(max-height:600px) and (orientation:landscape){body:has(.detail-sheet) .bottom-dock{left:12px;right:324px;width:auto;transform:none;max-width:none;margin:0}}
 
@@ -342,9 +341,10 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
   pointer-events: none;
 }
 .search-panel {
+  --search-bottom: calc(16px + env(safe-area-inset-bottom));
   display: flex;
   flex-direction: column;
-  max-height: calc(var(--search-visible-height, 100dvh) - var(--search-top) - 16px - env(safe-area-inset-bottom));
+  max-height: calc(var(--search-visible-height, 100dvh) - var(--search-top) - var(--search-bottom));
   overflow: hidden;
 }
 .search-panel > .panel-heading,
@@ -388,9 +388,20 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
   .explorer-panel-anchor { --search-top: calc(var(--mobile-top) + 112px); }
 }
 @media (max-height: 600px) and (orientation: landscape) {
-  .search-panel,
   .explorer-panel-anchor { --search-top: 72px; }
   .explorer-panel-anchor { left: auto; right: var(--mobile-right, 12px); width: 350px; }
+  .search-panel {
+    --search-top: max(12px, env(safe-area-inset-top));
+    --search-bottom: max(12px, env(safe-area-inset-bottom));
+    height: calc(var(--search-visible-height, 100dvh) - var(--search-top) - var(--search-bottom));
+  }
+  .search-panel [data-slot=combobox-list] { max-height: none; }
+  .search-panel[data-keyboard-open] > .panel-heading { min-height: 0; height: 0; }
+  .search-panel[data-keyboard-open] > .panel-heading > span { display: none; }
+  .search-panel[data-keyboard-open] [data-slot=input-group] {
+    width: calc(100% - 44px);
+    margin-top: 0;
+  }
 }
 .search-panel[data-keyboard-open],
 .explorer-panel-anchor[data-keyboard-open] {
@@ -515,8 +526,16 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
 @media (max-width: 767px) and (orientation: portrait) {
   /* 30.4px dock offset + 94px dock height + 16px gap. */
   .layers-panel.mobile-open { bottom: calc(140.4px + env(safe-area-inset-bottom)); }
-  .detail-sheet { bottom: calc(161.4px + env(safe-area-inset-bottom)) !important; }
-  .detail-sheet.is-isolated { bottom: calc(16px + env(safe-area-inset-bottom)) !important; }
+  .detail-sheet {
+    --detail-bottom: calc(140.4px + env(safe-area-inset-bottom));
+    bottom: var(--detail-bottom) !important;
+    max-height: calc(50dvh - var(--detail-bottom));
+  }
+  .detail-sheet.is-isolated {
+    --detail-bottom: calc(16px + env(safe-area-inset-bottom));
+    bottom: var(--detail-bottom) !important;
+    max-height: min(34dvh, calc(50dvh - var(--detail-bottom)));
+  }
 }
 @media (max-width: 350px) {
   .bottom-dock .explode-control { padding: 11px; }
@@ -526,6 +545,7 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
 @media (max-width: 350px) and (orientation: portrait) {
   /* The compact dock is 4px shorter. */
   .layers-panel.mobile-open { bottom: calc(136.4px + env(safe-area-inset-bottom)); }
+  .detail-sheet:not(.is-isolated) { --detail-bottom: calc(136.4px + env(safe-area-inset-bottom)); }
 }
 @media (max-height: 600px) and (orientation: landscape) {
   .bottom-dock .explode-control { padding: 10px 15px; }
@@ -551,7 +571,7 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
     min-height: 0;
   }
   .identity { top: var(--mobile-top); left: var(--mobile-left); }
-  .identity h1 { font-size: 18px; gap: 6px; letter-spacing: -.6px; margin: 0 0 3px; }
+  .identity h1 { font-size: 16.8px; gap: 5.4px; letter-spacing: -.78px; margin: 0 0 2.5px; }
   .identity-meta { display: block; font-size: 10px; }
   .identity-source { display: none; }
   .identity .edition { border-radius: 5px; padding: 1px 4px; }
@@ -607,9 +627,6 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
     max-width: var(--mobile-dock-max-width) !important;
     margin-inline: 0;
   }
-  body:has(.detail-sheet) .identity,
-  body:has(.detail-sheet) .model-switch,
-  body:has(.detail-sheet) .bottom-dock,
   body:has(.detail-sheet) .studio-footer { visibility: hidden; }
 }
 
@@ -683,6 +700,26 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
 @media (max-height: 340px) and (orientation: landscape) {
   .viewer-controls { --viewer-button-height: clamp(20px, calc((100dvh - 100px) / 9), 24px); }
 }
-@media (max-width: 767px), (max-height: 600px) and (orientation: landscape) {
-  body:has(.detail-sheet) .viewer-controls { visibility: hidden; }
+.detail-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: inherit;
+  min-height: 0;
+}
+@media (max-width: 767px) and (max-height: 800px) and (orientation: portrait) {
+  /* Keep the title and close button reachable when the lower half is short. */
+  .detail-body {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: #b9c3cc transparent;
+  }
+  .detail-scroll { flex: none; min-height: 0; overflow: visible; }
+}
+@media (max-height: 600px) and (orientation: landscape) {
+  .detail-sheet, .detail-sheet.is-isolated {
+    /* 44px controls + matching 12px inner and outer gaps. */
+    right: calc(68px + env(safe-area-inset-right)) !important;
+  }
 }

@@ -1047,93 +1047,95 @@ export default function Home() {
               {chosen?.name}
             </SheetTitle>
           </div>
-          <div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
-            <SheetDescription className="structure-description">
-              {chosen?.searchGroup?.description ??
-                (chosen && selected ? explanation(chosen.name, selected.system) : "")}
-            </SheetDescription>
-            {chosen && !chosen.searchGroup && !EXPLANATIONS[chosen.name.toLowerCase()] && (
-              <span className="context-note">
-                System overview · structure identified from source anatomy
-              </span>
-            )}
-            {selectedParts.some((p) => p.id.startsWith("ZA_N")) && (
-              <span className="context-note">Z-Anatomy · estimated registration</span>
-            )}
-            <div className="structure-meta">
-              <span>
-                {chosen?.searchGroup ? "Explorer group" : "Atlas reference"}
-                <strong>{chosen?.id}</strong>
-              </span>
-              <span>
-                Selected pieces<strong>{state.selected.length.toLocaleString()}</strong>
-              </span>
-            </div>
-            {selectedParts.length > 1 && (
-              <div className="member-list">
-                <h3>Included structures</h3>
-                {selectedParts.slice(0, 50).map((p) => (
-                  <Button variant="ghost" key={p.id} onClick={() => choosePart(p.id)}>
-                    <span>{p.name}</span>
-                    <ChevronRight size={14} />
-                  </Button>
-                ))}
-                {selectedParts.length > 50 && (
-                  <p>And {selectedParts.length - 50} more modeled pieces.</p>
-                )}
+          <div className="detail-body" key={chosen?.id}>
+            <div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
+              <SheetDescription className="structure-description">
+                {chosen?.searchGroup?.description ??
+                  (chosen && selected ? explanation(chosen.name, selected.system) : "")}
+              </SheetDescription>
+              {chosen && !chosen.searchGroup && !EXPLANATIONS[chosen.name.toLowerCase()] && (
+                <span className="context-note">
+                  System overview · structure identified from source anatomy
+                </span>
+              )}
+              {selectedParts.some((p) => p.id.startsWith("ZA_N")) && (
+                <span className="context-note">Z-Anatomy · estimated registration</span>
+              )}
+              <div className="structure-meta">
+                <span>
+                  {chosen?.searchGroup ? "Explorer group" : "Atlas reference"}
+                  <strong>{chosen?.id}</strong>
+                </span>
+                <span>
+                  Selected pieces<strong>{state.selected.length.toLocaleString()}</strong>
+                </span>
               </div>
-            )}
-            {anatomicalSources(selectedParts).map((source) => (
-              <a
-                key={source.name}
-                className="source-link"
-                href={source.url}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {source.name} source <ArrowUpRight size={14} />
-              </a>
-            ))}
-          </div>
-          <div className="detail-actions">
-            <div className="detail-focus-actions">
-              <Button
-                variant="outline"
-                className="locate-action"
-                aria-label={state.isolate ? "Locate structure in body" : "Locate structure"}
-                onClick={() =>
-                  setState((current) => ({
-                    ...current,
-                    isolate: false,
-                    focusContext: true,
-                    focus: (current.focus ?? 0) + 1,
-                    rotate: false,
-                  }))
-                }
-              >
-                <Focus size={16} />
-                Locate
-              </Button>
-              <Button
-                className={"primary-action " + (state.isolate ? "active" : "")}
-                aria-label={state.isolate ? "Show surrounding anatomy" : "Isolate structure"}
-                onClick={() =>
-                  setState((current) => ({
-                    ...current,
-                    isolate: !current.isolate,
-                    focus: (current.focus ?? 0) + 1,
-                    focusContext: current.isolate,
-                    rotate: false,
-                  }))
-                }
-              >
-                {state.isolate ? "Surroundings" : "Isolate"}
-                <ChevronRight size={16} />
+              {selectedParts.length > 1 && (
+                <div className="member-list">
+                  <h3>Included structures</h3>
+                  {selectedParts.slice(0, 50).map((p) => (
+                    <Button variant="ghost" key={p.id} onClick={() => choosePart(p.id)}>
+                      <span>{p.name}</span>
+                      <ChevronRight size={14} />
+                    </Button>
+                  ))}
+                  {selectedParts.length > 50 && (
+                    <p>And {selectedParts.length - 50} more modeled pieces.</p>
+                  )}
+                </div>
+              )}
+              {anatomicalSources(selectedParts).map((source) => (
+                <a
+                  key={source.name}
+                  className="source-link"
+                  href={source.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {source.name} source <ArrowUpRight size={14} />
+                </a>
+              ))}
+            </div>
+            <div className="detail-actions">
+              <div className="detail-focus-actions">
+                <Button
+                  variant="outline"
+                  className="locate-action"
+                  aria-label={state.isolate ? "Locate structure in body" : "Locate structure"}
+                  onClick={() =>
+                    setState((current) => ({
+                      ...current,
+                      isolate: false,
+                      focusContext: true,
+                      focus: (current.focus ?? 0) + 1,
+                      rotate: false,
+                    }))
+                  }
+                >
+                  <Focus size={16} />
+                  Locate
+                </Button>
+                <Button
+                  className={"primary-action " + (state.isolate ? "active" : "")}
+                  aria-label={state.isolate ? "Show surrounding anatomy" : "Isolate structure"}
+                  onClick={() =>
+                    setState((current) => ({
+                      ...current,
+                      isolate: !current.isolate,
+                      focus: (current.focus ?? 0) + 1,
+                      focusContext: current.isolate,
+                      rotate: false,
+                    }))
+                  }
+                >
+                  {state.isolate ? "Surroundings" : "Isolate"}
+                  <ChevronRight size={16} />
+                </Button>
+              </div>
+              <Button variant="ghost" className="secondary-action" onClick={returnOverall}>
+                Return to overall view
               </Button>
             </div>
-            <Button variant="ghost" className="secondary-action" onClick={returnOverall}>
-              Return to overall view
-            </Button>
           </div>
         </SheetContent>
       </Sheet>
