@@ -1,0 +1,27 @@
+/* Keep the larger control's negative margins inside the slider's original layout. */
+[data-slot="slider"] {
+  display: flow-root;
+}
+
+/* Cross-axis padding expands native touch capture without changing the visible rail. */
+[data-slot="slider-control"][data-orientation="horizontal"] {
+  padding-block: 22px;
+  margin-block: -22px;
+}
+
+[data-slot="slider-control"][data-orientation="vertical"] {
+  padding-inline: max(0px, calc(24px - 50%));
+  margin-inline: min(0px, calc(50% - 24px));
+}
+
+[data-slot="slider-thumb"]::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 48px;
+  height: 48px;
+  min-width: 100%;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+}

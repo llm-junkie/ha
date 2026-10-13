@@ -417,19 +417,6 @@ export default function Home() {
       },
     }));
   };
-  const returnOverall = () => {
-    setChosen(null);
-    setDetails(false);
-    setState((current) => ({
-      ...current,
-      selected: [],
-      isolate: false,
-      focus: 0,
-      focusContext: false,
-      rotate: false,
-      reset: current.reset + 1,
-    }));
-  };
   const reset = () => {
     setState((s) => ({
       ...initial,
@@ -1132,9 +1119,6 @@ export default function Home() {
                   <ChevronRight size={16} />
                 </Button>
               </div>
-              <Button variant="ghost" className="secondary-action" onClick={returnOverall}>
-                Return to overall view
-              </Button>
             </div>
           </div>
         </SheetContent>

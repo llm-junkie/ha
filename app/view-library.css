@@ -182,9 +182,6 @@
   .layer-opacity-control [data-slot="slider"] {
     padding-block: 12px;
   }
-  .layer-opacity-control [data-slot="slider-thumb"]::after {
-    inset: -14px;
-  }
   .opacity-help button {
     min-height: 44px;
   }
