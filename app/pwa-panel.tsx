@@ -13,9 +13,9 @@ export function pwaLabel(state: PwaState) {
   return '';
 }
 
-export default function PwaPanel({ state, loaded, titleRef, updateTitleRef }: {
+export default function PwaPanel({ state, loaded, titleRef, updateVersionRef }: {
   state: PwaState; loaded: boolean; titleRef?: Ref<HTMLHeadingElement>;
-  updateTitleRef?: Ref<HTMLHeadingElement>;
+  updateVersionRef?: Ref<HTMLParagraphElement>;
 }) {
   const [showInstallHelp, setShowInstallHelp] = useState(false);
   const installHelp = useRef<HTMLDivElement>(null);
@@ -66,25 +66,23 @@ export default function PwaPanel({ state, loaded, titleRef, updateTitleRef }: {
         {state.ready ? <Check size={17} /> : !state.online ? <WifiOff size={17} /> : <Download size={17} />}
         <span>{title}</span>
       </div>
-      <p className="pwa-hint">
-        {state.ready
-          ? 'The atlas and all anatomy files are saved in this browser. Offline saving is separate from installation. Keep the site data to retain your offline copy and bookmarks.'
-          : state.support === 'unavailable'
-            ? 'You can continue exploring online. Try a browser that allows offline site storage.'
-            : state.support === 'development'
-              ? 'Use a production build to try installation and offline access.'
-              : state.error
-                ? 'Your browser could not keep all anatomy files. Reconnect and retry, or free some device storage.'
-                : 'Stay connected while both anatomy models are saved (about 68 MB combined). The app will confirm when both are ready offline.'}
-      </p>
+      {!state.ready && <p className="pwa-hint">
+        {state.support === 'unavailable'
+          ? 'You can continue exploring online. Try a browser that allows offline site storage.'
+          : state.support === 'development'
+            ? 'Use a production build to try installation and offline access.'
+            : state.error
+              ? 'Your browser could not keep all anatomy files. Reconnect and retry, or free some device storage.'
+              : 'Stay connected while both anatomy models are saved (about 68 MB combined). The app will confirm when both are ready offline.'}
+      </p>}
       {available && loaded && !state.ready && (state.error || !state.online) && (
         <Button variant="outline" onClick={prepareOffline} disabled={!state.online}>
           <RefreshCw size={16} /> Retry offline saving
         </Button>
       )}
       <div className="pwa-update-section">
-        <h3 ref={updateTitleRef} tabIndex={-1}>{state.updateAvailable ? 'A new version is ready' : 'App updates'}</h3>
-        <p className="pwa-version">Current version <strong>{APP_VERSION}</strong></p>
+        {state.updateAvailable && <h3>A new version is ready</h3>}
+        <p ref={updateVersionRef} tabIndex={-1} className="pwa-version">Current version <strong>{APP_VERSION}</strong></p>
         {state.support === 'development' && <p className="pwa-hint">
           Updates are available in the published atlas.
         </p>}

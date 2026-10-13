@@ -12,3 +12,15 @@ export function createExplosionLayout(parts:Part[],aspect=1){
  cells.forEach(c=>{c.x-=usedWidth/2;c.y+=height/2;});
  return {cells,width:usedWidth,height};
 }
+
+/** Keep enabled pieces in their compact layout and give hidden pieces stable slots
+ * below it. Inspecting a hidden piece never repacks its visible surroundings. */
+export function createInspectionLayout(parts: Part[], enabledParts: Part[], aspect = 1) {
+  const layout = createExplosionLayout(enabledParts, aspect);
+  const enabled = new Set(enabledParts.map((part) => part.id));
+  const hidden = createExplosionLayout(parts.filter((part) => !enabled.has(part.id)), aspect);
+  const cells = new Map(layout.cells);
+  const shift = -(layout.height + hidden.height) / 2;
+  hidden.cells.forEach((cell, id) => cells.set(id, { ...cell, y: cell.y + shift }));
+  return { ...layout, cells };
+}

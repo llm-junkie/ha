@@ -16,6 +16,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from "react"
 import {
   Activity,
   ArrowUpRight,
+  ChevronDown,
   ChevronRight,
   Focus,
   Info,
@@ -23,14 +24,13 @@ import {
   Mars,
   Pause,
   Play,
-  RefreshCw,
   RotateCcw,
   Search,
   Settings2,
   Venus,
   X,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button, buttonVariants } from "@/components/ui/button";
 import { Slider } from "@/components/ui/slider";
 import { Sheet, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import {
@@ -46,7 +46,7 @@ import { backgroundColor, backgroundForeground } from "./background-brightness";
 import SystemLayers from "./system-layers";
 import ViewLibrary from "./view-library";
 import PwaPanel, { pwaLabel } from "./pwa-panel";
-import { prepareOffline, updateApp, usePwa } from "./pwa";
+import { prepareOffline, usePwa } from "./pwa";
 import { APP_VERSION } from "./version";
 import {
   captureSavedView,
@@ -63,6 +63,9 @@ import { clearStructureOverrides } from "./structure-layers";
 import { readRecentStructures, rememberStructure, recentStructuresKey } from "./recent-structures";
 import {
   DEFAULT_VISIBLE,
+  DEFAULT_ROTATION_SPEED,
+  MIN_ROTATION_SPEED,
+  MAX_ROTATION_SPEED,
   SYSTEMS,
   EXPLANATIONS,
   explanation,
@@ -84,7 +87,7 @@ const initial: SceneState = {
   focusContext: false,
   partVisibility: {},
   opacity: {},
-  rotationSpeed: 1,
+  rotationSpeed: DEFAULT_ROTATION_SPEED,
   rotationDirection: "clockwise",
 };
 const mobileControlsQuery = "(max-width: 767px), (max-height: 600px) and (orientation: landscape)";
@@ -101,10 +104,11 @@ export default function Home() {
     [defaultBackground, brightness],
   );
   const footerStatus = pwaLabel(pwa);
-  const mobileFooterStatus =
+  const dockFooterStatus =
     footerStatus === "Update available" || footerStatus === "Install app"
       ? footerStatus
       : pwa.installed ? `Version ${APP_VERSION}` : "";
+  const offlineFooterStatus = !pwa.online ? "Offline" : pwa.ready ? "Offline ready" : "";
   const [model, setModel] = useState<ModelId>(() => {
     const linked = viewModelFromHash(location.hash);
     try {
@@ -146,7 +150,7 @@ export default function Home() {
       0,
     ),
   }), [landscapeControls]);
-  const updateTitle = useRef<HTMLHeadingElement>(null);
+  const updateVersion = useRef<HTMLParagraphElement>(null);
   const [aboutUpdates, setAboutUpdates] = useState(false);
   const [aboutModel, setAboutModel] = useState<ModelId>(model);
   const detailTitle = useRef<HTMLHeadingElement>(null);
@@ -358,7 +362,6 @@ export default function Home() {
       rotate: false,
       focus: 0,
       focusContext: false,
-      partVisibility: clearStructureOverrides(current.partVisibility, concept.elements),
     }));
     setDetails(true);
     setPanel(null);
@@ -423,9 +426,7 @@ export default function Home() {
       isolate: false,
       focus: 0,
       focusContext: false,
-      explode: 0,
       rotate: false,
-      view: "three-quarter",
       reset: current.reset + 1,
     }));
   };
@@ -814,7 +815,7 @@ export default function Home() {
           <i />
           <Button
             variant="ghost"
-            disabled={state.explode >= 0.4}
+            disabled={state.explode >= 0.8}
             aria-label={state.rotate ? "Pause rotation" : "Rotate body"}
             title="Auto rotate"
             className={state.rotate ? "active" : ""}
@@ -828,7 +829,7 @@ export default function Home() {
               render={
                 <Button
                   variant="ghost"
-                  disabled={state.explode >= 0.4}
+                  disabled={state.explode >= 0.8}
                   aria-label="Rotation settings"
                   title="Rotation settings"
                 />
@@ -848,30 +849,38 @@ export default function Home() {
             >
               <div className="rotation-heading">
                 <strong>Rotation speed</strong>
-                <output>{Math.round((state.rotationSpeed ?? 1) * 10)}%</output>
+                <output>{Math.round((state.rotationSpeed ?? DEFAULT_ROTATION_SPEED) * 10)}%</output>
               </div>
               <Slider
                 aria-label="Rotation speed"
-                min={1}
-                max={100}
+                min={0}
+                max={MAX_ROTATION_SPEED * 10}
                 step={1}
-                value={[(state.rotationSpeed ?? 1) * 10]}
-                onValueChange={(value) =>
+                style={{
+                  "--rotation-snap-position": `${(DEFAULT_ROTATION_SPEED / MAX_ROTATION_SPEED) * 100}%`,
+                } as CSSProperties}
+                value={[(state.rotationSpeed ?? DEFAULT_ROTATION_SPEED) * 10]}
+                onValueChange={(value, details) => {
+                  const requested = Math.max(MIN_ROTATION_SPEED * 10, Array.isArray(value) ? value[0] : value);
+                  const standard = DEFAULT_ROTATION_SPEED * 10;
+                  const speed = details.reason !== "keyboard" && Math.abs(requested - standard) <= 3
+                    ? standard
+                    : requested;
                   setState((current) => ({
                     ...current,
-                    rotationSpeed: (Array.isArray(value) ? value[0] : value) / 10,
-                  }))
-                }
+                    rotationSpeed: speed / 10,
+                  }));
+                }}
               />
               <div className="rotation-speed-labels">
-                <span>1%</span>
+                <span>0%</span>
                 <Button
                   variant="ghost"
-                  onClick={() => setState((current) => ({ ...current, rotationSpeed: 1 }))}
+                  onClick={() => setState((current) => ({ ...current, rotationSpeed: DEFAULT_ROTATION_SPEED }))}
                 >
-                  Standard · 10%
+                  Standard · {DEFAULT_ROTATION_SPEED * 10}%
                 </Button>
-                <span>100%</span>
+                <span>{MAX_ROTATION_SPEED * 10}%</span>
               </div>
               <fieldset className="rotation-options">
                 <legend>Direction</legend>
@@ -939,16 +948,19 @@ export default function Home() {
             max={100}
             step={1}
             value={[state.explode * 100]}
-            onValueChange={(v) =>
+            onValueChange={(v, details) => {
+              const requested = Array.isArray(v) ? v[0] : v;
+              const snap = [45, 79].find((point) => Math.abs(requested - point) <= 3);
+              const value = details.reason !== "keyboard" ? snap ?? requested : requested;
               setState((s) => ({
                 ...s,
-                explode: (Array.isArray(v) ? v[0] : v) / 100,
-                view: (Array.isArray(v) ? v[0] : v) > 80 ? "front" : s.view,
+                explode: value / 100,
+                view: value > 80 ? "front" : s.view,
                 rotate: false,
                 focus: 0,
                 focusContext: false,
-              }))
-            }
+              }));
+            }}
           />
         </div>
         <Button
@@ -967,32 +979,18 @@ export default function Home() {
           Tap to inspect
         </span>
         <div className="pwa-footer-actions">
-          {pwa.support === "available" && (
-            <Button
-              variant="ghost"
-              disabled={pwa.checking || pwa.updating}
-              aria-busy={pwa.checking || pwa.updating}
-              title="Check for updates and reload when a new version is ready"
-              onClick={() => {
-                openAbout(true);
-                void updateApp();
-              }}
-            >
-              <RefreshCw size={12} aria-hidden="true" /> <span>Update</span>
-            </Button>
-          )}
           <Button variant="ghost" onClick={() => openAbout()}>
-            {footerStatus && <span className="pwa-footer-status">{footerStatus}</span>}
+            {offlineFooterStatus && <span className="pwa-footer-status">{offlineFooterStatus}</span>}
             <span>App & credits</span> <ArrowUpRight size={12} />
           </Button>
         </div>
-        {mobileFooterStatus && (
+        {dockFooterStatus && (
           <Button
             variant="ghost"
-            className="mobile-pwa-status"
+            className="dock-pwa-status"
             onClick={() => openAbout(pwa.updateAvailable || pwa.installed)}
           >
-            {mobileFooterStatus}
+            {dockFooterStatus}
           </Button>
         )}
       </footer>
@@ -1107,8 +1105,7 @@ export default function Home() {
                   setState((current) => ({
                     ...current,
                     isolate: false,
-                    explode: 0,
-                    focusContext: current.isolate || !!(current.focusContext && current.focus),
+                    focusContext: true,
                     focus: (current.focus ?? 0) + 1,
                     rotate: false,
                   }))
@@ -1124,9 +1121,8 @@ export default function Home() {
                   setState((current) => ({
                     ...current,
                     isolate: !current.isolate,
-                    explode: 0,
                     focus: (current.focus ?? 0) + 1,
-                    focusContext: false,
+                    focusContext: current.isolate,
                     rotate: false,
                   }))
                 }
@@ -1147,19 +1143,34 @@ export default function Home() {
           initialFocus={
             aboutUpdates
               ? () => {
-                  updateTitle.current?.parentElement?.scrollIntoView({ block: "nearest" });
-                  return updateTitle.current;
+                  updateVersion.current?.parentElement?.scrollIntoView({ block: "nearest" });
+                  return updateVersion.current;
                 }
               : aboutTitle
           }
         >
+          <SheetTitle ref={aboutTitle} tabIndex={-1} className="about-heading">
+            <Info size={18} aria-hidden="true" />
+            Information
+          </SheetTitle>
+          <a
+            className={`${buttonVariants({ variant: "ghost", size: "icon-sm" })} about-github`}
+            href="https://github.com/llm-junkie/ha"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="View Human Atlas + on GitHub (opens in a new tab)"
+            title="View on GitHub"
+          >
+            <svg viewBox="0 0 16 16" width="18" height="18" fill="currentColor" aria-hidden="true">
+              <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.65 7.65 0 0 1 2-.27c.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8Z" />
+            </svg>
+          </a>
           <PwaPanel
             state={pwa}
             loaded={progress === 100}
-            titleRef={aboutTitle}
-            updateTitleRef={updateTitle}
+            updateVersionRef={updateVersion}
           />
-          <SheetTitle className="eyebrow">SOURCE & SCOPE</SheetTitle>
+          <h2 className="eyebrow">SOURCE & SCOPE</h2>
           <fieldset className="about-model-switch">
             <legend className="sr-only">Model information</legend>
             <label className="model-option">
@@ -1171,7 +1182,10 @@ export default function Home() {
                 checked={aboutModel === "male"}
                 onChange={() => setAboutModel("male")}
               />
-              <span className="model-option-label">Male</span>
+              <span className="model-option-label">
+                <Mars size={16} aria-hidden="true" />
+                Male
+              </span>
             </label>
             <label className="model-option">
               <input
@@ -1183,6 +1197,7 @@ export default function Home() {
                 onChange={() => setAboutModel("female")}
               />
               <span className="model-option-label">
+                <Venus size={16} aria-hidden="true" />
                 Female{" "}
                 <span className="model-status" title="Experimental">
                   (Exp)
@@ -1195,87 +1210,90 @@ export default function Home() {
               ? "Explore the experimental female study model from BodyParts3D, HRA, and Z-Anatomy."
               : "Explore the adult male reference anatomy from BodyParts3D, with nerves from Z-Anatomy."}
           </SheetDescription>
-          <div className="about-copy">
-            <p>
-              <strong>
-                {aboutModel === "female" ? "Female · Experimental" : "Male · BodyParts3D"}
-              </strong>
-              <br />
-              {aboutModel === "female"
-                ? `${MODELS.female.pieces.toLocaleString()} individual meshes and ${MODELS.female.concepts.toLocaleString()} named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, knee ligaments, and fitted body skin, plus Z-Anatomy neural structures.`
-                : `${MODELS.male.pieces.toLocaleString()} individual meshes and ${MODELS.male.concepts.toLocaleString()} named concepts from BodyParts3D and Z-Anatomy.`}
-            </p>
-            <p>
-              Z-Anatomy adds 210 meshes for spinal cord tissue, spinal roots, trunk nerves, and arm
-              and leg nerves. Their placement is estimated against the reference skeleton; the
-              female version follows this model's estimated body proportions.
-            </p>
-            {aboutModel === "female" && (
+          <details className="about-details">
+            <summary>
+              <span>Details</span>
+              <span className="about-details-rule" aria-hidden="true" />
+              <ChevronDown size={16} aria-hidden="true" />
+            </summary>
+            <div className="about-copy">
               <p>
-                Proportions and organ placement are estimated and await independent anatomical
-                review. The full-body female skin is fitted to this assembly. Detailed external
-                genital anatomy and validated urethra/pelvic-floor replacements remain incomplete.
-                The uterosacral ligament registration restores the
-                source assembly's pelvic relationship; it does not validate the original attachment
-                anatomy.
+                {aboutModel === "female"
+                  ? `${MODELS.female.pieces.toLocaleString()} individual meshes and ${MODELS.female.concepts.toLocaleString()} named concepts. The model combines adapted BodyParts3D anatomy with female HRA pelvis, reproductive organs, breast tissue, knee ligaments, and fitted body skin, plus Z-Anatomy neural structures.`
+                  : `${MODELS.male.pieces.toLocaleString()} individual meshes and ${MODELS.male.concepts.toLocaleString()} named concepts from BodyParts3D and Z-Anatomy.`}
               </p>
-            )}
-            <p>
-              This reference does not contain every human structure or variation. Named concepts can
-              contain multiple pieces; each source mesh is rendered once.
-            </p>
-            <p>
-              Colors and system groupings are designed for exploration. The geometry is simplified
-              for the web, and short explanations provide general educational context. This is an
-              anatomical reference, not a diagnostic or surgical tool.
-            </p>
-            <h3>Source</h3>
-            <p>
-              BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0
-              International.
-              {aboutModel === "female" &&
-                " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume. Female body skin from the HuBMAP CCF 3D Reference Object Library v1.3, fitted locally under CC BY 4.0."}
-              {
-                " Z-Anatomy — the open source atlas of anatomy; models by Gauthier Kervyn and contributors, distributed by Lluís Vinent Juanico's Z-Anatomy project. Adapted neural data: CC BY-SA 4.0."
-              }
-            </p>
-            <a href="https://github.com/LluisV/Z-Anatomy" target="_blank" rel="noreferrer">
-              Z-Anatomy source models <ArrowUpRight size={14} />
-            </a>
-            <a
-              href="https://creativecommons.org/licenses/by-sa/4.0/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Neural data license <ArrowUpRight size={14} />
-            </a>
-            {aboutModel === "female" && (
-              <a href="https://doi.org/10.48539/HBM352.BTSQ.586" target="_blank" rel="noreferrer">
-                Female reference organ dataset <ArrowUpRight size={14} />
+              <p>
+                Z-Anatomy adds 210 meshes for spinal cord tissue, spinal roots, trunk nerves, and arm
+                and leg nerves. Their placement is estimated against the reference skeleton; the
+                female version follows this model's estimated body proportions.
+              </p>
+              {aboutModel === "female" && (
+                <p>
+                  Proportions and organ placement are estimated and await independent anatomical
+                  review. The full-body female skin is fitted to this assembly. Detailed external
+                  genital anatomy and validated urethra/pelvic-floor replacements remain incomplete.
+                  The uterosacral ligament registration restores the
+                  source assembly's pelvic relationship; it does not validate the original attachment
+                  anatomy.
+                </p>
+              )}
+              <p>
+                This reference does not contain every human structure or variation. Named concepts can
+                contain multiple pieces; each source mesh is rendered once.
+              </p>
+              <p>
+                Colors and system groupings are designed for exploration. The geometry is simplified
+                for the web, and short explanations provide general educational context. This is an
+                anatomical reference, not a diagnostic or surgical tool.
+              </p>
+              <h3>Model licenses</h3>
+              <p>
+                BodyParts3D, © The Database Center for Life Science licensed under CC Attribution 4.0
+                International.
+                {aboutModel === "female" &&
+                  " HRA / HuBMAP female organ geometry by Kristen Browne and Heidi Schlehlein (2023), CC BY 4.0; adapted by Human Atlas Enhanced and imported through Anatolume. Female body skin from the HuBMAP CCF 3D Reference Object Library v1.3, fitted locally under CC BY 4.0."}
+                {
+                  " Z-Anatomy — the open source atlas of anatomy; models by Gauthier Kervyn and contributors, distributed by Lluís Vinent Juanico's Z-Anatomy project. Adapted neural data: CC BY-SA 4.0."
+                }
+              </p>
+              <a href="https://github.com/LluisV/Z-Anatomy" target="_blank" rel="noreferrer">
+                Z-Anatomy source models <ArrowUpRight size={14} />
               </a>
-            )}
-            <a
-              href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Dataset license <ArrowUpRight size={14} />
-            </a>
-            <a
-              href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Original geometry & metadata <ArrowUpRight size={14} />
-            </a>
-            <a
-              href="https://academic.oup.com/nar/article/37/suppl_1/D782/1000752"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Read the source publication <ArrowUpRight size={14} />
-            </a>
-          </div>
+              <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Neural data license <ArrowUpRight size={14} />
+              </a>
+              {aboutModel === "female" && (
+                <a href="https://doi.org/10.48539/HBM352.BTSQ.586" target="_blank" rel="noreferrer">
+                  Female reference organ dataset <ArrowUpRight size={14} />
+                </a>
+              )}
+              <a
+                href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Dataset license <ArrowUpRight size={14} />
+              </a>
+              <a
+                href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/download.html"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Original geometry & metadata <ArrowUpRight size={14} />
+              </a>
+              <a
+                href="https://academic.oup.com/nar/article/37/suppl_1/D782/1000752"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Read the source publication <ArrowUpRight size={14} />
+              </a>
+            </div>
+          </details>
         </SheetContent>
       </Sheet>
     </main>

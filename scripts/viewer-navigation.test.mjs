@@ -114,8 +114,9 @@ test("individual switches, selection, isolation and system reset use consistent 
       selected: [part.id],
       partVisibility: { [part.id]: false },
     }),
-    false,
+    true,
   );
+  assert.equal(partIsVisible(part, { ...state, partVisibility: { [part.id]: false } }), false);
   const overrides = { [part.id]: false, other: true };
   assert.deepEqual(clearStructureOverrides(overrides, [part.id]), { other: true });
   assert.equal(overrides[part.id], false);

@@ -7,14 +7,14 @@ import * as T from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
 import { mergeGeometries } from "three/examples/jsm/utils/BufferGeometryUtils.js";
-import { createExplosionLayout } from "./explosion-layout";
+import { createInspectionLayout } from "./explosion-layout";
 import { decodeModelResponse, loadModelChunks } from "./model-download";
 import { assetUrl } from "./asset-url";
 import { PointerTap } from "./pointer-tap";
-import { partIsVisible } from "./part-visibility";
+import { partIsEnabled, partIsVisible } from "./part-visibility";
 import { createWheelZoom } from "./wheel-zoom";
 import { createFrameScheduler } from "./frame-scheduler";
-import { SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
+import { DEFAULT_ROTATION_SPEED, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED, SYSTEMS, type Atlas, type SceneState, type CameraPose } from "./anatomy";
 interface Props {
   atlas: Atlas;
   backgroundColor: string;
@@ -110,7 +110,6 @@ export default function AnatomyScene({
       destinationOffset: T.Vector2;
       orbit?: boolean;
     } | null = null;
-    let surroundingView: { position: T.Vector3; target: T.Vector3; aspect: number } | null = null;
     camera.position.set(1.4, 1.05, 3.6);
     controls.target.set(0, 0.85, 0);
     controls.enableDamping = true;
@@ -580,13 +579,6 @@ export default function AnatomyScene({
         lastState?.isolate !== s.isolate ||
         lastState?.partVisibility !== s.partVisibility;
       if (changed) {
-        if (s.isolate && !lastState?.isolate) {
-          surroundingView = {
-            position: camera.position.clone(),
-            target: controls.target.clone(),
-            aspect: camera.aspect,
-          };
-        }
         cameraTransition = null;
       }
       const moving = Math.abs(amount - s.explode) > 0.0001;
@@ -616,17 +608,15 @@ export default function AnatomyScene({
             if (p.system !== "integumentary") hasSolidParts = true;
           }
         });
-        const visibleParts = atlas.parts.filter((p) =>
-          partIsVisible(p, s, { visible, selected: selection }),
-        );
+        const enabledParts = atlas.parts.filter((p) => partIsEnabled(p, s, visible));
         const frame = el.clientWidth >= 768 && el.clientHeight > 600 ? desktopFrame() : undefined;
         const packingAspect = frame
           ? (frame.right - frame.left) / Math.max(160, frame.bottom - frame.top)
           : camera.aspect;
         const nextLayoutKey =
-          visibleParts.map((p) => p.id).join(",") + ":" + packingAspect.toFixed(3);
+          enabledParts.map((p) => p.id).join(",") + ":" + packingAspect.toFixed(3);
         if (nextLayoutKey !== layoutKey) {
-          const layout = createExplosionLayout(visibleParts, packingAspect);
+          const layout = createInspectionLayout(atlas.parts, enabledParts, packingAspect);
           packingWidth = layout.width;
           packingHeight = layout.height;
           atlas.parts.forEach((p, i) => {
@@ -697,9 +687,7 @@ export default function AnatomyScene({
               s.isolate,
               s.view,
               s.focus,
-              s.focusContext,
               s.reset,
-              s.inspectorOpen,
               camera.aspect,
             ].join(":")
           : "";
@@ -714,7 +702,7 @@ export default function AnatomyScene({
             );
           });
           if (!box.isEmpty()) {
-            let center = box.getCenter(new T.Vector3());
+            const center = box.getCenter(new T.Vector3());
             const size = box.getSize(new T.Vector3());
             const w = el.clientWidth,
               h = el.clientHeight;
@@ -756,7 +744,7 @@ export default function AnatomyScene({
               w / 2 - (left + right) / 2,
               h / 2 - (top + bottom) / 2,
             );
-            let direction = s.isolate
+            const direction = viewRequested
               ? viewDirection(s.view)
               : camera.position.clone().sub(controls.target).normalize();
             // Fit the bounds in the chosen camera orientation, including their
@@ -765,7 +753,7 @@ export default function AnatomyScene({
             const vertical = new T.Vector3().crossVectors(direction, horizontal).normalize();
             const projectedSize = (axis: T.Vector3) =>
               Math.abs(axis.x) * size.x + Math.abs(axis.y) * size.y + Math.abs(axis.z) * size.z;
-            let distance = Math.max(
+            const distance = Math.max(
               0.07,
               (Math.max(
                 (projectedSize(vertical) * h) / availableHeight,
@@ -775,21 +763,6 @@ export default function AnatomyScene({
                 (s.isolate ? 1.35 : 1.7) +
                 projectedSize(direction) / 2,
             );
-            if (s.focusContext && s.focus && !s.isolate) {
-              // Restore context instead of zooming back into the isolated organ.
-              center = surroundingView?.target.clone() ?? new T.Vector3(0, 0.85, 0);
-              direction = surroundingView
-                ? surroundingView.position.clone().sub(surroundingView.target).normalize()
-                : new T.Vector3(0.35, 0.06, 1).normalize();
-              distance = Math.max(
-                distance * 2,
-                1.6,
-                surroundingView
-                  ? surroundingView.position.distanceTo(surroundingView.target) *
-                      Math.max(1, surroundingView.aspect / camera.aspect)
-                  : 3.6,
-              );
-            }
             controls.maxDistance = Math.max(40, distance * 2);
             const destination = center.clone().addScaledVector(direction, distance);
             const offset = new T.Vector2(
@@ -834,8 +807,6 @@ export default function AnatomyScene({
             }
             dirty = true;
           }
-        } else if (lastSelectionFrame) {
-          fit(s.view, amount, viewRequested && !moving ? time : undefined);
         }
         lastSelectionFrame = selectionFrameKey;
       }
@@ -854,7 +825,9 @@ export default function AnatomyScene({
       controls.mouseButtons.LEFT = amount < 0.8 ? T.MOUSE.ROTATE : T.MOUSE.PAN;
       controls.touches.ONE = amount < 0.8 ? T.TOUCH.ROTATE : T.TOUCH.PAN;
       markers.visible = amount > 0.75;
-      const highlightKey = ready && s.focusContext && s.focus && !s.isolate ? selectedKey : "";
+      // Focused pieces must show through surrounding anatomy on the first Locate.
+      // Isolation only changes visibility; Locate uses the current exploded positions.
+      const highlightKey = ready && s.focus && !s.isolate ? selectedKey : "";
       if (highlightKey !== contextHighlightKey) {
         contextHighlight.clear();
         if (highlightKey)
@@ -887,10 +860,11 @@ export default function AnatomyScene({
         const i = mesh.userData.part as number;
         mesh.position.set(data[i * 4], data[i * 4 + 1], data[i * 4 + 2]);
       });
-      controls.autoRotate = s.rotate && amount < 0.4;
+      const rotationSpeed = T.MathUtils.clamp(s.rotationSpeed ?? DEFAULT_ROTATION_SPEED, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED);
+      controls.autoRotate = s.rotate && controls.enableRotate;
       controls.autoRotateSpeed =
         0.65 *
-        T.MathUtils.clamp(s.rotationSpeed ?? 1, 0.1, 10) *
+        rotationSpeed *
         (s.rotationDirection === "counterclockwise" ? -1 : 1);
       if (cameraTransition) {
         const journey = cameraTransition;

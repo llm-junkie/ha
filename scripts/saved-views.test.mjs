@@ -115,7 +115,7 @@ test("restoration filters obsolete IDs, preserves Hide all, and clamps numeric s
   assert.deepEqual(view.partVisibility, { [second.id]: false });
   assert.deepEqual(view.opacity, { muscular: 0.05, skeletal: 1 });
   assert.equal(view.explode, 1);
-  assert.equal(view.rotationSpeed, 0.1);
+  assert.equal(view.rotationSpeed, 1);
   assert.deepEqual(view.camera.offset, [0, 1]);
   const hidden = normalizeSavedView({ ...snapshot(), selected: [], visible: [] }, atlas);
   assert.deepEqual(hidden.visible, []);

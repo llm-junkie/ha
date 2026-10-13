@@ -1,4 +1,7 @@
 import {
+  DEFAULT_ROTATION_SPEED,
+  MIN_ROTATION_SPEED,
+  MAX_ROTATION_SPEED,
   SYSTEMS,
   type Atlas,
   type CameraPose,
@@ -103,7 +106,7 @@ export function normalizeSavedView(
     partVisibility,
     opacity,
     focusContext: value.focusContext === true,
-    rotationSpeed: number(value.rotationSpeed, 0.1, 10, 1),
+    rotationSpeed: number(value.rotationSpeed, MIN_ROTATION_SPEED, MAX_ROTATION_SPEED, DEFAULT_ROTATION_SPEED),
     rotationDirection:
       value.rotationDirection === "counterclockwise" ? "counterclockwise" : "clockwise",
     camera: {
@@ -143,7 +146,7 @@ export function captureSavedView(
     partVisibility: { ...state.partVisibility },
     opacity: { ...state.opacity },
     focusContext: !!state.focusContext,
-    rotationSpeed: state.rotationSpeed ?? 1,
+    rotationSpeed: state.rotationSpeed ?? DEFAULT_ROTATION_SPEED,
     rotationDirection: state.rotationDirection ?? "clockwise",
     camera: {
       position: [...camera.position],

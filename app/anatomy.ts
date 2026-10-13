@@ -21,6 +21,10 @@ export interface Part {id:string;name:string;conceptId:string;system:SystemId;ch
 export interface Concept {id:string;name:string;elements:string[]}
 export interface Atlas {version:string;sex?:'male'|'female';source?:string;scope?:string;parts:Part[];concepts:Concept[];chunks:{url:string;bytes:number;gzip?:string;gzipBytes?:number}[];triangles:number}
 export type View = 'three-quarter'|'front'|'back'|'side';
+// Rotation speed uses a 1–10 multiplier, displayed as 10–100%.
+export const MIN_ROTATION_SPEED = 1;
+export const MAX_ROTATION_SPEED = 10;
+export const DEFAULT_ROTATION_SPEED = 5;
 export interface CameraPose {position:[number,number,number];target:[number,number,number];offset:[number,number];viewport?:[number,number]}
 export interface SceneState {inspectorOpen?:boolean;explode:number;visible:SystemId[];selected:string[];isolate:boolean;view:View;rotate:boolean;reset:number;focus?:number;focusContext?:boolean;partVisibility?:Record<string,boolean>;opacity?:Partial<Record<SystemId,number>>;camera?:CameraPose;rotationSpeed?:number;rotationDirection?:'clockwise'|'counterclockwise'}
 export const DEFAULT_VISIBLE:SystemId[] = ['cardiac','sensory','skeletal','muscular','arterial','venous','nervous','respiratory','digestive','urinary','lymphatic','endocrine','reproductive','mammary','integumentary','connective'];
