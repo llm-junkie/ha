@@ -1,0 +1,29 @@
+{
+  "retrievedOn": "2026-10-22",
+  "files": [
+    {
+      "name": "fma.owl",
+      "url": "https://media.githubusercontent.com/media/uw-sig/FMA/b9bcdb2035f35683c97cc8f2c6c78e4142d2c3f8/fma.owl",
+      "bytes": 208047132,
+      "sha256": "beb3dc47979ad5434ef70fd02af4307f147f2023f7d8c2c57103b995191194c3"
+    },
+    {
+      "name": "fma-license.txt",
+      "url": "https://raw.githubusercontent.com/uw-sig/FMA/b9bcdb2035f35683c97cc8f2c6c78e4142d2c3f8/LICENSE",
+      "bytes": 18650,
+      "sha256": "7e7170e3cebf88a9f60c7b8421418323c09304da1af4d5e90f4da1dc1c8a2661"
+    },
+    {
+      "name": "uberon.obo",
+      "url": "https://raw.githubusercontent.com/obophenotype/uberon/d225e8458efebec3d8df38fe936bf95fb3521d39/uberon.obo",
+      "bytes": 22529133,
+      "sha256": "d4751a15d7551a8414caee2628c62bf68301d567caf54ccfa3eef383ae7cbb61"
+    },
+    {
+      "name": "uberon-license.txt",
+      "url": "https://raw.githubusercontent.com/obophenotype/uberon/d225e8458efebec3d8df38fe936bf95fb3521d39/LICENSE",
+      "bytes": 19467,
+      "sha256": "e6bc9e9c474700b708f568bac9e5a8a9bcb2b1dad53442f5ba449fcb848b8e76"
+    }
+  ]
+}

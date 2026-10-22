@@ -725,3 +725,10 @@ h1 .edition{display:inline-flex;align-items:center;justify-content:center;font:i
     right: calc(68px + env(safe-area-inset-right)) !important;
   }
 }
+.description-kind { font-size: 11px; color: #53717d; font-weight: 600; }
+.description-kind.is-fallback { color: #856728; }
+.description-sources { display: flex; flex-direction: column; gap: 8px; }
+.description-sources h3 { font-size: 11px; font-weight: 600; color: #687786; margin: 0; }
+.description-sources a { display: flex; align-items: flex-start; gap: 5px; font-size: 11px; line-height: 1.5; color: #537a89; text-decoration: none; overflow-wrap: anywhere; }
+.description-sources a:hover { text-decoration: underline; }
+.description-sources a svg { flex-shrink: 0; margin-top: 2px; }

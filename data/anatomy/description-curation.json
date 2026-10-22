@@ -1,0 +1,312 @@
+{
+  "schemaVersion": 1,
+  "reviewedOn": "2026-10-22",
+  "sources": {
+    "brain-ventricles": {
+      "title": "Purves et al., Neuroscience, The Ventricular System",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK11083/",
+      "evidence": "Cerebrospinal fluid circulates through the lateral, third and fourth ventricles; choroid plexuses produce the fluid. Interventricular foramina connect the lateral and third ventricles."
+    },
+    "iliotibial-tract": {
+      "title": "Fairclough et al. (2006), The functional anatomy of the iliotibial band",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/16533314/",
+      "evidence": "The iliotibial band is a thickening of fascia lata rather than a separate bone or muscle. It has femoral attachments as well as the tibial attachment."
+    },
+    "wrist-retinaculum": {
+      "title": "StatPearls, Anatomy, Shoulder and Upper Limb, Wrist Flexor Retinaculum",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK545198/",
+      "evidence": "The flexor retinaculum spans the wrist and forms the roof of the carpal tunnel, over the flexor tendons and median nerve."
+    },
+    "gingiva": {
+      "title": "StatPearls, Anatomy, Head and Neck, Oral Gingiva",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK560662/",
+      "evidence": "Gingiva surrounds the teeth and is part of the protective oral tissues. Maxillary and mandibular gingiva belong to the upper and lower jaws respectively."
+    },
+    "ribs": {
+      "title": "OpenStax, Anatomy and Physiology 2e, The Thoracic Cage",
+      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/7-4-the-thoracic-cage",
+      "evidence": "Ribs form the thoracic cage. Ribs 1–7 attach to the sternum through their own costal cartilages; ribs 8–10 attach indirectly. Ribs 11–12 lack anterior sternal attachment."
+    },
+    "knee-ligament": {
+      "title": "Claes et al. (2013), Anatomy of the anterolateral ligament of the knee",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/23906341/",
+      "evidence": "Cadaveric dissection identifies a ligament connecting the lateral femoral epicondylar region to the anterolateral proximal tibia, with attachment to the lateral meniscus."
+    },
+    "cervix": {
+      "title": "IARC / WHO, Anatomy of the uterine cervix and the transformation zone",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK568392/",
+      "evidence": "The cervix links the uterine cavity to the vagina; its intravaginal portion lies at the upper end of the vagina. The epithelial squamocolumnar junction is a separate anatomical concept."
+    },
+    "forearm-nerve": {
+      "title": "Ballard et al., Anatomy, Medial Antebrachial Cutaneous Nerve",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK551638/",
+      "evidence": "Anterior and posterior branches supply the medial forearm. The anterior branch is distributed to the anterior medial forearm; the posterior branch to the posterior medial forearm."
+    },
+    "upper-nerves": {
+      "title": "UAMS Department of Neuroscience, Nerves of the Upper Limb",
+      "url": "https://medicine.uams.edu/neuroscience/education/medical-school-courses/human-structure-module/anatomy-tables/nerve-tables/nerves-of-the-upper-limb/",
+      "evidence": "The table distinguishes parent nerves, their named branches, motor supply, and sensory territories; digital branches of median, radial and ulnar nerves are listed separately."
+    },
+    "plantar-nerves": {
+      "title": "Fenech (2024), Sonographic anatomy and technique to image the plantar digital nerves",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/38694832/",
+      "evidence": "Common plantar digital nerves arise from the medial and lateral plantar nerves, branches of the tibial nerve, and divide distally into proper plantar digital nerves."
+    },
+    "foot-nerves": {
+      "title": "StatPearls, Anatomy, Bony Pelvis and Lower Limb: Foot and Ankle",
+      "url": "https://www.ncbi.nlm.nih.gov/books/NBK546698/",
+      "evidence": "Superficial fibular branches supply most of the dorsal foot, while the deep fibular nerve supplies sensation to the first interdigital space. Plantar nerves supply the plantar foot."
+    }
+  },
+  "aliases": {
+    "right anterior spinal artery": "FMA:50531",
+    "left anterior spinal artery": "FMA:50531",
+    "skeleton (in vivo)": "FMA:303630",
+    "spinal dura": "FMA:71237",
+    "lateral intermediate substance": "FMA:83928",
+    "anterior horn of spinal cord": "FMA:256541",
+    "spinal ganglion": "FMA:5888",
+    "ganglia of sympathetic trunk": "FMA:5891",
+    "vagus nerve (x)": "FMA:5731",
+    "superficial branch of radial nerve": "FMA:292885",
+    "dorsal digital branches of radial nerve": "FMA:75490",
+    "deep branch of radial nerve": "FMA:77559",
+    "posterior interosseous nerve of forearm": "FMA:77559",
+    "posterior antebrachial cutaneous nerve": "FMA:39145",
+    "muscular branches of radial nerve": "FMA:75502",
+    "superior lateral brachial cutaneous nerve": "FMA:65303",
+    "muscular branches of axillary nerve": "FMA:75503",
+    "anterior interosseous nerve of forearm": "FMA:44822",
+    "palmar branch of median nerve": "FMA:44836",
+    "muscular branches of median nerve": "FMA:44821",
+    "common palmar digital branches of median nerve": "FMA:44840",
+    "proper palmar digital branches of median nerve": "FMA:44853",
+    "deep branch of ulnar nerve": "FMA:44877",
+    "palmar branch of ulnar nerve": "FMA:44878",
+    "dorsal branch of ulnar nerve": "FMA:292828",
+    "dorsal digital branches of ulnar nerve": "FMA:323340",
+    "superficial branch of ulnar nerve": "FMA:44876",
+    "common palmar digital branches of ulnar nerve": "FMA:323341",
+    "proper palmar digital branches of ulnar nerve": "FMA:272344",
+    "muscular branches of ulnar nerve": "FMA:75501",
+    "posterior cord of brachial plexus": "FMA:45237",
+    "middle trunk of brachial plexus": "FMA:65218",
+    "inferior trunk of brachial plexus": "FMA:65217",
+    "superior trunk of brachial plexus": "FMA:65216",
+    "posterior division of middle trunk of brachial plexus": "FMA:65373",
+    "anterior division of middle trunk of brachial plexus": "FMA:305011",
+    "anterior division of inferior trunk of brachial plexus": "FMA:65369",
+    "posterior division of inferior trunk of brachial plexus": "FMA:65374",
+    "posterior division of superior trunk of brachial plexus": "FMA:65372",
+    "anterior division of superior trunk of brachial plexus": "FMA:65367",
+    "roots of brachial plexus": "FMA:16428",
+    "lateral antebrachial cutaneous nerve": "FMA:39080",
+    "posterior root of spinal nerve": "FMA:5980",
+    "anterior root of spinal nerve": "FMA:5979",
+    "anterior cutaneous branches of femoral nerve": "FMA:75558",
+    "medial crural cutaneous branches of saphenous nerve": "FMA:75559",
+    "infrapatellar branch of saphenous nerve": "FMA:45325",
+    "genital branch of genitofemoral nerve": "FMA:20560",
+    "femoral branch of genitofemoral nerve": "FMA:16496",
+    "posterior branch of obturator nerve": "FMA:45307",
+    "anterior branch of obturator nerve": "FMA:45306",
+    "nerve to quadratus femoris muscle": "FMA:78705",
+    "nerve to piriformis muscle": "FMA:16509",
+    "intermediate dorsal cutaneous nerve of foot": "FMA:44810",
+    "medial dorsal cutaneous nerve of foot": "FMA:44809",
+    "sural communicating branch of common fibular nerve": "FMA:77602",
+    "muscular branches of deep fibular nerve": "FMA:75509",
+    "accessory nerve (xi)": "FMA:6720",
+    "intercostal nerves": "FMA:75467",
+    "mammary gland l": "FMA:286456",
+    "mammary gland r": "FMA:286454",
+    "fallopian tube r": "FMA:18483",
+    "fallopian tube l": "FMA:18484",
+    "pubis compact bone": "FMA:16595",
+    "ilium compact bone": "FMA:16589",
+    "ischium compact bone": "FMA:16592"
+  },
+  "descriptions": {
+    "iliotibial tract": {
+      "text": "A thickened band of deep fascia along the outer thigh, continuous with fascia lata. It has connections to the femur as well as an attachment to the upper outer tibia.",
+      "sources": ["iliotibial-tract"]
+    },
+    "lateral ventricle": {
+      "text": "A cerebrospinal-fluid space within a cerebral hemisphere. It communicates with the third ventricle through an interventricular foramen.",
+      "sources": ["brain-ventricles"]
+    },
+    "third ventricle": {
+      "text": "A cerebrospinal-fluid space in the diencephalon. It communicates with the lateral ventricles through the interventricular foramina and with the fourth ventricle through the cerebral aqueduct.",
+      "sources": ["brain-ventricles", "UBERON:0002286"]
+    },
+    "fourth ventricle": {
+      "text": "A cerebrospinal-fluid space between the brainstem and cerebellum. It connects with the cerebral aqueduct, central canal of the spinal cord, and subarachnoid space.",
+      "sources": ["brain-ventricles", "UBERON:0002422"]
+    },
+    "interventricular foramen": {
+      "text": "A passage connecting a lateral ventricle of the brain to the third ventricle, allowing cerebrospinal fluid to circulate.",
+      "sources": ["brain-ventricles"]
+    },
+    "choroid plexus of cerebral hemisphere": {
+      "text": "Specialized vascular and epithelial tissue within a lateral ventricle of the brain that produces cerebrospinal fluid.",
+      "sources": ["brain-ventricles"]
+    },
+    "flexor retinaculum of wrist": {
+      "text": "A strong fibrous band spanning the front of the wrist. It forms the roof of the carpal tunnel over the flexor tendons and median nerve.",
+      "sources": ["wrist-retinaculum"]
+    },
+    "gingiva of upper jaw": {
+      "text": "The gum tissue around the upper teeth. This oral tissue helps protect and maintain the tissues supporting the teeth.",
+      "sources": ["gingiva"]
+    },
+    "gingiva of lower jaw": {
+      "text": "The gum tissue around the lower teeth. This oral tissue helps protect and maintain the tissues supporting the teeth.",
+      "sources": ["gingiva"]
+    },
+    "rib": {
+      "text": "A curved bone of the thoracic cage that articulates posteriorly with the thoracic vertebral column. Ribs help protect the chest organs and move during breathing.",
+      "sources": ["ribs"]
+    },
+    "typical rib": {
+      "text": "A rib with the usual arrangement of a head, neck, tubercle and curved shaft. The head and tubercle provide posterior articulations with the thoracic vertebral column.",
+      "sources": ["ribs"]
+    },
+    "atypical rib": {
+      "text": "A rib whose shape differs from the usual arrangement of head, neck, tubercle and shaft. This is a category of rib shapes rather than an additional bone of the thoracic cage.",
+      "sources": ["ribs"]
+    },
+    "true rib": {
+      "text": "One of ribs 1–7, each connected to the sternum through its own costal cartilage. These ribs articulate posteriorly with the thoracic vertebrae.",
+      "sources": ["ribs"]
+    },
+    "false rib": {
+      "text": "One of ribs 8–12, without its own direct costal-cartilage connection to the sternum. Ribs 8–10 usually connect indirectly through the cartilage above, while ribs 11–12 have free anterior ends.",
+      "sources": ["ribs"]
+    },
+    "floating rib": {
+      "text": "One of ribs 11–12, which articulate posteriorly with the thoracic vertebrae but have no anterior connection to the sternum or the costal cartilage of another rib.",
+      "sources": ["ribs"]
+    },
+    "heart": {
+      "text": "A muscular organ that pumps blood through the pulmonary and systemic circulations. Its chambers, valves and associated vessels coordinate blood flow through the lungs and the rest of the body.",
+      "sources": ["UBERON:0000948", "FMA:7088"]
+    },
+    "liver": {
+      "text": "An abdominal organ that produces bile and processes nutrients. It contributes to carbohydrate, fat and protein metabolism, stores glycogen, and makes proteins involved in blood clotting.",
+      "sources": ["UBERON:0002107", "FMA:7197"]
+    },
+    "brain": {
+      "text": "The part of the central nervous system located within the skull. Its regions receive and process sensory information, coordinate movement, and support cognition and regulation of bodily functions.",
+      "sources": ["UBERON:0000955"]
+    },
+    "stomach": {
+      "text": "An expanded part of the digestive tract that stores food and participates in digestion. Its wall contains muscle and a glandular lining, and its outlet leads into the duodenum.",
+      "sources": ["UBERON:0000945"]
+    },
+    "spleen": {
+      "text": "An organ that filters blood and participates in immune functions. It also serves as a reservoir for blood cells and platelets.",
+      "sources": ["UBERON:0002106"]
+    },
+    "pancreas": {
+      "text": "An abdominal organ with digestive and endocrine roles. It produces precursors of digestive enzymes and hormones that regulate blood glucose.",
+      "sources": ["UBERON:0001264"]
+    },
+    "urinary bladder": {
+      "text": "A distensible muscular organ in the pelvis that collects and stores urine before it is expelled through the urethra.",
+      "sources": ["UBERON:0001255"]
+    },
+    "diaphragm": {
+      "text": "A thin muscular partition between the thoracic and abdominal cavities. It is an important muscle of breathing.",
+      "sources": ["UBERON:0001103"]
+    },
+    "anterior horn of spinal cord": {
+      "text": "The ventral gray region of the spinal cord, also called the anterior gray horn. Neurons in this region participate in motor output.",
+      "sources": ["UBERON:0002257", "FMA:256541"]
+    },
+    "anterior branch of medial antebrachial cutaneous nerve": {
+      "text": "A sensory branch of the medial antebrachial cutaneous nerve supplying skin on the front of the medial forearm.",
+      "sources": ["forearm-nerve"]
+    },
+    "posterior branch of medial antebrachial cutaneous nerve": {
+      "text": "A sensory branch of the medial antebrachial cutaneous nerve supplying skin on the back of the medial forearm. Its branching and connections vary between individuals.",
+      "sources": ["forearm-nerve"]
+    },
+    "communicating branch of median nerve with ulnar nerve": {
+      "text": "A connection between the median and ulnar nerves represented in this model. The source label does not identify a particular named communication or the direction of its nerve fibers.",
+      "sources": ["upper-nerves"],
+      "kind": "model"
+    },
+    "posterior root of posterior femoral cutaneous nerve": {
+      "text": "A contribution to the posterior femoral cutaneous nerve labelled as its posterior root in the source model. This label does not identify an individual spinal level and should not be confused with the sensory posterior root of a spinal nerve.",
+      "sources": [],
+      "kind": "model"
+    },
+    "anterior root of posterior femoral cutaneous nerve": {
+      "text": "A contribution to the posterior femoral cutaneous nerve labelled as its anterior root in the source model. This label does not identify an individual spinal level and should not be confused with the motor anterior root of a spinal nerve.",
+      "sources": [],
+      "kind": "model"
+    },
+    "sympathetic nerves": {
+      "text": "The sympathetic nerve branches represented in the source model. They belong to the sympathetic division of the autonomic nervous system; this selection does not represent every sympathetic nerve in the body.",
+      "sources": ["FMA:9906"],
+      "kind": "model"
+    },
+    "common plantar digital branches of medial plantar nerve": {
+      "text": "Branches from the medial plantar nerve that travel toward the toes along the sole. Common plantar digital nerves divide distally into proper plantar digital nerves supplying adjacent toe surfaces.",
+      "sources": ["plantar-nerves"]
+    },
+    "common plantar digital branches of lateral plantar nerve": {
+      "text": "Digital branches in the lateral plantar nerve distribution on the sole. Common plantar digital nerves divide distally into proper plantar digital nerves supplying adjacent toe surfaces.",
+      "sources": ["plantar-nerves"]
+    },
+    "proper plantar digital branches of medial plantar nerve": {
+      "text": "Distal digital branches in the medial plantar nerve distribution. Proper plantar digital nerves travel along individual sides of the toes and carry sensation from their plantar surfaces.",
+      "sources": ["plantar-nerves"]
+    },
+    "proper plantar digital branches of lateral plantar nerve": {
+      "text": "Distal digital branches in the lateral plantar nerve distribution. Proper plantar digital nerves travel along individual sides of the toes and carry sensation from their plantar surfaces.",
+      "sources": ["plantar-nerves"]
+    },
+    "dorsal digital branches of superficial fibular nerve": {
+      "text": "Digital branches of the superficial fibular nerve carrying sensation from much of the top of the foot and toes. The first interdigital space is supplied by the deep fibular nerve instead.",
+      "sources": ["foot-nerves"]
+    },
+    "dorsal digital branches of deep fibular nerve": {
+      "text": "Sensory terminal branches in the deep fibular nerve distribution on the top of the foot. Its characteristic cutaneous territory is the first interdigital space, between the great and second toes.",
+      "sources": ["foot-nerves"]
+    },
+    "cervicovaginal junction": {
+      "text": "The region where the uterine cervix meets the upper vagina. This model label refers to their anatomical junction, not specifically to the epithelial squamocolumnar junction of the cervix.",
+      "sources": ["cervix"]
+    },
+    "anterolateral ligament of knee": {
+      "text": "A ligament at the outer front of the knee connecting the lateral femoral region to the anterolateral proximal tibia, with attachment to the lateral meniscus. Published studies describe variation in its femoral attachment.",
+      "sources": ["knee-ligament"]
+    },
+    "female body skin": {
+      "text": "The external female skin surface fitted from the Human Reference Atlas to this model. Skin provides the body's outer protective covering. The fitted surface is an experimental reconstruction rather than an independently reviewed anatomical reference.",
+      "sources": ["FMA:7163"],
+      "kind": "model"
+    },
+    "peripheral nerves and ganglia (z-anatomy)": {
+      "text": "A model selection of the imported peripheral nerve and ganglion meshes, including represented limb and autonomic nerves. It is a subset of the peripheral nervous system, not a complete reconstruction.",
+      "sources": [],
+      "kind": "model"
+    },
+    "brachial plexuses (represented roots, trunks and divisions)": {
+      "text": "The represented parts of the brachial plexuses, the nerve networks supplying the upper limbs. The selection contains imported roots, trunks and divisions; it does not imply that every branch of either plexus is included.",
+      "sources": ["upper-nerves"],
+      "kind": "model"
+    },
+    "spinal roots and cauda equina": {
+      "text": "A selection of represented spinal nerve roots and cauda equina meshes. Spinal roots connect spinal nerves to the spinal cord; the cauda equina contains descending roots below the lower end of the cord.",
+      "sources": ["FMA:52590"],
+      "kind": "model"
+    },
+    "ligaments of uterus and ovaries": {
+      "text": "A source-model selection grouping represented uterine and ovarian support structures. It also includes the uterovesical pouch, which is a peritoneal recess rather than a ligament; the group label should not be used to classify every member as ligament tissue.",
+      "sources": [],
+      "kind": "model"
+    }
+  }
+}

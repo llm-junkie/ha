@@ -2,7 +2,8 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
-import { explanation, SYSTEMS } from "../app/anatomy.ts";
+import { SYSTEMS } from "../app/anatomy.ts";
+import { describeStructure } from "../app/structure-description.ts";
 import { partIsVisible } from "../app/part-visibility.ts";
 import { systemStructures } from "../app/structure-layers.ts";
 import { applyClassificationOverrides } from "./apply-classification-overrides.mjs";
@@ -97,24 +98,12 @@ for (const name of ["atlas.json", "atlas-female.json"]) {
 }
 
 test("corrected structures receive descriptions appropriate to their anatomy", () => {
-  for (const [name, system, expected] of [
-    ["Right iliotibial tract", "connective", /deep fascia/],
-    ["Left lateral ventricle", "nervous", /cerebrospinal-fluid space/i],
-    ["Third ventricle", "nervous", /cerebrospinal-fluid space/i],
-    ["Fourth ventricle", "nervous", /cerebrospinal-fluid space/i],
-    ["Interventricular foramen", "nervous", /brain/],
-    ["Choroid plexus of cerebral hemisphere", "nervous", /produces cerebrospinal fluid/],
-    ["Flexor retinaculum of left wrist", "connective", /carpal tunnel/],
-    ["Left common tendinous ring", "connective", /extraocular rectus/],
-    ["Left lower first secondary molar tooth", "digestive", /mechanical digestion/],
-    ["Gingiva of upper jaw", "digestive", /gum tissue/],
-    ["Hepatovenous segment IX", "digestive", /region of liver tissue/i],
-    ["Intervertebral disk of axis", "connective", /fibrocartilaginous/],
-    ["Thyroid cartilage", "connective", /connective-tissue/],
-    ["Anterior papillary muscle of right ventricle", "cardiac", /heart muscle/],
-  ]) assert.match(explanation(name, system), expected, name);
-  assert.equal(explanation("Cavity of right ventricle", "cardiac"), SYSTEMS.find((s) => s.id === "cardiac").description);
-  assert.equal(explanation("Left tibialis anterior", "muscular"), SYSTEMS.find((s) => s.id === "muscular").description);
+  for (const part of corrections.parts) {
+    const description = describeStructure({ id: part.id, name: part.name, elements: [part.id] }, [part]);
+    assert.notEqual(description.kind, "system", part.name);
+    assert(description.sources.length > 0, part.name);
+    assert.notEqual(description.text, SYSTEMS.find((system) => system.id === part.system).description, part.name);
+  }
 });
 
 test("female provenance records each corrected layer and the exact override definition", async () => {

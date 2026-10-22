@@ -33,22 +33,24 @@ Built with React, Three.js, and shadcn/ui. The **male reference** includes 2,444
 
 | Exploded anatomy · 45% | Heart inspection |
 | --- | --- |
-| [![Anatomical systems separated with the explode slider at 45%](docs/images/example_45p.jpg)](docs/images/example_45p.jpg) | [![Selected heart shown with surrounding anatomy and structure details](docs/images/example_heart.jpg)](docs/images/example_heart.jpg) |
+| [![Anatomical systems separated with the explode slider at 45%](docs/images/example_45p.jpg)](docs/images/example_45p.jpg) | [![Selected heart shown with surrounding organs on a dark background and structure details](docs/images/example_heart.jpg)](docs/images/example_heart.jpg) |
 
 **On phones**
 
 <p align="center">
   <a href="docs/images/example_phone_overview.jpg"><img src="docs/images/example_phone_overview.jpg" alt="Phone layout showing the full male anatomy and compact controls" title="Full-body exploration" width="23%" /></a>
   <a href="docs/images/example_phone_45p.jpg"><img src="docs/images/example_phone_45p.jpg" alt="Phone layout showing the male anatomy separated by system at 45% explosion" title="Exploded anatomy · 45%" width="23%" /></a>
-  <a href="docs/images/example_phone_heart.jpg"><img src="docs/images/example_phone_heart.jpg" alt="Phone layout showing the located heart in the female model above its structure details" title="Heart inspection" width="23%" /></a>
+  <a href="docs/images/example_phone_heart.jpg"><img src="docs/images/example_phone_heart.jpg" alt="Phone layout showing the located heart in the female model on a dark background above its structure details" title="Heart inspection" width="23%" /></a>
   <a href="docs/images/example_phone_layers.jpg"><img src="docs/images/example_phone_layers.jpg" alt="Phone layout showing the Systems panel with body surface opacity and individual structure controls" title="System layers and opacity" width="23%" /></a>
 </p>
 
 Left to right: **Full-body exploration** · **Exploded anatomy at 45%** · **Heart inspection** · **System layers and opacity**.
 
-Phone screenshots are **1290 × 2796 pixels**, captured from a 430 × 932 layout at 3× resolution, including the 3D anatomy.
+Both heart-inspection views use **−85% background brightness** with **Skeleton**, **Muscles**, **Breast tissue**, and **Connective tissue** disabled.
 
-Examples from app **0.5.2**, showing the male reference and heart inspection in the experimental female model. Click any image for the full-size screenshot. The anatomy uses adapted BodyParts3D, HRA, and Z-Anatomy data; see [Credits](#credits) and [dataset licenses](public/ATTRIBUTION.md). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
+Desktop screenshots are **1920 × 1200 pixels**. Phone screenshots are **1290 × 2796 pixels**, captured from a 430 × 932 layout at 3× resolution, including the 3D anatomy.
+
+Captured from app **0.7.1** on **22 October 2026**, showing the male reference and heart inspection in the experimental female model. Click any image for the full-size screenshot. The anatomy uses adapted BodyParts3D, HRA, and Z-Anatomy data; see [Credits](#credits) and [dataset licenses](public/ATTRIBUTION.md). The female model's scope and registration checks are documented in [female-model.md](docs/female-model.md).
 
 The female model now includes fitted body skin. [See the final forearm preview](docs/images/female-skin-forearms-fit.jpg) and [skin fit notes](docs/female-skin.md) for the head, neck, back, breast, hand and foot adjustments, source credits, and validation.
 
@@ -62,6 +64,7 @@ The female model now includes fitted body skin. [See the final forearm preview](
 - Move from assembled anatomy to a spaced inventory of every visible piece. Ticks mark **45%** and **79%**, where the slider snaps when dragging or tapping nearby; arrow keys retain precise 1% adjustments. Use **Reset** in the bottom dock to restore the view and layers.
 - Search anatomical names, source identifiers, and muscle groups such as quads, hamstrings, calves, and glutes. On phones, the search card adjusts above the on-screen keyboard and keeps results scrollable inside it. Landscape search fills the available height with safe gaps at the screen edges and shrinks when the keyboard opens.
 - Reopen recent selections and smoothly locate or isolate structures.
+- Read sourced descriptions for individual structures in both models. **Description sources** links explain the anatomy separately from the 3D model credits. Any unavailable description is explicitly labelled **System overview (fallback)**; see [description coverage and sources](docs/structure-descriptions.md).
 - Adjust automatic rotation speed and choose its direction. The slider uses a 0–100% scale, with a minimum selectable speed of 10%. The default is 50%, marked at the midpoint with a snap when dragging or tapping nearby; arrow keys keep precise 1% adjustments. Auto-rotate remains available below 80% explosion, matching manual orbit; at 80% and above, the inventory uses panning.
 - Adjust background brightness with the sun button; the midpoint snaps to the default gray, with a ±100% range. The title and subtitle automatically use dark or light text for contrast.
 - Fade any anatomical system while keeping selected structures clear.

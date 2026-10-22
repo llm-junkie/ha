@@ -96,6 +96,8 @@ export function atlasPwa(): Plugin {
           "icons/apple-touch-icon.png",
           "ATTRIBUTION.md",
           "licenses/z-anatomy-models.txt",
+          "licenses/fma-ontology.txt",
+          "licenses/uberon-ontology.txt",
         ]),
       ]
         .filter((file) => !file.endsWith(".map"))

@@ -87,6 +87,17 @@ The [classification audit](https://github.com/llm-junkie/ha/blob/main/docs/anato
 
 `data/anatomy/classification-evidence.json` contains selected official BodyParts3D IS-A/PART-OF concept-to-mesh relationships downloaded on 2026-10-12, with source URLs and full-table SHA-256 hashes. These retained extracts share the BodyParts3D attribution and CC BY 4.0 license above. `data/anatomy/classification-overrides.json` records each corrected system, exact identity, evidence concept, rationale, and independent references. The female provenance records mixed target systems and a hash of this definition.
 
+## Anatomical descriptions and ontology evidence
+
+Structure descriptions use the **Foundational Model of Anatomy**, University of Washington Structural Informatics Group, under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), and **Uberon**, the Uberon ontology contributors, under [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/). The original notices are retained as [fma-ontology.txt](licenses/fma-ontology.txt) and [uberon-ontology.txt](licenses/uberon-ontology.txt).
+
+- FMA 5.1.0 source: [uw-sig/FMA, pinned revision b9bcdb2](https://github.com/uw-sig/FMA/tree/b9bcdb2035f35683c97cc8f2c6c78e4142d2c3f8).
+- Uberon 2026-10-01 source: [obophenotype/uberon, pinned revision d225e84](https://github.com/obophenotype/uberon/tree/d225e8458efebec3d8df38fe936bf95fb3521d39).
+
+Adaptations include selected ontology excerpts, identifier and reviewed-name matching, converting explicit anatomical relationships into sentences, omitting authoring examples and superseded definitions from displayed text, correcting source spelling errors, and adding separately sourced original summaries. Model names and represented selections retain the BodyParts3D, HRA and Z-Anatomy credits above. The combined description catalogue and retained model mappings follow the existing combined-catalogue **CC BY-SA 4.0** terms; source ontology notices remain applicable. Application code remains MIT.
+
+Each displayed summary links to its anatomy references. Additional factual references and authored supporting summaries are recorded in `data/anatomy/description-curation.json`; they include UAMS anatomy tables, IARC/WHO, NCBI Bookshelf, anatomical research and OpenStax. External references are cited for factual support; their full articles are not bundled. [Description coverage and regeneration](https://github.com/llm-junkie/ha/blob/main/docs/structure-descriptions.md) documents the evidence, scope labels and fallback policy.
+
 ## Screenshots, comparison figures, and retained source fixtures
 
 The README's example screenshots and the uterosacral comparison figure render adaptations of the datasets credited above. The source fixture in `data/anatomy/uterosacral-source.json` retains HRA-derived geometry and registration references under the same dataset attribution. Preserve the applicable dataset credits and license links above, and identify adaptations when redistributing these data or anatomy images. The application code's MIT license and copyright notice remain separate from the anatomy data license.

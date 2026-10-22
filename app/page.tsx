@@ -61,14 +61,13 @@ import { buildSearchConcepts, matchesAnatomySearch, type SearchConcept } from ".
 import { partIsVisible } from "./part-visibility";
 import { clearStructureOverrides } from "./structure-layers";
 import { readRecentStructures, rememberStructure, recentStructuresKey } from "./recent-structures";
+import { describeStructure } from "./structure-description";
 import {
   DEFAULT_VISIBLE,
   DEFAULT_ROTATION_SPEED,
   MIN_ROTATION_SPEED,
   MAX_ROTATION_SPEED,
   SYSTEMS,
-  EXPLANATIONS,
-  explanation,
   type Atlas,
   type SceneState,
   type SystemId,
@@ -330,6 +329,7 @@ export default function Home() {
     selected = selectedParts[0],
     system = SYSTEMS.find((s) => s.id === selected?.system);
   const inspectorOpen = details && selectedParts.length > 0;
+  const structureDescription = chosen ? describeStructure(chosen, selectedParts) : null;
   // Opening interface panels must not restart the camera's remaining orbit damping.
   const sceneState = useMemo(() => ({ ...state, inspectorOpen }), [state, inspectorOpen]);
   const visibleCount = useMemo(() => {
@@ -1040,14 +1040,24 @@ export default function Home() {
           </div>
           <div className="detail-body" key={chosen?.id}>
             <div className="detail-scroll" key={`${chosen?.id}-${state.isolate}`}>
+              <span className={`description-kind ${structureDescription?.kind === "system" ? "is-fallback" : ""}`}>
+                {structureDescription?.label}
+              </span>
               <SheetDescription className="structure-description">
-                {chosen?.searchGroup?.description ??
-                  (chosen && selected ? explanation(chosen.name, selected.system) : "")}
+                {structureDescription?.text}
               </SheetDescription>
-              {chosen && !chosen.searchGroup && !EXPLANATIONS[chosen.name.toLowerCase()] && (
-                <span className="context-note">
-                  System overview · structure identified from source anatomy
-                </span>
+              {structureDescription?.note && (
+                <span className="context-note">{structureDescription.note}</span>
+              )}
+              {!!structureDescription?.sources.length && (
+                <section className="description-sources" aria-label="Description sources">
+                  <h3>Description sources</h3>
+                  {structureDescription.sources.map((source) => (
+                    <a key={source.url} href={source.url} target="_blank" rel="noreferrer">
+                      {source.title} <ArrowUpRight size={12} />
+                    </a>
+                  ))}
+                </section>
               )}
               {selectedParts.some((p) => p.id.startsWith("ZA_N")) && (
                 <span className="context-note">Z-Anatomy · estimated registration</span>
@@ -1083,7 +1093,7 @@ export default function Home() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  {source.name} source <ArrowUpRight size={14} />
+                  {source.name} model source <ArrowUpRight size={14} />
                 </a>
               ))}
             </div>
